@@ -3,7 +3,7 @@
   "description": "A Game For Horrible People Desperately Trying To Do Good",
   "version": "1.0.0",
   "private": false,
-  "author": "cardsforhumanity ",
+  "author": "cardsforhumanity",
   "repository": {
     "type": "git",
     "url": "https://github.com/cardsforhumanity/cardsforhumanity.git"
