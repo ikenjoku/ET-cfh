@@ -6,7 +6,6 @@ var express = require('express'),
     passport = require('passport'),
     logger = require('mean-logger'),
     io = require('socket.io');
-    require('dotenv').config();
 
 /**
  * Main application entry file.
@@ -21,7 +20,7 @@ var env = process.env.NODE_ENV = process.env.NODE_ENV || 'development',
     mongoose = require('mongoose');
 
 //Bootstrap db connection
-var db = mongoose.connect(config.db);
+var db = mongoose.connect(config.MONGOHQ_URL);
 
 //Bootstrap models
 var models_path = __dirname + '/app/models';

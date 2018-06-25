@@ -1,9 +1,10 @@
 var should = require('should');
 var io = require('socket.io-client');
+var config = require('../../config/config');
 
-var socketURL = 'http://localhost:3000';
+var socketURL = 'http://localhost:' + config.port;
 
-var options ={
+var options = {
   transports: ['websocket'],
   'force new connection': true
 };
