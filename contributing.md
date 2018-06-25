@@ -6,6 +6,6 @@
 * Check that your code will pass tests: `npm test` will run tests for you.
 * Keep pull requests concise, and document new functionality in PRs.
 * Avoid breaking changes unless they are very essential. We encourage people to care a lot about backwards compatibility.
-* View this [checklist](https://github.com/andela-stuff/andela-teams-core/wiki/Checklist) to ensure you haven't missed an important step while adding a new feature.
+* View this [checklist](https://github.com/andela-stuff/andela-teams-core/wiki/Checklist) to ensure you haven't missed an important step while adding new features.
 
 
