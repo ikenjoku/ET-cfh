@@ -2,6 +2,14 @@ Cards for Humanity - [http://cfh.io](http://cfh.io)
 ===========
 Cards for Humanity is a fast-paced online version of the popular card game, Cards Against Humanity, that gives you the opportunity to donate to children in need - all while remaining as despicable and awkward as you naturally are.
 
+Cards for Humanity is published in the following hosts
+<ul>
+  <li>
+    <p>Staging: <a href="https://et-cfh-staging.herokuapp.com/">https://et-cfh-staging.herokuapp.com/</a></p>
+    <p>Production: <a href="https://et-cfh.herokuapp.com/">https://et-cfh.herokuapp.com/</a></p>
+  </li>
+</ul>
+
 Our Team
 --------
 Cards for Humanity was created at [Hack Reactor](http://www.hackreactor.com) by:
