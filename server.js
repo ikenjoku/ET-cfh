@@ -15,13 +15,13 @@ const io = require('socket.io');
 
 // Load configurations
 // if test env, load example file
-const env = process.env.NODE_ENV || 'development';
+process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 const mongoose = require('mongoose');
 const config = require('./config/config');
 const auth = require('./config/middlewares/authorization');
 
 // Bootstrap db connection
-const db = mongoose.connect(config.db);
+mongoose.connect(config.db);
 
 // Bootstrap models
 const modelsPath = `${__dirname}/app/models`;
