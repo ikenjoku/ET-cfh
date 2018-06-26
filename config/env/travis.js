@@ -1,8 +1,7 @@
-{
+module.exports = {
     "port": 3001,
-    "MONGOHQ_URL": "mongodb://localhost:27017/et-cfh-test",
     "app": {
-        "name": "Cards for Humanity - Test"
+        "name": "Cards for Humanity - Test on travis"
     },
     "facebook": {
         "clientID": "APP_ID",
@@ -24,4 +23,4 @@
         "clientSecret": "APP_SECRET",
         "callbackURL": "http://localhost:3000/auth/google/callback"
     }
-}
+};
