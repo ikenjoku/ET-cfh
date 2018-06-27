@@ -73,11 +73,16 @@ exports.checkAvatar = function(req, res) {
 
 };
 
+exports.doSome = function(req, res) {
+  res.send('I am indsf');
+}
+
 /**
  * Create user
  */
 exports.create = function(req, res) {
-  if (req.body.name && req.body.password && req.body.email) {
+  
+  if (req.body.name && req.body.password && req.body.email) {    
     User.findOne({
       email: req.body.email
     }).exec(function(err,existingUser) {

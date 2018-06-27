@@ -21,7 +21,7 @@ const config = require('./config/config');
 const auth = require('./config/middlewares/authorization');
 
 // Bootstrap db connection
-mongoose.connect(config.db);
+mongoose.connect(config.MONGOHQ_URL);
 
 // Bootstrap models
 const modelsPath = `${__dirname}/app/models`;
