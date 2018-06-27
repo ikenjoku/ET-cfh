@@ -49,6 +49,8 @@ app.use((req, res, next) => {
   next();
 });
 
+console.log(config);
+
 // express settings
 require('./config/express')(app, passport, mongoose);
 
