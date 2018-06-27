@@ -1,8 +1,10 @@
-{
-    "port": 3001,
+require('dotenv').config();
+module.exports = {
     "app": {
         "name": "Cards for Humanity - Test"
     },
+    "port": 3001,
+    "MONGOHQ_URL": process.env.MONGOHQ_URL_TEST,
     "facebook": {
         "clientID": "APP_ID",
         "clientSecret": "APP_SECRET",
@@ -23,4 +25,4 @@
         "clientSecret": "APP_SECRET",
         "callbackURL": "http://localhost:3000/auth/google/callback"
     }
-}
+};
