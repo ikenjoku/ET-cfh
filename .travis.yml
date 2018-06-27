@@ -1,6 +1,12 @@
 
 language: node_js
 
-node_js: stable
+node_js: 
+- 8.11.2
+ 
+services:
+- mongodb
 
-services: mongodb
+cache:
+  directories:
+  - node_modules
