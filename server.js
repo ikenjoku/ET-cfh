@@ -1,4 +1,5 @@
 require('dotenv').config();
+
 /**
  * Module dependencies.
  */
@@ -15,13 +16,15 @@ var express = require('express'),
 
 //Load configurations
 //if test env, load example file
+
 var env = process.env.NODE_ENV = process.env.NODE_ENV || 'development',
     config = require('./config/config'),
-    auth = require('./config/middlewares/authorization'),
+    auth = require('./config/middlewares/authorization');
     mongoose = require('mongoose');
-
+    
 //Bootstrap db connection
 var db = mongoose.connect(config.MONGOHQ_URL);
+
 
 //Bootstrap models
 var models_path = __dirname + '/app/models';
