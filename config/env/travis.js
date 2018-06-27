@@ -1,4 +1,4 @@
-{
+module.exports = {
     "port": 3001,
     "app": {
         "name": "Cards for Humanity - Test on travis"
@@ -23,4 +23,4 @@
         "clientSecret": "APP_SECRET",
         "callbackURL": "http://localhost:3000/auth/google/callback"
     }
-}
+};
