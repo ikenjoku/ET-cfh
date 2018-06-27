@@ -1,5 +1,8 @@
 Cards for Humanity - [http://cfh.io](http://cfh.io)
 ===========
+
+[![Continous Integration](https://img.shields.io/badge/Protected_by-Hound-a873d1.svg)](https://www.houndci.com)
+
 Cards for Humanity is a fast-paced online version of the popular card game, Cards Against Humanity, that gives you the opportunity to donate to children in need - all while remaining as despicable and awkward as you naturally are.
 
 Cards for Humanity is published in the following hosts
