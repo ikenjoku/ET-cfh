@@ -46,7 +46,7 @@ module.exports = function(app, passport, mongoose) {
         app.use(express.session({
             secret: 'MEAN',
             store: new mongoStore({
-                url: config.db,
+                url: config.MONGOHQ_URL,
                 collection: 'sessions',
                 mongooseConnection: mongoose.connection
             })
