@@ -1,11 +1,13 @@
 /**
  * Sample test
  */
-describe("Sample test to ensure karma config works", () => {
+import { expect } from 'chai';
+
+describe('Sample test to ensure karma config works', () => {
   it('should pass', () => {
-    expect(1).toEqual(1);
+    expect(1).to.equal(1);
   });
   it('should fail', () => {
-    expect(2).toEqual(1);
+    expect(2).to.not.equal(1);
   });
 });
