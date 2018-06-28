@@ -1,9 +1,10 @@
 /**
  * Module dependencies.
  */
-var mongoose = require('mongoose'),
-  User = mongoose.model('User');
-var avatars = require('./avatars').all();
+const mongoose = require('mongoose');
+const avatars = require('./avatars').all();
+
+const User = mongoose.model('User');
 
 /**
  * Auth callback
