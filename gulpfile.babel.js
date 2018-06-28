@@ -51,7 +51,7 @@ gulp.task('watch', () => {
 gulp.task('default', ['nodemon', 'watch']);
 
 gulp.task('test', () => {
-  return gulp.src(['test/**/*.js'])
+  return gulp.src(['test/**/*.js', '!test/angular/**/*.js'])
     .pipe(cover.instrument({
       pattern: ['**/test*'],
       debugDirectory: 'debug'
