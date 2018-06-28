@@ -13,10 +13,10 @@
     "npm": "5.6.0"
   },
   "scripts": {
-    "start": "node node_modules/gulp/bin/gulp",
-    "test": "export NODE_ENV=test || set NODE_ENV=test && node node_modules/gulp/bin/gulp test --timeout 5000",
-    "postinstall": "node node_modules/gulp/bin/gulp install",
-    "build": "node node_modules/gulp/bin/gulp build",
+    "start": "gulp",
+    "test": "export NODE_ENV=test || set NODE_ENV=test && gulp test --timeout 5000",
+    "postinstall": "gulp install",
+    "build": "gulp build",
     "test:karma": "karma start"
   },
   "dependencies": {
