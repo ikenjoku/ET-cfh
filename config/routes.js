@@ -1,94 +1,94 @@
-var async = require('async');
+import users from '../app/controllers/users';
+import answers from '../app/controllers/answers';
+import questions from '../app/controllers/questions';
+import avatars from '../app/controllers/avatars';
+import index from '../app/controllers/index';
 
-module.exports = function(app, passport, auth) {
-    //User Routes
-    var users = require('../app/controllers/users');
-    app.get('/signin', users.signin);
-    app.get('/signup', users.signup);
-    app.get('/chooseavatars', users.checkAvatar);
-    app.get('/signout', users.signout);
+module.exports = (router, passport) => {
+  // User Routes
+  router.get('/signin', users.signin);
+  router.get('/signup', users.signup);
+  router.get('/chooseavatars', users.checkAvatar);
+  router.get('/signout', users.signout);
 
-    //Setting up the users api
-    app.post('/users', users.create);
-    app.get('/doSome', users.doSome);
-    app.post('/users/avatars', users.avatars);
+  // Setting up the users api
+  router.post('/users', users.create);
+  router.get('/doSome', users.doSome);
+  router.post('/users/avatars', users.avatars);
 
-    // Donation Routes
-    app.post('/donations', users.addDonation);
+  // Donation Routes
+  router.post('/donations', users.addDonation);
 
-    app.post('/users/session', passport.authenticate('local', {
-        failureRedirect: '/signin',
-        failureFlash: 'Invalid email or password.'
-    }), users.session);
+  router.post('/users/session', passport.authenticate('local', {
+    failureRedirect: '/signin',
+    failureFlash: 'Invalid email or password.'
+  }), users.session);
 
-    app.get('/users/me', users.me);
-    app.get('/users/:userId', users.show);
+  router.get('/users/me', users.me);
+  router.get('/users/:userId', users.show);
 
-    //Setting the facebook oauth routes
-    app.get('/auth/facebook', passport.authenticate('facebook', {
-        scope: ['email'],
-        failureRedirect: '/signin'
-    }), users.signin);
+  // Setting the facebook oauth routes
+  router.get('/auth/facebook', passport.authenticate('facebook', {
+    scope: ['email'],
+    failureRedirect: '/signin'
+  }), users.signin);
 
-    app.get('/auth/facebook/callback', passport.authenticate('facebook', {
-        failureRedirect: '/signin'
-    }), users.authCallback);
+  router.get('/auth/facebook/callback', passport.authenticate('facebook', {
+    failureRedirect: '/signin'
+  }), users.authCallback);
 
-    //Setting the github oauth routes
-    app.get('/auth/github', passport.authenticate('github', {
-        failureRedirect: '/signin'
-    }), users.signin);
+  // Setting the github oauth routes
+  router.get('/auth/github', passport.authenticate('github', {
+    failureRedirect: '/signin'
+  }), users.signin);
 
-    app.get('/auth/github/callback', passport.authenticate('github', {
-        failureRedirect: '/signin'
-    }), users.authCallback);
+  router.get('/auth/github/callback', passport.authenticate('github', {
+    failureRedirect: '/signin'
+  }), users.authCallback);
 
-    //Setting the twitter oauth routes
-    app.get('/auth/twitter', passport.authenticate('twitter', {
-        failureRedirect: '/signin'
-    }), users.signin);
+  // Setting the twitter oauth routes
+  router.get('/auth/twitter', passport.authenticate('twitter', {
+    failureRedirect: '/signin'
+  }), users.signin);
 
-    app.get('/auth/twitter/callback', passport.authenticate('twitter', {
-        failureRedirect: '/signin'
-    }), users.authCallback);
+  router.get('/auth/twitter/callback', passport.authenticate('twitter', {
+    failureRedirect: '/signin'
+  }), users.authCallback);
 
-    //Setting the google oauth routes
-    app.get('/auth/google', passport.authenticate('google', {
-        failureRedirect: '/signin',
-        scope: [
-            'https://www.googleapis.com/auth/userinfo.profile',
-            'https://www.googleapis.com/auth/userinfo.email'
-        ]
-    }), users.signin);
+  // Setting the google oauth routes
+  router.get('/auth/google', passport.authenticate('google', {
+    failureRedirect: '/signin',
+    scope: [
+      'https://www.googleapis.com/auth/userinfo.profile',
+      'https://www.googleapis.com/auth/userinfo.email'
+    ]
+  }), users.signin);
 
-    app.get('/auth/google/callback', passport.authenticate('google', {
-        failureRedirect: '/signin'
-    }), users.authCallback);
+  router.get('/auth/google/callback', passport.authenticate('google', {
+    failureRedirect: '/signin'
+  }), users.authCallback);
 
-    //Finish with setting up the userId param
-    app.param('userId', users.user);
+  // Finish with setting up the userId param
+  router.param('userId', users.user);
 
-    // Answer Routes
-    var answers = require('../app/controllers/answers');
-    app.get('/answers', answers.all);
-    app.get('/answers/:answerId', answers.show);
-    // Finish with setting up the answerId param
-    app.param('answerId', answers.answer);
+  // Answer Routes
+  router.get('/answers', answers.all);
+  router.get('/answers/:answerId', answers.show);
+  // Finish with setting up the answerId param
+  router.param('answerId', answers.answer);
 
-    // Question Routes
-    var questions = require('../app/controllers/questions');
-    app.get('/questions', questions.all);
-    app.get('/questions/:questionId', questions.show);
-    // Finish with setting up the questionId param
-    app.param('questionId', questions.question);
+  // Question Routes
+  router.get('/questions', questions.all);
+  router.get('/questions/:questionId', questions.show);
+  // Finish with setting up the questionId param
+  router.param('questionId', questions.question);
 
-    // Avatar Routes
-    var avatars = require('../app/controllers/avatars');
-    app.get('/avatars', avatars.allJSON);
+  // Avatar Routes
+  router.get('/avatars', avatars.allJSON);
 
-    //Home route
-    var index = require('../app/controllers/index');
-    app.get('/play', index.play);
-    app.get('/', index.render);
+  // Home route
+  router.get('/play', index.play);
+  router.get('/', index.render);
 
+  return router;
 };

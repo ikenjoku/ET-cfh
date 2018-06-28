@@ -81,9 +81,9 @@ exports.doSome = function(req, res) {
 /**
  * Create user
  */
-exports.create = function(req, res) {
+exports.create = (req, res) => {
   
-  if (req.body.name && req.body.password && req.body.email) {    
+  if (req.body.name && req.body.password && req.body.email) {   
     User.findOne({
       email: req.body.email
     }).exec(function(err,existingUser) {
