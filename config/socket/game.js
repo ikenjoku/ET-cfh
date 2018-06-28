@@ -261,15 +261,15 @@ Game.prototype.shuffleCards = function(cards) {
 
 Game.prototype.dealAnswers = function(maxAnswers) {
   maxAnswers = maxAnswers || 10;
-  const that = this;
+  var self = this;
   var storeAnswers = function(err, data) {
-    that.answers = data;
+    self.answers = data;
   };
-  for (var i = 0; i < that.players.length; i++) {
-    while (that.players[i].hand.length < maxAnswers) {
-      that.players[i].hand.push(that.answers.pop());
-      if (!that.answers.length) {
-        that.getAnswers(storeAnswers);
+  for (var i = 0; i < this.players.length; i++) {
+    while (this.players[i].hand.length < maxAnswers) {
+      this.players[i].hand.push(this.answers.pop());
+      if (!this.answers.length) {
+        this.getAnswers(storeAnswers);
       }
     }
   }

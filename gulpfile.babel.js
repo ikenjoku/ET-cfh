@@ -1,5 +1,4 @@
 import gulp from 'gulp';
-import jshint, { reporter as _reporter } from 'gulp-jshint';
 import sass from 'gulp-sass';
 import concat from 'gulp-concat';
 import mocha from 'gulp-mocha';
@@ -10,12 +9,6 @@ import bower from 'gulp-bower';
 import babel from 'gulp-babel';
 import cover from 'gulp-coverage';
 
-gulp.task('jshint', () => {
-  return gulp.src(['public/js/**/*.js', 'test/**/*.js', 'app/**/*.js'])
-    .pipe(jshint())
-    .pipe(_reporter('default'));
-});
-
 gulp.task('styles', () => {
   return sass('public/css/common.scss', { style: 'expanded' })
     .pipe(gulp.dest('public/css'));
@@ -25,7 +18,6 @@ gulp.task('nodemon', () => {
   nodemon({
     verbose: true,
     script: 'server.js',
-    tasks: ['jshint'],
     ignore: ['README.md', 'node_modules/**', 'public/lib/**', '.DS_Store'],
     ext: 'js html jade scss css',
     watch: ['app', 'config', 'public', 'server.js'],
@@ -36,7 +28,6 @@ gulp.task('nodemon', () => {
 });
 
 gulp.task('watch', () => {
-  gulp.watch(['public/js/**', 'app/**/*.js'], ['jshint']);
   gulp.watch(['public/css/**'], ['styles']);
   gulp.watch(['public/css/common.scss, public/css/views/articles.scss'], ['styles']);
   listen();
@@ -48,10 +39,22 @@ gulp.task('watch', () => {
   ]).on('change', changed);
 });
 
-gulp.task('default', ['nodemon', 'watch']);
+gulp.task('export', () => {
+  gulp.src('public/lib/bootstrap/dist/css/*')
+    .pipe(gulp.dest('public/lib/bootstrap/css'));
+  gulp.src('public/lib/bootstrap/dist/js/*')
+    .pipe(gulp.dest('public/lib/bootstrap/js'));
+  gulp.src('public/lib/bootstrap/dist/fonts/*')
+    .pipe(gulp.dest('public/lib/bootstrap/fonts'));
+  gulp.src('public/lib/angular-ui-utils/modules/route/route.js')
+    .pipe(gulp.dest('public/lib/angular-ui-utils/modules'));
+});
 
+// Default task(s).
+gulp.task('default', ['export', 'nodemon', 'watch']);
+// Test task.
 gulp.task('test', () => {
-  return gulp.src(['test/**/*.js'])
+  return gulp.src(['test/**/*.js', '!test/angular/**/*.js'])
     .pipe(cover.instrument({
       pattern: ['**/test*'],
       debugDirectory: 'debug'
@@ -68,7 +71,7 @@ gulp.task('test', () => {
     .pipe(cover.format())
     .pipe(gulp.dest('reports'));
 });
-
+// Babel task.
 gulp.task('build', () => gulp.src([
   './**/*.js',
   '!node_modules/**',
@@ -82,10 +85,9 @@ gulp.task('build', () => gulp.src([
   .pipe(sourcemaps.write('.'))
   .pipe(gulp.dest('./dist')));
 
+// Bower task.
 gulp.task('install', () => {
   return bower({
     directory: './public/lib',
-    verbosity: 2,
-    cmd: 'install'
   });
 });
