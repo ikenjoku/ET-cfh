@@ -261,15 +261,14 @@ Game.prototype.shuffleCards = function(cards) {
 
 Game.prototype.dealAnswers = function(maxAnswers) {
   maxAnswers = maxAnswers || 10;
+  var self = this;
   var storeAnswers = function(err, data) {
-    console.log(this.answers, 'ooooo');
-    this.answers = data;
+    self.answers = data;
   };
   for (var i = 0; i < this.players.length; i++) {
     while (this.players[i].hand.length < maxAnswers) {
       this.players[i].hand.push(this.answers.pop());
       if (!this.answers.length) {
-        console.log(this.answers, 'llllll');
         this.getAnswers(storeAnswers);
       }
     }

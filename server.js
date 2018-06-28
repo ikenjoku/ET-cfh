@@ -31,6 +31,8 @@ const walk = (path) => {
     const stat = fs.statSync(newPath);
     if (stat.isFile()) {
       if (/(.*)\.(js|coffee)/.test(file)) {
+        /* eslint global-require: 0 */
+        /* eslint import/no-dynamic-require: 0 */
         require(newPath);
       }
     } else if (stat.isDirectory()) {
@@ -49,8 +51,6 @@ app.use((req, res, next) => {
   next();
 });
 
-console.log(config);
-
 // express settings
 require('./config/express')(app, passport, mongoose);
 
@@ -64,6 +64,7 @@ const ioObj = io.listen(server, { log: false });
 // game logic handled here
 require('./config/socket/socket')(ioObj);
 
+/* eslint no-console: 0 */
 console.log(`Express app started on port ${port}`);
 
 // Initializing logger

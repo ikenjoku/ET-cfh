@@ -54,7 +54,7 @@ gulp.task('export', () => {
 gulp.task('default', ['export', 'nodemon', 'watch']);
 // Test task.
 gulp.task('test', () => {
-  return gulp.src(['test/**/*.js'])
+  return gulp.src(['test/**/*.js', '!test/angular/**/*.js'])
     .pipe(cover.instrument({
       pattern: ['**/test*'],
       debugDirectory: 'debug'
