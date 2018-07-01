@@ -136,6 +136,15 @@ background: linear-gradient(rgba(10, 10, 10, 0.6), rgba(10, 10, 10, 0.6));
   width: 70%;
 }
 
+#info-container {
+  overflow-y: scroll;
+}
+
+#info-box {
+   margin-top: 25px;
+   margin-left: 10%;
+}
+
 .card .card-image .card-title {
   position: relative;
   margin: 0 auto;

@@ -17,6 +17,7 @@ module.exports = {
     "curly": ["error", "multi-line"],
     "import/no-unresolved": [2, { commonjs: true }],
     "no-shadow": ["error", { "allow": ["req", "res", "err"] }],
+    "import/no-extraneous-dependencies": ["error", {"devDependencies": true}],
     "valid-jsdoc": ["error", {
       "requireReturn": true,
       "requireReturnType": true,
@@ -30,5 +31,13 @@ module.exports = {
             "ClassDeclaration": true
         }
     }]
+  },
+  "globals": {
+    "document": true,
+		"window": true,
+		"localStorage": true,
+    "FormData": true,
+    "angular": true,
+    "$": true,
   }
 };
