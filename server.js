@@ -15,6 +15,8 @@ const io = require('socket.io');
 
 // Load configurations
 // if test env, load example file
+
+
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 const mongoose = require('mongoose');
 const config = require('./config/config');

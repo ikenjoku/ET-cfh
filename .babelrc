@@ -1,12 +1,13 @@
 {
   "presets": [
-    "env"
+    "env",
+    "react",
+    "stage-0"
   ],
-  "env": {
-    "test": {
-      "plugins": [
-        "istanbul"
-      ]
-    }
-  }
+  "plugins": [
+    "transform-class-properties",
+    "transform-decorators",
+    "transform-react-constant-elements",
+    "transform-react-inline-elements"
+  ]
 }

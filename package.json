@@ -14,8 +14,9 @@
   },
   "scripts": {
     "start": "gulp",
+    "export": "gulp export",
     "test": "export NODE_ENV=test || set NODE_ENV=test && gulp test",
-    "postinstall": "gulp install",
+    "postinstall": "gulp install && gulp export",
     "build": "gulp build"
   },
   "nyc": {
