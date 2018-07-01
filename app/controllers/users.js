@@ -1,3 +1,5 @@
+/* eslint no-underscore-dangle: 0 */
+
 /**
  * Module dependencies.
  */
@@ -6,30 +8,32 @@ import mongoose from 'mongoose';
 import passport from 'passport';
 import avatarsList from './avatars';
 import { Tokenizer } from '../helpers/tokenizer';
+import sendInvitationEmail from '../helpers/sendInvitationEmail';
 
 const avatarsArray = avatarsList.all();
 const User = mongoose.model('User');
-
 
 // disabling no underscore because of the default style of mongoose ids
 /* eslint no-underscore-dangle: 0, valid-jsdoc: 0 */
 
 /**
- * @param {object} req - request object provided by express
- * @param {object} res - response object provided by express
- * @description controller called after successful passport social auth strategy
-*/
+ * Auth callback
+  * @param {req} req carries request payload
+ * @param {res} res handles response status code and messages
+ * @returns {res} a status code and data
+ */
+
 const authCallback = (req, res) => {
   res.redirect('/chooseavatars');
 };
 
 
 /**
- * @param {object} req - request object provided by express
- * @param {object} res - response object provided by express
- * @description controller handling GET '/signin', to redirects to the angular route.
- * Provides signin form if no user present, redirects to the main game if there is.
-*/
+ * Show login form
+ * @param {req} req carries request payload
+ * @param {res} res handles response status code and messages
+ * @returns {res} a status code and data
+ */
 const signin = (req, res) => {
   if (!req.user) {
     res.redirect('/#!/signin?error=invalid');
@@ -44,6 +48,12 @@ const signin = (req, res) => {
  * @param {object} res - response object provided by express
  * @param {function} next - next function for passing the request to next handler
  * @description Controller for handling requests to '/api/auth/login', returns token in response as JSON.
+ * @param {object} passport - passport with all the startegies registered
+ * @description Controller for handling requests to '/api/auth/login', 
+ * returns token in response as JSON.
+ * @param {object} passport - passport with all the startegies registered
+ * @description Controller for handling requests to '/api/auth/login', 
+ * returns token in response as JSON.
  *  Uses Tokenizer helper method to handle generation of token
 */
 const handleLogin = (req, res, next) => {
@@ -279,6 +289,44 @@ const user = (req, res, next, id) => {
     });
 };
 
+/**
+ * @param {object} req - request object provided by express
+ * @param {object} res - response object provided by express
+ * @description find users takes a search key and returns users
+ * that match the key. It search the name and email only.
+*/
+const findUsers = (req, res) => {
+  const { searchKey } = req.params;
+  User.find({
+    $and:
+    [
+      {
+        $or:
+        [
+          { name: { $regex: new RegExp(`.*${searchKey}.*`, 'i') } },
+          { email: { $regex: new RegExp(`.*${searchKey}.*`, 'i') } },
+        ]
+      }
+    ]
+  }, (err, users) => res.status(200).send({ users }));
+};
+
+
+/**
+ * @param {object} req - request object provided by express
+ * @param {object} res - response object provided by express
+ * @description invite users takes a users email, sends a
+ * game link to that user and returns that that user.
+*/
+const invite = (req, res) => {
+  const recipient = req.body.user;
+  if (sendInvitationEmail(recipient, req.body.link)) {
+    return res.status(200).send({ user: recipient });
+  }
+  return res.status(400).send({ message: 'An error occurred while sending the invitation' });
+};
+
+
 export default {
   authCallback,
   user,
@@ -292,5 +340,7 @@ export default {
   signin,
   handleLogin,
   handleSignUp,
-  avatars
+  avatars,
+  findUsers,
+  invite,
 };

@@ -30,9 +30,4 @@
     </div>
     <answers></answers>
   </div>
-  <script>
-    $(document).ready(function(){
-      $('.modal').modal();
-    });
-  </script>
 </div>

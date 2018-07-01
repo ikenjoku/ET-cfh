@@ -1,4 +1,4 @@
-/* eslint prefer-arrow-callback: 0, func-names: 0, no-undef: 0, no-var: 0 */
+/* eslint prefer-arrow-callback: 0, func-names: 0, no-undef: 0, no-var: 0, vars-on-top: 0 */
 angular.module('mean.directives', [])
   .directive('player', function () {
     return {
@@ -75,6 +75,27 @@ angular.module('mean.directives', [])
         if (scope.$$childHead.global.authenticated === true) {
           scope.showOptions = false;
         }
+      }
+    };
+  })
+  .directive('searchKeyLength', function () {
+    return {
+      require: 'ngModel',
+      link(scope, element, attr, mCtrl) {
+        /**
+         * Checks if validation rule passes
+         * @param {value} value
+         * @returns {boolean} boolean
+         */
+        function myValidation(value) {
+          if (value.length >= 3) {
+            mCtrl.$setValidity('charE', true);
+          } else {
+            mCtrl.$setValidity('charE', false);
+          }
+          return value;
+        }
+        mCtrl.$parsers.push(myValidation);
       }
     };
   });

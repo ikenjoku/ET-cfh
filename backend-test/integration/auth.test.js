@@ -20,7 +20,11 @@ describe('Auth endpoints', () => {
     Promise.resolve(User.create(mock));
   });
 
-  it('POST /api/auth/login should return the user token along with the', (done) => {
+  after(() => {
+    Promise.resolve(User.remove({}));
+  });
+
+  it('POST /api/auth/endpoint should return the user token along with the', (done) => {
     try {
       request(app)
         .post('/api/auth/login')

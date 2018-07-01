@@ -101,9 +101,7 @@ gulp.task('build', () => gulp.src([
   .pipe(gulp.dest('./dist')));
 
 // Bower task.
-gulp.task('install', () => bower({
-  directory: './public/lib',
-}));
+gulp.task('install', () => bower({ directory: './public/lib' }));
 
 // Test task
 gulp.task('test', ['test:frontend', 'test:backend']);
