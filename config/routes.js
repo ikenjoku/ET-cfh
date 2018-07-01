@@ -20,6 +20,8 @@ export default (router, passport, app) => {
   // Setting up the users api
   router.post('/users', users.create);
   router.post('/users/avatars', users.avatars);
+  router.get('/users/findUsers/:searchKey', users.findUsers);
+  router.post('/users/invite', users.invite);
 
   // Donation Routes
   router.post('/donations', users.addDonation);
@@ -113,5 +115,10 @@ export default (router, passport, app) => {
     res.status(500).render('500', {
       error: err.stack
     });
+  });
+
+  // Handle all 'Page not found errors' and return a message.
+  app.get('*', (req, res) => {
+    res.status(404).send('You are looking for a resource that does not exist.');
   });
 };

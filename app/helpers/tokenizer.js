@@ -12,7 +12,7 @@ import jwt from 'jsonwebtoken';
  */
 const verifyPayload = (data) => {
   // make sure the neccessary keys are present, only works if the data passed is an object :)
-  if (data.username && data._id && data.name) return;
+  if (data._id && data.name) return;
   throw new TypeError("The object passed in should have keys 'id', 'username', 'name' and 'avatar'");
 };
 
