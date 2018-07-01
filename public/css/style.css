@@ -75,6 +75,10 @@
    text-align: center;
 }
 
+#info-container {
+  overflow-y: scroll;
+}
+
 #info-box {
    margin-top: 25px;
    margin-left: 10%;
