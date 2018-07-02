@@ -12,12 +12,11 @@ const User = mongoose.model('User');
 
 
 // disabling no underscore because of the default style of mongoose ids
-/* eslint no-underscore-dangle: 0 */
+/* eslint no-underscore-dangle: 0, valid-jsdoc: 0 */
 
 /**
  * @param {object} req - request object provided by express
  * @param {object} res - response object provided by express
- * @returns {null} returns nothing
  * @desc controller called after successful passport social auth strategy
 */
 const authCallback = (req, res) => {
@@ -28,7 +27,6 @@ const authCallback = (req, res) => {
 /**
  * @param {object} req - request object provided by express
  * @param {object} res - response object provided by express
- * @returns {null} returns nothing
  * @desc controller handling GET '/signin', to redirects to the angular route.
  * Provides signin form if no user present, redirects to the main game if there is.
 */
@@ -46,7 +44,6 @@ const signin = (req, res) => {
  * @param {object} res - response object provided by express
  * @param {function} next - next function for passing the request to next handler
  * @param {object} passport - passport with all the startegies registered
- * @returns {null} returns nothing
  * @desc Controller for handling requests to '/api/auth/login', returns token in response as JSON.
  *  Uses Tokenizer helper method to handle generation of token
 */
@@ -63,7 +60,6 @@ const handleLogin = (req, res, next) => {
 /**
  * @param {object} req - request object provided by express
  * @param {object} res - response object provided by express
- * @returns {null} returns nothing
  *
 */
 const signup = (req, res) => {
@@ -77,7 +73,6 @@ const signup = (req, res) => {
 /**
  * @param {object} req - request object provided by express
  * @param {object} res - response object provided by express
- * @returns {null} returns nothing
  *
 */
 const signout = (req, res) => {
@@ -88,7 +83,6 @@ const signout = (req, res) => {
 /**
  * @param {object} req - request object provided by express
  * @param {object} res - response object provided by express
- * @returns {null} returns nothing
  * @desc function that checks that the current user has an avatar
  * and redirects to choose avatar when none
 */
@@ -115,7 +109,6 @@ const checkAvatar = (req, res) => {
  * @param {object} req - request object provided by express
  * @param {object} res - response object provided by express
  * @param {function} next - next function for passing the request to next handler
- * @returns {null} returns nothing
  * @description controller that creates a new user on POST '/api/users'
 */
 const create = (req, res, next) => {
@@ -152,7 +145,6 @@ const create = (req, res, next) => {
 /**
  * @param {object} req - request object provided by express
  * @param {object} res - response object provided by express
- * @returns {null} returns nothing
  * @desc controller handling uploading choosing avatars on POST '/api/users/avatars'
 */
 const avatars = (req, res) => {
@@ -174,7 +166,6 @@ const avatars = (req, res) => {
 /**
  * @param {object} req - request object provided by express
  * @param {object} res - response object provided by express
- * @returns {null} returns nothing
  * @desc controller handling the new donations request on POST '/api/donations',
  * expects that the request body contains crowdrise data, and the amount.
 */
@@ -208,7 +199,6 @@ const addDonation = (req, res) => {
 /**
  * @param {object} req - request object provided by express
  * @param {object} res - response object provided by express
- * @returns {null} returns nothing
  * @desc controller that shows a specfific user on GET '/api/users/:userId'.
 */
 const show = (req, res) => {
@@ -222,7 +212,6 @@ const show = (req, res) => {
 /**
  * @param {object} req - request object provided by express
  * @param {object} res - response object provided by express
- * @returns {null} returns nothing
  * @desc controller that shows the current user on GET '/api/me'
 */
 const me = (req, res) => {
@@ -234,7 +223,6 @@ const me = (req, res) => {
  * @param {object} res - response object provided by express
  * @param {function} next - next function for passing the request to next handler
  * @param {string} id - mongoose id of the user
- * @returns {null} returns nothing
  * @desc finds a user by id from the db and
  * assigns the user to the profile key on the request object
 */

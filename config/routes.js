@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import users from '../app/controllers/users';
-import answers from '../app/controllers/answers';
+import * as answers from '../app/controllers/answers';
 import questions from '../app/controllers/questions';
 import avatars from '../app/controllers/avatars';
 import index from '../app/controllers/index';

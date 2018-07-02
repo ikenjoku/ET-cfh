@@ -1,20 +1,19 @@
 /**
  * Module dependencies.
  */
-let mongoose = require('mongoose'),
-  async = require('async'),
-  Answer = mongoose.model('Answer'),
-  _ = require('underscore');
+import mongoose from 'mongoose';
+
+const Answer = mongoose.model('Answer');
 
 
 /**
  * Find answer by id
  */
-exports.answer = (req, res, next, id) => {
-  Answer.load(id, (err, answer) => {
+export const answer = (req, res, next, id) => {
+  Answer.load(id, (err, answerObject) => {
     if (err) return next(err);
-    if (!answer) return next(new Error(`Failed to load answer ${id}`));
-    req.answer = answer;
+    if (!answerObject) return next(new Error(`Failed to load answer ${id}`));
+    req.answer = answerObject;
     next();
   });
 };
@@ -22,14 +21,14 @@ exports.answer = (req, res, next, id) => {
 /**
  * Show an answer
  */
-exports.show = (req, res) => {
+export const show = (req, res) => {
   res.jsonp(req.answer);
 };
 
 /**
  * List of Answers
  */
-exports.all = (req, res) => {
+export const all = (req, res) => {
   Answer.find({ official: true }).select('-_id').exec((err, answers) => {
     if (err) {
       res.render('error', {
@@ -44,7 +43,7 @@ exports.all = (req, res) => {
 /**
  * List of Answers (for Game class)
  */
-exports.allAnswersForGame = (cb) => {
+export const allAnswersForGame = (cb) => {
   Answer.find({ official: true }).select('-_id').exec((err, answers) => {
     if (err) {
       console.log(err);

@@ -8,6 +8,7 @@ import mocha from 'gulp-mocha';
 import bower from 'gulp-bower';
 import babel from 'gulp-babel';
 import karma from 'karma';
+import path from 'path';
 
 const { Server } = karma;
 
@@ -77,6 +78,7 @@ gulp.task('test:backend', ['compile'], () => {
     .pipe(mocha({
       reporter: 'spec',
       exit: true,
+      timeout: 5000,
       globals: {
         should: require('should') 
       },

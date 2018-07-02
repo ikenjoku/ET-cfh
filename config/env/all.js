@@ -1,7 +1,8 @@
 import path from 'path';
+import dotenv from 'dotenv';
 
-const rootPath = path.normalize(__dirname + '/../..');
-require('dotenv').config();
+const rootPath = path.normalize(`${__dirname}/../..`);
+dotenv.config();
 
 module.exports = {
   root: rootPath,
