@@ -43,12 +43,12 @@ gulp.task('watch', () => {
 });
 
 gulp.task('export', () => {
-  gulp.src('public/lib/bootstrap/dist/css/*')
-    .pipe(gulp.dest('public/lib/bootstrap/css'));
-  gulp.src('public/lib/bootstrap/dist/js/*')
-    .pipe(gulp.dest('public/lib/bootstrap/js'));
-  gulp.src('public/lib/bootstrap/dist/fonts/*')
-    .pipe(gulp.dest('public/lib/bootstrap/fonts'));
+  gulp.src('public/lib/materialize/dist/css/*')
+    .pipe(gulp.dest('public/lib/materialize/css'));
+  gulp.src('public/lib/materialize/dist/js/*')
+    .pipe(gulp.dest('public/lib/materialize/js'));
+  // gulp.src('public/lib/bootstrap/dist/fonts/*')
+  //   .pipe(gulp.dest('public/lib/bootstrap/fonts'));
   gulp.src('public/lib/angular-ui-utils/modules/route/route.js')
     .pipe(gulp.dest('public/lib/angular-ui-utils/modules'));
 });
