@@ -1,13 +1,15 @@
 import gulp from 'gulp';
 import sass from 'gulp-sass';
 import concat from 'gulp-concat';
-import mocha from 'gulp-mocha';
 import sourcemaps from 'gulp-sourcemaps';
 import { listen, changed } from 'gulp-livereload';
 import nodemon from 'gulp-nodemon';
+import mocha from 'gulp-mocha';
 import bower from 'gulp-bower';
 import babel from 'gulp-babel';
-import cover from 'gulp-coverage';
+import karma from 'karma';
+
+const { Server } = karma;
 
 gulp.task('styles', () => sass('public/css/common.scss', { style: 'expanded' })
   .pipe(gulp.dest('public/css')));
@@ -70,12 +72,8 @@ gulp.task('export', () => {
 gulp.task('default', ['nodemon']);
 
 
-gulp.task('test', ['compile'], () => {
-  return gulp.src(['dist/test/**/*.js', '!test/angular/**/*.js'])
-    .pipe(cover.instrument({
-      pattern: ['**/test*'],
-      debugDirectory: 'debug'
-    }))
+gulp.task('test:backend', ['compile'], () => {
+  return gulp.src(['dist/backend-test/**/*.js', '!test/angular/**/*.js'])
     .pipe(mocha({
       reporter: 'spec',
       exit: true,
@@ -83,10 +81,22 @@ gulp.task('test', ['compile'], () => {
         should: require('should') 
       },
       compilers: 'babel-register'
-    }))
-    .pipe(cover.gather())
-    .pipe(cover.format())
-    .pipe(gulp.dest('reports'));
+    }));
+  });
+
+gulp.task('default', ['export', 'nodemon', 'watch']);
+
+// Backend Test task.
+// gulp.task('test:backend', shell.task([
+//   'NODE_ENV=test nyc mocha backend-test/**/*.js  --exit',
+// ]));
+
+// Frontend test task
+gulp.task('test:frontend', (done) => {
+  new Server({
+    configFile: path.join(__dirname, '/karma.conf.js'),
+    singleRun: true
+  }, done).start();
 });
 
 // Babel task.
@@ -109,3 +119,6 @@ gulp.task('install', () => {
     directory: './public/lib',
   });
 });
+
+// Test task
+gulp.task('test', ['test:backend', 'test:frontend']);

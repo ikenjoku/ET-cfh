@@ -5,14 +5,17 @@ addons:
 language: node_js
 
 node_js: 
-- 8.11.2
+  - 8.11.2
 
 services:
-- mongodb
+  - mongodb
 
 cache:
   directories:
   - node_modules
 
 script:
-- npm test && npm run test:karma
+  - npm test
+
+after_success:
+  - cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage
