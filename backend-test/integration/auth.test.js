@@ -15,15 +15,21 @@ const mock = {
 };
 
 describe('Auth endpoints', () => {
-  before(async () => {
-    await User.create(mock);
+  before(() => {
+    Promise.resolve(User.create(mock));
   });
 
-  it('POST /api/auth/endpoint should return the user token along with the', async () => {
+  it('POST /api/auth/endpoint should return the user token along with the', (done) => {
     try {
-      const res = await request(app).post('/api/auth/login').send(mock);
-      expect(res.statusCode).to.equal(200);
-      expect(res.body.token).to.equal(Tokenizer(res.body));
+      request(app)
+        .post('/api/auth/login')
+        .send(mock)
+        .end((err, res) => {
+          if (err) return done(err);
+          expect(res.statusCode).to.equal(200);
+          expect(res.body.token).to.equal(Tokenizer(res.body));
+          done();
+        });
     } catch (err) {
       /* eslint no-unused-expressions: 0 */
       expect(err).to.not.exist;

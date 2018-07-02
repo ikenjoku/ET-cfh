@@ -7,3 +7,6 @@ c4h_keys.txt
 reports/
 .coverrun
 dist
+.coveralls.yml
+coverage/
+.nyc_output/

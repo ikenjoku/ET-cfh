@@ -5,7 +5,7 @@ import jwt from 'jsonwebtoken';
 /**
  * @function verifyPayload
  * @param {object} data - An object to be encoded into a token
- * @desc function  without return value that ensures that the object
+ * @description function  without return value that ensures that the object
  *       to be tokenized is an object with the necessary keys.
  *       The function throws a TypeError without the right value
  * @returns { null } returns undefined
@@ -28,12 +28,8 @@ const verifyPayload = (data) => {
  */
 export const Tokenizer = (payload) => {
   verifyPayload(payload);
-  const filteredPayload = {
-    name: payload.name,
-    username: payload.username,
-    avatar: payload.avatar,
-    id: payload._id /* eslint no-underscore-dangle: 0 */
-  };
+  const { name, username, avatar, _id } = payload;
+  const filteredPayload = { name, username, avatar, _id }; /* eslint object-curly-newline: 0 */
   const token = jwt.sign(filteredPayload, process.env.SECRET_KEY);
   return token;
 };
@@ -48,7 +44,9 @@ export const Tokenizer = (payload) => {
  */
 export const decodeToken = (token) => {
   try {
-    if (token.constructor !== String) throw new TypeError('Please send in a token string, seems like you passed a wrong data type or nothing at all');
+    if (token.constructor !== String) {
+      throw new TypeError('Please send in a token string, seems like you passed a wrong data type or nothing at all');
+    }
     return jwt.verify(token, process.env.SECRET_KEY);
   } catch (err) {
     throw err;

@@ -16,14 +16,15 @@ describe('Payload to token converter(Unit Test)', () => {
       token = Tokenizer(payload);
     });
 
-    it(' Should return a valid token that returns to the initial object', async () => {
+    it(' Should return a valid token that returns to the initial object', () => {
       const data = jwt.verify(token, process.env.SECRET_KEY);
       expect(data.name).to.equal('A test username');
       expect(data.username).to.equal('Hasstrupezekiel');
     });
 
-    it('should return a token whose payload is an object containing only four fields', () => {
+    it('should return a token whose payload is an object containing only five fields', () => {
       const userObject = jwt.verify(token, process.env.SECRET_KEY);
+      // testing for five because jwt implicitly adds an 'iat' field to the payload object
       expect(Object.keys(userObject).length).to.equal(5);
     });
   });
