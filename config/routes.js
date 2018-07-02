@@ -1,11 +1,17 @@
+import { Router } from 'express';
 import users from '../app/controllers/users';
 import answers from '../app/controllers/answers';
 import questions from '../app/controllers/questions';
 import avatars from '../app/controllers/avatars';
 import index from '../app/controllers/index';
 
-module.exports = (router, passport) => {
-  // User Routes
+export default (router, passport, app) => {
+
+  // api name spaced routes;
+  const api = Router();
+  api
+    .post('/auth/login', users.handleLogin);
+
   router.get('/signin', users.signin);
   router.get('/signup', users.signup);
   router.get('/chooseavatars', users.checkAvatar);
@@ -13,16 +19,10 @@ module.exports = (router, passport) => {
 
   // Setting up the users api
   router.post('/users', users.create);
-  router.get('/doSome', users.doSome);
   router.post('/users/avatars', users.avatars);
 
   // Donation Routes
   router.post('/donations', users.addDonation);
-
-  router.post('/users/session', passport.authenticate('local', {
-    failureRedirect: '/signin',
-    failureFlash: 'Invalid email or password.'
-  }), users.session);
 
   router.get('/users/me', users.me);
   router.get('/users/:userId', users.show);
@@ -90,5 +90,28 @@ module.exports = (router, passport) => {
   router.get('/play', index.play);
   router.get('/', index.render);
 
-  return router;
+  // Registering the api namespaced middleware on the router middleware
+  router.use('/api', api);
+
+  app.use(router);
+
+
+  // refactored to the position to prevent overrides
+  app.use((req, res) => {
+    res.status(404).render('404', {
+      url: req.originalUrl,
+      error: 'Not found'
+    });
+  });
+
+  app.use((err, req, res, next) => {
+    // Treat as 404
+    if (err.message.indexOf('not found')) return next();
+    // Log it
+    console.error(err.stack);
+    // Error page
+    res.status(500).render('500', {
+      error: err.stack
+    });
+  });
 };

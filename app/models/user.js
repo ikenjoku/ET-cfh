@@ -1,12 +1,12 @@
 /**
  * Module dependencies.
  */
-var mongoose = require('mongoose'),
-    Schema = mongoose.Schema,
-    bcrypt = require('bcryptjs'),
-    _ = require('underscore'),
-    authTypes = ['github', 'twitter', 'facebook', 'google'];
+import mongoose from 'mongoose';
+import bcrypt from 'bcryptjs';
+import _ from 'underscore';
 
+const { Schema } = mongoose;
+const authTypes = ['github', 'twitter', 'facebook', 'google'];
 
 /**
  * User Schema
@@ -29,10 +29,10 @@ var UserSchema = new Schema({
 /**
  * Virtuals
  */
-UserSchema.virtual('password').set(function(password) {
+UserSchema.virtual('password').set( function (password) {
     this._password = password;
     this.hashed_password = this.encryptPassword(password);
-}).get(function() {
+}).get( function () {
     return this._password;
 });
 
@@ -50,7 +50,7 @@ UserSchema.path('name').validate(function(name) {
     return name.length;
 }, 'Name cannot be blank');
 
-UserSchema.path('email').validate(function(email) {
+UserSchema.path('email').validate(function (email) {
     // if you are authenticating by any of the oauth strategies, don't validate
     if (authTypes.indexOf(this.provider) !== -1) return true;
     return email.length;
@@ -74,7 +74,6 @@ UserSchema.path('hashed_password').validate(function(hashed_password) {
  */
 UserSchema.pre('save', function(next) {
     if (!this.isNew) return next();
-
     if (!validatePresenceOf(this.password) && authTypes.indexOf(this.provider) === -1)
         next(new Error('Invalid password'));
     else
