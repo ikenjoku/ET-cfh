@@ -63,6 +63,12 @@ gulp.task('export', () => {
     .pipe(gulp.dest('dist/public/lib/bootstrap/js'));
   gulp.src('public/lib/bootstrap/dist/fonts/*')
     .pipe(gulp.dest('dist/public/lib/bootstrap/fonts'));
+  gulp.src('public/lib/materialize/dist/css/*')
+    .pipe(gulp.dest('public/lib/materialize/css'));
+  gulp.src('public/lib/materialize/dist/js/*')
+    .pipe(gulp.dest('public/lib/materialize/js'));
+  // gulp.src('public/lib/bootstrap/dist/fonts/*')
+  //   .pipe(gulp.dest('public/lib/bootstrap/fonts'));
   gulp.src('public/lib/angular-ui-utils/modules/route/route.js')
     .pipe(gulp.dest('dist/public/lib/angular-ui-utils/modules'));
   // adding this to let gulp pipe the jade files to the dist folder
