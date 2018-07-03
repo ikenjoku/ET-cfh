@@ -6,6 +6,7 @@ c4h_keys.txt
 .env
 reports/
 .coverrun
+dist
 .coveralls.yml
 coverage/
 .nyc_output/

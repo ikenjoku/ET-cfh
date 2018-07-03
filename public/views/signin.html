@@ -44,7 +44,8 @@
           <div class="sign-error" ng-show="showError() === 'invalid'">
             Please check your username/password and try again.
           </div>
-          <form class="signup form-horizontal" action="/users/session" method="post">
+          <!-- Modifying action to point to new endpoint -->
+          <form class="signup form-horizontal" action="/api/auth/login" method="post">
             <div class="control-group">
               <label for="email" class="control-label"></label>
               <div class="controls">

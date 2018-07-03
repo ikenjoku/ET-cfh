@@ -1,9 +1,9 @@
-/* eslint import/no-dynamic-require: 0 */ // --> OFF
-
-const _ = require('underscore');
+import allConfig from './env/all';
 
 // Load app configuration
-module.exports = _.extend(
-  require(`${__dirname}/../config/env/all.js`),
-  require(`${__dirname}/../config/env/${process.env.NODE_ENV}.js`),
-);
+/* eslint global-require: 0, import/no-dynamic-require: 0 */
+process.env.NODE_ENV = process.env.NODE_ENV || 'development';
+const envConfig = require(`./env/${process.env.NODE_ENV}.js`) || {}
+export default { ...allConfig, ...envConfig };
+
+

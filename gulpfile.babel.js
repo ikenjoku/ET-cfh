@@ -4,30 +4,41 @@ import concat from 'gulp-concat';
 import sourcemaps from 'gulp-sourcemaps';
 import { listen, changed } from 'gulp-livereload';
 import nodemon from 'gulp-nodemon';
+import mocha from 'gulp-mocha';
 import bower from 'gulp-bower';
 import babel from 'gulp-babel';
-import shell from 'gulp-shell';
 import karma from 'karma';
 import path from 'path';
 
 const { Server } = karma;
 
-gulp.task('styles', () => {
-  return sass('public/css/common.scss', { style: 'expanded' })
-    .pipe(gulp.dest('public/css'));
-});
+gulp.task('styles', () => sass('public/css/common.scss', { style: 'expanded' })
+  .pipe(gulp.dest('public/css')));
 
-gulp.task('nodemon', () => {
+gulp.task('develop', () => {
   nodemon({
-    verbose: true,
-    script: 'server.js',
-    ignore: ['README.md', 'node_modules/', '.DS_Store'],
+    script: 'dist/server.js',
+    ignore: ['README.md', 'node_modules/**', 'dist/**', 'public/lib/**', '.DS_Store'],
     ext: 'js html jade scss css',
     watch: ['app', 'config', 'public', 'server.js'],
     delayTime: 1,
     env: { PORT: 3000 },
     NODE_ENV: process.env.NODE_ENV
   });
+});
+
+gulp.task('compile', () => {
+  const stream = gulp.src(['./**/*.js', '!node_modules/**', '!dist/**/*', '!public/lib/**/*.js', '!test/angular/**/*.js'])
+    .pipe(babel({
+      presets: ['env'],
+      plugins: [
+        'transform-class-properties',
+        'transform-decorators',
+        'transform-object-rest-spread'
+      ]
+    }))
+    .pipe(gulp.dest('dist'));
+  return stream;
 });
 
 gulp.task('watch', () => {
@@ -44,22 +55,40 @@ gulp.task('watch', () => {
 
 gulp.task('export', () => {
   gulp.src('public/lib/bootstrap/dist/css/*')
-    .pipe(gulp.dest('public/lib/bootstrap/css'));
+    .pipe(gulp.dest('dist/public/lib/bootstrap/css'));
   gulp.src('public/lib/bootstrap/dist/js/*')
-    .pipe(gulp.dest('public/lib/bootstrap/js'));
+    .pipe(gulp.dest('dist/public/lib/bootstrap/js'));
   gulp.src('public/lib/bootstrap/dist/fonts/*')
-    .pipe(gulp.dest('public/lib/bootstrap/fonts'));
+    .pipe(gulp.dest('dist/public/lib/bootstrap/fonts'));
   gulp.src('public/lib/angular-ui-utils/modules/route/route.js')
-    .pipe(gulp.dest('public/lib/angular-ui-utils/modules'));
+    .pipe(gulp.dest('dist/public/lib/angular-ui-utils/modules'));
+  // adding this to let gulp pipe the jade files to the dist folder
+  gulp.src('app/views/**/*.jade')
+    .pipe(gulp.dest('dist/app/views'));
+  gulp.src('public/**/*')
+    .pipe(gulp.dest('dist/public'));
 });
 
 // Default task(s).
-gulp.task('default', ['nodemon', 'watch']);
+gulp.task('default', ['nodemon']);
+
+gulp.task('test:backend', ['compile'], () => {
+  return gulp.src(['dist/backend-test/**/*.js', '!test/angular/**/*.js'])
+    .pipe(mocha({
+      reporter: 'spec',
+      exit: true,
+      timeout: 5000,
+      globals: {
+        should: require('should') 
+      },
+      compilers: 'babel-register'
+    }));
+  });
 
 // Backend Test task.
-gulp.task('test:backend', shell.task([
-  'NODE_ENV=test nyc mocha backend-test/**/*.js  --exit',
-]));
+// gulp.task('test:backend', shell.task([
+//   'NODE_ENV=test nyc mocha backend-test/**/*.js  --exit',
+// ]));
 
 // Frontend test task
 gulp.task('test:frontend', (done) => {
