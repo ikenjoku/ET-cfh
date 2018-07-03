@@ -19,7 +19,7 @@ gulp.task('develop', () => {
   nodemon({
     script: 'dist/server.js',
     ignore: ['README.md', 'node_modules/**', 'dist/**', 'public/lib/**', '.DS_Store'],
-    // ext: 'js html jade scss css',
+    ext: 'js html jade scss css',
     watch: ['app', 'config', 'public', 'server.js'],
     delayTime: 1,
     env: { PORT: 3000 },
@@ -72,7 +72,6 @@ gulp.task('export', () => {
 // Default task(s).
 gulp.task('default', ['nodemon']);
 
-
 gulp.task('test:backend', ['compile'], () => {
   return gulp.src(['dist/backend-test/**/*.js', '!test/angular/**/*.js'])
     .pipe(mocha({
@@ -85,8 +84,6 @@ gulp.task('test:backend', ['compile'], () => {
       compilers: 'babel-register'
     }));
   });
-
-gulp.task('default', ['export', 'nodemon', 'watch']);
 
 // Backend Test task.
 // gulp.task('test:backend', shell.task([

@@ -17,7 +17,7 @@ const User = mongoose.model('User');
 /**
  * @param {object} req - request object provided by express
  * @param {object} res - response object provided by express
- * @desc controller called after successful passport social auth strategy
+ * @description controller called after successful passport social auth strategy
 */
 const authCallback = (req, res) => {
   res.redirect('/chooseavatars');
@@ -27,7 +27,7 @@ const authCallback = (req, res) => {
 /**
  * @param {object} req - request object provided by express
  * @param {object} res - response object provided by express
- * @desc controller handling GET '/signin', to redirects to the angular route.
+ * @description controller handling GET '/signin', to redirects to the angular route.
  * Provides signin form if no user present, redirects to the main game if there is.
 */
 const signin = (req, res) => {
@@ -44,7 +44,7 @@ const signin = (req, res) => {
  * @param {object} res - response object provided by express
  * @param {function} next - next function for passing the request to next handler
  * @param {object} passport - passport with all the startegies registered
- * @desc Controller for handling requests to '/api/auth/login', returns token in response as JSON.
+ * @description Controller for handling requests to '/api/auth/login', returns token in response as JSON.
  *  Uses Tokenizer helper method to handle generation of token
 */
 const handleLogin = (req, res, next) => {
@@ -83,7 +83,7 @@ const signout = (req, res) => {
 /**
  * @param {object} req - request object provided by express
  * @param {object} res - response object provided by express
- * @desc function that checks that the current user has an avatar
+ * @description function that checks that the current user has an avatar
  * and redirects to choose avatar when none
 */
 const checkAvatar = (req, res) => {
@@ -145,7 +145,7 @@ const create = (req, res, next) => {
 /**
  * @param {object} req - request object provided by express
  * @param {object} res - response object provided by express
- * @desc controller handling uploading choosing avatars on POST '/api/users/avatars'
+ * @description controller handling uploading choosing avatars on POST '/api/users/avatars'
 */
 const avatars = (req, res) => {
   // Update the current user's profile to include the avatar choice they've made
@@ -166,7 +166,7 @@ const avatars = (req, res) => {
 /**
  * @param {object} req - request object provided by express
  * @param {object} res - response object provided by express
- * @desc controller handling the new donations request on POST '/api/donations',
+ * @description controller handling the new donations request on POST '/api/donations',
  * expects that the request body contains crowdrise data, and the amount.
 */
 const addDonation = (req, res) => {
@@ -199,7 +199,7 @@ const addDonation = (req, res) => {
 /**
  * @param {object} req - request object provided by express
  * @param {object} res - response object provided by express
- * @desc controller that shows a specfific user on GET '/api/users/:userId'.
+ * @description controller that shows a specfific user on GET '/api/users/:userId'.
 */
 const show = (req, res) => {
   const user = req.profile;
@@ -212,7 +212,7 @@ const show = (req, res) => {
 /**
  * @param {object} req - request object provided by express
  * @param {object} res - response object provided by express
- * @desc controller that shows the current user on GET '/api/me'
+ * @description controller that shows the current user on GET '/api/me'
 */
 const me = (req, res) => {
   res.jsonp(req.user || null);
@@ -223,7 +223,7 @@ const me = (req, res) => {
  * @param {object} res - response object provided by express
  * @param {function} next - next function for passing the request to next handler
  * @param {string} id - mongoose id of the user
- * @desc finds a user by id from the db and
+ * @description finds a user by id from the db and
  * assigns the user to the profile key on the request object
 */
 const user = (req, res, next, id) => {
