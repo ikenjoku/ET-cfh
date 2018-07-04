@@ -11,6 +11,7 @@ import karma from 'karma';
 import dotenv from 'dotenv';
 
 import path from 'path';
+import shell from 'gulp-shell';
 
 dotenv.config();
 const { Server } = karma;
@@ -73,16 +74,10 @@ gulp.task('export', () => {
 // Default task(s).
 gulp.task('default', ['develop']);
 
-gulp.task('test:backend', ['compile'], () => gulp.src(['dist/backend-test/**/*.js', '!test/angular/**/*.js'])
-  .pipe(mocha({
-    reporter: 'spec',
-    exit: true,
-    timeout: 5000,
-    globals: {
-      should: require('should') 
-    },
-    compilers: 'babel-register'
-  })));
+// Backend Test task.
+gulp.task('test:backend', shell.task([
+  'NODE_ENV=test nyc mocha backend-test/**/*.js  --exit',
+]));
 
 // Frontend test task
 gulp.task('test:frontend', (done) => {
@@ -112,4 +107,4 @@ gulp.task('install', () => bower({
 }));
 
 // Test task
-gulp.task('test', ['test:backend', 'test:frontend']);
+gulp.task('test', ['test:frontend', 'test:backend']);

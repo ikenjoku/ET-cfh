@@ -43,7 +43,6 @@ const signin = (req, res) => {
  * @param {object} req - request object provided by express
  * @param {object} res - response object provided by express
  * @param {function} next - next function for passing the request to next handler
- * @param {object} passport - passport with all the startegies registered
  * @description Controller for handling requests to '/api/auth/login', returns token in response as JSON.
  *  Uses Tokenizer helper method to handle generation of token
 */
@@ -54,6 +53,48 @@ const handleLogin = (req, res, next) => {
     const token = Tokenizer(user);
     res.status(200).json({ ...user._doc, token });
   })(req, res, next);
+};
+
+/**
+ * @param {object} req - request object provided by express
+ * @param {object} res - response object provided by express
+ * @param {function} next - next function for passing the request to next handler
+ * @description Controller for handling requests to '/api/auth/signup',
+ * returns the token of the user on signup, users Tokenizer to generate the token as well.
+*/
+const handleSignUp = (req, res, next) => {
+  // there has to be the email, username and password
+  if (req.body.password && req.body.email && req.body.name) {
+    // Check that there is no user with that email
+    User.findOne({ email: req.body.email }, (err, existingUser) => {
+      if (err) return next(err);
+      if (!existingUser) {
+        const user = new User(req.body);
+        user.avatar = avatarsArray[user.avatar];
+        user.provider = 'local';
+        user.save((err, newUser) => {
+          if (err) return next(err); // something went wrong saving the new user
+          const token = Tokenizer(newUser);
+          return res.status(201).json({ ...newUser._doc, token });
+        });
+        return;
+      }
+      // conflict errors
+      const error = new Error('Sorry that user exists already exists');
+      error.status = 409;
+      return next(error);
+    });
+  } else {
+  // Loop through to find the missing fields, so the error message is pretty clear
+    const required = ['password', 'name', 'email'];
+    const message = required.reduce((accumulator, current) => {
+      if (!req.body[`${current}`]) return `${accumulator}, ${current}`;
+      return accumulator;
+    }, 'Hey, Please check that these fields are present');
+    const error = new Error(`${message}.`);
+    error.status = 422;
+    return next(error);
+  }
 };
 
 
@@ -185,7 +226,6 @@ const addDonation = (req, res) => {
             }
           }
           if (!duplicate) {
-            console.log('Validated donation');
             user.donations.push(req.body);
             user.premium = 1;
             user.save();
@@ -251,5 +291,6 @@ export default {
   signup,
   signin,
   handleLogin,
+  handleSignUp,
   avatars
 };

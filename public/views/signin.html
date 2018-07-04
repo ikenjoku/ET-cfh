@@ -45,21 +45,21 @@
             Please check your username/password and try again.
           </div>
           <!-- Modifying action to point to new endpoint -->
-          <form class="signup form-horizontal" action="/api/auth/login" method="post">
+          <form class="signup form-horizontal" ng-controller="AuthController">
             <div class="control-group">
               <label for="email" class="control-label"></label>
               <div class="controls">
-                <input class="input-info" id="email" type="text" name="email" placeholder="Email" required novalidate />
+                <input class="input-info" id="email" type="text" name="email" placeholder="Email" ng-model="user.email" required novalidate />
               </div>
             </div>
             <div class="control-group">
               <label for="password" class="control-label"></label>
               <div class="controls">
-                <input class="input-info" id="password" type="password" name="password" placeholder="Password" required novalidate />
+                <input class="input-info" id="password" type="password" name="password"  ng-model="user.password" placeholder="Password" required novalidate />
               </div>
             </div>
             <div class="form-actions top-margin">
-              <button id="sign-up-btn-other" type='submit'>Sign In</button>
+              <button id="sign-up-btn-other" type='submit' ng-click="SignInUser()">Sign In</button>
             </div>
           </form>
         </div>
