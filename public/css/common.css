@@ -1,0 +1,38 @@
+header, div, footer, table,
+body, ul, li, tr, th, td, h1, h2,
+h3, tbody, thead, img, nav, section {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+html{
+  font-family: "Quicksand", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+}
+
+.font-bold {
+  font-weight: bold !important;
+}
+.font-bold-md {
+  font-weight: 500 !important;
+}
+
+.font-lg {
+  font-size: 2rem;
+}
+
+.font-sm {
+  font-size: 1rem;
+}
+
+.font-md {
+  font-size: 1.5rem;
+}
+
+.font-quick-sand {
+  font-family: "Quicksand", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+}
+
+.font-capitalize {
+  text-transform: capitalize;
+}
