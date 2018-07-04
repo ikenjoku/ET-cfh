@@ -5,6 +5,12 @@
   "env": {
     "MONGOHQ_URL": {
       "required": true
+    },
+    "GMAIL_PASSWORD": {
+      "required": true
+    },
+    "SECRET_KEY": {
+      "required": true
     }
   },
   "formation": {
