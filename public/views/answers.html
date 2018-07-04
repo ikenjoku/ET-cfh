@@ -21,7 +21,40 @@
             <span id='selection-number' ng-show="secondAnswer($index)"> 2 </span>
         </div>
     </span>
+  </div>
+</div>
 
+
+<div id="info-container" ng-show="game.state === 'awaiting players'">
+  <div id="inner-info">
+    <form id="search-users" ng-submit="findUsers()" name="myForm">
+      <div class="form-group col-md-10">
+        <input ng-model="searchKey" type='text' autocomplete="off" name='searchKey' placeholder="Search for friends" search-key-length>
+        <small style="float: left; color: rgb(204, 88, 34)" class="form-text text-muted" ng-show="(myForm.searchKey.$dirty && myForm.searchKey.$invalid) || hasServerError">{{ searchHelper }}</small>
+      </div>
+      <br>
+      <div class='form-group-col-md-2'>
+          <input type='submit' value="Find Friends" ng-disabled="myForm.$invalid || myForm.$pristine">
+      </div>
+    </form>
+  </div>
+  <div id='found-users' style="clear: both;">
+    <div ng-show="showNotFound"><br>Your search did not match any current user.</div>
+    <table>
+      <tr ng-repeat="x in foundUsers">
+        <td>{{x.name}}</td>
+        <td>{{x.email}}</td>
+        <td>
+          <img ng-show="selectedUser === x" src='../img/loaders/spinner.gif' style="margin-right: 5px" width="20px" alt='spin'>
+          <button style="width: 100px;" ng-show="invitedUsers.indexOf(x.email) === -1" ng-disabled="disableInviteButton" ng-click="sendInvitation(x)" class="btn btn-primary">
+            invite
+          </button>
+          <button style="width: 100px;" ng-show="invitedUsers.indexOf(x.email) !== -1" ng-disabled="true" class="btn btn-default">
+            <b>invited</b>
+          </button>
+        </td>
+      </tr>
+    </table>
   </div>
 </div>
 
