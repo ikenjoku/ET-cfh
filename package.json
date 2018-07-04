@@ -13,9 +13,9 @@
     "npm": "5.6.0"
   },
   "scripts": {
-    "start": "gulp compile && gulp export && gulp develop",
+    "start": "gulp",
     "test": "export NODE_ENV=test || set NODE_ENV=test && gulp test --timeout 5000",
-    "postinstall": "gulp install",
+    "postinstall": "gulp install && gulp compile && gulp export",
     "build": "gulp build"
   },
   "nyc": {
