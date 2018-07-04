@@ -17,6 +17,31 @@ angular.module('mean.system')
     let makeAWishFacts = MakeAWishFactsService.getMakeAWishFacts();
     $scope.makeAWishFact = makeAWishFacts.pop();
 
+    $scope.openLessModal = () => {
+      $('#less-modal').modal('open');
+    };
+
+    $scope.openReuseModal = () => {
+      const refusableModel = $('#reuse-modal');
+      refusableModel.find('.modal-body').text('I am coming from the other side');
+      $('#reuse-modal').modal('open');
+    };
+
+    $scope.closeReuseModal = () => {
+      $('#reuse-modal').modal('close');    
+    }
+    $scope.closeLessModal = () => {
+      $('#less-modal').modal('close');
+    };
+
+    $scope.openMoreModal = () => {
+      $('#more-players-modal').modal('open');
+    };
+
+    $scope.closeMoreModal = () => {
+      $('#more-players-modal').modal('close');
+    };
+
     $scope.findUsers = () => {
       $scope.hasServerError = false;
       $http.get(`/users/findUsers/${$scope.searchKey}`)
@@ -162,6 +187,7 @@ angular.module('mean.system')
     $scope.$watch('game.state', () => {
       if (game.state === 'waiting for czar to decide' && $scope.showTable === false) {
         $scope.showTable = true;
+        console.log(players);
       }
     });
 
