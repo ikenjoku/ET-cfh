@@ -1,5 +1,6 @@
 import 'babel-polyfill';
 import request from 'supertest';
+import faker from 'faker';
 import { expect } from 'chai';
 import mongoose from 'mongoose';
 import app from '../../server';
@@ -19,7 +20,7 @@ describe('Auth endpoints', () => {
     Promise.resolve(User.create(mock));
   });
 
-  it('POST /api/auth/endpoint should return the user token along with the', (done) => {
+  it('POST /api/auth/login should return the user token along with the', (done) => {
     try {
       request(app)
         .post('/api/auth/login')
@@ -32,6 +33,29 @@ describe('Auth endpoints', () => {
         });
     } catch (err) {
       /* eslint no-unused-expressions: 0 */
+      expect(err).to.not.exist;
+    }
+  });
+
+  it('POST /api/auth/signup should return the token of a user on sign up', (done) => {
+    try {
+      const fake = {
+        username: faker.internet.userName(),
+        name: faker.name.findName(),
+        email: faker.internet.email(),
+        password: faker.internet.password(),
+      };
+
+      request(app)
+        .post('/api/auth/signup')
+        .send(fake)
+        .end((err, res) => {
+          if (err) return done(err);
+          expect(res.statusCode).to.equal(201);
+          expect(res.body.token).to.equal(Tokenizer(res.body));
+          done();
+        });
+    } catch (err) {
       expect(err).to.not.exist;
     }
   });

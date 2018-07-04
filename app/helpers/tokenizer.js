@@ -12,7 +12,7 @@ import jwt from 'jsonwebtoken';
  */
 const verifyPayload = (data) => {
   // make sure the neccessary keys are present, only works if the data passed is an object :)
-  if (data.username && data._id && data.name) return;
+  if (data._id && data.name) return;
   throw new TypeError("The object passed in should have keys 'id', 'username', 'name' and 'avatar'");
 };
 
@@ -28,8 +28,8 @@ const verifyPayload = (data) => {
  */
 export const Tokenizer = (payload) => {
   verifyPayload(payload);
-  const { name, username, avatar, _id } = payload;
-  const filteredPayload = { name, username, avatar, _id }; /* eslint object-curly-newline: 0 */
+  const { name, avatar, _id } = payload;
+  const filteredPayload = { name, avatar, _id }; /* eslint object-curly-newline: 0 */
   const token = jwt.sign(filteredPayload, process.env.SECRET_KEY);
   return token;
 };

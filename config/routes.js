@@ -6,11 +6,11 @@ import avatars from '../app/controllers/avatars';
 import index from '../app/controllers/index';
 
 export default (router, passport, app) => {
-
   // api name spaced routes;
   const api = Router();
   api
-    .post('/auth/login', users.handleLogin);
+    .post('/auth/login', users.handleLogin)
+    .post('/auth/signup', users.handleSignUp);
 
   router.get('/signin', users.signin);
   router.get('/signup', users.signup);
@@ -96,15 +96,9 @@ export default (router, passport, app) => {
   app.use(router);
 
 
-  // refactored to the position to prevent overrides
-  app.use((req, res) => {
-    res.status(404).render('404', {
-      url: req.originalUrl,
-      error: 'Not found'
-    });
-  });
-
   app.use((err, req, res, next) => {
+    // error from the '/api' namespaced routes
+    if (err.status) return res.status(err.status).json({ message: err.message });
     // Treat as 404
     if (err.message.indexOf('not found')) return next();
     // Log it
@@ -112,6 +106,14 @@ export default (router, passport, app) => {
     // Error page
     res.status(500).render('500', {
       error: err.stack
+    });
+  });
+
+  // refactored to the position to prevent overrides
+  app.use((req, res) => {
+    res.status(404).render('404', {
+      url: req.originalUrl,
+      error: 'Not found'
     });
   });
 };

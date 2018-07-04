@@ -19,13 +19,12 @@ describe('Payload to token converter(Unit Test)', () => {
     it(' Should return a valid token that returns to the initial object', () => {
       const data = jwt.verify(token, process.env.SECRET_KEY);
       expect(data.name).to.equal('A test username');
-      expect(data.username).to.equal('Hasstrupezekiel');
     });
 
-    it('should return a token whose payload is an object containing only five fields', () => {
+    it('should return a token whose payload is an object containing only four fields', () => {
       const userObject = jwt.verify(token, process.env.SECRET_KEY);
-      // testing for five because jwt implicitly adds an 'iat' field to the payload object
-      expect(Object.keys(userObject).length).to.equal(5);
+      // testing for four because jwt implicitly adds an 'iat' field to the payload object
+      expect(Object.keys(userObject).length).to.equal(4);
     });
   });
 
@@ -54,7 +53,6 @@ describe('Payload to token converter(Unit Test)', () => {
     it('Should successfully decode a token, returning the initial object sent', () => {
       const payLoad = decodeToken(token);
       expect(payLoad.name).to.equal('A test username');
-      expect(payLoad.username).to.equal('Hasstrupezekiel');
     });
 
     it('Should throw an error when sent the wrong datatype', () => {
