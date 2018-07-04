@@ -1,4 +1,3 @@
-/* Fola Start */
 .banner {
   background-image: url("http://res.cloudinary.com/dffiyhgto/image/upload/c_scale,w_1594/v1530706947/landing.jpg");
   background-repeat: no-repeat;
@@ -121,6 +120,71 @@ background: linear-gradient(rgba(96, 99, 100, 0.3), rgba(0,0,0,0.3));
   .play-foot, .login-btn {
     font: Bold 2rem 'Quicksand';
   }
+
+  #donations {
+    text-align: left;
+  }
+
+  .donation-banner {
+    padding: 3rem;
+  }
+
+  .wish-logo {
+    top: 28rem;
+  }
+
+  .nav-wrapper {
+    margin-left: 2.5rem;
+    margin-right: 2.5rem;
+  }
 }
 
-/* Fola End */
+.brand-logo {
+  margin-top: .25rem;
+}
+
+#nav-mobile .btn { margin-right: 0 !important; }
+#nav-mobile .btn:last-of-type { margin-right: .5rem !important; }
+
+.background-green {
+  background-color: #236231;
+}
+
+.border-black {
+  border: 2px solid #000 !important;
+  border-radius: 5px;
+}
+
+#charity-section {
+  background-image: url("../img/landing/hands-charity.png");
+  background-repeat: no-repeat;
+  width: 100%;
+  background-size: cover;
+  opacity: 0.7;
+}
+
+.image-overlay {
+  width: 100%;
+  background:  linear-gradient(rgba(10, 10, 10, 0.6), rgba(10, 10, 10, 0.6)),
+      url('http://res.cloudinary.com/dikaeinstein/image/upload/c_scale,w_1972/v1530707365/cfh/Charity-Donation-small.jpg');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.donation-banner {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  padding: 2rem;
+}
+
+#donations {
+  text-align: center;
+}
+
+.footer {
+  font-size: 1.25rem;
+  padding: 1rem;
+  line-height: 1rem;
+}
