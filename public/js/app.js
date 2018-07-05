@@ -6,13 +6,13 @@ angular.module('mean', ['ngCookies', 'ngResource', 'ui.bootstrap', 'ui.route', '
             templateUrl: 'views/index.html'
           }).
           when('/app', {
-            templateUrl: '/views/app.html',
+            templateUrl: '/views2/app.html',
           }).
           when('/privacy', {
-            templateUrl: '/views/privacy.html',
+            templateUrl: '/views2/privacy.html',
           }).
           when('/bottom', {
-            templateUrl: '/views/bottom.html'
+            templateUrl: '/views2/bottom.html'
           }).
           when('/signin', {
             templateUrl: '/views/signin.html'
@@ -21,7 +21,7 @@ angular.module('mean', ['ngCookies', 'ngResource', 'ui.bootstrap', 'ui.route', '
             templateUrl: '/views/signup.html'
           }).
           when('/choose-avatar', {
-            templateUrl: '/views/choose-avatar.html'
+            templateUrl: '/views2/choose-avatar.html'
           }).
           otherwise({
             redirectTo: '/'

@@ -41,7 +41,32 @@
       </div>
     </div>
   </div>
-    
+  <!-- modal one section -->
+  <div id="modal1" class="modal">
+  <div class="modal-content">
+    <h4>Play Game As A Guest</h4>
+    <p>You  are about to play game as a guest! </p>
+  </div>
+  <div class="modal-footer">
+    <a href="#" class="modal-close waves-effect waves-light green darken-4 btn white-text">Cancel</a>&nbsp;&nbsp;&nbsp;&nbsp;
+    <a href="/play" class="modal-close waves-effect waves-light green darken-4 btn white-text">Start Game</a>
+  </div>
+</div>
+
+  <!-- modal two section -->
+<div id="modal2" class="modal">
+    <div class="modal-content">
+      <h4>Card For Humanity</h4>
+      <p>Kelvin! You are about to play game of horrible people trying to do good </p>
+    </div>
+    <div class="modal-footer">
+      <a href="#" class="modal-close waves-effect waves-light green darken-4 btn white-text">Cancel</a>&nbsp;&nbsp;&nbsp;&nbsp;
+      <a href="/play" class="modal-close waves-effect waves-light green darken-4 btn white-text">Start Game</a>
+      <div class="row play-foot flow-text" ng-controller="IndexController"><button data-target="modal1" class="btn modal-trigger green darken-4 font-lg font-bold font-capitalize font-quick-sand">Play AS A Guest</button>
+        <button ng-show="user()" data-target="modal2" class="btn modal-trigger green darken-4 font-lg font-bold font-capitalize font-quick-sand">Play Game</button>
+      </div>
+    </div>
+  </div>
   <div id="play" class="section how-to-play">
     <div class="row play-head"><h1>How To Play</h1></div>
     <div class="row">
@@ -99,7 +124,7 @@
           </div>
         </div>
       </div>
-    </div>
+  </div>
 
   <!-- Donation Info Start -->
   <section class="image-overlay donation-banner white-text font-md" id="donations">
@@ -134,5 +159,5 @@
       Designed with <span class="green-text text-darken-3">&#10084;</span> By the ET team
     </p>
   </footer>
-  <!-- Footer end -->
+  <script> $('.modal').modal();</script> 
 </body>

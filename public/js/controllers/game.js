@@ -121,14 +121,23 @@ angular.module('mean.system')
     };
 
     $scope.startGame = function() {
-      game.startGame();
-    };
+      const {
+        players, gameID
+      } = game;
+       let friends = [];
+       players.forEach(player => {
+        friends.push(player.userID);
+       });
+       console.log(friends);
+       const gameStarter = players[0].username;
+       game.createPlayers(gameID, friends, gameStarter);   
+       game.startGame();
+     };
 
     $scope.abandonGame = function() {
       game.leaveGame();
       $location.path('/');
     };
-
     // Catches changes to round to update when no players pick card
     // (because game.state remains the same)
     $scope.$watch('game.round', function() {
