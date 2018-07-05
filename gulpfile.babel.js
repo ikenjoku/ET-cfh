@@ -8,8 +8,11 @@ import mocha from 'gulp-mocha';
 import bower from 'gulp-bower';
 import babel from 'gulp-babel';
 import karma from 'karma';
+import dotenv from 'dotenv';
+
 import path from 'path';
 
+dotenv.config();
 const { Server } = karma;
 
 gulp.task('styles', () => sass('public/css/common.scss', { style: 'expanded' })
@@ -17,7 +20,7 @@ gulp.task('styles', () => sass('public/css/common.scss', { style: 'expanded' })
 
 gulp.task('develop', () => {
   nodemon({
-    script: 'dist/server.js',
+    exec: 'gulp compile && gulp export && node dist/server.js',
     ignore: ['README.md', 'node_modules/**', 'dist/**', 'public/lib/**', '.DS_Store'],
     ext: 'js html jade scss css',
     watch: ['app', 'config', 'public', 'server.js'],
@@ -70,7 +73,7 @@ gulp.task('export', () => {
 });
 
 // Default task(s).
-gulp.task('default', ['nodemon']);
+gulp.task('default', ['develop']);
 
 gulp.task('test:backend', ['compile'], () => {
   return gulp.src(['dist/backend-test/**/*.js', '!test/angular/**/*.js'])
