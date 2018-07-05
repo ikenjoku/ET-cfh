@@ -1,100 +1,3 @@
-.banner {
-  background-image: url("http://res.cloudinary.com/dffiyhgto/image/upload/c_scale,w_1594/v1530706947/landing.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
-  height: 90vh;
-  width: 100%;
-}
-
-.overlay {
-  content: '';
-position: absolute;
-background: linear-gradient(rgba(96, 99, 100, 0.3), rgba(0,0,0,0.3));
-    width: 100%;
-    height: 90vh;
-}
-.cfh-head {
-  color: white;
-  font: Bold 4rem 'Quicksand';
-  position: relative;
-  text-align: center;
-}
-
-.cfh-text {
-  color: white;
-  position: relative;
-  margin-top: 3%;
-  margin-bottom: 3%;
-  justify-content: center;
-  text-align: center;
-}
-
-.cfh-btn {
-  text-align: center;
-}
-
-.play-btn {
-  color: white;
-  background-color: transparent;
-  border-color: white;
-  border: 2px solid;
-}
-
-.login-btn {
-  background-color: #236231;
-}
-
-.Header
-{
-    width: 100%;
-    height: 80px;
-}
-.card.col.s9{
-  margin: 20px auto;
-  padding: 0px;
-  border-radius: 7px;
-  float: none;
-  background-color: #E5E5E5;
-}
-.card-image {
-  width: 50%;
-  display: block;
-  margin: auto;
-  padding-top: 50px;
-  padding-bottom: 15px;
-}
-
-.card .card-image img{
-  height: 50%;
-  margin: auto;
-  width: 70%;
-}
-
-.card .card-image .card-title {
-  position: relative;
-  margin: 0 auto;
-  padding: 5px;
-  text-align: center;
-  color: black;
-  clear: both;
-}
-
-.card .card-content {
-  background-color: black;
-  color: white;
-  text-align: center;
-  height: 150px;
-}
-
-.play-head h1{
-  font: Bold 3rem 'Quicksand';
-  text-align: center;
-}
-
-.play-foot, .login-btn {
-  text-align: center;
-}
-
 .brand-logo {
   margin-top: .25rem;
 }
@@ -146,6 +49,118 @@ background: linear-gradient(rgba(96, 99, 100, 0.3), rgba(0,0,0,0.3));
 }
 
 @media screen and (min-width: 767px) {
+  #donations {
+    text-align: left;
+  }
+
+  .donation-banner {
+    padding: 3rem;
+  }
+
+  .wish-logo {
+    top: 28rem;
+  }
+
+  .nav-wrapper {
+    margin-left: 2.5rem;
+    margin-right: 2.5rem;
+  }
+}
+
+.banner {
+  background-image: url("http://res.cloudinary.com/dffiyhgto/image/upload/c_scale,w_1594/v1530706947/landing.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 90vh;
+  width: 100%;
+}
+
+.overlay {
+  content: '';
+position: absolute;
+background: linear-gradient(rgba(10, 10, 10, 0.6), rgba(10, 10, 10, 0.6));
+    width: 100%;
+    height: 90vh;
+}
+.cfh-head {
+  color: white;
+  font: Bold 4rem 'Quicksand';
+  position: relative;
+  text-align: center;
+}
+
+.cfh-text {
+  color: white;
+  position: relative;
+  margin-top: 3%;
+  margin-bottom: 3%;
+  justify-content: center;
+  text-align: center;
+}
+
+.cfh-btn {
+  text-align: center;
+}
+
+.play-btn {
+  color: white;
+  background-color: transparent;
+  border-color: white;
+  border: 2px solid;
+}
+
+.login-btn {
+  background-color: #236231;
+}
+
+.card.col.s9{
+  margin: 20px auto;
+  padding: 0px;
+  border-radius: 7px;
+  float: none;
+  background-color: #E5E5E5;
+}
+.card-image {
+  width: 50%;
+  display: block;
+  margin: auto;
+  padding-top: 50px;
+  padding-bottom: 15px;
+}
+
+.card .card-image img{
+  height: 50%;
+  margin: auto;
+  width: 70%;
+}
+
+.card .card-image .card-title {
+  position: relative;
+  margin: 0 auto;
+  padding: 5px;
+  text-align: center;
+  color: black;
+  clear: both;
+}
+
+.card .card-content {
+  background-color: black;
+  color: white;
+  text-align: center;
+  height: 150px;
+}
+
+.play-head h1{
+  font: Bold 3rem 'Quicksand';
+  text-align: center;
+}
+
+.play-foot, .login-btn {
+  text-align: center;
+}
+
+
+@media screen and (min-width: 767px) {
   .banner {
     padding: 2%;
   }
@@ -169,21 +184,179 @@ background: linear-gradient(rgba(96, 99, 100, 0.3), rgba(0,0,0,0.3));
   .play-foot, .login-btn {
     font: Bold 2rem 'Quicksand';
   }
-
-  #donations {
-    text-align: left;
+}
+.login-image-overlay {
+  width: 100%;
+  background:  linear-gradient(rgba(10, 10, 10, 0.6), rgba(10, 10, 10, 0.6)),
+      url('http://res.cloudinary.com/dqsmurjpg/image/upload/v1530770621/3-cards-against-humanity_32938.jpg');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.signin-image-overlay {
+  width: 100%;
+  background:  linear-gradient(rgba(10, 10, 10, 0.6), rgba(10, 10, 10, 0.6)),
+      url('http://res.cloudinary.com/dqsmurjpg/image/upload/v1530797290/cards_2.jpg');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+@media screen and (min-width: 767px) {
+  #cfh-logo {
+    width: 25%
   }
+}
 
-  .donation-banner {
-    padding: 3rem;
+@media screen and (max-width: 767px) {
+  #cfh-logo {
+    width: 22%
   }
+}
 
-  .wish-logo {
-    top: 28rem;
-  }
+#auth {
+  height: 83vh;
+  text-align: center;
+}
 
-  .nav-wrapper {
-    margin-left: 2.5rem;
-    margin-right: 2.5rem;
+@media screen and (max-width: 600px) {
+  #auth {
+    height: 85vh;
   }
+}
+
+.auth-input {
+  width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+@media screen and (max-width: 420px) {
+  .auth-input {
+    width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+@media screen and (min-width: 420px) {
+  .auth-input {
+    width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+.input-field {
+  color:white;
+  box-sizing: border-box;
+  border: 2px solid #f1f1f1;
+  background-color: white;
+  border-radius: 3px;
+  margin-bottom: 0 !important;
+  padding: 0 10px !important;
+}
+input {
+  border-bottom: none !important;
+  height: 3.2rem !important;
+  margin: 0 !important;
+}
+.input-field input[type=text]:focus {
+  border-bottom: none !important;
+}
+.row .input-field input:focus {
+  border-bottom: none !important;
+  box-shadow: none !important
+}
+.auth-text {
+  margin-bottom: 40px !important;
+}
+.auth-btn {
+  margin-top: 30px !important;
+  height: 50px !important;
+}
+.auth-icon {
+  display: inline-block;
+  padding: 10px;
+  border: 2px solid white;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+}
+i {
+  color: white;
+  font-size: 24px;
+}
+.auth-component {
+  padding-top: 30px !important;
+}
+.or{
+  font-size: 25px;
+}
+.index-login-btn, .index-signup-btn {
+  box-shadow: none !important;
+}
+.index-login-btn {
+  border: 2px solid black;
+  border-radius: 3px;
+}
+.index-signup-btn:hover, .login-btn:hover {
+  border: 2px solid black !important;
+  border-radius: 3px !important;
+  background-color: white !important;
+  color: black !important;
+}
+.index-login-btn:hover {
+  background-color: #236231 !important;
+  border: none !important;
+  color: white !important;
+}
+.play-btn:hover {
+  background-color: #236231 !important;
+  border: none !important;
+}
+.btn-large:hover {
+  background: transparent !important;
+  border: 2px solid white !important;
+  border-radius: 3px !important;
+}
+.choose-avatar {
+  font-size: 18px !important;
+  background-color: transparent !important;
+  border: none;
+  color: white !important;
+  cursor: pointer;
+  margin-top: 10px;
+}
+.avatar-list {
+  overflow: hidden;
+  padding-left: 0px;
+  margin-left: 3%;
+}
+.avatar-list img {
+  max-width: 60%;
+}
+.avatars {
+  position: relative;
+  float: left;
+  margin: 2px 5px;
+  border-radius: 8px;
+}
+.modal {
+  background-color: #236231 !important;
+}
+.radio-avatar {
+  display: block !important;
+  opacity: 1 !important;
+  pointer-events: visible !important;
+}
+.modal-footer-button {
+  height: 35px;
+  width: 80px;
+  border-radius: 3px;
+  border: 2px black solid;
+}
+.modal-footer-button:hover {
+  background-color: #236231 !important;
+  border: none !important;
+  color: white;
+}
+.modal-footer {
+  text-align: center !important;
 }
