@@ -57,12 +57,10 @@ gulp.task('watch', () => {
 });
 
 gulp.task('export', () => {
-  gulp.src('public/lib/bootstrap/dist/css/*')
-    .pipe(gulp.dest('dist/public/lib/bootstrap/css'));
-  gulp.src('public/lib/bootstrap/dist/js/*')
-    .pipe(gulp.dest('dist/public/lib/bootstrap/js'));
-  gulp.src('public/lib/bootstrap/dist/fonts/*')
-    .pipe(gulp.dest('dist/public/lib/bootstrap/fonts'));
+  gulp.src('public/lib/materialize/dist/css/*')
+    .pipe(gulp.dest('public/lib/materialize/css'));
+  gulp.src('public/lib/materialize/dist/js/*')
+    .pipe(gulp.dest('public/lib/materialize/js'));
   gulp.src('public/lib/angular-ui-utils/modules/route/route.js')
     .pipe(gulp.dest('dist/public/lib/angular-ui-utils/modules'));
   // adding this to let gulp pipe the jade files to the dist folder
@@ -75,23 +73,16 @@ gulp.task('export', () => {
 // Default task(s).
 gulp.task('default', ['develop']);
 
-gulp.task('test:backend', ['compile'], () => {
-  return gulp.src(['dist/backend-test/**/*.js', '!test/angular/**/*.js'])
-    .pipe(mocha({
-      reporter: 'spec',
-      exit: true,
-      timeout: 5000,
-      globals: {
-        should: require('should') 
-      },
-      compilers: 'babel-register'
-    }));
-  });
-
-// Backend Test task.
-// gulp.task('test:backend', shell.task([
-//   'NODE_ENV=test nyc mocha backend-test/**/*.js  --exit',
-// ]));
+gulp.task('test:backend', ['compile'], () => gulp.src(['dist/backend-test/**/*.js', '!test/angular/**/*.js'])
+  .pipe(mocha({
+    reporter: 'spec',
+    exit: true,
+    timeout: 5000,
+    globals: {
+      should: require('should') 
+    },
+    compilers: 'babel-register'
+  })));
 
 // Frontend test task
 gulp.task('test:frontend', (done) => {
@@ -116,11 +107,9 @@ gulp.task('build', () => gulp.src([
   .pipe(gulp.dest('./dist')));
 
 // Bower task.
-gulp.task('install', () => {
-  return bower({
-    directory: './public/lib',
-  });
-});
+gulp.task('install', () => bower({
+  directory: './public/lib',
+}));
 
 // Test task
 gulp.task('test', ['test:backend', 'test:frontend']);
