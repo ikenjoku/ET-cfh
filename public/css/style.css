@@ -25,7 +25,7 @@
 .image-overlay {
   width: 100%;
   background:  linear-gradient(rgba(10, 10, 10, 0.6), rgba(10, 10, 10, 0.6)),
-      url('http://res.cloudinary.com/dikaeinstein/image/upload/c_scale,w_1972/v1530707365/cfh/Charity-Donation-small.jpg');
+      url('https://res.cloudinary.com/dikaeinstein/image/upload/c_scale,w_1972/v1530707365/cfh/Charity-Donation-small.jpg');
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -68,7 +68,7 @@
 }
 
 .banner {
-  background-image: url("http://res.cloudinary.com/dffiyhgto/image/upload/c_scale,w_1594/v1530706947/landing.jpg");
+  background-image: url("https://res.cloudinary.com/dffiyhgto/image/upload/c_scale,w_1594/v1530706947/landing.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   height: 90vh;
@@ -188,7 +188,7 @@ background: linear-gradient(rgba(10, 10, 10, 0.6), rgba(10, 10, 10, 0.6));
 .login-image-overlay {
   width: 100%;
   background:  linear-gradient(rgba(10, 10, 10, 0.6), rgba(10, 10, 10, 0.6)),
-      url('http://res.cloudinary.com/dqsmurjpg/image/upload/v1530770621/3-cards-against-humanity_32938.jpg');
+      url('https://res.cloudinary.com/dqsmurjpg/image/upload/v1530770621/3-cards-against-humanity_32938.jpg');
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -196,7 +196,7 @@ background: linear-gradient(rgba(10, 10, 10, 0.6), rgba(10, 10, 10, 0.6));
 .signin-image-overlay {
   width: 100%;
   background:  linear-gradient(rgba(10, 10, 10, 0.6), rgba(10, 10, 10, 0.6)),
-      url('http://res.cloudinary.com/dqsmurjpg/image/upload/v1530797290/cards_2.jpg');
+      url('https://res.cloudinary.com/dqsmurjpg/image/upload/v1530797290/cards_2.jpg');
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;

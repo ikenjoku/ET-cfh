@@ -13,6 +13,9 @@
           </li>
           <li><a class="waves-effect waves-light green darken-4 btn white-text index-signup-btn" href="signup">Signup</a></li>
         </ul>
+        <span ng-show="user()">
+          <li><a waves-effect waves-light green darken-4 btn white-text index-signup-btn href="/signout">Sign Out</a></li>
+        </span>
       </div>
     </nav>
   </header>
@@ -34,6 +37,7 @@
     <div class="row">
       <div class="col s12 cfh-btn" ng-controller="ScrollController">
         <a ng-click="goPlay()" class="waves-effect waves-light btn play-btn">How To Play</a>
+        <a href="/play" class="waves-effect waves-light btn play-btn">Play as guest </a>
       </div>
     </div>
   </div>
@@ -95,13 +99,12 @@
           </div>
         </div>
       </div>
-      <div class="row play-foot flow-text"><a href="/play">Play as guest </a><span>OR</span> <a class="waves-effect waves-light btn login-btn" a href="#!/signin">LOGIN</a></div>
-  </div>
+    </div>
 
   <!-- Donation Info Start -->
   <section class="image-overlay donation-banner white-text font-md" id="donations">
     <div class="row">
-      <div class="col font-bold">
+      <div class="col s12 l8 font-bold">
         <h3 class="font-bold">Donate to Charity</h3>
         <p>&ldquo;Anticipate charity by preventing poverty.....&rdquo;</p>
         <p class="font-bold-md">
@@ -116,7 +119,7 @@
         <p>All donations go to the Make-a-Wish Foundation and benefit children in need.</p>
       
         <a href="https://www.crowdrise.com/donate/project/cfhio/cards4humanity">
-          <button class="btn-large green darken-4 font-lg font-bold font-capitalize font-quick-sand">
+          <button class="btn-large green darken-4 font-lg font-capitalize font-quick-sand">
             Donate Now
           </button>
         </a>
