@@ -1,5 +1,5 @@
 angular.module('mean.system')
-  .controller('GameController', ['$scope', '$http', 'game', '$timeout', '$location', 'MakeAWishFactsService', '$dialog', ($scope, $http, game, $timeout, $location, MakeAWishFactsService) => {
+  .controller('GameController', ['$scope', '$http', 'game', '$timeout', '$location', 'MakeAWishFactsService', '$dialog', '$rootScope', ($scope, $http, game, $timeout, $location, MakeAWishFactsService, $rootScope) => {
     $scope.hasPickedCards = false;
     $scope.winningCardPicked = false;
     $scope.showTable = false;
@@ -17,29 +17,19 @@ angular.module('mean.system')
     let makeAWishFacts = MakeAWishFactsService.getMakeAWishFacts();
     $scope.makeAWishFact = makeAWishFacts.pop();
 
-    $scope.openLessModal = () => {
-      $('#less-modal').modal('open');
-    };
-
-    $scope.openReuseModal = () => {
+    $scope.openReusedModal = () => {
       const refusableModel = $('#reuse-modal');
-      refusableModel.find('.modal-body').text('I am coming from the other side');
+      $('.modal-header').empty();
+      refusableModel.find('.modal-header').append('<h4 class="modal-title center-align" style="color: #23522d;">3 PLAYERS REQUIRED</h4>');
+      refusableModel.find('.modal-body').text('This game requires a minimum of 3 players. Please invite more friends to play');
+      const okayBtn = '<button type="button" class="btn waves-effect waves-green modal-close" style="background-color: #23522d;" >OKAY</button>';
+      $('.modal-footer').empty();
+      $('.modal-footer').append(okayBtn);
       $('#reuse-modal').modal('open');
     };
 
-    $scope.closeReuseModal = () => {
-      $('#reuse-modal').modal('close');    
-    }
-    $scope.closeLessModal = () => {
-      $('#less-modal').modal('close');
-    };
-
-    $scope.openMoreModal = () => {
-      $('#more-players-modal').modal('open');
-    };
-
-    $scope.closeMoreModal = () => {
-      $('#more-players-modal').modal('close');
+    $scope.closeReusedModal = () => {
+      $('#reuse-modal').modal('close');
     };
 
     $scope.findUsers = () => {
@@ -162,7 +152,11 @@ angular.module('mean.system')
     $scope.winnerPicked = () => game.winningCard !== -1;
 
     $scope.startGame = () => {
-      game.startGame();
+      if (game.players.length < game.playerMinLimit) {
+        $scope.openReusedModal();
+      } else {
+        game.startGame();
+      }
     };
 
     $scope.abandonGame = () => {
