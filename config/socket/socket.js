@@ -136,8 +136,11 @@ module.exports = function(io) {
         }
       } else {
         // TODO: Send an error message back to this user saying the game has already started
+
       }
     } else {
+      socket.emit('playerMaxReached');
+      // console.log('=====fired to 13th player====')
       // Put players into the general queue
       console.log('Redirecting player',socket.id,'to general queue');
       if (createPrivate) {
