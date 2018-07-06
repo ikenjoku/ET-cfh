@@ -14,10 +14,7 @@
     <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
     </span>
   </div>
-  <button id='start-game-btn' ng-click="openLessModal()" class="btn" data-target="less-modal">Start Game</button>
-  <button id='more-players-btn' ng-click="openMoreModal()" class="btn" data-target= 'more-players-modal'>More than 11</button>
-  <button id='reuse-modal-btn' ng-click="openReuseModal()" class="btn" data-target="reuse-modal">Start Resusable Modal</button>
-
+  
 <!-- Reusable Modal -->
 <div id="reuse-modal" class="modal animated rollIn">
     <div class="modal-dialog modal-sm">     
