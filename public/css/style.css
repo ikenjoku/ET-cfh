@@ -82,6 +82,7 @@ background: linear-gradient(rgba(10, 10, 10, 0.6), rgba(10, 10, 10, 0.6));
     width: 100%;
     height: 90vh;
 }
+
 .cfh-head {
   color: white;
   font: Bold 4rem 'Quicksand';
@@ -120,6 +121,7 @@ background: linear-gradient(rgba(10, 10, 10, 0.6), rgba(10, 10, 10, 0.6));
   float: none;
   background-color: #E5E5E5;
 }
+
 .card-image {
   width: 50%;
   display: block;
@@ -159,16 +161,17 @@ background: linear-gradient(rgba(10, 10, 10, 0.6), rgba(10, 10, 10, 0.6));
   text-align: center;
 }
 
-
 @media screen and (min-width: 767px) {
   .banner {
     padding: 2%;
   }
+
   .cfh-head {
     color: white;
     margin-top: 5%;
     text-align: left;
   }
+
   .cfh-text {
     color: white;
     margin-top: 3%;
@@ -176,6 +179,7 @@ background: linear-gradient(rgba(10, 10, 10, 0.6), rgba(10, 10, 10, 0.6));
     font: 1.5rem 'Quicksand';
     text-align: left;
   }
+
   .cfh-btn {
     text-align: left;
     margin-top: 5%;
@@ -185,6 +189,7 @@ background: linear-gradient(rgba(10, 10, 10, 0.6), rgba(10, 10, 10, 0.6));
     font: Bold 2rem 'Quicksand';
   }
 }
+
 .login-image-overlay {
   width: 100%;
   background:  linear-gradient(rgba(10, 10, 10, 0.6), rgba(10, 10, 10, 0.6)),
@@ -193,6 +198,7 @@ background: linear-gradient(rgba(10, 10, 10, 0.6), rgba(10, 10, 10, 0.6));
   background-size: cover;
   background-repeat: no-repeat;
 }
+
 .signin-image-overlay {
   width: 100%;
   background:  linear-gradient(rgba(10, 10, 10, 0.6), rgba(10, 10, 10, 0.6)),
@@ -201,6 +207,7 @@ background: linear-gradient(rgba(10, 10, 10, 0.6), rgba(10, 10, 10, 0.6));
   background-size: cover;
   background-repeat: no-repeat;
 }
+
 @media screen and (min-width: 767px) {
   #cfh-logo {
     width: 25%
@@ -229,6 +236,7 @@ background: linear-gradient(rgba(10, 10, 10, 0.6), rgba(10, 10, 10, 0.6));
   margin-left: auto;
   margin-right: auto;
 }
+
 @media screen and (max-width: 420px) {
   .auth-input {
     width: 300px;
@@ -236,6 +244,7 @@ background: linear-gradient(rgba(10, 10, 10, 0.6), rgba(10, 10, 10, 0.6));
     margin-right: auto;
   }
 }
+
 @media screen and (min-width: 420px) {
   .auth-input {
     width: 400px;
@@ -243,6 +252,7 @@ background: linear-gradient(rgba(10, 10, 10, 0.6), rgba(10, 10, 10, 0.6));
     margin-right: auto;
   }
 }
+
 .input-field {
   color:white;
   box-sizing: border-box;
@@ -252,25 +262,31 @@ background: linear-gradient(rgba(10, 10, 10, 0.6), rgba(10, 10, 10, 0.6));
   margin-bottom: 0 !important;
   padding: 0 10px !important;
 }
+
 input {
   border-bottom: none !important;
   height: 3.2rem !important;
   margin: 0 !important;
 }
+
 .input-field input[type=text]:focus {
   border-bottom: none !important;
 }
+
 .row .input-field input:focus {
   border-bottom: none !important;
   box-shadow: none !important
 }
+
 .auth-text {
-  margin-bottom: 40px !important;
+  margin-bottom: 40px;
 }
+
 .auth-btn {
-  margin-top: 30px !important;
-  height: 50px !important;
+  margin-top: 30px;
+  height: 50px;
 }
+
 .auth-icon {
   display: inline-block;
   padding: 10px;
@@ -279,84 +295,102 @@ input {
   width: 50px;
   height: 50px;
 }
+
 i {
   color: white;
   font-size: 24px;
 }
+
 .auth-component {
-  padding-top: 30px !important;
+  padding-top: 30px;
 }
-.or{
+
+.separator {
   font-size: 25px;
 }
-.index-login-btn, .index-signup-btn {
-  box-shadow: none !important;
+
+#index-login-btn, #index-signup-btn {
+  box-shadow: none;
 }
-.index-login-btn {
+
+#index-login-btn {
   border: 2px solid black;
   border-radius: 3px;
 }
-.index-signup-btn:hover, .login-btn:hover {
-  border: 2px solid black !important;
-  border-radius: 3px !important;
+
+#index-signup-btn:hover {
+  border: 2px solid black;
+  border-radius: 3px;
   background-color: white !important;
   color: black !important;
 }
-.index-login-btn:hover {
+
+#index-login-btn:hover {
   background-color: #236231 !important;
   border: none !important;
   color: white !important;
 }
-.play-btn:hover {
+
+#play-btn:hover {
   background-color: #236231 !important;
   border: none !important;
 }
+
 .btn-large:hover {
   background: transparent !important;
   border: 2px solid white !important;
   border-radius: 3px !important;
 }
-.choose-avatar {
-  font-size: 18px !important;
-  background-color: transparent !important;
+
+#choose-avatar {
+  font-size: 18px;
+  background-color: transparent;
   border: none;
-  color: white !important;
+  color: white;
   cursor: pointer;
   margin-top: 10px;
 }
+
 .avatar-list {
   overflow: hidden;
   padding-left: 0px;
   margin-left: 3%;
 }
+
 .avatar-list img {
   max-width: 60%;
 }
+
 .avatars {
   position: relative;
   float: left;
   margin: 2px 5px;
   border-radius: 8px;
 }
+
 .modal {
   background-color: #236231 !important;
 }
-.radio-avatar {
+
+.with-gap {
   display: block !important;
   opacity: 1 !important;
   pointer-events: visible !important;
 }
+
 .modal-footer-button {
   height: 35px;
   width: 80px;
   border-radius: 3px;
   border: 2px black solid;
 }
-.modal-footer-button:hover {
-  background-color: #236231 !important;
-  border: none !important;
+
+.modal-footer button:hover {
+  background-color: #236231;
+  border: none;
   color: white;
 }
+
 .modal-footer {
   text-align: center !important;
 }
