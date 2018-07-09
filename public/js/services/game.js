@@ -1,6 +1,6 @@
 /* eslint prefer-arrow-callback: 0, func-names: 0, no-undef: 0, no-var: 0 */
 angular.module('mean.system')
-  .factory('game', ['socket', '$http', '$timeout', function (socket, $http, $timeout) {
+  .factory('game', ['socket', '$timeout', '$http', function (socket, $timeout, $http) {
     var game = {
       id: null, // This player's socket ID, so we know who this player is
       gameID: null,
@@ -58,7 +58,6 @@ angular.module('mean.system')
     socket.on('id', function (data) {
       game.id = data.id;
     });
-
 
     socket.on('prepareGame', function (data) {
       game.playerMinLimit = data.playerMinLimit;
@@ -172,50 +171,50 @@ angular.module('mean.system')
         game.time = 0;
       }
     });
-    socket.on('notification', function(data) {
+
+    socket.on('notification', function (data) {
       addToNotificationQueue(data.notification);
     });
 
-    game.joinGame = function(mode,room,createPrivate) {
+    game.joinGame = function (mode, room, createPrivate) {
       mode = mode || 'joinGame';
       room = room || '';
       createPrivate = createPrivate || false;
-      var userID = !!window.user ? user._id : 'unauthenticated';
-      socket.emit(mode,{userID: userID, room: room, createPrivate: createPrivate});
+      var userId = localStorage.getItem('#cfhetUserId') ? localStorage.getItem('#cfhetUserId') : 'unauthenticated';
+      socket.emit(mode, { userId, room, createPrivate });
     };
 
-    game.startGame = function() {
+    game.startGame = function () {
       socket.emit('startGame');
     };
-    game.createPlayers = function(gameID, friends, gameStarter) {
-      const token = localStorage.getItem('token'); 
+    game.createPlayers = function(gameId, players) {
+      const token = localStorage.getItem('#cfhetusertoken');
       $http({
         method: 'POST',
-        url: `/api/game/${gameID}/start`,
+        url: `/api/game/${gameId}/start`,
         data: {
-          players: friends,
-          gameStarter: gameStarter
+          players: players
         },
         headers: {
           'Content-Type': 'application/json',
-          'authorization': token,
+          'Authorization': token,
         }
       }).then(gamePlayers => {
-        return gamePlayers;
+        console.log(gamePlayers);
       });
     }
-    game.leaveGame = function() {
+    game.leaveGame = function () {
       game.players = [];
       game.time = 0;
       socket.emit('leaveGame');
     };
 
-    game.pickCards = function(cards) {
-      socket.emit('pickCards',{cards: cards});
+    game.pickCards = function (cards) {
+      socket.emit('pickCards', { cards });
     };
 
-    game.pickWinning = function(card) {
-      socket.emit('pickWinning',{card: card.id});
+    game.pickWinning = function (card) {
+      socket.emit('pickWinning', { card: card.id });
     };
 
     decrementTime();

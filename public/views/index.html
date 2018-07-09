@@ -36,35 +36,34 @@
     </div>
     <div class="row">
       <div class="col s12 cfh-btn" ng-controller="ScrollController">
-        <a ng-click="goPlay()" class="waves-effect waves-light btn" id="play-btn">How To Play</a>
-        <a href="/play" class="waves-effect waves-light btn" id="play-btn">Play as guest </a>
-      </div>
+        <div ng-controller="IndexController">
+          <a ng-click="goPlay()" class="waves-effect waves-light btn" id="play-btn">How To Play</a>
+          <button data-target="modal1" class="btn modal-trigger waves-effect waves-light btn">Play AS A Guest</button>
+          <button data-target="modal2" class="btn modal-trigger waves-effect waves-light btn">Play Game</button>
+        </div>
     </div>
   </div>
   <!-- modal one section -->
-  <div id="modal1" class="modal">
+  <div id="modal1" class="modal text-white">
   <div class="modal-content">
     <h4>Play Game As A Guest</h4>
     <p>You  are about to play game as a guest! </p>
   </div>
   <div class="modal-footer">
-    <a href="#" class="modal-close waves-effect waves-light green darken-4 btn white-text">Cancel</a>&nbsp;&nbsp;&nbsp;&nbsp;
-    <a href="/play" class="modal-close waves-effect waves-light green darken-4 btn white-text">Start Game</a>
+    <a href="#" class="modal-close waves-effect waves-light btn">Cancel</a>&nbsp;&nbsp;&nbsp;&nbsp;
+    <a href="/play" class="modal-close wwaves-effect waves-light btn">Start Game</a>
   </div>
 </div>
 
   <!-- modal two section -->
-<div id="modal2" class="modal">
+<div id="modal2" class="modal text-white">
     <div class="modal-content">
       <h4>Card For Humanity</h4>
       <p>Kelvin! You are about to play game of horrible people trying to do good </p>
     </div>
     <div class="modal-footer">
-      <a href="#" class="modal-close waves-effect waves-light green darken-4 btn white-text">Cancel</a>&nbsp;&nbsp;&nbsp;&nbsp;
-      <a href="/play" class="modal-close waves-effect waves-light green darken-4 btn white-text">Start Game</a>
-      <div class="row play-foot flow-text" ng-controller="IndexController"><button data-target="modal1" class="btn modal-trigger green darken-4 font-lg font-bold font-capitalize font-quick-sand">Play AS A Guest</button>
-        <button ng-show="user()" data-target="modal2" class="btn modal-trigger green darken-4 font-lg font-bold font-capitalize font-quick-sand">Play Game</button>
-      </div>
+      <a href="#" class="modal-close waves-effect waves-light btn">Cancel</a>&nbsp;&nbsp;&nbsp;&nbsp;
+      <a href="/play" class="modal-close waves-effect waves-light btn">Start Game</a>
     </div>
   </div>
   <div id="play" class="section how-to-play">

@@ -2,11 +2,11 @@
  * Module dependencies.
  */
 import mongoose from 'mongoose';
-// import config from '../../config/config';
+
 const { Schema } = mongoose;
 
 /**
- * Player Schema
+ * Game Schema
  */
 const GameSchema = new Schema({
   id: {
@@ -15,18 +15,13 @@ const GameSchema = new Schema({
   gameId: {
     type: Number
   },
-  gameStarter: {
-    type: String,
-    default: '',
-    trim: true
-  },
   gameWinner: {
     type: String,
     default: '',
     trim: true
   },
   players: {
-    type: [Number]
+    type: [String]
   }
 });
 

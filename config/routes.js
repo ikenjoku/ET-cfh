@@ -5,7 +5,7 @@ import questions from '../app/controllers/questions';
 import avatars from '../app/controllers/avatars';
 import index from '../app/controllers/index';
 import game from '../app/controllers/game';
-import middleware from '../app/middleware/auth';
+import auth from '../app/middleware/auth';
 
 export default (router, passport, app) => {
   // api name spaced routes;
@@ -13,6 +13,10 @@ export default (router, passport, app) => {
   api
     .post('/auth/login', users.handleLogin)
     .post('/auth/signup', users.handleSignUp);
+
+  // Setting up the game api
+  api
+    .post('/game/:id/start', auth, game);
 
   router.get('/signin', users.signin);
   router.get('/signup', users.signup);
@@ -22,10 +26,7 @@ export default (router, passport, app) => {
   // Setting up the users api
   router.post('/users', users.create);
   router.post('/users/avatars', users.avatars);
-  api.get('/verify', middleware.verifyToken);
 
-  // Setting up the game api
-  api.post('/game/:id/start', middleware.auth, game);
   // Donation Routes
   router.post('/donations', users.addDonation);
 

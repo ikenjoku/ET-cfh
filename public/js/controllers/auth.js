@@ -14,6 +14,7 @@ angular.module('mean.system')
     $scope.SignUpUser = function () {
       SignUp.execute({}, $scope.newUser, function (response) {
         localStorage.setItem('#cfhetusertoken', response.token);
+        localStorage.setItem('#cfhetUserId', response._id);
         $location.path('/app');
       }, (error) => {
         console.log(error);
@@ -23,6 +24,7 @@ angular.module('mean.system')
     $scope.SignInUser = function () {
       Login.execute({}, $scope.user, function (response) {
         localStorage.setItem('#cfhetusertoken', response.token);
+        localStorage.setItem('#cfhetUserId', response._id);
         $location.path('/app');
       }, (error) => {
         console.log(error);

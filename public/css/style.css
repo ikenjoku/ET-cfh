@@ -368,8 +368,13 @@ i {
   border-radius: 8px;
 }
 
-.modal {
+.modal-signup{
   background-color: #236231 !important;
+}
+
+.modal {
+  
+  
 }
 
 .with-gap {

@@ -5,7 +5,7 @@ function Player(socket) {
   this.username = null;
   this.premium = 0;
   this.avatar = null;
-  this.userID = null;
+  this.userId = null;
   this.color = null;
 }
 

@@ -121,16 +121,9 @@ angular.module('mean.system')
     };
 
     $scope.startGame = function() {
-      const {
-        players, gameID
-      } = game;
-       let friends = [];
-       players.forEach(player => {
-        friends.push(player.userID);
-       });
-       console.log(friends);
-       const gameStarter = players[0].username;
-       game.createPlayers(gameID, friends, gameStarter);   
+      const gameId = game.gameID;
+      const players = game.players.map(player => player.userId);
+       game.createPlayers(gameId, players);  
        game.startGame();
      };
 
