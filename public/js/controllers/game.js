@@ -1,8 +1,8 @@
 angular.module('mean.system')
-  .controller('GameController', ['$scope', '$http', 'game', '$timeout', '$location', 'MakeAWishFactsService', '$dialog', '$rootScope', ($scope, $http, game, $timeout, $location, MakeAWishFactsService, $rootScope) => {
+  .controller('GameController', ['$scope', '$http', 'game', '$timeout', '$location', 'MakeAWishFactsService', '$dialog', '$rootScope', 'socket', ($scope, $http, game, $timeout, $location, MakeAWishFactsService, $rootScope) => {
     $scope.hasPickedCards = false;
     $scope.winningCardPicked = false;
-    $scope.showTable = false;
+    $scope.showTable = false; 
     $scope.hasServerError = false;
     $scope.searchKey = '';
     $scope.disableInviteButton = false;
@@ -17,12 +17,25 @@ angular.module('mean.system')
     let makeAWishFacts = MakeAWishFactsService.getMakeAWishFacts();
     $scope.makeAWishFact = makeAWishFacts.pop();
 
-    $scope.openReusedModal = () => {
-      const refusableModel = $('#reuse-modal');
+
+    $scope.fewPlayersModal = () => {
+      var refusableModel = $('#reuse-modal');
       $('.modal-header').empty();
       refusableModel.find('.modal-header').append('<h4 class="modal-title center-align" style="color: #23522d;">3 PLAYERS REQUIRED</h4>');
       refusableModel.find('.modal-body').text('This game requires a minimum of 3 players. Please invite more friends to play');
-      const okayBtn = '<button type="button" class="btn waves-effect waves-green modal-close" style="background-color: #23522d;" >OKAY</button>';
+      var okayBtn = '<button type="button" class="btn waves-effect waves-green modal-close" style="background-color: #23522d;" >OKAY</button>';
+      $('.modal-footer').empty();
+      $('.modal-footer').append(okayBtn);
+      $('#reuse-modal').modal('open');
+    };
+
+    $scope.morePlayersModal = () => {
+      var refusableModel = $('#reuse-modal');
+      $('.modal-header').empty();
+      refusableModel.find('.modal-header').append('<h4 class="modal-title center-align" style="color: #23522d;">MAX NUMBER OF PLAYERS</h4>');
+      $('.modal-body').empty();
+      refusableModel.find('.modal-body').append('<p>The game cannot take more than 12 players.</p> <p>Game has started already. You have been added to a new game</p>');
+      var okayBtn = '<button type="button" class="btn waves-effect waves-green modal-close" style="background-color: #23522d;" >OKAY</button>';
       $('.modal-footer').empty();
       $('.modal-footer').append(okayBtn);
       $('#reuse-modal').modal('open');
@@ -30,8 +43,9 @@ angular.module('mean.system')
 
     $scope.closeReusedModal = () => {
       $('#reuse-modal').modal('close');
-    };
-
+      game.isFilledUp = null;    
+    }
+    
     $scope.findUsers = () => {
       $scope.hasServerError = false;
       $http.get(`/users/findUsers/${$scope.searchKey}`)
@@ -152,12 +166,19 @@ angular.module('mean.system')
     $scope.winnerPicked = () => game.winningCard !== -1;
 
     $scope.startGame = () => {
-      if (game.players.length < game.playerMinLimit) {
-        $scope.openReusedModal();
+      if (game.players.length < game.playerMinLimit){
+        $scope.fewPlayersModal();
       } else {
         game.startGame();
       }
     };
+
+    // Watches for a new players where game has started already
+    $scope.$watch('game.isFilledUp', () => {
+      if (game.isFilledUp) {
+        $scope.morePlayersModal();
+      }
+    });
 
     $scope.abandonGame = () => {
       game.leaveGame();

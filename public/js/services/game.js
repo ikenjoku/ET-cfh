@@ -28,11 +28,6 @@ angular.module('mean.system')
   var self = this;
   var joinOverrideTimeout = 0;
 
-  socket.on('playerMaxReached', () => {
-    $rootScope.$emit('playerMaxReached');
-    console.log('===form services=========', $rootScope)
-  });
-
   var addToNotificationQueue = function(msg) {
     notificationQueue.push(msg);
     if (!timeout) { // Start a cycle if there isn't one
@@ -70,6 +65,10 @@ angular.module('mean.system')
     game.pointLimit = data.pointLimit;
     game.timeLimits = data.timeLimits;
   });
+
+  socket.on('gameFilledUp', function (){
+    game.isFilledUp = true;
+  })
 
   socket.on('gameUpdate', function(data) {
 

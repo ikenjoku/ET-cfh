@@ -139,7 +139,7 @@ module.exports = function(io) {
 
       }
     } else {
-      socket.emit('playerMaxReached');
+      // socket.emit('playerMaxReached');
       // console.log('=====fired to 13th player====')
       // Put players into the general queue
       console.log('Redirecting player',socket.id,'to general queue');
@@ -152,7 +152,43 @@ module.exports = function(io) {
 
   };
 
-  var fireGame = function(player,socket) {
+  // var fireGame = function(player,socket) {
+  //   var game;
+  //   if (gamesNeedingPlayers.length <= 0) {
+  //     gameID += 1;
+  //     var gameIDStr = gameID.toString();
+  //     game = new Game(gameIDStr, io);
+  //     allPlayers[socket.id] = true;
+  //     game.players.push(player);
+  //     allGames[gameID] = game;
+  //     gamesNeedingPlayers.push(game);
+  //     socket.join(game.gameID);
+  //     socket.gameID = game.gameID;
+  //     console.log(socket.id,'has joined newly created game',game.gameID);
+  //     game.assignPlayerColors();
+  //     game.assignGuestNames();
+  //     game.sendUpdate();
+  //   } else {
+  //     game = gamesNeedingPlayers[0];
+  //     allPlayers[socket.id] = true;
+  //     game.players.push(player);
+  //     console.log(socket.id,'has joined game',game.gameID);
+  //     socket.join(game.gameID);
+  //     socket.gameID = game.gameID;
+  //     game.assignPlayerColors();
+  //     game.assignGuestNames();
+  //     game.sendUpdate();
+  //     game.sendNotification(player.username+' has joined the game!');
+  //     if (game.players.length >= game.playerMaxLimit) {
+  //       gamesNeedingPlayers.shift();
+        // game.prepareGame();
+  //     }
+  //   }
+  // };
+
+
+
+  const fireGame = (player,socket) => {
     var game;
     if (gamesNeedingPlayers.length <= 0) {
       gameID += 1;
@@ -171,20 +207,40 @@ module.exports = function(io) {
     } else {
       game = gamesNeedingPlayers[0];
       allPlayers[socket.id] = true;
+
+      if( game.players.length < game.playerMaxLimit) {
+      if ( game.players.length === (game.playerMaxLimit - 1)) game.pending = true;
+        return setUpGame(socket, game, player);
+      } 
+      // dispatch a notification to the current socket
+      gamesNeedingPlayers.shift();
+      gameID += 1;
+      var gameIDStr = gameID.toString();
+      game = new Game(gameIDStr, io);
+      allPlayers[socket.id] = true;
       game.players.push(player);
-      console.log(socket.id,'has joined game',game.gameID);
+      allGames[gameID] = game;
+      gamesNeedingPlayers.push(game);
       socket.join(game.gameID);
       socket.gameID = game.gameID;
+      console.log(socket.id,'has joined newly created game',game.gameID);
       game.assignPlayerColors();
       game.assignGuestNames();
       game.sendUpdate();
-      game.sendNotification(player.username+' has joined the game!');
-      if (game.players.length >= game.playerMaxLimit) {
-        gamesNeedingPlayers.shift();
-        game.prepareGame();
-      }
+      io.sockets.socket(socket.id).emit("gameFilledUp")
     }
-  };
+  }
+  const setUpGame = (socket, game, player) => {
+    game.players.push(player)
+    socket.join(game.gameID);
+    socket.gameID = game.gameID;
+    game.assignPlayerColors();
+    game.assignGuestNames();
+    game.sendUpdate();
+    game.sendNotification(player.username+' has joined the game!');
+    if(game.pending) return game.prepareGame();
+    return game
+    }
 
   var createGameWithFriends = function(player,socket) {
     var isUniqueRoom = false;
