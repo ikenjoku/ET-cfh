@@ -21,4 +21,11 @@ angular.module('mean.system')
         $scope.avatars = data;
       });
 
+    $scope.openModal = function() {
+      $('modal1').modal('open');
+    }
+
+    $scope.closeModal = function() {
+      $('modal1').modal('close');
+    }
 }]);

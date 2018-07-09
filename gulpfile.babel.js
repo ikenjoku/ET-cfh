@@ -4,12 +4,11 @@ import concat from 'gulp-concat';
 import sourcemaps from 'gulp-sourcemaps';
 import { listen, changed } from 'gulp-livereload';
 import nodemon from 'gulp-nodemon';
-import mocha from 'gulp-mocha';
+import shell from 'gulp-shell';
 import bower from 'gulp-bower';
 import babel from 'gulp-babel';
 import karma from 'karma';
 import dotenv from 'dotenv';
-
 import path from 'path';
 
 dotenv.config();
@@ -73,16 +72,23 @@ gulp.task('export', () => {
 // Default task(s).
 gulp.task('default', ['develop']);
 
-gulp.task('test:backend', ['compile'], () => gulp.src(['dist/backend-test/**/*.js', '!test/angular/**/*.js'])
-  .pipe(mocha({
-    reporter: 'spec',
-    exit: true,
-    timeout: 5000,
-    globals: {
-      should: require('should') 
-    },
-    compilers: 'babel-register'
-  })));
+gulp.task('test:backend', shell.task([
+  'NODE_ENV=test nyc mocha dist/backend-test/**/*.js  --exit',
+]));
+
+gulp.task('develop', () => {
+  nodemon({
+    exec: 'gulp compile && gulp export && node dist/server.js',
+    ignore: ['README.md', 'node_modules/**', 'dist/**', 'public/lib/**', '.DS_Store'],
+    ext: 'js html jade scss css',
+    watch: ['app', 'config', 'public', 'server.js'],
+    delayTime: 1,
+    env: { PORT: 3000 },
+    NODE_ENV: process.env.NODE_ENV
+  });
+});
+
+gulp.task('default', ['develop']);
 
 // Frontend test task
 gulp.task('test:frontend', (done) => {

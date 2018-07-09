@@ -1,72 +1,67 @@
 <div id="main-bod" ng-controller="IndexController">
   <!-- Fixed Logo & Menu Bar Start -->
-  <div id="top-part">
-    <div class="wpb-top-bar">
-      <div class="mod-contain" id="navver">
-        <div class="row">
-          <!-- Logo -->
-          <div class="wpb-logo-container">
-            <div id="landing-logo"> 
-              <span id="first-word">Cards</span>
-              <span id="second-word"> for</span> 
-              <span id="third-word">Humanity</span> 
-            </div> 
-            <div class="col-md-9 wpb-menu-container">
-              <ul class="wpb-main-menu">
-                <li><a href="/">Home</a></li>
-              </ul>
-            </div>
-          </div>      
+    <header>
+      <nav class="white nav">
+        <div class="nav-wrapper font-bold">
+          <a href="/" class="black-text text-darken-2 brand-logo left">
+            <img src="https://res.cloudinary.com/dqsmurjpg/image/upload/v1530718726/Navbar_Logo.png"
+              id="cfh-logo" alt="cfg-logo">
+          </a>
         </div>
-      </div>
-    </div>
-  </div>
+      </nav>
+    </header>
 <!-- Fixed Logo & Menu Bar End -->
 
 <!-- Landing Start -->
-<div class="wpb-teaser parallax-background" id="homer">
-  <div class="background-opacity"></div> 
-  <div class="modified-container">
-    <div class="row" id="main-text"> 
-    <!-- Teaser Text Start -->
-    <div id="landing-logo">
-      <h2 id="slogan">Sign in with:</h2>
-      <div id="login-buttons">
-        <a href="/auth/facebook"><img class="login-item" src="/img/icons/facebook.png"></a>
-        <a href="/auth/github"><img class="login-item" src="/img/icons/github.png"></a>
-        <a href="/auth/twitter"><img class="login-item" src="/img/icons/twitter.png"></a>
-        <a href="/auth/google"><img class="login-item" src="/img/icons/google.png"></a>
-      </div>
-      <p id="create">Or log in below:</p>
-
-      <div class="sign-body">
-        <div class="more-sign">
-          <div class="sign-error" ng-show="showError() === 'invalid'">
-            Please check your username/password and try again.
+  <section class="login login-image-overlay white-text" id="auth">
+    <div class="row center-align">
+      <div class="row m12 font-bold auth-component">
+        <h3 class="font-bold auth-text">Log In</h3>
+        <form class="col s12">
+          <div class="auth-input">
+            <div class="input-field col s12">
+              <input id="email" type="text" name="email" placeholder="Email" required novalidate />
+            </div>
           </div>
-          <!-- Modifying action to point to new endpoint -->
-          <form class="signup form-horizontal" action="/api/auth/login" method="post">
-            <div class="control-group">
-              <label for="email" class="control-label"></label>
-              <div class="controls">
-                <input class="input-info" id="email" type="text" name="email" placeholder="Email" required novalidate />
-              </div>
+          <div class="auth-input">
+            <div class="input-field col s12">
+              <input id="password" type="password" name="password" placeholder="Password" required novalidate />
             </div>
-            <div class="control-group">
-              <label for="password" class="control-label"></label>
-              <div class="controls">
-                <input class="input-info" id="password" type="password" name="password" placeholder="Password" required novalidate />
-              </div>
-            </div>
-            <div class="form-actions top-margin">
-              <button id="sign-up-btn-other" type='submit'>Sign In</button>
-            </div>
-          </form>
-        </div>
+          </div>
+          <div class="auth-input">
+            <button class="btn col s12 green darken-4 font-lg font-quick-sand auth-btn">LOG IN</button>
+          </div>
+        </form>
       </div>
     </div>
+    <div>
+        <p class="separator">Or</p>
     </div>
+    <div>
+      <a href="/auth/facebook">
+        <div class="auth-icon">
+          <i class="fab fa-facebook-f"></i>
+        </div>
+      </a>
+      <a href="/auth/twitter">
+        <div class="auth-icon">
+          <i class="fab fa-twitter"></i>
+        </div>
+      </a>
+      <a href="/auth/google">
+        <div class="auth-icon">
+          <i class="fab fa-google"></i>
+        </div>
+      </a>
     </div>
-  </div>
+  </section>
+
+  <!-- Footer start -->
+  <footer class="center-align black white-text flow-text footer">
+    <p>
+      Designed with <span class="green-text text-darken-3">&#10084;</span> By the ET team
+    </p>
+  </footer>
+  <!-- Footer end -->
 </div>
 
