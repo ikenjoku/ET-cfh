@@ -66,6 +66,10 @@ angular.module('mean.system')
       game.timeLimits = data.timeLimits;
     });
 
+    socket.on('gameFilledUp', function (data) {
+      game.isFilledUp = true;
+    });
+
     socket.on('gameUpdate', function (data) {
     // Update gameID field only if it changed.
     // That way, we don't trigger the $scope.$watch too often

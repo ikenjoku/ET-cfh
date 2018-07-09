@@ -28,6 +28,11 @@
         <question></question>
       </div>
     </div>
-    <answers></answers>
+    <answers ng-controller="InvitePlayersController"></answers>
   </div>
+  <script>
+    $(document).ready(function(){
+      $('.modal').modal();
+    });
+  </script>
 </div>

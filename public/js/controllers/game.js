@@ -6,70 +6,11 @@ angular.module('mean.system')
     $scope.hasPickedCards = false;
     $scope.winningCardPicked = false;
     $scope.showTable = false;
-    $scope.hasServerError = false;
-    $scope.searchKey = '';
-    $scope.disableInviteButton = false;
-    $scope.selectedUser = {};
-    $scope.showNotFound = false;
-    $scope.foundUsers = [];
-    $scope.invitedUsers = [];
-    $scope.dobounceTimeout = null;
-    $scope.searchHelper = 'At least 3 letters are needed for this search';
     $scope.modalShown = false;
     $scope.game = game;
     $scope.pickedCards = [];
     var makeAWishFacts = MakeAWishFactsService.getMakeAWishFacts();
-    var token = localStorage.getItem('#cfhetusertoken');
     $scope.makeAWishFact = makeAWishFacts.pop();
-
-    $scope.openReusedModal = () => {
-      const refusableModel = $('#reuse-modal');
-      $('.modal-header').empty();
-      refusableModel.find('.modal-header').append('<h4 class="modal-title center-align" style="color: #23522d;">3 PLAYERS REQUIRED</h4>');
-      refusableModel.find('.modal-body').text('This game requires a minimum of 3 players. Please invite more friends to play');
-      const okayBtn = '<button type="button" class="btn waves-effect waves-green modal-close" style="background-color: #23522d;" >OKAY</button>';
-      $('.modal-footer').empty();
-      $('.modal-footer').append(okayBtn);
-      $('#reuse-modal').modal('open');
-    };
-
-    $scope.closeReusedModal = () => {
-      $('#reuse-modal').modal('close');
-    };
-
-    $scope.findUsers = () => {
-      var canceler = $q.defer();
-      clearTimeout($scope.dobounceTimeout);
-      $scope.dobounceTimeout = setTimeout(() => {
-        $http.get(`/users/findUsers/${$scope.searchKey}`, { headers: { Authorization: `Bearer ${token}` } }, { timeout: canceler.promise }).success((response) => {
-          $scope.foundUsers = response.users;
-          $scope.showNotFound = $scope.foundUsers.length === 0 && $scope.searchKey.length > 0;
-        }).error((response) => {
-          $scope.searchHelper = response.data;
-          $scope.hasServerError = true;
-        });
-      }, 300);
-    };
-
-    $scope.sendInvitation = (x) => {
-      $scope.selectedUser = x;
-      $scope.disableInviteButton = true;
-      var url = window.location.href;
-
-      var formData = {
-        user: x,
-        link: url,
-      };
-
-      $http.post('/users/invite', formData, { headers: { Authorization: `Bearer ${token}` } }).success((response) => {
-        $scope.invitedUsers.push(response.user.email);
-        $scope.disableInviteButton = false;
-        $scope.selectedUser = {};
-      }).error((response) => {
-        $scope.searchHelper = response.message;
-        $scope.hasServerError = true;
-      });
-    };
 
     $scope.pickCard = (card) => {
       if (!$scope.hasPickedCards) {
@@ -167,6 +108,13 @@ angular.module('mean.system')
       game.createPlayers(gameId, players);
       game.startGame();
     };
+
+    // Watches for a new players where game has started already
+    $scope.$watch('game.isFilledUp', () => {
+      if (game.isFilledUp) {
+        $scope.morePlayersModal();
+      }
+    });
 
     $scope.abandonGame = () => {
       game.leaveGame();
