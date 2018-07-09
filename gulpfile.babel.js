@@ -4,14 +4,12 @@ import concat from 'gulp-concat';
 import sourcemaps from 'gulp-sourcemaps';
 import { listen, changed } from 'gulp-livereload';
 import nodemon from 'gulp-nodemon';
-import mocha from 'gulp-mocha';
+import shell from 'gulp-shell';
 import bower from 'gulp-bower';
 import babel from 'gulp-babel';
 import karma from 'karma';
 import dotenv from 'dotenv';
-
 import path from 'path';
-import shell from 'gulp-shell';
 
 dotenv.config();
 const { Server } = karma;

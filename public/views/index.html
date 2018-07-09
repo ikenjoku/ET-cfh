@@ -3,16 +3,19 @@
     <nav class="white nav">
       <div class="nav-wrapper font-bold">
         <a href="/" class="black-text text-darken-2 brand-logo left">
-          <img src="http://res.cloudinary.com/dikaeinstein/image/upload/c_scale,h_56/v1530704908/cfh/CARDSFORHUMANITY.png"
-            alt="cfg-logo">
+          <img src="https://res.cloudinary.com/dqsmurjpg/image/upload/v1530718726/Navbar_Logo.png"
+            id="cfh-logo" alt="cfg-logo">
         </a>
   
         <ul id="nav-mobile" class="right">
           <li>
-            <a class="waves-effect waves-light white black-text btn" href="signin">Login</a>
+            <a class="waves-effect waves-light white black-text btn" id="index-login-btn" href="signin">Login</a>
           </li>
-          <li><a class="waves-effect waves-light green darken-4 btn white-text" href="signup">Signup</a></li>
+          <li><a class="waves-effect waves-light green darken-4 btn white-text" id="index-signup-btn" href="signup">Signup</a></li>
         </ul>
+        <span ng-show="user()">
+          <li><a class="waves-effect waves-light green darken-4 btn white-text" id="index-signup-btn" href="/signout">Sign Out</a></li>
+        </span>
       </div>
     </nav>
   </header>
@@ -20,20 +23,21 @@
   <div class="overlay"></div>
   <div class="banner section">
     <div class="row">
-      <div class="cfh-head col s12 m6 l4 flow-text">
+      <div class="cfh-head col s12 l4 flow-text">
           Cards<br>
           For<br>
           Humanity<br>
       </div>
     </div>
     <div class="row">
-        <div class="cfh-text col s12 m10 l8 info flow-text">
+        <div class="cfh-text col s12 l8 info flow-text">
             Cards for Humanity is a fast-paced online version of the popular card game, Cards Against Humanity, that gives you the opportunity to donate to children in need all while remaining as despicable and awkward as you naturally are.
         </div>
     </div>
     <div class="row">
       <div class="col s12 cfh-btn" ng-controller="ScrollController">
-        <a ng-click="goPlay()" class="waves-effect waves-light btn play-btn">How To Play</a>
+        <a ng-click="goPlay()" class="waves-effect waves-light btn" id="play-btn">How To Play</a>
+        <a href="/play" class="waves-effect waves-light btn" id="play-btn">Play as guest </a>
       </div>
     </div>
   </div>
@@ -41,7 +45,7 @@
   <div id="play" class="section how-to-play">
     <div class="row play-head"><h1>How To Play</h1></div>
     <div class="row">
-        <div class="col s12 m5 l3">
+        <div class="col s12 m6 l3">
           <div class="card col s9">
             <div class="card-image">
               <!-- <img src="../img/chosen/E01.png"> -->
@@ -55,7 +59,7 @@
             </div>
           </div>
         </div>
-        <div class="col s12 m5 l3">
+        <div class="col s12 m6 l3">
           <div class="card col s9">
             <div class="card-image">
               <img src="../img/chosen/FI02.png">
@@ -68,7 +72,7 @@
             </div>
           </div>
         </div>
-        <div class="col s12 m5 l3">
+        <div class="col s12 m6 l3">
           <div class="card col s9">
             <div class="card-image">
               <img src="../img/chosen/J01.png">
@@ -81,7 +85,7 @@
             </div>
           </div>
         </div>
-        <div class="col s12 m5 l3">
+        <div class="col s12 m6 l3">
           <div class="card col s9">
             <div class="card-image">
               <img src="../img/chosen/N03.png">
@@ -95,13 +99,12 @@
           </div>
         </div>
       </div>
-      <div class="row play-foot flow-text"><a href="/play">Play as guest </a><span>OR</span> <a class="waves-effect waves-light btn login-btn" a href="#!/signin">LOGIN</a></div>
-  </div>
+    </div>
 
   <!-- Donation Info Start -->
   <section class="image-overlay donation-banner white-text font-md" id="donations">
     <div class="row">
-      <div class="col m8 font-bold">
+      <div class="col s12 l8 font-bold">
         <h3 class="font-bold">Donate to Charity</h3>
         <p>&ldquo;Anticipate charity by preventing poverty.....&rdquo;</p>
         <p class="font-bold-md">
@@ -116,7 +119,7 @@
         <p>All donations go to the Make-a-Wish Foundation and benefit children in need.</p>
       
         <a href="https://www.crowdrise.com/donate/project/cfhio/cards4humanity">
-          <button class="btn-large green darken-4 font-lg font-bold font-capitalize font-quick-sand">
+          <button class="btn-large green darken-4 font-lg font-capitalize font-quick-sand">
             Donate Now
           </button>
         </a>
@@ -131,4 +134,5 @@
       Designed with <span class="green-text text-darken-3">&#10084;</span> By the ET team
     </p>
   </footer>
+  <!-- Footer end -->
 </body>

@@ -18,4 +18,12 @@ angular.module('mean.system')
       .then(function (data) {
         $scope.avatars = data;
       });
+
+    $scope.openModal = function () {
+      $('modal1').modal('open');
+    };
+
+    $scope.closeModal = function () {
+      $('modal1').modal('close');
+    };
   }]);

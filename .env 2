@@ -1,3 +1,0 @@
-MONGOHQ_URL_TEST=mongodb://localhost:27017/et-cfh-test
-MONGOHQ_URL_DEV=mongodb://localhost:27017/et-cfh-dev
-SECRET_KEY=HelloThisisKanyeshit
