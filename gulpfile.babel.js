@@ -72,23 +72,10 @@ gulp.task('export', () => {
 // Default task(s).
 gulp.task('default', ['develop']);
 
+// Backend Test task.
 gulp.task('test:backend', shell.task([
-  'NODE_ENV=test nyc mocha dist/backend-test/**/*.js  --exit',
+  'NODE_ENV=test nyc mocha backend-test/**/*.js  --exit',
 ]));
-
-gulp.task('develop', () => {
-  nodemon({
-    exec: 'gulp compile && gulp export && node dist/server.js',
-    ignore: ['README.md', 'node_modules/**', 'dist/**', 'public/lib/**', '.DS_Store'],
-    ext: 'js html jade scss css',
-    watch: ['app', 'config', 'public', 'server.js'],
-    delayTime: 1,
-    env: { PORT: 3000 },
-    NODE_ENV: process.env.NODE_ENV
-  });
-});
-
-gulp.task('default', ['develop']);
 
 // Frontend test task
 gulp.task('test:frontend', (done) => {
@@ -118,4 +105,4 @@ gulp.task('install', () => bower({
 }));
 
 // Test task
-gulp.task('test', ['test:backend', 'test:frontend']);
+gulp.task('test', ['test:frontend', 'test:backend']);
