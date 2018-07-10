@@ -26,7 +26,7 @@ gulp.task('develop', () => {
     watch: ['app', 'config', 'public', 'server.js'],
     delayTime: 1,
     env: { PORT: 3000 },
-    NODE_ENV: process.env.NODE_ENV
+    NODE_ENV: process.env.NODE_ENV,
   });
 });
 

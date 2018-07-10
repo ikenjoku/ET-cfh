@@ -2,7 +2,15 @@ import 'babel-polyfill';
 import request from 'supertest';
 import { expect } from 'chai';
 import app from '../../server';
+import { Tokenizer } from '../../app/helpers/tokenizer';
 
+const user = {
+  _id: '1232132',
+  name: 'Benjamin Onah',
+  password: 'wrongPassword',
+};
+
+const token = Tokenizer(user);
 
 describe('User endpoints', () => {
   it('POST /users/invite should return statusCode 200 with a user object', (done) => {
@@ -16,6 +24,7 @@ describe('User endpoints', () => {
     };
     request(app)
       .post('/users/invite')
+      .set('Authorization', `Bearer ${token}`)
       .send(payload)
       .end((err, res) => {
         if (err) return done(err);
@@ -36,6 +45,7 @@ describe('User endpoints', () => {
     };
     request(app)
       .post('/users/invite')
+      .set('Authorization', `Bearer ${token}`)
       .send(payload)
       .end((err, res) => {
         if (err) return done(err);
@@ -56,6 +66,7 @@ describe('User endpoints', () => {
     };
     request(app)
       .post('/users/invite')
+      .set('Authorization', `Bearer ${token}`)
       .send(payload)
       .end((err, res) => {
         if (err) return done(err);

@@ -30,13 +30,13 @@
     <form id="search-users" ng-submit="findUsers()" name="myForm">
       <div class="form-group col-md-10">
         <input ng-keyup="findUsers()" ng-model="searchKey" type='text' autocomplete="off" name='searchKey' placeholder="Search for friends">
-        <!-- <small style="float: left; color: rgb(204, 88, 34)" class="form-text text-muted" ng-show="(myForm.searchKey.$dirty && myForm.searchKey.$invalid) || hasServerError">{{ searchHelper }}</small> -->
+        <small style="float: left; color: rgb(204, 88, 34)" class="form-text text-muted" ng-show="hasServerError">{{ searchHelper }}</small>
       </div>
       <br>
     </form>
   </div>
   <div id='found-users' style="clear: both;">
-    <div ng-show="showNotFound"><br>Your search did not match any current user.</div>
+    <div ng-show="showNotFound" style="color: rgb(226, 94, 94)"><br>Your search did not match any current user.</div>
     <table>
       <tr ng-repeat="x in foundUsers">
         <td>{{x.name}}</td>

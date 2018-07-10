@@ -1,6 +1,4 @@
-import 'babel-polyfill';
 import jwt from 'jsonwebtoken';
-
 
 /**
  * @function verifyPayload

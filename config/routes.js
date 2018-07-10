@@ -26,9 +26,9 @@ export default (router, passport, app) => {
   // Setting up the users api
   router.post('/users', users.create);
   router.post('/users/avatars', users.avatars);
-  router.get('/users/findUsers/:searchKey', users.findUsers);
-  router.get('/users/findUsers/', users.findUsers);
-  router.post('/users/invite', users.invite);
+  router.get('/users/findUsers/:searchKey', middleware.auth, users.findUsers);
+  router.get('/users/findUsers/', middleware.auth, users.findUsers);
+  router.post('/users/invite', middleware.auth, users.invite);
 
   // Donation Routes
   router.post('/donations', users.addDonation);
@@ -98,11 +98,6 @@ export default (router, passport, app) => {
   // Home route
   router.get('/play', index.play);
   router.get('/', index.render);
-
-  // Handle all 'Page not found errors' and return a message.
-  app.get('*', (req, res) => {
-    res.status(404).send('You are looking for a resource that does not exist.');
-  });
 
   // Registering the api namespaced middleware on the router middleware
   router.use('/api', api);
