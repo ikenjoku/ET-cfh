@@ -14,20 +14,15 @@ describe('User endpoints', () => {
       },
       link: 'http://localhost:3333/app'
     };
-    try {
-      request(app)
-        .post('/users/invite')
-        .send(payload)
-        .end((err, res) => {
-          if (err) return done(err);
-          expect(res.statusCode).to.equal(200);
-          expect(res.body.user).to.deep.equal(payload.user);
-          done();
-        });
-    } catch (err) {
-      /* eslint no-unused-expressions: 0 */
-      expect(err).to.not.exist;
-    }
+    request(app)
+      .post('/users/invite')
+      .send(payload)
+      .end((err, res) => {
+        if (err) return done(err);
+        expect(res.statusCode).to.equal(200);
+        expect(res.body.user).to.deep.equal(payload.user);
+        done();
+      });
   });
 
   it('POST /users/invite should return statusCode 400 with error message if wrong email is used', (done) => {
@@ -39,20 +34,15 @@ describe('User endpoints', () => {
       },
       link: 'http://localhost:3333/app'
     };
-    try {
-      request(app)
-        .post('/users/invite')
-        .send(payload)
-        .end((err, res) => {
-          if (err) return done(err);
-          expect(res.statusCode).to.equal(400);
-          expect(res.body.message).to.equal('An error occurred while sending the invitation');
-          done();
-        });
-    } catch (err) {
-      /* eslint no-unused-expressions: 0 */
-      expect(err).to.not.exist;
-    }
+    request(app)
+      .post('/users/invite')
+      .send(payload)
+      .end((err, res) => {
+        if (err) return done(err);
+        expect(res.statusCode).to.equal(400);
+        expect(res.body.message).to.equal('An error occurred while sending the invitation');
+        done();
+      });
   });
 
   it('POST /users/invite should return statusCode 400 with error message if wrong link is used', (done) => {
@@ -64,19 +54,14 @@ describe('User endpoints', () => {
       },
       link: 'htt/localhost:3333/app'
     };
-    try {
-      request(app)
-        .post('/users/invite')
-        .send(payload)
-        .end((err, res) => {
-          if (err) return done(err);
-          expect(res.statusCode).to.equal(400);
-          expect(res.body.message).to.equal('An error occurred while sending the invitation');
-          done();
-        });
-    } catch (err) {
-      /* eslint no-unused-expressions: 0 */
-      expect(err).to.not.exist;
-    }
+    request(app)
+      .post('/users/invite')
+      .send(payload)
+      .end((err, res) => {
+        if (err) return done(err);
+        expect(res.statusCode).to.equal(400);
+        expect(res.body.message).to.equal('An error occurred while sending the invitation');
+        done();
+      });
   });
 });

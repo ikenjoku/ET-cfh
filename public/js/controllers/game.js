@@ -1,4 +1,6 @@
 /* eslint prefer-arrow-callback: 0, func-names: 0, no-undef: 0, no-var: 0, object-shorthand: 0 */
+/* eslint vars-on-top: 0 */
+/* eslint no-var: 0 */
 angular.module('mean.system')
   .controller('GameController', ['$scope', '$http', 'game', '$timeout', '$location', 'MakeAWishFactsService', '$dialog', '$rootScope', ($scope, $http, game, $timeout, $location, MakeAWishFactsService, $rootScope) => {
     $scope.hasPickedCards = false;
@@ -15,7 +17,7 @@ angular.module('mean.system')
     $scope.modalShown = false;
     $scope.game = game;
     $scope.pickedCards = [];
-    let makeAWishFacts = MakeAWishFactsService.getMakeAWishFacts();
+    var makeAWishFacts = MakeAWishFactsService.getMakeAWishFacts();
     $scope.makeAWishFact = makeAWishFacts.pop();
 
     $scope.openReusedModal = () => {
@@ -48,9 +50,9 @@ angular.module('mean.system')
     $scope.sendInvitation = (x) => {
       $scope.selectedUser = x;
       $scope.disableInviteButton = true;
-      const { href } = window.location;
+      var href = window.location.href;
 
-      const formData = {
+      var formData = {
         user: x,
         link: href,
       };

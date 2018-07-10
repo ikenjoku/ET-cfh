@@ -34,34 +34,24 @@ describe('User endpoints', () => {
   });
 
   it('GET /users/findUsers/:searchKey should return statusCode 200 with 2 users', (done) => {
-    try {
-      request(app)
-        .get('/users/findUsers/ben')
-        .end((err, res) => {
-          if (err) return done(err);
-          expect(res.statusCode).to.equal(200);
-          expect(res.body.users.length).to.equal(2);
-          done();
-        });
-    } catch (err) {
-      /* eslint no-unused-expressions: 0 */
-      expect(err).to.not.exist;
-    }
+    request(app)
+      .get('/users/findUsers/ben')
+      .end((err, res) => {
+        if (err) return done(err);
+        expect(res.statusCode).to.equal(200);
+        expect(res.body.users.length).to.equal(2);
+        done();
+      });
   });
 
   it('GET /users/findUsers/:searchKey should return statusCode 200 with no user', (done) => {
-    try {
-      request(app)
-        .get('/users/findUsers/nothing')
-        .end((err, res) => {
-          if (err) return done(err);
-          expect(res.statusCode).to.equal(200);
-          expect(res.body.users.length).to.equal(0);
-          done();
-        });
-    } catch (err) {
-      /* eslint no-unused-expressions: 0 */
-      expect(err).to.not.exist;
-    }
+    request(app)
+      .get('/users/findUsers/nothing')
+      .end((err, res) => {
+        if (err) return done(err);
+        expect(res.statusCode).to.equal(200);
+        expect(res.body.users.length).to.equal(0);
+        done();
+      });
   });
 });
