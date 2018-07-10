@@ -3,8 +3,19 @@ import request from 'supertest';
 import { expect } from 'chai';
 import mongoose from 'mongoose';
 import app from '../../server';
+import { Tokenizer } from '../../app/helpers/tokenizer';
+
 
 const User = mongoose.model('User');
+
+const user = {
+  _id: '1232132',
+  name: 'Benjamin Onah',
+  password: 'wrongPassword',
+};
+
+const token = Tokenizer(user);
+
 
 const mock = [
   {
@@ -36,6 +47,7 @@ describe('User endpoints', () => {
   it('GET /users/findUsers/:searchKey should return statusCode 200 with 2 users', (done) => {
     request(app)
       .get('/users/findUsers/ben')
+      .set('Authorization', `Bearer ${token}`)
       .end((err, res) => {
         if (err) return done(err);
         expect(res.statusCode).to.equal(200);
@@ -47,6 +59,7 @@ describe('User endpoints', () => {
   it('GET /users/findUsers/:searchKey should return statusCode 200 with no user', (done) => {
     request(app)
       .get('/users/findUsers/nothing')
+      .set('Authorization', `Bearer ${token}`)
       .end((err, res) => {
         if (err) return done(err);
         expect(res.statusCode).to.equal(200);

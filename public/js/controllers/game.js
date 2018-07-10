@@ -1,7 +1,7 @@
 /* eslint vars-on-top: 0 */
 /* eslint no-var: 0 */
 angular.module('mean.system')
-  .controller('GameController', ['$scope', '$http', 'game', '$timeout', '$location', 'MakeAWishFactsService', '$dialog', '$rootScope', ($scope, $http, game, $timeout, $location, MakeAWishFactsService, $rootScope) => {
+  .controller('GameController', ['$scope', '$http', '$q', 'game', '$timeout', '$location', 'MakeAWishFactsService', '$dialog', '$rootScope', ($scope, $http, $q, game, $timeout, $location, MakeAWishFactsService, $rootScope) => {
     $scope.hasPickedCards = false;
     $scope.winningCardPicked = false;
     $scope.showTable = false;
@@ -12,11 +12,13 @@ angular.module('mean.system')
     $scope.showNotFound = false;
     $scope.foundUsers = [];
     $scope.invitedUsers = [];
+    $scope.dobounceTimeout = null;
     $scope.searchHelper = 'At least 3 letters are needed for this search';
     $scope.modalShown = false;
     $scope.game = game;
     $scope.pickedCards = [];
     var makeAWishFacts = MakeAWishFactsService.getMakeAWishFacts();
+    var token = localStorage.getItem('#cfhetusertoken');
     $scope.makeAWishFact = makeAWishFacts.pop();
 
     $scope.openReusedModal = () => {
@@ -35,31 +37,36 @@ angular.module('mean.system')
     };
 
     $scope.findUsers = () => {
-      $scope.hasServerError = false;
-      $http.get(`/users/findUsers/${$scope.searchKey}`)
-        .then((response) => {
-          $scope.foundUsers = response.data.users;
-          $scope.showNotFound = $scope.foundUsers.length === 0;
-        }, (error) => {
-          $scope.searchHelper = error.data;
+      var canceler = $q.defer();
+      clearTimeout($scope.dobounceTimeout);
+      $scope.dobounceTimeout = setTimeout(() => {
+        $http.get(`/users/findUsers/${$scope.searchKey}`, { headers: { Authorization: `Bearer ${token}` } }, { timeout: canceler.promise }).success((response) => {
+          $scope.foundUsers = response.users;
+          $scope.showNotFound = $scope.foundUsers.length === 0 && $scope.searchKey.length > 0;
+        }).error((response) => {
+          $scope.searchHelper = response.data;
           $scope.hasServerError = true;
         });
+      }, 300);
     };
 
     $scope.sendInvitation = (x) => {
       $scope.selectedUser = x;
       $scope.disableInviteButton = true;
-      var href = window.location.href;
+      var url = window.location.href;
 
       var formData = {
         user: x,
-        link: href,
+        link: url,
       };
 
-      $http.post('/users/invite', formData).then((response) => {
-        $scope.invitedUsers.push(response.data.user.email);
+      $http.post('/users/invite', formData, { headers: { Authorization: `Bearer ${token}` } }).success((response) => {
+        $scope.invitedUsers.push(response.user.email);
         $scope.disableInviteButton = false;
         $scope.selectedUser = {};
+      }).error((response) => {
+        $scope.searchHelper = response.message;
+        $scope.hasServerError = true;
       });
     };
 
