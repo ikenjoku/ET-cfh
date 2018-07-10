@@ -21,6 +21,7 @@ export default (router, passport, app) => {
   router.post('/users', users.create);
   router.post('/users/avatars', users.avatars);
   router.get('/users/findUsers/:searchKey', users.findUsers);
+  router.get('/users/findUsers/', users.findUsers);
   router.post('/users/invite', users.invite);
 
   // Donation Routes

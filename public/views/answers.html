@@ -29,13 +29,10 @@
   <div id="inner-info">
     <form id="search-users" ng-submit="findUsers()" name="myForm">
       <div class="form-group col-md-10">
-        <input ng-model="searchKey" type='text' autocomplete="off" name='searchKey' placeholder="Search for friends" search-key-length>
-        <small style="float: left; color: rgb(204, 88, 34)" class="form-text text-muted" ng-show="(myForm.searchKey.$dirty && myForm.searchKey.$invalid) || hasServerError">{{ searchHelper }}</small>
+        <input ng-keyup="findUsers()" ng-model="searchKey" type='text' autocomplete="off" name='searchKey' placeholder="Search for friends">
+        <!-- <small style="float: left; color: rgb(204, 88, 34)" class="form-text text-muted" ng-show="(myForm.searchKey.$dirty && myForm.searchKey.$invalid) || hasServerError">{{ searchHelper }}</small> -->
       </div>
       <br>
-      <div class='form-group-col-md-2'>
-          <input type='submit' value="Find Friends" ng-disabled="myForm.$invalid || myForm.$pristine">
-      </div>
     </form>
   </div>
   <div id='found-users' style="clear: both;">
