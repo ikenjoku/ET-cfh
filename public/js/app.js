@@ -1,3 +1,4 @@
+/* eslint prefer-arrow-callback: 0, func-names: 0, no-undef: 0, no-var: 0, object-shorthand: 0 */
 angular.module('mean', ['ngCookies', 'ngResource', 'ui.bootstrap', 'ui.route', 'mean.system', 'mean.directives'])
   .config(['$routeProvider',
       function($routeProvider) {
@@ -6,13 +7,13 @@ angular.module('mean', ['ngCookies', 'ngResource', 'ui.bootstrap', 'ui.route', '
             templateUrl: 'views/index.html'
           }).
           when('/app', {
-            templateUrl: '/views2/app.html',
+            templateUrl: '/views/app.html',
           }).
           when('/privacy', {
-            templateUrl: '/views2/privacy.html',
+            templateUrl: '/views/privacy.html',
           }).
           when('/bottom', {
-            templateUrl: '/views2/bottom.html'
+            templateUrl: '/views/bottom.html'
           }).
           when('/signin', {
             templateUrl: '/views/signin.html'
@@ -21,7 +22,7 @@ angular.module('mean', ['ngCookies', 'ngResource', 'ui.bootstrap', 'ui.route', '
             templateUrl: '/views/signup.html'
           }).
           when('/choose-avatar', {
-            templateUrl: '/views2/choose-avatar.html'
+            templateUrl: '/views/choose-avatar.html'
           }).
           otherwise({
             redirectTo: '/'

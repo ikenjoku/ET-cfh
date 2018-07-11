@@ -7,10 +7,13 @@ const Game = mongoose.model('Game');
 
 /**
  * @function gameResult
- * @param {object} data - An object containing game result to be saved in database
  * @description without friends parameter, it returns a status code 401
  *   with a warning message
  * It saves the game result to the database
+ *
+ * @param {object} req
+ * @param {object} res
+ *
  * @returns {object} returns the game result
  */
 const gameResult = (req, res) => {

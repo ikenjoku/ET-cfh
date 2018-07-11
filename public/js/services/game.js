@@ -193,7 +193,7 @@ angular.module('mean.system')
         method: 'POST',
         url: `/api/game/${gameId}/start`,
         data: {
-          players: players
+          players
         },
         headers: {
           'Content-Type': 'application/json',
