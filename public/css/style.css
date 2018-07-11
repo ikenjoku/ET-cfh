@@ -411,3 +411,139 @@ i {
 .modal-footer {
   text-align: center !important;
 }
+
+#finding-players {
+  font-size: 36px;
+  font-weight: bold;
+  text-align: center;
+}
+
+#player-count {
+  font-size: 18px;
+  text-align: center;
+}
+
+.top-div {
+  height: 225px;
+}
+
+.question-div {
+  border: 1px solid black;
+  border-radius: 7px;
+  height: 100%;
+  text-align: center;
+}
+
+.card-img {
+  height: 225px;
+  width: 100%; 
+  /* 125px */
+  border-radius: 7px;
+}
+
+.play-instructions {
+  height: 549px;
+}
+
+.play-instructions h2 {
+  font-size: 36px;
+}
+
+.help-instructions {
+  /* height: 549px; */
+}
+
+#help {
+  padding: 0px;
+}
+
+.help-instructions h2 {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.help-step {
+  font-size: 16px;
+}
+
+.help-step span {
+  font-weight: bolder;
+}
+
+.play-step {
+  font-size: 32px;
+}
+
+.play-step span {
+  font-weight: bolder;
+}
+
+#start-btn {
+  background-color: #236231;
+  color: white;
+}
+
+#invite-btn {
+  background-color: white;
+  color: #236231;
+  border: 1px solid #236231;
+}
+
+
+.card.item {
+  background-color: black;
+  position: relative;
+  display: inline-block;
+  box-sizing: border-box;
+  width: 17.5%;
+  height: 215px;
+  padding: 1%;
+  margin: 1%;
+  border-radius: 8px;
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.donate-now{
+  background-color: black;
+  color: white;
+}
+
+.answers {
+  background-color: white;
+  color: black;
+}
+
+.how-to-help {
+  background-color: white;
+  color: black;
+}
+.donate-now {
+  text-align: center;
+}
+
+.donate-now img {
+  width: 300px;
+}
+
+@media screen and (max-width: 600px) {
+  #card-img, #help {
+    visibility: hidden;
+    display: none;
+    float: none;
+    clear: both;
+  }
+
+  .play-instructions h2 {
+    font-size: 18px;
+  }
+
+  .play-step {
+    font-size: 16px;
+  }
+
+  .card.item {
+    width: 80%;
+  }
+}
