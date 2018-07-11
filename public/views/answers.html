@@ -1,8 +1,8 @@
-<div id="donate">
-  <div class="row">
-    <div class="col l8 how-to-help" id="info-container" ng-show="game.state === 'awaiting players'">
-      <div class="row">
-        <div class="col s12 play-instructions">
+<div id="donate" style="margin-right: 41px;">
+  <div>
+    <div class="how-to-help" id="info-container" ng-show="game.state === 'awaiting players'">
+      <div>
+        <div class="play-instructions">
           <h2>HOW TO PLAY</h2>
           <p class="play-step"><span>E</span>ach player except the czar starts with 10 answer cards</p>
           <p class="play-step"><span>A</span> player is randomly chosen as czar</p>
@@ -46,55 +46,52 @@
     
 
 <div id="donate">
-    <div class="row">
-    <div class="col l8 answers" ng-cloak id="cards-container" ng-hide="game.state === 'game ended' || game.state ==='game dissolved'">
-      <div id="cards" class='hand'>
+    <div ng-cloak id="cards-container" ng-hide="game.state === 'game ended' || game.state ==='game dissolved'">
+      <div id="cards" class="hand answers">
         <span ng-show="winnerPicked()"></span>
         <div ng-style="{'cursor':'pointer'}" class="card item" id='answers' ng-click="pickCard(card)" ng-hide="showTable || isCzar()"
         ng-repeat="card in game.players[game.playerIndex].hand" ng-animate="{enter:'animated fadeInUp', leave: 'animated fadeInOut'}">
-            <div>
-                <span ng-bind-html-unsafe="card.text"></span>
-                <span id='selection-number' ng-show="showFirst(card)"> 1 </span>
-                <span id='selection-number' ng-show="showSecond(card)"> 2 </span>
-            </div>
+            <p ng-bind-html-unsafe="card.text" class="game-card-text"></p>
+              <span id='selection-number' ng-show="showFirst(card)"> 1 </span>
+              <span id='selection-number' ng-show="showSecond(card)"> 2 </span>
         </div>
 
         <span ng-repeat="answer in game.table">
             <div class="card item" ng-style="pointerCursorStyle()" id='table' ng-click="pickWinning(answer)" ng-show="showTable || isCzar()"
-            ng-repeat="card in answer.card" ng-animate="{enter:'animated bounceInLeft'}" style="background-color:{{winningColor($parent.$index)}}">
-                <span ng-bind-html-unsafe="card.text"></span>
+            ng-repeat="card in answer.card" ng-animate="{enter:'animated bounceInLeft'}" >
+                <div ng-bind-html-unsafe="card.text"></div>
                 <span id='selection-number' ng-show="firstAnswer($index)"> 1 </span>
                 <span id='selection-number' ng-show="secondAnswer($index)"> 2 </span>
             </div>
         </span>
       </div>
     </div>
-  </div>
 </div>
 
 <div id="donate" ng-show="game.state === 'game ended' || game.state ==='game dissolved'">
-  <div class="row">
-    <div class="col l8 donate-now">
-      <div class="row">
+  <div>
+    <div class="donate-now">
+      <div>
         <h2>DONATE</h2>
         <span>“For it is in giving that we receive.” — Francis of Assisi</span>
       </div>
       <div class="row">
         <div class="col l4"><img src="./../img/donate.png" alt=""></div>
+        <!-- <script type="text/javascript" src="https://www.crowdrise.com/widgets/donate/fundraiser/121142/?callback=userDonationCb"></script> -->
         <div class="col l4"></div>
         <div class="col l4"><img src="./../img/make-a-wish.png" alt=""></div>
       </div>
-      <div class="row">
+      <div>
         <span>Help yourself to another game or help a child in need? Donating will also place a lovely crown on your avatar's head.</span>
       </div>
     </div>
   </div>
 </div>
 
-<div id="czar-blank-container" ng-show="isCzar() && game.table.length===0 && game.state !== 'game dissolved' && game.state !== 'awaiting players'">
+<div id="czar-blank-container" class="czar-donate" ng-show="isCzar() && game.table.length===0 && game.state !== 'game dissolved' && game.state !== 'awaiting players'">
   <div id="czar-blank-inner">
-    You are the Card Czar. <br>
-    <span id="smaller-text">Players are choosing their answers. Prepare to select a winner.</span>
+    <p class="czar-blank-text">You are the Card Czar. <br></p>
+    <span class="smaller-text">Players are choosing their answers. Prepare to select a winner.</span>
   </div>
   <div id='charity-fact-container'>
     <div id='charity-fact-tagline'>Did you know?</div>

@@ -9,7 +9,7 @@ angular.module('mean.system')
     $scope.modalShown = false;
     $scope.game = game;
     $scope.pickedCards = [];
-    var makeAWishFacts = MakeAWishFactsService.getMakeAWishFacts();
+    let makeAWishFacts = MakeAWishFactsService.getMakeAWishFacts();
     $scope.makeAWishFact = makeAWishFacts.pop();
 
     $scope.pickCard = function (card) {
@@ -75,9 +75,12 @@ angular.module('mean.system')
       return game.curQuestion.numAnswers > 1 && $scope.pickedCards[0] === card.id;
     };
 
-
     $scope.showSecond = function (card) {
       return game.curQuestion.numAnswers > 1 && $scope.pickedCards[1] === card.id;
+    };
+
+    $scope.isCzar = function () {
+      return game.czar === game.playerIndex;
     };
 
     $scope.isPlayer = function ($index) {
@@ -180,6 +183,15 @@ angular.module('mean.system')
         }
       }
     });
+
+    $scope.toggleChatbox = function () {
+      const toggleDiv = document.getElementById('chat-box-content-container');
+      if (toggleDiv.style.display === 'none') {
+        toggleDiv.style.display = 'block';
+      } else {
+        toggleDiv.style.display = 'none';
+      }
+    };
 
     if ($location.search().game && !(/^\d+$/).test($location.search().game)) {
       game.joinGame('joinGame', $location.search().game);
