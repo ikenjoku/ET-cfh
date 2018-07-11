@@ -1,4 +1,4 @@
-import 'babel-polyfill';
+/* eslint no-undef: 0 */
 import request from 'supertest';
 import faker from 'faker';
 import { expect } from 'chai';

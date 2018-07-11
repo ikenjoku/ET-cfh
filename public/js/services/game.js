@@ -66,7 +66,7 @@ angular.module('mean.system')
       game.timeLimits = data.timeLimits;
     });
 
-    socket.on('gameFilledUp', function (data) {
+    socket.on('gameFilledUp', function () {
       game.isFilledUp = true;
     });
 

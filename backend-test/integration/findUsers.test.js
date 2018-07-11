@@ -1,4 +1,4 @@
-import 'babel-polyfill';
+/* eslint no-undef: 0 */
 import request from 'supertest';
 import { expect } from 'chai';
 import mongoose from 'mongoose';
@@ -44,9 +44,9 @@ describe('User endpoints', () => {
     Promise.resolve(User.remove({}));
   });
 
-  it('GET /users/findUsers/:searchKey should return statusCode 200 with 2 users', (done) => {
+  it('GET /api/users/findUsers/:searchKey should return statusCode 200 with 2 users', (done) => {
     request(app)
-      .get('/users/findUsers/ben')
+      .get('/api/users/findUsers/ben')
       .set('Authorization', `Bearer ${token}`)
       .end((err, res) => {
         if (err) return done(err);
@@ -56,9 +56,9 @@ describe('User endpoints', () => {
       });
   });
 
-  it('GET /users/findUsers/:searchKey should return statusCode 200 with no user', (done) => {
+  it('GET /api/users/findUsers/:searchKey should return statusCode 200 with no user', (done) => {
     request(app)
-      .get('/users/findUsers/nothing')
+      .get('/api/users/findUsers/nothing')
       .set('Authorization', `Bearer ${token}`)
       .end((err, res) => {
         if (err) return done(err);

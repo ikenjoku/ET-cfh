@@ -1,3 +1,4 @@
+/* eslint no-undef: 0 */
 import { expect } from 'chai';
 import sendInvitationEmail from '../../app/helpers/sendInvitationEmail';
 

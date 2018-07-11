@@ -49,10 +49,10 @@ const signin = (req, res) => {
  * @param {function} next - next function for passing the request to next handler
  * @description Controller for handling requests to '/api/auth/login', returns token in response as JSON.
  * @param {object} passport - passport with all the startegies registered
- * @description Controller for handling requests to '/api/auth/login', 
+ * @description Controller for handling requests to '/api/auth/login',
  * returns token in response as JSON.
  * @param {object} passport - passport with all the startegies registered
- * @description Controller for handling requests to '/api/auth/login', 
+ * @description Controller for handling requests to '/api/auth/login',
  * returns token in response as JSON.
  *  Uses Tokenizer helper method to handle generation of token
 */

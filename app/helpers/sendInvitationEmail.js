@@ -1,4 +1,4 @@
-/* eslint no-useless-escape: 0 */
+/* eslint no-useless-escape: 0, no-console: 0 */
 import nodemailer from 'nodemailer';
 import IsUrl from 'is-url';
 

@@ -56,7 +56,7 @@ angular.module('mean.directives', [])
     return {
       restrict: 'EA',
       templateUrl: '/views/question.html',
-      link(scope, elem, attr) {}
+      link() {}
     };
   })
   .directive('timer', function () {
@@ -75,27 +75,6 @@ angular.module('mean.directives', [])
         if (scope.$$childHead.global.authenticated === true) {
           scope.showOptions = false;
         }
-      }
-    };
-  })
-  .directive('searchKeyLength', function () {
-    return {
-      require: 'ngModel',
-      link(scope, element, attr, mCtrl) {
-        /**
-         * Checks if validation rule passes
-         * @param {value} value
-         * @returns {boolean} boolean
-         */
-        function myValidation(value) {
-          if (value.length >= 3) {
-            mCtrl.$setValidity('charE', true);
-          } else {
-            mCtrl.$setValidity('charE', false);
-          }
-          return value;
-        }
-        mCtrl.$parsers.push(myValidation);
       }
     };
   });

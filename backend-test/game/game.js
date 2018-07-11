@@ -1,3 +1,4 @@
+/* eslint no-undef: 0 */
 import should from 'should';
 import io from 'socket.io-client';
 import config from '../../config/config';

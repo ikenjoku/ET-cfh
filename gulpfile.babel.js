@@ -10,7 +10,6 @@ import babel from 'gulp-babel';
 import karma from 'karma';
 import dotenv from 'dotenv';
 import path from 'path';
-import shell from 'gulp-shell';
 
 dotenv.config();
 const { Server } = karma;

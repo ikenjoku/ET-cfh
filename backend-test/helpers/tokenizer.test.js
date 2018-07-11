@@ -1,3 +1,4 @@
+/* eslint no-undef: 0 */
 import { expect } from 'chai';
 import jwt from 'jsonwebtoken';
 import { Tokenizer, decodeToken } from '../../app/helpers/tokenizer';

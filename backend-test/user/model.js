@@ -1,6 +1,4 @@
-/**
- * Module dependencies.
- */
+/* eslint no-undef: 0 */
 const should = require('should');
 const mongoose = require('mongoose');
 

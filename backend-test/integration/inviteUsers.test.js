@@ -1,4 +1,4 @@
-import 'babel-polyfill';
+/* eslint no-undef: 0 */
 import request from 'supertest';
 import { expect } from 'chai';
 import app from '../../server';
@@ -13,7 +13,7 @@ const user = {
 const token = Tokenizer(user);
 
 describe('User endpoints', () => {
-  it('POST /users/invite should return statusCode 200 with a user object', (done) => {
+  it('POST /api/users/invite should return statusCode 200 with a user object', (done) => {
     const payload = {
       user: {
         name: 'Ben Onah',
@@ -23,7 +23,7 @@ describe('User endpoints', () => {
       link: 'http://localhost:3333/app'
     };
     request(app)
-      .post('/users/invite')
+      .post('/api/users/invite')
       .set('Authorization', `Bearer ${token}`)
       .send(payload)
       .end((err, res) => {
@@ -34,7 +34,7 @@ describe('User endpoints', () => {
       });
   });
 
-  it('POST /users/invite should return statusCode 400 with error message if wrong email is used', (done) => {
+  it('POST /api/users/invite should return statusCode 400 with error message if wrong email is used', (done) => {
     const payload = {
       user: {
         name: 'Ben Onah',
@@ -44,7 +44,7 @@ describe('User endpoints', () => {
       link: 'http://localhost:3333/app'
     };
     request(app)
-      .post('/users/invite')
+      .post('/api/users/invite')
       .set('Authorization', `Bearer ${token}`)
       .send(payload)
       .end((err, res) => {
@@ -55,7 +55,7 @@ describe('User endpoints', () => {
       });
   });
 
-  it('POST /users/invite should return statusCode 400 with error message if wrong link is used', (done) => {
+  it('POST /api/users/invite should return statusCode 400 with error message if wrong link is used', (done) => {
     const payload = {
       user: {
         name: 'Ben Onah',
@@ -65,7 +65,7 @@ describe('User endpoints', () => {
       link: 'htt/localhost:3333/app'
     };
     request(app)
-      .post('/users/invite')
+      .post('/api/users/invite')
       .set('Authorization', `Bearer ${token}`)
       .send(payload)
       .end((err, res) => {
