@@ -11,11 +11,28 @@ angular.module('mean.system')
       execute: { method: 'POST', hasBody: true }
     });
 
+    $scope.logOut = function () {
+      localStorage.removeItem('#cfhetusertoken');
+      localStorage.removeItem('username');
+      localStorage.removeItem('#cfhetUserId');
+    };
+
+    $scope.username = localStorage.getItem('username');
+
+    $scope.checkToken = function () {
+      const token = localStorage.getItem('#cfhetusertoken');
+      if (token) {
+        return true;
+      }
+      return false;
+    };
+
     $scope.SignUpUser = function () {
       SignUp.execute({}, $scope.newUser, function (response) {
         localStorage.setItem('#cfhetusertoken', response.token);
         localStorage.setItem('#cfhetUserId', response._id);
-        $location.path('/app');
+        localStorage.setItem('username', response.name);
+        $location.path('/');
       }, (error) => {
         console.log(error);
       });
@@ -25,7 +42,8 @@ angular.module('mean.system')
       Login.execute({}, $scope.user, function (response) {
         localStorage.setItem('#cfhetusertoken', response.token);
         localStorage.setItem('#cfhetUserId', response._id);
-        $location.path('/app');
+        localStorage.setItem('username', response.name);
+        $location.path('/');
       }, (error) => {
         console.log(error);
       });

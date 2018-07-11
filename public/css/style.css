@@ -360,7 +360,12 @@ i {
 .avatar-list img {
   max-width: 60%;
 }
-
+#play-btn {
+  color: white;
+  background-color: transparent;
+  border-color: white;
+  border: 2px solid;
+}
 .avatars {
   position: relative;
   float: left;
@@ -371,7 +376,10 @@ i {
 .modal-signup{
   background-color: #236231 !important;
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> ft(Integration): Integrate start game button and navbar to use authentication
 .with-gap {
   display: block !important;
   opacity: 1 !important;

@@ -7,13 +7,10 @@ module.exports = {
     "mocha": true,
     "jasmine": true
   },
-<<<<<<< HEAD:.eslintrc.js
-=======
   "parser": "babel-eslint",
   "parserOptions": {
     "sourceType": "module"
 },
->>>>>>> Fixes(Hound and Eslint): Fixed linting error in controllers:.eslintrc
   "rules": {
     "one-var": 0,
     "import/extensions": 0,

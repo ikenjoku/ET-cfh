@@ -121,7 +121,7 @@ angular.module('mean.system')
       return game.winningCard !== -1;
     };
 
-    $scope.startGame = function() {
+    $scope.startGame = function () {
       const gameId = game.gameID;
       const players = game.players.map(player => player.userId);
       game.createPlayers(gameId, players);
