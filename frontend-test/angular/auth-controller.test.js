@@ -39,11 +39,6 @@ describe('AuthController', function () {
     expect($location.path()).toBe('/');
   });
 
-  it('Should return true if a user is logged; token is presence', function () {
-    const token = $scope.checkToken();
-    expect(token).toEqual(true);
-  });
-
   it('Should return false if a user is not logged; token is absence', function () {
     $scope.logOut();
     const token = $scope.checkToken();
