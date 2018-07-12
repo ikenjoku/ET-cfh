@@ -1,3 +1,4 @@
+/* eslint prefer-arrow-callback: 0, func-names: 0, no-undef: 0, no-var: 0, object-shorthand: 0 */
 angular.module('mean.system')
 .controller('GameController', ['$scope', 'game', '$timeout', '$location', 'MakeAWishFactsService', '$dialog', function ($scope, game, $timeout, $location, MakeAWishFactsService, $dialog) {
     $scope.hasPickedCards = false;
@@ -120,7 +121,10 @@ angular.module('mean.system')
       return game.winningCard !== -1;
     };
 
-    $scope.startGame = function() {
+    $scope.startGame = function () {
+      const gameId = game.gameID;
+      const players = game.players.map(player => player.userId);
+      game.createPlayers(gameId, players);
       game.startGame();
     };
 
@@ -128,7 +132,6 @@ angular.module('mean.system')
       game.leaveGame();
       $location.path('/');
     };
-
     // Catches changes to round to update when no players pick card
     // (because game.state remains the same)
     $scope.$watch('game.round', function() {

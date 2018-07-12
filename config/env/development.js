@@ -3,7 +3,7 @@ module.exports = {
     name: 'Cards for Humanity - Development'
   },
   port: process.env.PORT,
-  MONGOHQ_URL: process.env.MONGOHQ_URL_DEV,
+  MONGOHQ_URL: process.env.MONGODB_URI,
   facebook: {
     clientID: 'APP_ID',
     clientSecret: 'APP_SECRET',

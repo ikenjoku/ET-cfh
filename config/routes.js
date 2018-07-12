@@ -4,6 +4,8 @@ import * as answers from '../app/controllers/answers';
 import questions from '../app/controllers/questions';
 import avatars from '../app/controllers/avatars';
 import index from '../app/controllers/index';
+import game from '../app/controllers/game';
+import auth from '../app/middleware/auth';
 
 export default (router, passport, app) => {
   // api name spaced routes;
@@ -11,6 +13,10 @@ export default (router, passport, app) => {
   api
     .post('/auth/login', users.handleLogin)
     .post('/auth/signup', users.handleSignUp);
+
+  // Setting up the game api
+  api
+    .post('/game/:id/start', auth, game);
 
   router.get('/signin', users.signin);
   router.get('/signup', users.signup);

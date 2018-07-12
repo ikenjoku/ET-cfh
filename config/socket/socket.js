@@ -78,10 +78,10 @@ module.exports = function(io) {
   var joinGame = function(socket,data) {
     var player = new Player(socket);
     data = data || {};
-    player.userID = data.userID || 'unauthenticated';
-    if (data.userID !== 'unauthenticated') {
+    player.userId = data.userId || 'unauthenticated';
+    if (data.userId !== 'unauthenticated') {
       User.findOne({
-        _id: data.userID
+        _id: data.userId
       }).exec(function(err, user) {
         if (err) {
           console.log('err',err);
@@ -92,6 +92,7 @@ module.exports = function(io) {
           player.username = 'Guest';
           player.avatar = avatars[Math.floor(Math.random()*4)+12];
         } else {
+          player.userId = user.id;
           player.username = user.name;
           player.premium = user.premium || 0;
           player.avatar = user.avatar || avatars[Math.floor(Math.random()*4)+12];

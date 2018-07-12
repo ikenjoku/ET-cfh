@@ -26,7 +26,7 @@ describe('AuthController', function () {
     $scope.SignUpUser();
     const token = localStorage.getItem('#cfhetusertoken');
     expect(token).toEqual('Thisisatesttoken');
-    expect($location.path()).toBe('/app');
+    expect($location.path()).toBe('/');
   });
 
   it('Should log in the user with the successful data then set the returning token to local storage', function () {
@@ -36,6 +36,12 @@ describe('AuthController', function () {
     const token = localStorage.getItem('#cfhetusertoken');
     // check the token now
     expect(token).toEqual('Thisisatesttoken');
-    expect($location.path()).toBe('/app');
+    expect($location.path()).toBe('/');
+  });
+
+  it('Should return false if a user is not logged; token is absence', function () {
+    $scope.logOut();
+    const token = $scope.checkToken();
+    expect(token).toEqual(false);
   });
 });

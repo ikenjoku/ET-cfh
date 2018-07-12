@@ -1,6 +1,6 @@
 /* eslint prefer-arrow-callback: 0, func-names: 0, no-undef: 0, no-var: 0 */
 angular.module('mean.system')
-  .factory('game', ['socket', '$timeout', function (socket, $timeout) {
+  .factory('game', ['socket', '$timeout', '$http', function (socket, $timeout, $http) {
     var game = {
       id: null, // This player's socket ID, so we know who this player is
       gameID: null,
@@ -180,14 +180,29 @@ angular.module('mean.system')
       mode = mode || 'joinGame';
       room = room || '';
       createPrivate = createPrivate || false;
-      var userID = window.user ? user._id : 'unauthenticated';
-      socket.emit(mode, { userID, room, createPrivate });
+      var userId = localStorage.getItem('#cfhetUserId') ? localStorage.getItem('#cfhetUserId') : 'unauthenticated';
+      socket.emit(mode, { userId, room, createPrivate });
     };
 
     game.startGame = function () {
       socket.emit('startGame');
     };
-
+    game.createPlayers = function(gameId, players) {
+      const token = localStorage.getItem('#cfhetusertoken');
+      $http({
+        method: 'POST',
+        url: `/api/game/${gameId}/start`,
+        data: {
+          players
+        },
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': token,
+        }
+      }).then(gamePlayers => {
+        console.log(gamePlayers);
+      });
+    }
     game.leaveGame = function () {
       game.players = [];
       game.time = 0;

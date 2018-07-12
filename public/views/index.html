@@ -1,21 +1,19 @@
 <body>
   <header>
     <nav class="white nav">
-      <div class="nav-wrapper font-bold">
+      <div class="nav-wrapper font-bold" ng-controller="AuthController">
         <a href="/" class="black-text text-darken-2 brand-logo left">
           <img src="https://res.cloudinary.com/dqsmurjpg/image/upload/v1530718726/Navbar_Logo.png"
             id="cfh-logo" alt="cfg-logo">
         </a>
   
         <ul id="nav-mobile" class="right">
-          <li>
+          <li ng-hide="checkToken()">
             <a class="waves-effect waves-light white black-text btn" id="index-login-btn" href="signin">Login</a>
           </li>
-          <li><a class="waves-effect waves-light green darken-4 btn white-text" id="index-signup-btn" href="signup">Signup</a></li>
+          <li ng-hide="checkToken()"><a class="waves-effect waves-light green darken-4 btn white-text" id="index-signup-btn" href="signup">Signup</a></li>
+          <li ng-show="checkToken()"><a ng-click="logOut()" class="modal-trigger waves-effect waves-light green darken-4 btn white-text" id="index-signup-btn">Sign Out</a></li>
         </ul>
-        <span ng-show="user()">
-          <li><a class="waves-effect waves-light green darken-4 btn white-text" id="index-signup-btn" href="/signout">Sign Out</a></li>
-        </span>
       </div>
     </nav>
   </header>
@@ -36,12 +34,37 @@
     </div>
     <div class="row">
       <div class="col s12 cfh-btn" ng-controller="ScrollController">
-        <a ng-click="goPlay()" class="waves-effect waves-light btn" id="play-btn">How To Play</a>
-        <a href="/play" class="waves-effect waves-light btn" id="play-btn">Play as guest </a>
-      </div>
+        <div ng-controller="AuthController">
+          <a ng-click="goPlay()" class="waves-effect waves-light btn" id="play-btn">How To Play</a>
+          <a data-target="modal1" class="btn modal-trigger waves-effect waves-light btn" id="play-btn" ng-hide="checkToken()">Play as guest </a>
+          <a data-target="modal2" class="btn modal-trigger waves-effect waves-light btn" id="play-btn" ng-show="checkToken()">Play Game </a>
+        </div>
     </div>
   </div>
-    
+  <!-- modal one section -->
+  <div id="modal1" class="modal text-white">
+  <div class="modal-content">
+    <h4>Play Game As A Guest</h4>
+    <p>You  are about to play game as a guest! </p>
+  </div>
+  <div class="modal-footer">
+    <a href="#" class="modal-close waves-effect waves-light green darken-4 btn white-text">Cancel</a>&nbsp;&nbsp;&nbsp;&nbsp;
+    <a href="/play" class="modal-close waves-effect waves-light green darken-4 btn white-text">Start Game</a>
+  </div>
+</div>
+
+  <!-- modal two section -->
+<div id="modal2" class="modal text-white" ng-controller="AuthController">
+    <div class="modal-content">
+      <h4>Card For Humanity</h4>
+      <p>{{username}} You are about to play game of horrible people trying to do good </p>
+    </div>
+    <div class="modal-footer">
+      <a href="#" class="modal-close waves-effect waves-light green darken-4 btn white-text" id="play-btn">Cancel</a>&nbsp;&nbsp;&nbsp;&nbsp;
+      <a href="/play" class="modal-close waves-effect waves-light green darken-4 btn white-text" id="play-btn">Start Game </a>
+    </div>
+  </div>
+  <br/>
   <div id="play" class="section how-to-play">
     <div class="row play-head"><h1>How To Play</h1></div>
     <div class="row">
@@ -99,7 +122,7 @@
           </div>
         </div>
       </div>
-    </div>
+  </div>
 
   <!-- Donation Info Start -->
   <section class="image-overlay donation-banner white-text font-md" id="donations">
@@ -134,5 +157,5 @@
       Designed with <span class="green-text text-darken-3">&#10084;</span> By the ET team
     </p>
   </footer>
-  <!-- Footer end -->
+  <script> $('.modal').modal();</script> 
 </body>
