@@ -8,6 +8,7 @@
 }
 
 #nav-mobile .btn:last-of-type { margin-right: .5rem !important; }
+
 .background-green {
   background-color: #236231;
 }
@@ -50,7 +51,6 @@
   padding: 1rem;
   line-height: 1rem;
 }
-
 @media screen and (min-width: 767px) {
   #donations {
     text-align: left;
@@ -68,6 +68,7 @@
     margin-left: 2.5rem;
     margin-right: 2.5rem;
   }
+
 }
 
 .banner {
@@ -198,6 +199,7 @@
   .play-foot, .login-btn {
     font: Bold 2rem 'Quicksand';
   }
+
 }
 
 .login-image-overlay {
@@ -222,12 +224,14 @@
   #cfh-logo {
     width: 25%
   }
+
 }
 
 @media screen and (max-width: 767px) {
   #cfh-logo {
     width: 22%
   }
+
 }
 
 #auth {
@@ -247,6 +251,7 @@
     margin-left: auto;
     margin-right: auto;
   }
+
 }
 
 @media screen and (min-width: 420px) {
@@ -255,6 +260,7 @@
     margin-left: auto;
     margin-right: auto;
   }
+
 }
 
 .input-field {
@@ -377,6 +383,7 @@ i {
   background-color: white !important;
   color: black !important;
 }
+
 
 .avatars {
   position: relative;
@@ -572,8 +579,8 @@ i {
   #social-bar-container {
     height: 15vh;
   }
-}
 
+}
 
 #avatar_ img {
   width: 85%;
@@ -607,6 +614,7 @@ i {
   .how-to-help {
     margin-left: 0px;
   }
+
 }
 
 @media screen and (max-width: 600px) {
@@ -628,6 +636,7 @@ i {
   .answers {
     background-color: transparent;
   }
+
 
   .card.item {
     width: 45%;
@@ -656,7 +665,7 @@ i {
   .game-end-headline, .question-div span {
     font-size: 14px;
   }
-  
+
 }
 
 #app-container {
@@ -732,6 +741,11 @@ i {
 
 #czar-container {
   display: inline-block;
+}
+
+#avatar_ img {
+  width: 85%;
+  margin-top: 9px;
 }
 
 #player-name h4 {
@@ -823,6 +837,7 @@ i {
   .mobile-width {
     width: 23% !important;
   }
+
 }
 
 #timer-status-round, #timer-status-czar-choosing {
@@ -931,7 +946,6 @@ i {
 .hourglass-spin > .fa-hourglass-end.spin {
   animation: showhidespin 4s linear infinite;
 }
-
 @keyframes showhide {
   0% {
     opacity: 1;
@@ -964,4 +978,12 @@ i {
 
 .donate-button {
   font-size: 1.23rem !important;
+}
+
+.question-div hr {
+  height:2px;
+  display:inline-block;
+  margin:0; width:150px;
+  background-color:black;
+  border-width:0;
 }

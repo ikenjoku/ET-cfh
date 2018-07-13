@@ -29,7 +29,8 @@
   <div class="col l12 s12">
     <div class="col l6 m7 s12 question-div">
       <span ng-bind-html-unsafe="game.curQuestion.text" ng-hide="game.state === 'game ended' || game.state ==='game dissolved' || game.state === 'awaiting players'"></span>
-      <div id="notifications" ng-if="game.notification" ng-animate="{enter:'animated fadeInLeft', leave:'animated fadeOut'}">{{game.notification}}</div></div>
+      <div id="notifications" ng-if="game.notification" ng-animate="{enter:'animated fadeInLeft', leave:'animated fadeOut'}">{{game.notification}}</div>
+    </div>
     <div class="col l2 s2" id="card-img">
       <img class="card-img2" src="https://res.cloudinary.com/dffiyhgto/image/upload/v1531231021/Screen_Shot_2018-07-09_at_5.14.23_PM.png" alt="card-img">
     </div>
@@ -45,7 +46,7 @@
   </div>
 </div>
 
-<div class="top-div row" >
+<div class="top-div row" ng-show="game.state ==='game dissolved' || game.state === 'game ended'">
   <div class="col l12 s12">
     <div class="col l10 m9 s12 question-div">
       <div class="game-end-info row">
