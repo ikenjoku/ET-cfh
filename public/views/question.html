@@ -45,11 +45,11 @@
   </div>
 </div>
 
-<div class="top-div row" ng-show="game.state ==='game dissolved' && game.gameWinner === -1">
+<div class="top-div row" >
   <div class="col l12 s12">
     <div class="col l10 m9 s12 question-div">
       <div class="game-end-info row">
-        <div id="people-left-game-top">
+        <div id="people-left-game-top" ng-show="game.state ==='game dissolved' && game.gameWinner === -1">
           <div class="game-end-headline">What the!? The game ended because too many people left! </div>
             Our sincere apologies.
         </div>
@@ -63,7 +63,6 @@
       </div>
       <div class="row" ng-show="game.state === 'game ended'">
         <a class="waves-effect waves-light btn" id="start-btn">Restart Game</a>
-        <a href="#" class="waves-effect waves-light btn" id="invite-btn">Invite friends </a>
       </div>
     </div>
     <div class="col m3 l2" id="card-img">

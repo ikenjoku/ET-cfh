@@ -8,14 +8,14 @@ const User = mongoose.model('User');
 let user;
 
 // The tests
-describe('<Unit Test>', () => {
+describe('Unit Test', () => {
   describe('Model User:', () => {
     before((done) => {
       user = new User({
         name: 'Full name',
         email: 'test@test.com',
-        username: 'user',
-        password: 'password'
+        username: 'userd',
+        password: 'testing'
       });
 
       done();

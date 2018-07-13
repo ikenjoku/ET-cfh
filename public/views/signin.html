@@ -14,21 +14,21 @@
 
 <!-- Landing Start -->
   <section class="login login-image-overlay white-text" id="auth">
-    <div class="row center-align">
+    <div ng-controller="AuthController" class="row center-align">
       <div class="row m12 font-bold auth-component">
         <h3 class="font-bold auth-text">Log In</h3>
-         <div class="sign-error" ng-show="showError() === 'invalid'">
+         <div class="sign-error" ng-show="authError !== ''">
             Please check your username/password and try again.
           </div>
-        <form class="col s12" ng-controller="AuthController">
-          <div class="auth-input">s
+        <form class="col s12" >
+          <div class="auth-input">
             <div class="input-field col s12">
-              <input id="email" type="text" name="email" ng-model="user.email" placeholder="Email" required novalidate />
+              <input id="email" type="text" name="email" ng-model="user.email" placeholder="Email" required />
             </div>
           </div>
           <div class="auth-input">
             <div class="input-field col s12">
-              <input id="password" type="password" ng-model="user.password" name="password" placeholder="Password" required novalidate />
+              <input id="password" type="password" ng-model="user.password" name="password" placeholder="Password" required />
             </div>
           </div>
           <div class="auth-input">

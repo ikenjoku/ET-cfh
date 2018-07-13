@@ -17,6 +17,9 @@
     <div class="row center-align">
       <div class="row m12 font-bold auth-component">
         <h3 class="font-bold auth-text">Signup</h3>
+        <div class="sign-error" ng-show="authError !== ''">
+          {{ authError }}
+        </div>
         <form class="col s12">
           <div class="auth-input">
             <div class="input-field col s12">
@@ -42,7 +45,7 @@
         </form>
       </div>
     </div>
-  <div id="modal1" class="modal modal-signup">
+    <div id="modal1" class="modal modal-signup">
       <div class="modal-content">
         <h4>Choose an avatar</h4>
         <form action="">

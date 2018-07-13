@@ -122,7 +122,7 @@ angular.module('mean.system')
       $('.modal-header').empty();
       refusableModel.find('.modal-header').append('<h4 class="modal-title center-align" style="color: #23522d;">3 PLAYERS REQUIRED</h4>');
       refusableModel.find('.modal-body').text('This game requires a minimum of 3 players. Please invite more friends to play');
-      var okayBtn = '<button type="button" class="btn waves-effect waves-green modal-close" style="background-color: #23522d;" >OKAY</button>';
+      var okayBtn = '<button type="button" class="btn waves-effect waves-green modal-close"  id="play-chioce-btn">OKAY</button>';
       $('.modal-footer').empty();
       $('.modal-footer').append(okayBtn);
       $('#reuse-modal').modal('open');
@@ -134,16 +134,12 @@ angular.module('mean.system')
       refusableModel.find('.modal-header').append('<h4 class="modal-title center-align" style="color: #23522d;">MAX NUMBER OF PLAYERS</h4>');
       $('.modal-body').empty();
       refusableModel.find('.modal-body').append('<p>The game cannot take more than 12 players.</p> <p>Game has started already. You have been added to a new game</p>');
-      var okayBtn = '<button type="button" class="btn waves-effect waves-green modal-close" style="background-color: #23522d;" >OKAY</button>';
+      var okayBtn = '<button type="button" class="btn waves-effect waves-green modal-close"  id="play-chioce-btn">OKAY</button>';
       $('.modal-footer').empty();
       $('.modal-footer').append(okayBtn);
       $('#reuse-modal').modal('open');
     };
 
-    $scope.closeReusedModal = function () {
-      $('#reuse-modal').modal('close');
-      game.isFilledUp = null;
-    };
     $scope.startGame = function () {
       if (game.players.length < game.playerMinLimit) {
         $scope.fewPlayersModal();

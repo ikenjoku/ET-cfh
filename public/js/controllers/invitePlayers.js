@@ -14,6 +14,10 @@ angular.module('mean.system')
     $scope.searchHelper = '';
     var token = localStorage.getItem('#cfhetusertoken');
 
+    $scope.closeReusedModal = function () {
+      $('#reuse-modal').modal('close');
+      game.isFilledUp = null;
+    };
 
     $scope.findUsers = function () {
       return $http.get(`/api/users/findUsers/${$scope.searchKey}`, { headers: { Authorization: `Bearer ${token}` } }).then(function (response) {
