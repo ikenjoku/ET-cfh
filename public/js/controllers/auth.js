@@ -45,8 +45,8 @@ angular.module('mean.system')
         localStorage.setItem('#cfhetUserId', response._id);
         localStorage.setItem('username', response.name);
         $location.path('/');
-      }, (error) => {
-        $scope.authError = error.data.message;
+      }, () => {
+        $scope.authError = 'Please check your username/password and try again';
       });
     };
   }]);
