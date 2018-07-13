@@ -3,7 +3,13 @@
   "scripts": {
   },
   "env": {
-    "MONGOHQ_URL": {
+    "MONGODB_URI": {
+      "required": true
+    },
+    "GMAIL_PASSWORD": {
+      "required": true
+    },
+    "SECRET_KEY": {
       "required": true
     }
   },

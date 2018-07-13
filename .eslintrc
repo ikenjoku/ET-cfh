@@ -1,5 +1,5 @@
 {
-    "root": true,
+  "root": true,
   "extends": "airbnb-base",
   "env": {
     "node": true,
@@ -23,6 +23,7 @@
     "curly": ["error", "multi-line"],
     "import/no-unresolved": [2, { "commonjs": true }],
     "no-shadow": ["error", { "allow": ["req", "res", "err"] }],
+    "import/no-extraneous-dependencies": ["error", {"devDependencies": true}],
     "valid-jsdoc": ["error", {
       "requireReturn": true,
       "requireReturnType": true,
@@ -30,11 +31,23 @@
       "requireReturnDescription": true
     }],
     "require-jsdoc": ["error", {
-        "require": {
-            "FunctionDeclaration": true,
-            "MethodDefinition": true,
-            "ClassDeclaration": true
-        }
+      "require": {
+        "FunctionDeclaration": true,
+        "MethodDefinition": true,
+        "ClassDeclaration": true
+      }
     }]
+  },
+  "globals": {
+    "document": true,
+    "window": true,
+    "localStorage": true,
+    "FormData": true,
+    "angular": true,
+    "require": true,
+    "describe": true,
+    "before": true,
+    "it": true,
+    "$": true
   }
 }

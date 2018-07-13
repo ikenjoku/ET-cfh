@@ -1,4 +1,4 @@
-/* eslint prefer-arrow-callback: 0, func-names: 0, no-undef: 0, no-var: 0 */
+/* eslint prefer-arrow-callback: 0, func-names: 0, no-undef: 0, no-var: 0, vars-on-top: 0 */
 angular.module('mean.directives', [])
   .directive('player', function () {
     return {
@@ -56,7 +56,7 @@ angular.module('mean.directives', [])
     return {
       restrict: 'EA',
       templateUrl: '/views/question.html',
-      link(scope, elem, attr) {}
+      link() {}
     };
   })
   .directive('timer', function () {

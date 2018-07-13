@@ -12,7 +12,10 @@ export default (router, passport, app) => {
   const api = Router();
   api
     .post('/auth/login', users.handleLogin)
-    .post('/auth/signup', users.handleSignUp);
+    .post('/auth/signup', users.handleSignUp)
+    .get('/users/findUsers/:searchKey', auth, users.findUsers)
+    .get('/users/findUsers/', auth, users.findUsers)
+    .post('/users/invite', auth, users.invite);
 
   // Setting up the game api
   api

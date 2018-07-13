@@ -25,7 +25,7 @@ gulp.task('develop', () => {
     watch: ['app', 'config', 'public', 'server.js'],
     delayTime: 1,
     env: { PORT: 3000 },
-    NODE_ENV: process.env.NODE_ENV
+    NODE_ENV: process.env.NODE_ENV,
   });
 });
 
@@ -100,9 +100,7 @@ gulp.task('build', () => gulp.src([
   .pipe(gulp.dest('./dist')));
 
 // Bower task.
-gulp.task('install', () => bower({
-  directory: './public/lib',
-}));
+gulp.task('install', () => bower({ directory: './public/lib' }));
 
 // Test task
 gulp.task('test', ['test:frontend', 'test:backend']);
