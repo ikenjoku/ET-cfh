@@ -20,16 +20,21 @@
 <!-- Resusable Modal -->
   <header id="menu-container">
     <nav class="white nav">
-      <div class="nav-wrapper font-bold">
+      <div class="nav-wrapper font-bold" ng-controller="AuthController">
         <a href="/" class="black-text text-darken-2 brand-logo left">
           <img src="https://res.cloudinary.com/dqsmurjpg/image/upload/v1530718726/Navbar_Logo.png"
             id="cfh-logo" alt="cfg-logo">
         </a>
         <ul id="nav-mobile" class="right">
-          <span ng-show="game.state === 'game ended' || game.state === 'game dissolved'">
+          <span ng-show="!checkToken() && (game.state === 'game ended' || game.state === 'game dissolved')">
             <li>
               <a class="waves-effect waves-light red darken-4 btn white-text abandon-button" id="index-signup-btn" href="signup">SIGNUP</a>
             </li>
+          </span>
+          <span ng-click="logOut()" ng-show="(game.state === 'game ended' || game.state === 'game dissolved') && checkToken()">
+              <li>
+                <a class="waves-effect waves-light red darken-4 btn white-text abandon-button" id="index-signup-btn" href="signup">LOGOUT</a>
+              </li>
           </span>
           <span ng-hide="game.state === 'game ended' || game.state === 'game dissolved'">
             <li>
@@ -51,12 +56,12 @@
         <question></question>
       </div>
     </div>
-    <div class="row player-row">
+    <div class="row player-row" >
       <div class="col s12 m3 l3" id="social-bar-container" ng-hide="game.state === 'game ended' || game.state === 'game dissolved'">
         <player class="row"></player>
       </div>
-      <div class="col s12 m9 l9 answer-div" ng-hide="game.state === 'game ended' || game.state === 'game dissolved'">
-        <answers ng-controller="InvitePlayersController"></answers>
+      <div ng-controller="InvitePlayersController" class="col s12 m9 l9 answer-div" ng-hide="game.state === 'game ended' || game.state === 'game dissolved'">
+        <answers ng-controller="AuthController"></answers>
       </div>
       <div class="col s12 m12 l12 answer-div" ng-show="game.state === 'game ended' || game.state === 'game dissolved'">
           <answers></answers>
