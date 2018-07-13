@@ -1,20 +1,5 @@
 </script>
 <div id="app-container" ng-controller="GameController">
-  <div id="menu-container">
-    <div id="logo">
-      <span id="first-word">Cards</span>
-      <span id="second-word"> for</span>
-      <span id="third-word">Humanity</span>
-    </div>
-    <div id = 'abandon-game-button' ng-click="abandonGame()">
-        Abandon Game
-    </div>
-        <span id="tweet-container">
-      <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://cfh.io" data-text="Cards for Humanity: A Game for Horrible People Desperately Trying to do Good" data-related="CFH_App">Tweet</a>
-    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-    </span>
-  </div>
-  
 <!-- Reusable Modal -->
 <div id="reuse-modal" class="modal">
     <div class="modal-dialog modal-sm">     
@@ -33,21 +18,72 @@
     </div>
   </div>
 <!-- Resusable Modal -->
+  <header id="menu-container">
+    <nav class="white nav">
+      <div class="nav-wrapper font-bold" ng-controller="AuthController">
+        <a href="/" class="black-text text-darken-2 brand-logo left">
+          <img src="https://res.cloudinary.com/dqsmurjpg/image/upload/v1530718726/Navbar_Logo.png"
+            id="cfh-logo" alt="cfg-logo">
+        </a>
+        <ul id="nav-mobile" class="right">
+          <span ng-show="!checkToken() && (game.state === 'game ended' || game.state === 'game dissolved')">
+            <li>
+              <a class="waves-effect waves-light red darken-4 btn white-text abandon-button" id="index-signup-btn" href="signup">SIGNUP</a>
+            </li>
+          </span>
+          <span ng-click="logOut()" ng-show="(game.state === 'game ended' || game.state === 'game dissolved') && checkToken()">
+              <li>
+                <a class="waves-effect waves-light red darken-4 btn white-text abandon-button" id="index-signup-btn" href="signup">LOGOUT</a>
+              </li>
+          </span>
+          <span ng-hide="game.state === 'game ended' || game.state === 'game dissolved'">
+            <li>
+              <a class="waves-effect waves-light red darken-4 btn white-text abandon-button" id="index-signup-btn" ng-click="abandonGame()">Abandon Game</a>
+            </li>
+          </span>
+        </ul>
+      </div>
+    </nav>
+  </header>
   <div id="gameplay-container">
-    <div id="upper-gameplay-container">
-      <div id="menu-timeremaining-container">
-        <div id="menu-container">
-          <span id="menu-button">Menu</span>
-        </div>
+    <div id="upper-gameplay-container" class="row game-row">
+      <div id="menu-timeremaining-container" class="col s5 m3 l3">
         <div id="timer-container">
           <timer></timer>
         </div>
       </div>
-      <div id="question-container-outer">
+      <div id="question-container-outer" class="col s7 m9 l9">
         <question></question>
       </div>
     </div>
-    <answers ng-controller="InvitePlayersController"></answers>
+    <div class="row player-row" >
+      <div class="col s12 m3 l3" id="social-bar-container" ng-hide="game.state === 'game ended' || game.state === 'game dissolved'">
+        <player class="row"></player>
+      </div>
+      <div ng-controller="InvitePlayersController" class="col s12 m9 l9 answer-div" ng-hide="game.state === 'game ended' || game.state === 'game dissolved'">
+        <answers ng-controller="AuthController"></answers>
+      </div>
+      <div class="col s12 m12 l12 answer-div" ng-show="game.state === 'game ended' || game.state === 'game dissolved'">
+          <answers></answers>
+      </div>
+    </div>
+    <div id="chat-box">
+      <div id="chat-box-header" ng-click="toggleChatbox()">
+        <p><i class="fas fa-comment-alt"></i> Chat</p>
+      </div>
+      <div id="chat-box-content-container" style="display: none;">
+        <div id="chat-box-content">
+          <div>
+            <p id="user-name">Muchi</p>
+            <p id="user-message">I love your design</p>
+          </div>
+        </div>
+        <div id="chat-box-input">
+          <input type="text" class="input-field" name="message" id="">
+          <i class="far fa-paper-plane"></i>
+        </div>
+      </div>
+    </div>
   </div>
   <script>
     $(document).ready(function(){

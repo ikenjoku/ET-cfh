@@ -17,8 +17,6 @@
       </div>
     </nav>
   </header>
-
-  <div class="overlay"></div>
   <div class="banner section">
     <div class="row">
       <div class="cfh-head col s12 l4 flow-text">
@@ -39,32 +37,33 @@
           <a data-target="modal1" class="btn modal-trigger waves-effect waves-light btn" id="play-btn" ng-hide="checkToken()">Play as guest </a>
           <a data-target="modal2" class="btn modal-trigger waves-effect waves-light btn" id="play-btn" ng-show="checkToken()">Play Game </a>
         </div>
+      </div>
     </div>
   </div>
   <!-- modal one section -->
   <div id="modal1" class="modal text-white">
-  <div class="modal-content">
-    <h4>Play Game As A Guest</h4>
-    <p>You  are about to play game as a guest! </p>
+    <div class="modal-content">
+      <h4>Play Game As A Guest</h4>
+      <p>You  are about to play game as a guest! </p>
+    </div>
+    <div class="modal-footer">
+      <a href="#" class="modal-close waves-effect waves-light green darken-4 btn white-text">Cancel</a>&nbsp;&nbsp;&nbsp;&nbsp;
+      <a href="/play" class="modal-close waves-effect waves-light green darken-4 btn white-text">Start Game</a>
+    </div>
   </div>
-  <div class="modal-footer">
-    <a href="#" class="modal-close waves-effect waves-light green darken-4 btn white-text">Cancel</a>&nbsp;&nbsp;&nbsp;&nbsp;
-    <a href="/play" class="modal-close waves-effect waves-light green darken-4 btn white-text">Start Game</a>
-  </div>
-</div>
 
   <!-- modal two section -->
-<div id="modal2" class="modal text-white" ng-controller="AuthController">
+  <div id="modal2" class="modal text-white" ng-controller="AuthController">
     <div class="modal-content">
       <h4>Card For Humanity</h4>
-      <p>{{username}} You are about to play game of horrible people trying to do good </p>
+      <p>Hi {{username}}, click on the start game button to continue</p>
     </div>
     <div class="modal-footer">
       <a href="#" class="modal-close waves-effect waves-light green darken-4 btn white-text" id="play-btn">Cancel</a>&nbsp;&nbsp;&nbsp;&nbsp;
       <a href="/play" class="modal-close waves-effect waves-light green darken-4 btn white-text" id="play-btn">Start Game </a>
     </div>
   </div>
-  <br/>
+
   <div id="play" class="section how-to-play">
     <div class="row play-head"><h1>How To Play</h1></div>
     <div class="row">
@@ -142,7 +141,7 @@
         <p>All donations go to the Make-a-Wish Foundation and benefit children in need.</p>
       
         <a href="https://www.crowdrise.com/donate/project/cfhio/cards4humanity">
-          <button class="btn-large green darken-4 font-lg font-capitalize font-quick-sand">
+          <button class="btn-large green darken-4 font-lg font-capitalize font-quick-sand donate-button">
             Donate Now
           </button>
         </a>

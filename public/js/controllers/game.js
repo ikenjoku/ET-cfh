@@ -9,7 +9,7 @@ angular.module('mean.system')
     $scope.modalShown = false;
     $scope.game = game;
     $scope.pickedCards = [];
-    var makeAWishFacts = MakeAWishFactsService.getMakeAWishFacts();
+    let makeAWishFacts = MakeAWishFactsService.getMakeAWishFacts();
     $scope.makeAWishFact = makeAWishFacts.pop();
 
     $scope.pickCard = function (card) {
@@ -75,9 +75,12 @@ angular.module('mean.system')
       return game.curQuestion.numAnswers > 1 && $scope.pickedCards[0] === card.id;
     };
 
-
     $scope.showSecond = function (card) {
       return game.curQuestion.numAnswers > 1 && $scope.pickedCards[1] === card.id;
+    };
+
+    $scope.isCzar = function () {
+      return game.czar === game.playerIndex;
     };
 
     $scope.isPlayer = function ($index) {
@@ -114,6 +117,33 @@ angular.module('mean.system')
       return game.winningCard !== -1;
     };
 
+    $scope.fewPlayersModal = function () {
+      var refusableModel = $('#reuse-modal');
+      $('.modal-header').empty();
+      refusableModel.find('.modal-header').append('<h4 class="modal-title center-align" style="color: #23522d;">3 PLAYERS REQUIRED</h4>');
+      refusableModel.find('.modal-body').text('This game requires a minimum of 3 players. Please invite more friends to play');
+      var okayBtn = '<button type="button" class="btn waves-effect waves-green modal-close" style="background-color: #23522d;" >OKAY</button>';
+      $('.modal-footer').empty();
+      $('.modal-footer').append(okayBtn);
+      $('#reuse-modal').modal('open');
+    };
+
+    $scope.morePlayersModal = function () {
+      var refusableModel = $('#reuse-modal');
+      $('.modal-header').empty();
+      refusableModel.find('.modal-header').append('<h4 class="modal-title center-align" style="color: #23522d;">MAX NUMBER OF PLAYERS</h4>');
+      $('.modal-body').empty();
+      refusableModel.find('.modal-body').append('<p>The game cannot take more than 12 players.</p> <p>Game has started already. You have been added to a new game</p>');
+      var okayBtn = '<button type="button" class="btn waves-effect waves-green modal-close" style="background-color: #23522d;" >OKAY</button>';
+      $('.modal-footer').empty();
+      $('.modal-footer').append(okayBtn);
+      $('#reuse-modal').modal('open');
+    };
+
+    $scope.closeReusedModal = function () {
+      $('#reuse-modal').modal('close');
+      game.isFilledUp = null;
+    };
     $scope.startGame = function () {
       if (game.players.length < game.playerMinLimit) {
         $scope.fewPlayersModal();
@@ -180,6 +210,15 @@ angular.module('mean.system')
         }
       }
     });
+
+    $scope.toggleChatbox = function () {
+      const toggleDiv = document.getElementById('chat-box-content-container');
+      if (toggleDiv.style.display === 'none') {
+        toggleDiv.style.display = 'block';
+      } else {
+        toggleDiv.style.display = 'none';
+      }
+    };
 
     if ($location.search().game && !(/^\d+$/).test($location.search().game)) {
       game.joinGame('joinGame', $location.search().game);
