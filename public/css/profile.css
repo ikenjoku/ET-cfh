@@ -1,0 +1,450 @@
+.profile-page {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 4;
+  background-color: rgba(35, 34, 34, 0.5);
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center; 
+}
+
+  .profile-page .profile-backdrop {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(35, 34, 34, 0.1); }
+  .profile-page .navigator-buttons {
+    position: fixed;
+    bottom: 5%;
+    height: 20px;
+    width: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-flow: row nowrap;
+    flex-flow: row nowrap;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center; 
+  }
+
+    .profile-page .navigator-buttons a {
+      font-size: 14px;
+      text-decoration: none;
+      color: white;
+      font-family: Quicksand;
+      margin-right: 50px; 
+    }
+
+      .profile-page .navigator-buttons a:hover {
+        cursor: pointer;
+        text-decoration: underline;
+        color: green; 
+      }
+
+  .profile-page .show-profile-main {
+    background-color: white;
+    height: 70vh;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    width: 60vw;
+    border-radius: 5px;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-flow: row nowrap;
+    flex-flow: row nowrap;
+    z-index: 5; 
+  }
+
+    .profile-page .show-profile-main .show-user-details-main {
+      width: 50%;
+      height: 70vh;
+      position: relative;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex; 
+    }
+
+      .profile-page .show-profile-main .show-user-details-main .close-button {
+        position: absolute;
+        top: 5;
+        left: 5;
+        color: white; 
+      }
+
+      .profile-page .show-profile-main .show-user-details-main .show-background-image {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-flex: 1;
+        -ms-flex: 1;
+        flex: 1;
+        -webkit-filter: grayscale(50%);
+        filter: grayscale(50%);
+        position: absolute;
+        top: 0;
+        height: 100%;
+        width: 100%;
+        -o-object-fit: cover;
+        object-fit: cover; 
+      }
+
+      .profile-page .show-profile-main .show-user-details-main .show-user-bio {
+        height: 100%;
+        width: 100%;
+        background-color: rgba(35, 34, 34, 0.6);
+        position: absolute;
+        top: 0;
+        z-index: 2;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -ms-flex-flow: column wrap;
+        flex-flow: column wrap;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        -webkit-box-pack: space-evenly;
+        -ms-flex-pack: space-evenly;
+        justify-content: space-evenly; 
+      }
+
+        .profile-page .show-profile-main .show-user-details-main .show-user-bio p {
+          font-family: Quicksand; 
+        }
+
+        .profile-page .show-profile-main .show-user-details-main .show-user-bio .show-user-name-and-mail {
+          width: 60%;
+          height: 40%;
+          color: white;
+          display: -webkit-box;
+          display: -ms-flexbox;
+          display: flex;
+          -webkit-box-orient: vertical;
+          -webkit-box-direction: normal;
+          -ms-flex-flow: column nowrap;
+          flex-flow: column nowrap;
+          -webkit-box-pack: center;
+          -ms-flex-pack: center;
+          justify-content: center;
+          -webkit-box-align: center;
+          -ms-flex-align: center;
+          align-items: center; 
+        }
+
+          .profile-page .show-profile-main .show-user-details-main .show-user-bio .show-user-name-and-mail .user-avatar {
+            height: 120px;
+            width: 120px;
+            border-radius: 50%;
+            -o-object-fit: cover;
+            object-fit: cover; 
+          }
+
+          .profile-page .show-profile-main .show-user-details-main .show-user-bio .show-user-name-and-mail .user-name {
+            font-size: 19px;
+            font-family: 'Quicksand';
+            font-weight: 700; 
+          }
+
+        .profile-page .show-profile-main .show-user-details-main .show-user-bio .show-game-overview {
+          height: 25%;
+          width: 80%;
+          color: white;
+          display: -webkit-box;
+          display: -ms-flexbox;
+          display: flex;
+          -webkit-box-orient: vertical;
+          -webkit-box-direction: normal;
+          -ms-flex-flow: column nowrap;
+          flex-flow: column nowrap; 
+        }
+
+          .profile-page .show-profile-main .show-user-details-main .show-user-bio .show-game-overview .games-played-preamble {
+            text-align: center;
+            font-size: 18px;
+            font-family: 'Quicksand'; 
+          }
+
+          .profile-page .show-profile-main .show-user-details-main .show-user-bio .show-game-overview .games-played-tiny-grid {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-orient: horizontal;
+            -webkit-box-direction: normal;
+            -ms-flex-flow: row nowrap;
+            flex-flow: row nowrap;
+            -webkit-box-pack: space-evenly;
+            -ms-flex-pack: space-evenly;
+            justify-content: space-evenly; 
+          }
+
+        .profile-page .show-profile-main .show-user-details-main .show-user-bio .edit-profile-button {
+          height: 50px;
+          width: 120px;
+          padding-top: 5px;
+          text-align: center;
+          border-radius: 3px;
+          background-color: green;
+          color: white;
+          border-color: green;
+          font-size: 15px; 
+        }
+
+          .profile-page .show-profile-main .show-user-details-main .show-user-bio .edit-profile-button:hover {
+            cursor: pointer; 
+          }
+
+  .profile-page .show-user-game-history {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    width: 60%;
+    height: 100%;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-flow: column nowrap;
+    flex-flow: column nowrap;
+    padding-top: 15px;
+    background-color: #EAECEE; 
+  }
+
+    .profile-page .show-user-game-history .no-games-display-text {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      width: 80%;
+      height: 10%;
+      -webkit-box-pack: center;
+      -ms-flex-pack: center;
+      justify-content: center;
+      -ms-flex-item-align: center;
+      align-self: center;
+      color: #797D7F; 
+    }
+
+      .profile-page .show-user-game-history .no-games-display-text p {
+        font-size: 13px;
+        font-weight: 700;
+        font-family: Quicksand; 
+      }
+
+    .profile-page .show-user-game-history .show-cards-grid {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-orient: horizontal;
+      -webkit-box-direction: normal;
+      -ms-flex-flow: row wrap;
+      flex-flow: row wrap;
+      overflow-y: scroll;
+      height: 100%;
+      width: 100%;
+      padding-left: 5%;
+      -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+      justify-content: space-between;
+      -webkit-box-align: space-evenly;
+      -ms-flex-align: space-evenly;
+      align-items: space-evenly; 
+    }
+
+      .profile-page .show-user-game-history .show-cards-grid p {
+        font-family: Quicksand; 
+      }
+
+      .profile-page .show-user-game-history .show-cards-grid .game-card {
+        height: 95px;
+        margin-bottom: -50%;
+        -ms-flex-preferred-size: 35%;
+        flex-basis: 35%;
+        background-color: white;
+        border-radius: 4px;
+        -webkit-box-shadow: 0 0 15px 5px #E5E7E9;
+        box-shadow: 0 0 15px 5px #E5E7E9;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+        flex-direction: column; 
+      }
+
+        .profile-page .show-user-game-history .show-cards-grid .game-card:hover {
+          cursor: pointer;
+          -webkit-box-shadow: 0 0 15px 10px #E5E7E9;
+          box-shadow: 0 0 15px 10px #E5E7E9;
+          position: relative;
+          top: -2px; 
+        }
+
+        .profile-page .show-user-game-history .show-cards-grid .game-card .players-and-winner {
+          display: -webkit-box;
+          display: -ms-flexbox;
+          display: flex;
+          -webkit-box-orient: horizontal;
+          -webkit-box-direction: normal;
+          -ms-flex-flow: row wrap;
+          flex-flow: row wrap;
+          -ms-flex-pack: distribute;
+          justify-content: space-around;
+          -ms-flex-preferred-size: 90%;
+          flex-basis: 90%; 
+        }
+
+          .profile-page .show-user-game-history .show-cards-grid .game-card .players-and-winner .players-and-winner-item {
+            -ms-flex-preferred-size: 30%;
+            flex-basis: 30%;
+            height: 10%; 
+          }
+
+            .profile-page .show-user-game-history .show-cards-grid .game-card .players-and-winner .players-and-winner-item .players-item {
+              color: #D0D3D4;
+              font-size: 12.5px;
+              font-weight: 600;
+              margin-bottom: -10px; 
+            }
+
+            .profile-page .show-user-game-history .show-cards-grid .game-card .players-and-winner .players-and-winner-item .players-number {
+              color: #626567;
+              font-size: 14px;
+              font-weight: 700; 
+            }
+
+        .profile-page .show-user-game-history .show-cards-grid .game-card .game-date {
+          padding-left: 20px; 
+        }
+
+          .profile-page .show-user-game-history .show-cards-grid .game-card .game-date p {
+            font-size: 12px;
+            color: #76D7C4;
+            font-weight: 700; 
+          }
+
+@media only screen and (max-width: 480px) {
+  .navigator-buttons {
+    bottom: 2% !important; 
+  }
+  .show-profile-main {
+    -webkit-box-orient: vertical !important;
+    -webkit-box-direction: normal !important;
+    -ms-flex-flow: column nowrap !important;
+    flex-flow: column nowrap !important;
+    height: 85% !important;
+    width: 80% !important; 
+  }
+    .show-profile-main .edit-profile-button {
+      display: none; 
+    }
+
+    .show-profile-main .show-user-details-main {
+      width: 100% !important; 
+    }
+
+      .show-profile-main .show-user-details-main .show-user-name-and-mail {
+        width: 100% !important;
+        height: 10% !important;
+        padding-top: 5%; 
+      }
+
+        .show-profile-main .show-user-details-main .show-user-name-and-mail p {
+          font-size: 14px !important; 
+        }
+
+        .show-profile-main .show-user-details-main .show-user-name-and-mail .user-avatar {
+          height: 60px !important;
+          width: 60px !important;
+          position: relative; 
+        }
+
+        .show-profile-main .show-user-details-main .show-user-name-and-mail .user-email {
+          position: relative;
+          top: -50%; 
+        }
+
+      .show-profile-main .show-user-details-main .show-game-overview {
+        height: 8% !important;
+        position: relative;
+        top: -9%; 
+      }
+
+        .show-profile-main .show-user-details-main .show-game-overview p {
+          font-size: 13px !important; 
+        }
+
+        .show-profile-main .show-user-details-main .show-game-overview .games-played-tiny-grid {
+          width: 100%;
+          -ms-flex-item-align: center;
+          align-self: center;
+          position: relative;
+          right: -10%;
+          top: -10%; 
+        }
+
+          .show-profile-main .show-user-details-main .show-game-overview .games-played-tiny-grid .games-item {
+            -ms-flex-preferred-size: 40%;
+            flex-basis: 40%; 
+          }
+
+    .show-profile-main .show-user-game-history {
+      width: 100%;
+      height: 100%; 
+    }
+      .show-profile-main .show-user-game-history .show-cards-grid {
+        -webkit-box-orient: vertical !important;
+        -webkit-box-direction: normal !important;
+        -ms-flex-flow: column nowrap !important;
+        flex-flow: column nowrap !important;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        padding-left: 2% !important; 
+      }
+
+        .show-profile-main .show-user-game-history .show-cards-grid .game-card {
+          width: 70% !important;
+          height: 50% !important; 
+        }
+
+          .show-profile-main .show-user-game-history .show-cards-grid .game-card .players-and-winner {
+            -webkit-box-pack: justify !important;
+            -ms-flex-pack: justify !important;
+            justify-content: space-between !important;
+            padding: 0 5% 0 5%; 
+          }
+
+            .show-profile-main .show-user-game-history .show-cards-grid .game-card .players-and-winner .players-and-winner-item {
+              width: 50%; 
+            } 
+          }
+
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+  
+  .show-profile-main {
+    height: 60vh !important;
+    width: 70vh !important; 
+  }
+    .show-profile-main .show-user-details-main {
+      height: 60vh !important;
+     
+    }
+      .show-profile-main .show-user-details-main .games-played-tiny-grid {
+        position: relative;
+        right: -10%; 
+      } 
+    }

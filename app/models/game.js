@@ -9,20 +9,20 @@ const { Schema } = mongoose;
  * Game Schema
  */
 const GameSchema = new Schema({
-  id: {
-    type: Number
-  },
   gameId: {
     type: Number
   },
   gameWinner: {
-    type: String,
-    default: '',
-    trim: true
+    type: Schema.Types.ObjectId,
+    trim: true,
+    ref: 'User'
   },
-  players: {
-    type: [String]
-  }
+  players: [{
+    type: Schema.Types.ObjectId,
+    ref: 'User'
+  }]
+}, {
+  timestamps: true
 });
 
 GameSchema.statics = {

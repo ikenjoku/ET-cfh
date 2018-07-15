@@ -13,6 +13,7 @@
           </li>
           <li ng-hide="checkToken()"><a class="waves-effect waves-light green darken-4 btn white-text" id="index-signup-btn" href="signup">Signup</a></li>
           <li ng-show="checkToken()"><a ng-click="logOut()" class="modal-trigger waves-effect waves-light green darken-4 btn white-text" id="index-signup-btn">Sign Out</a></li>
+          <li ng-show="checkToken()" ng-click="showProfile()"><a class="waves-effect waves-light green darken-4 btn white-text" id="index-signup-btn">Show Profile</a></li>
         </ul>
       </div>
     </nav>
@@ -149,6 +150,13 @@
     </div>
   </section>
   <!-- Donation Info End -->
+
+  <!-- the profile page of the user -->
+  <div class="profile-container" style="display:none;"> 
+    <profile-page></profile-page>
+    </div>
+
+  </div>
 
   <!-- Footer start -->
   <footer class="center-align black white-text flow-text footer">

@@ -1,4 +1,4 @@
-/* eslint prefer-arrow-callback: 0, func-names: 0, no-undef: 0 */
+/* eslint prefer-arrow-callback: 0, func-names: 0 */
 angular.module('mean.system')
   .controller('AuthController', ['$scope', '$location', '$resource', function ($scope, $location, $resource) {
     $scope.newUser = {};
@@ -26,6 +26,10 @@ angular.module('mean.system')
         return true;
       }
       return false;
+    };
+
+    $scope.showProfile = function () {
+      document.getElementsByClassName('profile-container')[0].style.display = 'block';
     };
 
     $scope.SignUpUser = function () {

@@ -5,7 +5,8 @@ import questions from '../app/controllers/questions';
 import avatars from '../app/controllers/avatars';
 import index from '../app/controllers/index';
 import game from '../app/controllers/game';
-import auth from '../app/middleware/auth';
+import ensureUser from '../app/middleware/auth';
+
 
 export default (router, passport, app) => {
   // api name spaced routes;
@@ -13,13 +14,12 @@ export default (router, passport, app) => {
   api
     .post('/auth/login', users.handleLogin)
     .post('/auth/signup', users.handleSignUp)
-    .get('/users/findUsers/:searchKey', auth, users.findUsers)
-    .get('/users/findUsers/', auth, users.findUsers)
-    .post('/users/invite', auth, users.invite);
-
-  // Setting up the game api
-  api
-    .post('/game/:id/start', auth, game);
+    .get('/users/findUsers/:searchKey', ensureUser, users.findUsers)
+    .get('/users/findUsers/', ensureUser, users.findUsers)
+    .post('/users/invite', ensureUser, users.invite)
+    .post('/game/:id/start', ensureUser, game)
+    .get('/profile', ensureUser, users.fetchProfile)
+    .post('/game/:id/start', ensureUser, game);
 
   router.get('/signin', users.signin);
   router.get('/signup', users.signup);
@@ -110,8 +110,6 @@ export default (router, passport, app) => {
     if (err.status) return res.status(err.status).json({ message: err.message });
     // Treat as 404
     if (err.message.indexOf('not found')) return next();
-    // Log it
-    console.error(err.stack);
     // Error page
     res.status(500).render('500', {
       error: err.stack

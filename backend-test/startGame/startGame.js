@@ -8,8 +8,10 @@ const User = mongoose.model('User');
 
 const mockPlayers = {
   gameWinner: 'kevin',
-  players: [1, 2, 3]
+  players: []
 };
+
+let mockUser;
 
 const userMock = {
   name: 'kelvin',
@@ -21,7 +23,12 @@ const userMock = {
 let token = '';
 describe('Player endpoints', () => {
   before(() => {
-    Promise.resolve(User.create(userMock));
+    Promise.resolve(User.create(userMock, (err, user) => {
+      if (err) throw err;
+      mockPlayers.players.push(user._id);
+      mockPlayers.gameWinner = user._id;
+      mockUser = user;
+    }));
   });
 
   it('POST /api/auth/endpoint should return the user token along with the user', (done) => {
@@ -31,6 +38,7 @@ describe('Player endpoints', () => {
       .end((err, res) => {
         if (err) return done(err);
         expect(res.statusCode).to.equal(200);
+        /* eslint prefer-destructuring: 0 */
         token = res.body.token;
         done();
       });
@@ -44,7 +52,7 @@ describe('Player endpoints', () => {
       .end((err, res) => {
         if (err) return done(err);
         expect(res.statusCode).to.equal(201);
-        expect(res.body.gameWinner).to.equal('kevin');
+        expect(res.body.gameWinner).to.equal(mockUser._id.toString());
         done();
       });
   });
