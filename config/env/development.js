@@ -5,8 +5,8 @@ module.exports = {
   port: process.env.PORT,
   MONGOHQ_URL: process.env.MONGODB_URI,
   facebook: {
-    clientID: 'APP_ID',
-    clientSecret: 'APP_SECRET',
+    clientID: process.env.FB_CLIENT_ID,
+    clientSecret: process.env.FB_CLIENT_SECRET,
     callbackURL: 'http://cardsforhumanity.com:3000/auth/facebook/callback'
   },
   twitter: {

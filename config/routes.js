@@ -41,23 +41,16 @@ export default (router, passport, app) => {
   router.get('/users/:userId', users.show);
 
   // Setting the facebook oauth routes
-  router.get('/auth/facebook', passport.authenticate('facebook', {
-    scope: ['email'],
-    failureRedirect: '/signin'
-  }), users.signin);
+  router.get('/auth/facebook/', (req, res, next) => {
+    passport.authenticate('facebook', {
+      scope: ['email'],
+      failureRedirect: '/signin',
+    })(req, res, next);
+  }, users.signin);
 
   router.get('/auth/facebook/callback', passport.authenticate('facebook', {
     failureRedirect: '/signin'
-  }), users.authCallback);
-
-  // Setting the github oauth routes
-  router.get('/auth/github', passport.authenticate('github', {
-    failureRedirect: '/signin'
   }), users.signin);
-
-  router.get('/auth/github/callback', passport.authenticate('github', {
-    failureRedirect: '/signin'
-  }), users.authCallback);
 
   // Setting the twitter oauth routes
   router.get('/auth/twitter', passport.authenticate('twitter', {
@@ -66,7 +59,7 @@ export default (router, passport, app) => {
 
   router.get('/auth/twitter/callback', passport.authenticate('twitter', {
     failureRedirect: '/signin'
-  }), users.authCallback);
+  }), users.signin);
 
   // Setting the google oauth routes
   router.get('/auth/google', passport.authenticate('google', {

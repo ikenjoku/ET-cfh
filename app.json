@@ -11,6 +11,12 @@
     },
     "SECRET_KEY": {
       "required": true
+    },
+    "FB_CLIENT_ID": {
+      "required": true
+    },
+    "FB_CLIENT_SECRET": {
+      "required": true
     }
   },
   "formation": {

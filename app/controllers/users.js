@@ -41,7 +41,10 @@ const signin = (req, res) => {
   if (!req.user) {
     res.redirect('/#!/signin');
   } else {
-    res.redirect('/#!/app');
+    const { user } = req;
+    const token = Tokenizer(user);
+    const url = `/#!/auth?${token}--${user.name}--${user._id}`;
+    res.redirect(url);
   }
 };
 
@@ -129,6 +132,13 @@ const fetchProfile = (req, res, next) => handleFetchProfile(req.user._id)
     next(err);
   });
 
+
+/**
+ * @param {object} req - request object from OAUTH callback
+ * @param {object} res - request object provided by express
+ * @description This action generates a token after a successful oauth login and sends the token
+ * the client to be used for subsequent requests.
+ */
 
 /**
  * @param {object} req - request object provided by express
@@ -387,5 +397,5 @@ export default {
   handleSignUp,
   avatars,
   findUsers,
-  invite,
+  invite
 };

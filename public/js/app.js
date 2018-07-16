@@ -9,6 +9,9 @@ angular.module('mean', ['ngCookies', 'ngResource', 'ui.bootstrap', 'ui.route', '
         .when('/app', {
           templateUrl: '/views/app.html',
         })
+        .when('/auth', {
+          templateUrl: '/views/index.html',
+        })
         .when('/privacy', {
           templateUrl: '/views/privacy.html',
         })

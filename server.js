@@ -29,6 +29,7 @@ mongoose.connect(config.MONGOHQ_URL, { autoIndex: false });
 passportConfig(passport);
 
 const app = express();
+app.use(passport.initialize());
 
 // express settings
 expressConfig(app, passport);

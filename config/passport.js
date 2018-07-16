@@ -1,9 +1,8 @@
 
 import mongoose from 'mongoose';
-import { Strategy as LocalStrategy } from 'passport-local'; 
+import { Strategy as LocalStrategy } from 'passport-local';
 import { Strategy as TwitterStrategy } from 'passport-twitter'; 
 import { Strategy as FacebookStrategy } from 'passport-facebook';
-import { Strategy as GitHubStrategy } from 'passport-github';
 import { OAuth2Strategy as GoogleStrategy } from 'passport-google-oauth';
 import config from './config';
 
@@ -86,9 +85,10 @@ export default (passport) => {
 
   // Use facebook strategy
   passport.use(new FacebookStrategy({
-    clientID: process.env.FB_CLIENT_ID || config.facebook.clientID,
-    clientSecret: process.env.FB_CLIENT_SECRET || config.facebook.clientSecret,
-    callbackURL: config.facebook.callbackURL
+    clientID: config.facebook.clientID,
+    clientSecret: config.facebook.clientSecret,
+    callbackURL: config.facebook.callbackURL,
+    profileFields: ['id', 'emails', 'displayName', 'picture.type(large)'],
   },
     ((accessToken, refreshToken, profile, done) => {
       User.findOne({
@@ -98,52 +98,20 @@ export default (passport) => {
           return done(err);
         }
         if (!user) {
-          console.log(profile);
           user = new User({
             name: profile.displayName,
             email: (profile.emails && profile.emails[0].value) || '',
             username: profile.username,
-            provider: 'facebook',
-            facebook: profile._json
+            avatar: profile.photos ? profile.photos[0].value : '',
+            password: Math.random().toString(36).substring(2),
+            facebook: profile
           });
           user.save((err) => {
-            if (err) console.log(err);
             user.facebook = null;
             return done(err, user);
           });
         } else {
           user.facebook = null;
-          return done(err, user);
-        }
-      });
-    })));
-
-  // Use github strategy
-  passport.use(new GitHubStrategy({
-    clientID: process.env.GITHUB_CLIENT_ID || config.github.clientID,
-    clientSecret: process.env.GITHUB_CLIENT_SECRET || config.github.clientSecret,
-    callbackURL: config.github.callbackURL
-  },
-    ((accessToken, refreshToken, profile, done) => {
-      User.findOne({
-        'github.id': profile.id
-      }, (err, user) => {
-        if (err) {
-          return done(err);
-        }
-        if (!user) {
-          user = new User({
-            name: profile.displayName,
-            email: profile.emails[0].value,
-            username: profile.username,
-            provider: 'github',
-            github: profile._json
-          });
-          user.save((err) => {
-            if (err) console.log(err);
-            return done(err, user);
-          });
-        } else {
           return done(err, user);
         }
       });
