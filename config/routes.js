@@ -15,10 +15,9 @@ export default (router, passport, app) => {
     .post('/auth/signup', users.handleSignUp)
     .get('/users/findUsers/:searchKey', auth, users.findUsers)
     .get('/users/findUsers/', auth, users.findUsers)
-    .post('/users/invite', auth, users.invite);
+    .post('/users/invite', auth, users.invite)
 
   // Setting up the game api
-  api
     .post('/game/:id/start', auth, game);
 
   router.get('/signin', users.signin);

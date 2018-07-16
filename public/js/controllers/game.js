@@ -144,9 +144,12 @@ angular.module('mean.system')
       if (game.players.length < game.playerMinLimit) {
         $scope.fewPlayersModal();
       } else {
-        const gameId = game.gameID;
-        const players = game.players.map(player => player.userId);
-        game.createPlayers(gameId, players);
+        const token = localStorage.getItem('#cfhetusertoken');
+        if (token) {
+          const gameId = game.gameID;
+          const players = game.players.map(player => player.userId);
+          game.createPlayers(gameId, players);
+        }
         game.startGame();
       }
     };

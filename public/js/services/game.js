@@ -1,4 +1,5 @@
 /* eslint prefer-arrow-callback: 0, func-names: 0, no-undef: 0, no-var: 0, vars-on-top: 0 */
+/* eslint no-console: 0 */
 angular.module('mean.system')
   .factory('game', ['socket', '$timeout', '$http', function (socket, $timeout, $http) {
     var game = {
