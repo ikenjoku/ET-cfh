@@ -1,7 +1,7 @@
 </script>
 <div id="app-container" ng-controller="GameController">
 <!-- Reusable Modal -->
-<div id="reuse-modal" class="modal">
+  <div id="reuse-modal" class="modal">
     <div class="modal-dialog modal-sm">     
       <!-- Modal content -->
       <div class="modal-content" style="background-color: white;">
@@ -15,7 +15,23 @@
       </div>
     </div>
   </div>
-<!-- Resusable Modal -->
+  <!-- Resusable Modal -->
+
+  <!-- Tour Modal content -->
+  <div id="tour-modal" class="modal" ng-controller="TourController">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content" style="background-color: white;">
+        <div class="modal-body" style="text-align: center; margin-top: 10px" style="font-size: 1.8em;">
+          <p>Welcome to the gaming screen for Cards for Humanity. You are about to take a brief tour of the gaming area. Click Okay to continue or cancel if you know how to play already</p>
+        </div>
+        <div class="modal-footer">
+          <button class="btn waves-effect waves-green modal-close" id="play-chioce-btn" ng-click="takeTour()">Okay</button>
+          <button class="btn waves-effect waves-green modal-close" id="play-chioce-btn" ng-click="closeTourModal()">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <header id="menu-container">
     <nav class="white nav">
       <div class="nav-wrapper font-bold" ng-controller="AuthController">
@@ -58,7 +74,7 @@
       <div class="col s12 m3 l3" id="social-bar-container" ng-hide="game.state === 'game ended' || game.state === 'game dissolved'">
         <player class="row"></player>
       </div>
-      <div ng-controller="InvitePlayersController" class="col s12 m9 l9 answer-div" ng-hide="game.state === 'game ended' || game.state === 'game dissolved'">
+      <div ng-controller="InvitePlayersController" id="player" class="col s12 m9 l9 answer-div" ng-hide="game.state === 'game ended' || game.state === 'game dissolved'">
         <answers ng-controller="AuthController"></answers>
       </div>
       <div class="col s12 m12 l12 answer-div" ng-show="game.state === 'game ended' || game.state === 'game dissolved'">
@@ -86,6 +102,13 @@
   <script>
     $(document).ready(function(){
       $('.modal').modal();
+      $('.modal').modal({
+        dismissible: false
+      });
+      const isTourTaken = localStorage.getItem('#cfhuseristourtaken');
+      if (isTourTaken === 'false') {
+        $('#tour-modal').modal('open');
+      }
     });
   </script>
 </div>

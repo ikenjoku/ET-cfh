@@ -316,6 +316,25 @@ const user = (req, res, next, id) => {
 /**
  * @param {object} req - request object provided by express
  * @param {object} res - response object provided by express
+ * @param {function} next - next function for passing the request to next handler
+ * @description finds a user by id from the db and
+ * updates the tour field to true
+*/
+const updateUserTour = (req, res, next) => {
+  const { id } = req.params;
+  User.findOneAndUpdate(
+    { _id: id },
+    { tour: true },
+    (err) => {
+      if (err) return next(err);
+      return res.status(200).send({ tourUpdated: true });
+    }
+  );
+};
+
+/**
+ * @param {object} req - request object provided by express
+ * @param {object} res - response object provided by express
  * @description find users takes a search key and returns users
  * that match the key. It search the name and email only.
 */
@@ -354,6 +373,7 @@ const invite = (req, res) => {
 export default {
   authCallback,
   user,
+  updateUserTour,
   me,
   show,
   addDonation,

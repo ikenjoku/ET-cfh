@@ -375,6 +375,7 @@ i {
   color: white;
   background-color: #236231 !important;
   border: 0;
+  padding: 0 !important;
 }
 
 #play-chioce-btn:hover {
@@ -993,7 +994,15 @@ i {
   padding: 8px;
   font-size: 0.9375rem;
 }
-/* Fola imageview */
+
+nav .sidenav-trigger {
+  float: right !important;
+}
+
+.sidenav-trigger > i {
+  color: #236231 !important;
+}
+
 .imagepreview {
   height: 200px;
   width: 200px;

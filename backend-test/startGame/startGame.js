@@ -21,6 +21,7 @@ const userMock = {
 };
 
 let token = '';
+let id = '';
 describe('Player endpoints', () => {
   before(() => {
     Promise.resolve(User.create(userMock, (err, user) => {
@@ -40,11 +41,12 @@ describe('Player endpoints', () => {
         expect(res.statusCode).to.equal(200);
         /* eslint prefer-destructuring: 0 */
         token = res.body.token;
+        id = res.body._id;
         done();
       });
   });
 
-  it('POST /api/game/:id/start  endpoint should return the the game players', (done) => {
+  it('POST /api/game/:id/start endpoint should return the the game players', (done) => {
     request(app)
       .post('/api/game/3/start')
       .set('authorization', token)
@@ -53,6 +55,18 @@ describe('Player endpoints', () => {
         if (err) return done(err);
         expect(res.statusCode).to.equal(201);
         expect(res.body.gameWinner).to.equal(mockUser._id.toString());
+        done();
+      });
+  });
+
+  it('POST /api/tour/:id endpoint should update the tour option to true', (done) => {
+    request(app)
+      .post(`/api/tour/${id}`)
+      .set('authorization', token)
+      .end((err, res) => {
+        if (err) return done(err);
+        expect(res.statusCode).to.equal(200);
+        expect(res.body.tourUpdated).to.equal(true);
         done();
       });
   });
