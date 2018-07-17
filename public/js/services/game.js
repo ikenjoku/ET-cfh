@@ -70,6 +70,10 @@ angular.module('mean.system')
       game.isFilledUp = true;
     });
 
+    socket.on('userExist', function () {
+      game.userExist = true;
+    });
+
     socket.on('gameUpdate', function (data) {
     // Update gameID field only if it changed.
     // That way, we don't trigger the $scope.$watch too often
@@ -191,7 +195,7 @@ angular.module('mean.system')
     game.startGame = function () {
       socket.emit('startGame');
     };
-    game.createPlayers = function(gameId, players) {
+    game.createPlayers = function (gameId, players) {
       const token = localStorage.getItem('#cfhetusertoken');
       $http({
         method: 'POST',
@@ -201,12 +205,11 @@ angular.module('mean.system')
         },
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': token,
+          Authorization: token,
         }
-      }).then(gamePlayers => {
-        console.log(gamePlayers);
-      });
-    }
+      }).then(gamePlayers => gamePlayers);
+    };
+
     game.leaveGame = function () {
       game.players = [];
       game.time = 0;

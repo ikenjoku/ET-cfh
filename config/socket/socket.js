@@ -3,6 +3,7 @@ eslint prefer-arrow-callback: 0, func-names: 0, no-undef: 0, no-var: 0,
 vars-on-top: 0, import/no-dynamic-require: 0, prefer-template: 0, no-path-concat: 0,
 no-console: 0, no-use-before-define: 0, no-shadow: 0, no-plusplus: 0,
 block-scoped-var: 0, prefer-destructuring: 0, no-redeclare: 0,
+array-callback-return: 0
 */
 
 var mongoose = require('mongoose');
@@ -87,7 +88,7 @@ module.exports = function (io) {
     if (data.userId !== 'unauthenticated') {
       User.findOne({
         _id: data.userId
-      }).exec(function(err, user) {
+      }).exec(function (err, user) {
         if (err) {
           console.log('err', err);
           return err; // Hopefully this never happens.
@@ -174,7 +175,11 @@ module.exports = function (io) {
     } else {
       game = gamesNeedingPlayers[0];
       allPlayers[socket.id] = true;
-
+      // const isUserExist = game.players.map(user => user.userId === player.userId);
+      const isUserExist = game.players.find(user => user.userId === player.userId);
+      if (isUserExist && player.userId !== 'unauthenticated') {
+        return io.sockets.socket(socket.id).emit('userExist');
+      }
       if (game.players.length < game.playerMaxLimit) {
         if (game.players.length === (game.playerMaxLimit - 1)) game.pending = true;
         return setUpGame(socket, game, player);
@@ -197,6 +202,7 @@ module.exports = function (io) {
       io.sockets.socket(socket.id).emit('gameFilledUp');
     }
   };
+
   const setUpGame = (socket, game, player) => {
     game.players.push(player);
     socket.join(game.gameID);

@@ -8,11 +8,12 @@ import jwt from 'jsonwebtoken';
 
 const auth = (req, res, next) => {
   let token = req.headers.authorization || req.headers['x-access-token'];
-  token = token.replace('Bearer ', '');
 
   if (!token) {
     return res.status(401).json({ message: 'Unauthorized Access' });
   }
+
+  token = token.replace('Bearer ', '');
 
   jwt.verify(token, process.env.SECRET_KEY, (err, result) => {
     if (err) {
