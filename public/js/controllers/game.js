@@ -158,6 +158,18 @@ angular.module('mean.system')
       }
     });
 
+    $scope.$watch('game.userExist', function () {
+      var reUsableModal = $('#reuse-modal');
+      $('.modal-header').empty();
+      reUsableModal.find('.modal-header').append('<h4 class="modal-title center-align" style="color: #23522d;">You Cannot Join A Game Twice</h4>');
+      $('.modal-body').empty();
+      reUsableModal.find('.modal-body').append('<p>You have already joined this game</p>');
+      var okayBtn = '<a href="/" class="btn" style="background-color: #23522d;">OKAY</a>';
+      $('.modal-footer').empty();
+      $('.modal-footer').append(okayBtn);
+      $('#reuse-modal').modal('open');
+    });
+
     $scope.abandonGame = function () {
       game.leaveGame();
       $location.path('/');
