@@ -3,6 +3,7 @@ angular.module('mean.system')
   .controller('AuthController', ['$scope', '$location', '$resource', function ($scope, $location, $resource) {
     $scope.newUser = {};
     $scope.user = {};
+    $scope.authError = '';
     const Login = $resource('/api/auth/login', {}, {
       execute: { method: 'POST', hasBody: true }
     });
@@ -34,7 +35,7 @@ angular.module('mean.system')
         localStorage.setItem('username', response.name);
         $location.path('/');
       }, (error) => {
-        console.log(error);
+        $scope.authError = error.data.message;
       });
     };
 
@@ -44,8 +45,8 @@ angular.module('mean.system')
         localStorage.setItem('#cfhetUserId', response._id);
         localStorage.setItem('username', response.name);
         $location.path('/');
-      }, (error) => {
-        console.log(error);
+      }, () => {
+        $scope.authError = 'Please check your username/password and try again';
       });
     };
   }]);

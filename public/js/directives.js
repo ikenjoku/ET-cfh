@@ -17,7 +17,7 @@ angular.module('mean.directives', [])
           if (scope.game.state === 'winner has been chosen') {
             var curQ = scope.game.curQuestion;
             var curQuestionArr = curQ.text.split('_');
-            var startStyle = `<span style='color: ${scope.colors[scope.game.players[scope.game.winningCardPlayer].color]}'>`;
+            var startStyle = "<span style='color: #236231'>";
             var endStyle = '</span>';
             var shouldRemoveQuestionPunctuation = false;
             var removePunctuation = function (cardIndex) {
@@ -31,6 +31,7 @@ angular.module('mean.directives', [])
               }
               return cardText;
             };
+
             if (curQuestionArr.length > 1) {
               var cardText = removePunctuation(0);
               curQuestionArr.splice(1, 0, startStyle + cardText + endStyle);
@@ -38,6 +39,7 @@ angular.module('mean.directives', [])
                 cardText = removePunctuation(1);
                 curQuestionArr.splice(3, 0, startStyle + cardText + endStyle);
               }
+
               curQ.text = curQuestionArr.join('');
               // Clean up the last punctuation mark in the question if there already is one in the answer
               if (shouldRemoveQuestionPunctuation) {

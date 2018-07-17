@@ -14,25 +14,25 @@
 
 <!-- Landing Start -->
   <section class="login login-image-overlay white-text" id="auth">
-    <div class="row center-align">
+    <div ng-controller="AuthController" class="row center-align">
       <div class="row m12 font-bold auth-component">
         <h3 class="font-bold auth-text">Log In</h3>
-         <div class="sign-error" ng-show="showError() === 'invalid'">
-            Please check your username/password and try again.
+         <div class="sign-error" ng-show="authError !== ''">
+            <p>{{ authError }}</p>
           </div>
-        <form class="col s12" ng-controller="AuthController">
-          <div class="auth-input">s
+        <form class="col s12" ng-submit="SignInUser()" >
+          <div class="auth-input">
             <div class="input-field col s12">
-              <input id="email" type="text" name="email" ng-model="user.email" placeholder="Email" required novalidate />
+              <input id="email" type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" name="email" ng-model="user.email" placeholder="Email" required />
             </div>
           </div>
           <div class="auth-input">
             <div class="input-field col s12">
-              <input id="password" type="password" ng-model="user.password" name="password" placeholder="Password" required novalidate />
+              <input id="password" type="password" pattern=".{4,}" ng-model="user.password" name="password" placeholder="Password" required />
             </div>
           </div>
           <div class="auth-input">
-            <button class="btn col s12 green darken-4 font-lg font-quick-sand auth-btn" ng-click="SignInUser()">LOG IN</button>
+            <button class="btn col s12 green darken-4 font-lg font-quick-sand auth-btn">LOG IN</button>
           </div>
         </form>
       </div>

@@ -1,18 +1,23 @@
 .brand-logo {
   margin-top: .25rem;
 }
+
 #nav-mobile .btn {
   margin-right: 0 !important;
   text-transform: none;
 }
+
 #nav-mobile .btn:last-of-type { margin-right: .5rem !important; }
+
 .background-green {
   background-color: #236231;
 }
+
 .border-black {
   border: 2px solid #000 !important;
   border-radius: 5px;
 }
+
 #charity-section {
   background-image: url("../img/landing/hands-charity.png");
   background-repeat: no-repeat;
@@ -20,6 +25,7 @@
   background-size: cover;
   opacity: 0.7;
 }
+
 .image-overlay {
   width: 100%;
   background:  linear-gradient(rgba(10, 10, 10, 0.6), rgba(10, 10, 10, 0.6)),
@@ -28,15 +34,18 @@
   background-size: cover;
   background-repeat: no-repeat;
 }
+
 .donation-banner {
   width: 100%;
   height: 100%;
   position: relative;
   padding: 2rem;
 }
+
 #donations {
   text-align: center;
 }
+
 .footer {
   font-size: 1.25rem;
   padding: 1rem;
@@ -46,17 +55,22 @@
   #donations {
     text-align: left;
   }
+
   .donation-banner {
     padding: 3rem;
   }
+
   .wish-logo {
     top: 28rem;
   }
+
   .nav-wrapper {
     margin-left: 2.5rem;
     margin-right: 2.5rem;
   }
+
 }
+
 .banner {
   background-repeat: no-repeat;
   background-size: cover;
@@ -65,12 +79,14 @@
   background: linear-gradient(rgba(10, 10, 10, 0.6), rgba(10, 10, 10, 0.6)), 
     url("https://res.cloudinary.com/dffiyhgto/image/upload/c_scale,w_1594/v1530706947/landing.jpg");
 }
+
 .cfh-head {
   color: white;
   font: Bold 4rem 'Quicksand';
   position: relative;
   text-align: center;
 }
+
 .cfh-text {
   color: white;
   position: relative;
@@ -79,18 +95,22 @@
   justify-content: center;
   text-align: center;
 }
+
 .cfh-btn {
   text-align: center;
 }
+
 #play-btn {
   color: white;
   background-color: transparent;
   border-color: white;
   border: 2px solid;
 }
+
 .login-btn {
   background-color: #236231;
 }
+
 .card.col.s9{
   margin: 20px auto;
   padding: 0px;
@@ -98,6 +118,7 @@
   float: none;
   background-color: #E5E5E5;
 }
+
 .card-image {
   width: 50%;
   display: block;
@@ -105,11 +126,13 @@
   padding-top: 50px;
   padding-bottom: 15px;
 }
+
 .card .card-image img{
   height: 50%;
   margin: auto;
   width: 70%;
 }
+
 #info-container {
   overflow-y: scroll;
   padding: 10px;
@@ -118,10 +141,12 @@
   background-color: white;
   margin-bottom: 10px;
 }
+
 #info-box {
    margin-top: 25px;
    margin-left: 10%;
 }
+
 .card .card-image .card-title {
   position: relative;
   margin: 0 auto;
@@ -130,28 +155,34 @@
   color: black;
   clear: both;
 }
+
 .card .card-content {
   background-color: black;
   color: white;
   text-align: center;
   height: 150px;
 }
+
 .play-head h1{
   font: Bold 3rem 'Quicksand';
   text-align: center;
 }
+
 .play-foot, .login-btn {
   text-align: center;
 }
+
 @media screen and (min-width: 767px) {
   .banner {
     padding: 2%;
   }
+
   .cfh-head {
     color: white;
     margin-top: 5%;
     text-align: left;
   }
+
   .cfh-text {
     color: white;
     margin-top: 3%;
@@ -159,14 +190,18 @@
     font: 1.5rem 'Quicksand';
     text-align: left;
   }
+
   .cfh-btn {
     text-align: left;
     margin-top: 5%;
   }
+
   .play-foot, .login-btn {
     font: Bold 2rem 'Quicksand';
   }
+
 }
+
 .login-image-overlay {
   width: 100%;
   background:  linear-gradient(rgba(10, 10, 10, 0.6), rgba(10, 10, 10, 0.6)),
@@ -175,6 +210,7 @@
   background-size: cover;
   background-repeat: no-repeat;
 }
+
 .signin-image-overlay {
   width: 100%;
   background:  linear-gradient(rgba(10, 10, 10, 0.6), rgba(10, 10, 10, 0.6)),
@@ -183,39 +219,50 @@
   background-size: cover;
   background-repeat: no-repeat;
 }
+
 @media screen and (min-width: 767px) {
   #cfh-logo {
     width: 25%
   }
+
 }
+
 @media screen and (max-width: 767px) {
   #cfh-logo {
     width: 22%
   }
+
 }
+
 #auth {
   min-height: calc(100vh - 130px);
   text-align: center;
 }
+
 .auth-input {
   width: 400px;
   margin-left: auto;
   margin-right: auto;
 }
+
 @media screen and (max-width: 420px) {
   .auth-input {
     width: 300px;
     margin-left: auto;
     margin-right: auto;
   }
+
 }
+
 @media screen and (min-width: 420px) {
   .auth-input {
     width: 400px;
     margin-left: auto;
     margin-right: auto;
   }
+
 }
+
 .input-field {
   color:white;
   box-sizing: border-box;
@@ -225,25 +272,31 @@
   margin-bottom: 0 !important;
   padding: 0 10px !important;
 }
+
 input {
   border-bottom: none !important;
   height: 3.2rem !important;
   margin: 0 !important;
 }
+
 .input-field input[type=text]:focus {
   border-bottom: none !important;
 }
+
 .row .input-field input:focus {
   border-bottom: none !important;
   box-shadow: none !important
 }
+
 .auth-text {
   margin-bottom: 40px;
 }
+
 .auth-btn {
   margin-top: 30px;
   height: 50px;
 }
+
 .auth-icon {
   display: inline-block;
   padding: 10px;
@@ -252,43 +305,53 @@ input {
   width: 50px;
   height: 50px;
 }
+
 i {
   color: white;
   font-size: 24px;
 }
+
 .auth-component {
   padding-top: 30px;
 }
+
 .separator {
   font-size: 25px;
 }
+
 #index-login-btn, #index-signup-btn {
   box-shadow: none;
 }
+
 #index-login-btn {
   border: 2px solid black;
   border-radius: 3px;
 }
+
 #index-signup-btn:hover {
   border: 2px solid black;
   border-radius: 3px;
   background-color: white !important;
   color: black !important;
 }
+
 #index-login-btn:hover {
   background-color: #236231 !important;
   border: none !important;
   color: white !important;
 }
+
 #play-btn:hover {
   background-color: #236231 !important;
   border: none !important;
 }
+
 .btn-large:hover {
   background: transparent !important;
   border: 2px solid white !important;
   border-radius: 3px !important;
 }
+
 #choose-avatar {
   font-size: 18px;
   background-color: transparent;
@@ -297,38 +360,48 @@ i {
   cursor: pointer;
   margin-top: 10px;
 }
+
 .avatar-list {
   overflow: hidden;
   padding-left: 0px;
   margin-left: 3%;
 }
+
 .avatar-list img {
   max-width: 60%;
 }
+
 #play-chioce-btn {
   color: white;
   background-color: #236231 !important;
+  border: 0;
 }
+
 #play-chioce-btn:hover {
   border: 2px solid black;
   border-radius: 3px;
   background-color: white !important;
   color: black !important;
 }
+
+
 .avatars {
   position: relative;
   float: left;
   margin: 2px 5px;
   border-radius: 8px;
 }
+
 .modal-signup{
   background-color: #236231 !important;
 }
+
 .with-gap {
   display: block !important;
   opacity: 1 !important;
   pointer-events: visible !important;
 }
+
 .modal-footer button {
   height: 35px;
   width: 80px;
@@ -336,77 +409,94 @@ i {
   border: 2px black solid;
   background-color: white;
 }
+
 .modal-footer button:hover {
   background-color: #236231;
   border: none;
   color: white;
 }
+
 .modal-footer {
   text-align: center !important;
 }
+
 #finding-players {
   font-size: 36px;
   font-weight: bold;
   text-align: center;
 }
+
 #player-count {
   font-size: 18px;
   text-align: center;
 }
+
 .top-div {
   height: 185px;
 }
+
 .question-div {
   background-color: white;
   border-radius: 7px;
   height: 185px;
   text-align: center;
 }
+
 .card-img, .card-img2  {
   height: 185px;
   width: 80%; 
   border-radius: 7px;
   margin-left: 0.8rem;
 }
+
 .play-instructions h2 {
   font-size: 1.5625rem;
   font-weight: bold;
   margin-top: 30px;
 }
+
 .help-instructions {
   height: 185px;
   overflow-y: auto;
   background-color: white;
 }
+
 .help-instructions h2 {
   font-size: 16px;
   font-weight: bold;
   padding-top: 10px;
   margin-left: 15px;
 }
+
 .help-step {
   font-size: 12px;
   margin-top: 5px;
   margin-left: 15px;
 }
+
 .help-step span {
   font-weight: bolder;
 }
+
 .play-step {
   font-size: 1.25rem;
 }
+
 .play-step span {
   font-weight: bolder;
 }
+
 #start-btn {
   background-color: #236231;
   color: white;
 }
+
 #invite-btn {
   background-color: white;
   color: #236231;
   border: 1px solid #236231;
 }
+
 .card.item {
   background-color: black;
   position: relative;
@@ -422,82 +512,111 @@ i {
   font-weight: bold;
   vertical-align: top;
 }
+
 .game-card-text {
   text-align: center;
 }
+
 .donate-now{
   background-color: black;
   color: white;
 }
+
 .answers {
   background-color: white;
   color: black;
 }
+
 .how-to-help, .czar-donate {
   background-color: white;
   color: black;
 }
+
 .czar-donate {
   height: 71.5vh;
 }
+
 .donate-now {
   text-align: center;
 }
+
 .donate-now h2 {
   margin-bottom: 25px;
 }
+
 .donate-now img {
   width: 300px;
 }
+
 #donate {
   margin-left: 12px;
   border-radius: 7px;
 }
+
 .game-end-headline, .question-div span {
   font-size: 24px;
   text-align: center;
 }
+
 .czar-blank-text {
   font-size: 30px;
   padding-top: 5%;
   text-align: center;
   margin: 0;
 }
+
 .smaller-text, #charity-fact-tagline, #charity-fact, #czar-blank-inner {
   margin-top: 15px;
   font-size: 20px;
   text-align: center
 }
-/* .how-to-help {
-  margin-left: 10px;
-} */
+
 @media screen and (max-width: 600px) {
   .answer-div {
     margin-top: 20px;
   }
+
   #social-bar-container {
     height: 15vh;
   }
+
 }
+
+#avatar_ img {
+  width: 85%;
+  margin-top: 9px;
+}
+
+@media screen and (min-width: 1441px) {
+  #avatar_ img {
+    width: 45%;
+    margin-top: 9px;
+  }
+}
+
 @media screen and (max-width: 993px) {
-  
   #donate {
     margin-right: 0px;
     border-radius: 7px;
   }
+
   .card-img2 {
     visibility: hidden;
     display: none;
     float: none;
     clear: both;
   }
+
   .game-card-text {
     font-size: 15px;
   }
+
   .how-to-help {
     margin-left: 0px;
   }
+
 }
+
 @media screen and (max-width: 600px) {
   #card-img, #help {
     visibility: hidden;
@@ -505,24 +624,32 @@ i {
     float: none;
     clear: both;
   }
+
   .play-instructions h2 {
     font-size: 18px;
   }
+
   .play-step {
     font-size: 16px;
   }
+
   .answers {
     background-color: transparent;
   }
+
+
   .card.item {
     width: 45%;
   }
+
   #finding-players {
     font-size: 18px;
   }
+
   #player-count {
     font-size: 0.875rem;
   }
+
   #start-btn, #invite-btn {
     font-size: 0.575rem;
     padding: 0 7px;
@@ -530,23 +657,27 @@ i {
     line-height: 30px;
     margin-bottom: 2px;
   }
+
   .donate-now img {
     width: 50%;
   }
+
   .game-end-headline, .question-div span {
     font-size: 14px;
   }
-  
+
 }
-/* Blessing Start */
+
 #app-container {
   background-color: #C4C4C4;
   min-height: 100vh;
 }
+
 #time {
   font-size: 3.75rem;
   text-align: center;
 }
+
 #inner-timer-container {
   height: 100%;
   background-color: white;
@@ -559,85 +690,101 @@ i {
   margin-left: auto;
   margin-right: auto;
 }
+
 #timer-container {
   height: 35%;
 }
+
 #hourglass-container {
   height: 40%;
   border-radius: 5px;
   text-align: center;
 }
+
 #hourglass-container i {
   color: #236231;
   text-align: center;
   font-size: 3.75rem;
 }
+
 #hourglass-container > i {
   margin-top: 15px;
   margin-bottom: 8px;
 }
+
 #time-container {
   height: 60%;
   background-color: black;
   color: white;
   text-align: center;
 }
+
 @media screen and (max-width: 320px) {
   #player-container {
     height: 70px;
   }
 }
+
 #player-container {
   height: 90px;
   margin-bottom: 8px;
   border-radius: 7px;
 }
+
 #above-czar-container > div {
   display: inline-block;
 }
+
 #above-czar-container h2 {
   font-size: 1.25rem;
 }
+
 #czar-container {
   display: inline-block;
 }
-#avatar_ img {
-  width: 85%;
-  margin-top: 9px;
-}
+
 #player-name h4 {
   font-size: 0.9375rem;
   margin-top: 12px;
   margin-bottom: 3px;
 }
+
 #player-score h2 {
   display: inline;
 }
+
 #player-star {
   display: inline-block;
 }
+
 #player-star img {
   width: 20px;
 }
+
 .player-row {
   margin-bottom: 0 !important;
 }
+
 #charity-logo-container {
   margin: auto;
   width: 30%;
 }
+
 #social-bar-container {
   overflow: auto;
   border-radius: 7px;
 }
+
 #donates {
   min-height: 420px;
 }
+
 @media screen and (min-width: 600px) {
   #social-bar-container {
     height: 52vh;
   }
 }
+
 @media screen and (max-width: 425px) {
   .abandon-button {
     height: 30px !important;
@@ -645,41 +792,53 @@ i {
     padding: 0 5px !important;
     font-size: 9px !important;
   }
+
   #social-bar-container {
     height: 10vh;
   }
+
   .game-row {
     margin-bottom: 7px !important;
   }
+
   #player-container {
     height: 70px;
     padding: 0 !important;
     margin-right: 5px;
   }
+
   #player-name h4 {
     font-size: 0.7rem;
     margin-top: 8px;
     margin-bottom: 0px;
   }
+
   #above-czar-container h2 {
     font-size: 0.8rem;
   }
+
   #player-star img {
     width: 10px;
   }
+
   #the-czar {
     font-size: 0.8rem;
   }
+
   #player-container-inner {
     padding: 0 !important;
   }
+
   .mobile-width {
     width: 23% !important;
   }
+
 }
+
 #timer-status-round, #timer-status-czar-choosing {
   font-size: 0.875rem;
 }
+
 #chat-box {
   position: fixed;
   bottom: 0;
@@ -689,16 +848,19 @@ i {
   border-top-right-radius: 7px;
   margin-left: 30px;
 }
+
 @media screen and (max-width: 425px) {
   #chat-box {
     margin-left: 10px;
   }
 }
+
 @media screen and (min-width: 1440px) {
   #chat-box {
     margin-left: 47px;
   }
 }
+
 #chat-box-header p {
   margin: 0;
   padding: 9px;
@@ -707,22 +869,27 @@ i {
   border-top-right-radius: 5px;
   color: white;
 }
+
 #chat-box-header i {
   color: #236231;
   font-size: 1rem;
 }
+
 #chat-box-header {
   cursor: pointer;
 }
+
 #chat-box-content {
   max-height: 280px;
   overflow: auto;
   background-color: #fff;
 }
+
 #chat-box-input {
   background-color: white;
   height: 50px;
 }
+
 #chat-box-input input{
   background-color: white;
   height: 42px !important;
@@ -731,37 +898,46 @@ i {
   margin: 0 0 0 5px !important;
   color: black;
 }
+
 #chat-box-input i {
   width: 13%;
   color: green;
   cursor: pointer;
 }
+
 #chat-box-content div {
   padding: 5px;
   margin: 5px;
   background-color: #d4d4d4;
   border-radius: 7px;
 }
+
 #chat-box-content #user-name {
   padding: 0;
   font-weight: bolder;
 }
+
 #chat-box-content #user-message, #chat-box-content #user-name {
   margin: 0;
 }
+
 .hourglass-spin > [class*="fa-hourglass"] {
   animation: showhide 4s steps(1) infinite;
   opacity: 0;
 }
+
 .hourglass-spin > .fa-hourglass-end {
   animation-delay: 2s;
 }
+
 .hourglass-spin > .fa-hourglass-half {
   animation-delay: 1s;
 }
+
 .hourglass-spin > .fa-hourglass-start {
   animation-delay: 0s;
 }
+
 .hourglass-spin > .fa-hourglass-end.spin {
   animation: showhidespin 4s linear infinite;
 }
@@ -769,26 +945,51 @@ i {
   0% {
     opacity: 1;
   }
+
   25% {
     opacity: 0;
   }
 }
+
 @keyframes showhidespin {
   0% {
     opacity: 0;
   }
+
   74.9999999% {
     opacity: 0;
   }
+
   75% {
     opacity: 1;
     transform: rotate(0deg);
   }
+
   100% {
     opacity: 1;
     transform: rotate(180deg);
   }
 }
+
 .donate-button {
   font-size: 1.23rem !important;
+}
+
+.question-div hr {
+  height:2px;
+  display:inline-block;
+  margin:0; width:150px;
+  background-color:black;
+  border-width:0;
+}
+
+.sign-error > p {
+  width: 400px;
+  margin-right: auto;
+  margin-left: auto;
+  background-color: #FEEDEE;
+  color: #F53D3D;
+  border-radius: 3px;
+  padding: 8px;
+  font-size: 0.9375rem;
 }

@@ -36,7 +36,7 @@ const authCallback = (req, res) => {
  */
 const signin = (req, res) => {
   if (!req.user) {
-    res.redirect('/#!/signin?error=invalid');
+    res.redirect('/#!/signin');
   } else {
     res.redirect('/#!/app');
   }
