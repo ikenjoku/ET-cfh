@@ -29,6 +29,15 @@
     },
     "GOOGLE_CALLBACK_URL": {
       "required": true
+    },
+    "TWITTER_CUSTOMER_KEY": {
+      "required": true
+    },
+    "TWITTER_CUSTOMER_SECRET": {
+      "required": true
+    },
+    "TWITTER_CALLBACK_URL": {
+      "required": true
     }
   },
   "formation": {

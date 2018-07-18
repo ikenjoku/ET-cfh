@@ -23,10 +23,20 @@ angular.module('mean.system')
         execute: { method: 'POST', hasBody: true }
       });
 
+      const LogOut = $resource('api/signout', {}, {
+        execute: { method: 'GET', hasBody: false }
+      });
+
+
       $scope.logOut = function () {
-        localStorage.removeItem('#cfhetusertoken');
-        localStorage.removeItem('username');
-        localStorage.removeItem('#cfhetUserId');
+        LogOut.execute({}, function () {
+          localStorage.removeItem('#cfhetusertoken');
+          localStorage.removeItem('username');
+          localStorage.removeItem('#cfhetUserId');
+          $location.path('/');
+        }, (error) => {
+          $scope.authError = error.data.message;
+        });
       };
 
       $scope.username = localStorage.getItem('username');
@@ -41,15 +51,6 @@ angular.module('mean.system')
 
       $scope.showProfile = function () {
         document.getElementsByClassName('profile-container')[0].style.display = 'block';
-      };
-
-      $scope.SignUpUser = function () {
-        SignUp.execute({}, $scope.newUser, function (response) {
-          storeAndRefresh(response.token, response._id, response.name);
-          $location.path('/');
-        }, (error) => {
-          $scope.authError = error.data.message;
-        });
       };
 
       $scope.SignInUser = function () {
@@ -141,10 +142,7 @@ angular.module('mean.system')
           $scope.uploadImage(profilePic).then(function (res) {
             $scope.newUser.avatar = res.data.url;
             SignUp.execute({}, $scope.newUser, function (response) {
-              localStorage.setItem('#cfhetusertoken', response.token);
-              localStorage.setItem('#cfhetUserId', response._id);
-              localStorage.setItem('username', response.name);
-              localStorage.setItem('#cfhuseristourtaken', response.tour);
+              storeAndRefresh(response.token, response._id, response.name);
               $location.path('/');
             }, (error) => {
               $scope.authError = error.data.message;
@@ -152,10 +150,7 @@ angular.module('mean.system')
           });
         } else {
           SignUp.execute({}, $scope.newUser, function (response) {
-            localStorage.setItem('#cfhetusertoken', response.token);
-            localStorage.setItem('#cfhetUserId', response._id);
-            localStorage.setItem('username', response.name);
-            localStorage.setItem('#cfhuseristourtaken', response.tour);
+            storeAndRefresh(response.token, response._id, response.name);
             $location.path('/');
           }, (error) => {
             $scope.authError = error.data.message;

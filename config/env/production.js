@@ -9,9 +9,9 @@ module.exports = {
     callbackURL: process.env.FB_CALLBACK_URL
   },
   twitter: {
-    clientID: 'CONSUMER_KEY',
-    clientSecret: 'CONSUMER_SECRET',
-    callbackURL: 'http://cfh.io/auth/twitter/callback'
+    clientID: process.env.TWITTER_CUSTOMER_KEY,
+    clientSecret: process.env.TWITTER_CUSTOMER_SECRET,
+    callbackURL: process.env.TWITTER_CALLBACK_URL
   },
   google: {
     clientID: process.env.GOOGLE_CLIENT_ID,

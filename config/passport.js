@@ -1,10 +1,12 @@
 
 import mongoose from 'mongoose';
 import { Strategy as LocalStrategy } from 'passport-local';
-import { Strategy as TwitterStrategy } from 'passport-twitter';
+// import { Strategy as TwitterStrategy } from 'passport-twitter';
 import { Strategy as FacebookStrategy } from 'passport-facebook';
 import { OAuth2Strategy as GoogleStrategy } from 'passport-google-oauth';
 import config from './config';
+
+const TwitterStrategy = require('passport-twitter').Strategy;
 
 const User = mongoose.model('User');
 
@@ -55,13 +57,14 @@ export default (passport) => {
 
   // Use twitter strategy
   passport.use(new TwitterStrategy({
-    consumerKey: process.env.TWITTER_CONSUMER_KEY || config.twitter.clientID,
-    consumerSecret: process.env.TWITTER_CONSUMER_SECRET || config.twitter.clientSecret,
-    callbackURL: config.twitter.callbackURL
+    consumerKey: config.twitter.clientID,
+    consumerSecret: config.twitter.clientSecret,
+    callbackURL: config.twitter.callbackURL,
+    userProfileURL: 'https://api.twitter.com/1.1/account/verify_credentials.json?include_email=true',
   },
     ((token, tokenSecret, profile, done) => {
       User.findOne({
-        'twitter.id_str': profile.id
+        email: profile.emails[0].value
       }, (err, user) => {
         if (err) {
           return done(err);
@@ -70,6 +73,8 @@ export default (passport) => {
           user = new User({
             name: profile.displayName,
             username: profile.username,
+            avatar: profile.photos[0].value,
+            email: profile.emails[0].value,
             provider: 'twitter',
             twitter: profile._json
           });
@@ -92,7 +97,7 @@ export default (passport) => {
   },
     ((accessToken, refreshToken, profile, done) => {
       User.findOne({
-        'facebook.id': profile.id
+        email: (profile.emails && profile.emails[0].value)
       }, (err, user) => {
         if (err) {
           return done(err);
@@ -101,9 +106,7 @@ export default (passport) => {
           user = new User({
             name: profile.displayName,
             email: (profile.emails && profile.emails[0].value) || '',
-            username: profile.username,
             avatar: profile.photos ? profile.photos[0].value : '',
-            // password: Math.random().toString(36).substring(2),
             provider: 'facebook',
             facebook: profile
           });
@@ -126,7 +129,7 @@ export default (passport) => {
   },
     ((accessToken, refreshToken, profile, done) => {
       User.findOne({
-        'google.id': profile.id
+        email: profile.emails[0].value
       }, (err, user) => {
         if (err) {
           return done(err);

@@ -43,11 +43,10 @@ const signin = (req, res) => {
   } else {
     const { user } = req;
     const token = Tokenizer(user);
-    const url = `/#!/auth?${token}--${user.name}--${user._id}`;
+    const url = `/#!/auth?${token}----${user.name}---${user._id}`;
     res.redirect(url);
   }
 };
-
 
 /**
  * @param {object} req - request object provided by express

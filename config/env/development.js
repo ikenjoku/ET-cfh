@@ -10,9 +10,9 @@ module.exports = {
     callbackURL: process.env.FB_CALLBACK_URL
   },
   twitter: {
-    clientID: '401685871994-3i58in34j7qpngdka5ci54hh441n9a3q.apps.googleusercontent.com","project_id":"et-cfh-210520","auth_uri":"https://accounts.google.com/o/oauth2/auth","token_uri":"https://accounts.google.com/o/oauth2/token","auth_provider_x509_cert_url":"https://www.googleapis.com/oauth2/v1/certs","client_secret":"sHJSbinFDieBRDG2SKceCJN1',
-    clientSecret: 'sHJSbinFDieBRDG2SKceCJN1',
-    callbackURL: 'http://cardsforhumanity.com:3000/auth/twitter/callback'
+    clientID: process.env.TWITTER_CUSTOMER_KEY,
+    clientSecret: process.env.TWITTER_CUSTOMER_SECRET,
+    callbackURL: process.env.TWITTER_CALLBACK_URL
   },
   google: {
     clientID: process.env.GOOGLE_CLIENT_ID,
