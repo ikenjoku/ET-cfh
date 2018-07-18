@@ -54,6 +54,10 @@ module.exports = function (io) {
       joinGame(socket, data);
     });
 
+    socket.on('czarSelectCard', function () {
+      allGames[socket.gameID].beginRound(allGames[socket.gameID]);
+    });
+
     socket.on('startGame', function () {
       if (allGames[socket.gameID]) {
         var thisGame = allGames[socket.gameID];

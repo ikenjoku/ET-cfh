@@ -150,16 +150,16 @@ describe('Game Server', () => {
       const expectStartGame = () => {
         client1.emit('startGame');
         client1.on('gameUpdate', (data) => {
-          data.state.should.equal('waiting for players to pick');
+          data.state.should.equal('czar picks card');
         });
         client2.on('gameUpdate', (data) => {
-          data.state.should.equal('waiting for players to pick');
+          data.state.should.equal('czar picks card');
         });
         client3.on('gameUpdate', (data) => {
-          data.state.should.equal('waiting for players to pick');
+          data.state.should.equal('czar picks card');
         });
         client4.on('gameUpdate', (data) => {
-          data.state.should.equal('waiting for players to pick');
+          data.state.should.equal('czar picks card');
         });
         setTimeout(disconnect, 200);
       };
@@ -198,13 +198,13 @@ describe('Game Server', () => {
     const expectStartGame = () => {
       client1.emit('startGame');
       client1.on('gameUpdate', (data) => {
-        data.state.should.equal('waiting for players to pick');
+        data.state.should.equal('czar picks card');
       });
       client2.on('gameUpdate', (data) => {
-        data.state.should.equal('waiting for players to pick');
+        data.state.should.equal('czar picks card');
       });
       client3.on('gameUpdate', (data) => {
-        data.state.should.equal('waiting for players to pick');
+        data.state.should.equal('czar picks card');
       });
       setTimeout(disconnect, 200);
     };
@@ -222,7 +222,35 @@ describe('Game Server', () => {
     });
   });
 
-  it('Should automatically start game when 6 players are in a game', (done) => {
+  it('Should not start game when startGame event is sent with less than 3 players', (done) => {
+    let client2;
+    const client1 = io.connect(socketURL, options);
+    const disconnect = () => {
+      client1.disconnect();
+      client2.disconnect();
+      done();
+    };
+    const expectStartGame = () => {
+      client1.emit('startGame');
+      client1.on('gameUpdate', (data) => {
+        data.state.should.equal('waiting for players to pick');
+      });
+      client2.on('gameUpdate', (data) => {
+        data.state.should.equal('waiting for players to pick');
+      });
+      setTimeout(disconnect, 200);
+    };
+    client1.on('connect', () => {
+      client1.emit('joinGame', { userID: 'unauthenticated', room: '', createPrivate: false });
+      client2 = io.connect(socketURL, options);
+      client2.on('connect', () => {
+        client2.emit('joinGame', { userID: 'unauthenticated', room: '', createPrivate: false });
+        setTimeout(expectStartGame, 100);
+      });
+    });
+  });
+
+  it('Should start only when game has more than 3 players are in a game', (done) => {
     let client2, client3, client4, client5, client6;
     const client1 = io.connect(socketURL, options);
     const disconnect = () => {
@@ -237,22 +265,22 @@ describe('Game Server', () => {
     const expectStartGame = () => {
       client1.emit('startGame');
       client1.on('gameUpdate', (data) => {
-        data.state.should.equal('waiting for players to pick');
+        data.state.should.equal('czar picks card');
       });
       client2.on('gameUpdate', (data) => {
-        data.state.should.equal('waiting for players to pick');
+        data.state.should.equal('czar picks card');
       });
       client3.on('gameUpdate', (data) => {
-        data.state.should.equal('waiting for players to pick');
+        data.state.should.equal('czar picks card');
       });
       client4.on('gameUpdate', (data) => {
-        data.state.should.equal('waiting for players to pick');
+        data.state.should.equal('czar picks card');
       });
       client5.on('gameUpdate', (data) => {
-        data.state.should.equal('waiting for players to pick');
+        data.state.should.equal('czar picks card');
       });
       client6.on('gameUpdate', (data) => {
-        data.state.should.equal('waiting for players to pick');
+        data.state.should.equal('czar picks card');
       });
       setTimeout(disconnect, 200);
     };
@@ -285,6 +313,42 @@ describe('Game Server', () => {
             });
           });
         }
+      });
+    });
+  });
+
+  it('Should have a new game state for czar to pick card', (done) => {
+    let client2, client3;
+    const client1 = io.connect(socketURL, options);
+    const disconnect = () => {
+      client1.disconnect();
+      client2.disconnect();
+      client3.disconnect();
+      done();
+    };
+    const expectStartGame = () => {
+      client1.emit('startGame');
+      client1.on('gameUpdate', (data) => {
+        data.state.should.equal('czar picks card');
+      });
+      client2.on('gameUpdate', (data) => {
+        data.state.should.equal('czar picks card');
+      });
+      client3.on('gameUpdate', (data) => {
+        data.state.should.equal('czar picks card');
+      });
+      setTimeout(disconnect, 200);
+    };
+    client1.on('connect', () => {
+      client1.emit('joinGame', { userID: 'unauthenticated', room: '', createPrivate: false });
+      client2 = io.connect(socketURL, options);
+      client2.on('connect', () => {
+        client2.emit('joinGame', { userID: 'unauthenticated', room: '', createPrivate: false });
+        client3 = io.connect(socketURL, options);
+        client3.on('connect', () => {
+          client3.emit('joinGame', { userID: 'unauthenticated', room: '', createPrivate: false });
+          setTimeout(expectStartGame, 100);
+        });
       });
     });
   });

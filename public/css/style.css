@@ -1036,6 +1036,47 @@ nav .sidenav-trigger {
   color: #236231 !important;
 }
 
+.czars-card img{
+  max-height: 300px;
+  max-width: 200px;
+  padding: 5px;
+}
+
+.modal-body .czars-card{
+  display: flex;
+}
+
+.modal-body .czars-card:hover{
+  cursor: pointer;
+}
+
+.czar-modal {
+  margin-top: 105px;
+}
+
+.czar-modal .czar-modal-head {
+  text-align:center;
+}
+
+.czar-modal .czar-modal-head h4{
+  color: #236231;
+  font-family:'Quicksand', sans-serif;
+}
+
+#czarSelectCard{
+  width: 840px;
+}
+
+#czarSelectCard .card{
+  margin: .5rem 3px 1rem 3px;
+  border-radius: 8px;
+  box-shadow: none;
+}
+
+.contain-cards{
+  display: flex;
+  justify-content: space-evenly;
+}/* Fola imageview */
 .imagepreview {
   height: 200px;
   width: 200px;

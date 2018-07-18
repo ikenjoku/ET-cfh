@@ -1,6 +1,6 @@
 /* eslint prefer-arrow-callback: 0, func-names: 0, */
 angular.module('mean.system')
-  .factory('game', ['socket', '$timeout', '$http', function (socket, $timeout) {
+  .factory('game', ['socket', '$timeout', '$http', function (socket, $timeout, $http) {
     const game = {
       id: null, // This player's socket ID, so we know who this player is
       gameID: null,
@@ -12,7 +12,7 @@ angular.module('mean.system')
       table: [],
       czar: null,
       playerMinLimit: 3,
-      playerMaxLimit: 6,
+      playerMaxLimit: 12,
       pointLimit: null,
       state: null,
       round: 0,
@@ -145,6 +145,16 @@ angular.module('mean.system')
         game.state = data.state;
       }
 
+      if (data.state === 'czar picks card') {
+        game.czar = data.czar;
+        if (game.czar === game.playerIndex) {
+          addToNotificationQueue(`You are now the Czar, 
+            select a card to show a question`);
+        } else {
+          addToNotificationQueue('Waiting for Czar to pick the question');
+        }
+      }
+
       if (data.state === 'waiting for players to pick') {
         game.czar = data.czar;
         game.curQuestion = data.curQuestion;
@@ -194,6 +204,25 @@ angular.module('mean.system')
 
     game.startGame = function () {
       socket.emit('startGame');
+    };
+
+    game.beginRound = function () {
+      socket.emit('czarSelectCard');
+    };
+
+    game.createPlayers = function (gameId, players) {
+      const token = localStorage.getItem('#cfhetusertoken');
+      $http({
+        method: 'POST',
+        url: `/api/game/${gameId}/start`,
+        data: {
+          players
+        },
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: token,
+        }
+      }).then(gamePlayers => gamePlayers);
     };
 
     game.leaveGame = function () {
