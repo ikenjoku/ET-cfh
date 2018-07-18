@@ -44,7 +44,11 @@ describe('Tour', function () {
   });
 
   it('Should call the takeTour method', function () {
-    spyOn($scope, 'takeTour').and.callThrough();
-    expect($scope.takeTour).toBeDefined();
+    spyOn($scope, 'takeNewUserTour').and.callThrough();
+    spyOn($scope, 'takeGeneralTour').and.callThrough();
+    spyOn($scope, 'tour').and.callThrough();
+    expect($scope.takeNewUserTour).toBeDefined();
+    expect($scope.takeGeneralTour).toBeDefined();
+    expect($scope.tour).toBeDefined();
   });
 });

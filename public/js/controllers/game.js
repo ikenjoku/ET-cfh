@@ -118,10 +118,10 @@ angular.module('mean.system')
     };
 
     $scope.fewPlayersModal = function () {
-      var refusableModel = $('#reuse-modal');
+      var reusableModel = $('#reuse-modal');
       $('.modal-header').empty();
-      refusableModel.find('.modal-header').append('<h4 class="modal-title center-align" style="color: #23522d;">3 PLAYERS REQUIRED</h4>');
-      refusableModel.find('.modal-body').text('This game requires a minimum of 3 players. Please invite more friends to play');
+      reusableModel.find('.modal-header').append('<h4 class="modal-title center-align" style="color: #23522d;">3 PLAYERS REQUIRED</h4>');
+      reusableModel.find('.modal-body').text('This game requires a minimum of 3 players. Please invite more friends to play');
       var okayBtn = '<button type="button" class="btn waves-effect waves-green modal-close" id="play-chioce-btn">OKAY</button>';
       $('.modal-footer').empty();
       $('.modal-footer').append(okayBtn);
@@ -129,16 +129,30 @@ angular.module('mean.system')
     };
 
     $scope.morePlayersModal = function () {
-      var refusableModel = $('#reuse-modal');
+      var reusableModel = $('#reuse-modal');
       $('.modal-header').empty();
-      refusableModel.find('.modal-header').append('<h4 class="modal-title center-align" style="color: #23522d;">MAX NUMBER OF PLAYERS</h4>');
+      reusableModel.find('.modal-header').append('<h4 class="modal-title center-align" style="color: #23522d;">MAX NUMBER OF PLAYERS</h4>');
       $('.modal-body').empty();
-      refusableModel.find('.modal-body').append('<p>The game cannot take more than 12 players.</p> <p>Game has started already. You have been added to a new game</p>');
+      reusableModel.find('.modal-body').append('<p>The game cannot take more than 12 players.</p> <p>Game has started already. You have been added to a new game</p>');
       var okayBtn = '<button type="button" class="btn waves-effect waves-green modal-close"  id="play-chioce-btn">OKAY</button>';
       $('.modal-footer').empty();
       $('.modal-footer').append(okayBtn);
       $('#reuse-modal').modal('open');
     };
+
+    $scope.$watch('game.userExist', function () {
+      if (game.userExist) {
+        var reusableModel = $('#reuse-modal');
+        $('.modal-header').empty();
+        reusableModel.find('.modal-header').append('<h4 class="modal-title center-align" style="color: #23522d;">You Cannot Join A Game Twice</h4>');
+        $('.modal-body').empty();
+        reusableModel.find('.modal-body').append('<p>You have already joined this game</p>');
+        var okayBtn = '<a href="/" class="btn" style="background-color: #23522d;">OKAY</a>';
+        $('.modal-footer').empty();
+        $('.modal-footer').append(okayBtn);
+        $('#reuse-modal').modal('open');
+      }
+    });
 
     $scope.startGame = function () {
       if (game.players.length < game.playerMinLimit) {
@@ -158,17 +172,6 @@ angular.module('mean.system')
       }
     });
 
-    $scope.$watch('game.userExist', function () {
-      var reUsableModal = $('#reuse-modal');
-      $('.modal-header').empty();
-      reUsableModal.find('.modal-header').append('<h4 class="modal-title center-align" style="color: #23522d;">You Cannot Join A Game Twice</h4>');
-      $('.modal-body').empty();
-      reUsableModal.find('.modal-body').append('<p>You have already joined this game</p>');
-      var okayBtn = '<a href="/" class="btn" style="background-color: #23522d;">OKAY</a>';
-      $('.modal-footer').empty();
-      $('.modal-footer').append(okayBtn);
-      $('#reuse-modal').modal('open');
-    });
 
     $scope.abandonGame = function () {
       game.leaveGame();

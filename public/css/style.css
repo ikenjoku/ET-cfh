@@ -323,6 +323,19 @@ i {
   box-shadow: none;
 }
 
+#tour-button, #profile-button {
+  box-shadow: none;
+  color: #000 !important;
+  background-color: transparent !important;
+}
+
+#tour-button:hover, #profile-button:hover {
+  border: 2px solid black;
+  border-radius: 3px;
+  background-color: white !important;
+  color: black !important;
+}
+
 #index-login-btn {
   border: 2px solid black;
   border-radius: 3px;
@@ -375,10 +388,23 @@ i {
   color: white;
   background-color: #236231 !important;
   border: 0;
-  padding: 0 !important;
 }
 
 #play-chioce-btn:hover {
+  border: 2px solid black;
+  border-radius: 3px;
+  background-color: white !important;
+  color: black !important;
+}
+
+#tour-chioce-btn {
+  color: white;
+  background-color: #236231 !important;
+  border: 0;
+  padding: 0 !important;
+}
+
+#tour-chioce-btn:hover {
   border: 2px solid black;
   border-radius: 3px;
   background-color: white !important;
@@ -787,7 +813,7 @@ i {
 }
 
 @media screen and (max-width: 425px) {
-  .abandon-button {
+  .navbar-button {
     height: 30px !important;
     line-height: 30px !important;
     padding: 0 5px !important;
@@ -995,6 +1021,13 @@ i {
   font-size: 0.9375rem;
 }
 
+nav .sidenav-trigger {
+  float: right !important;
+}
+
+.sidenav-trigger > i {
+  color: #236231 !important;
+}
 nav .sidenav-trigger {
   float: right !important;
 }

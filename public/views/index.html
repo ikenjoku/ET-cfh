@@ -1,22 +1,30 @@
 <body>
   <header>
-    <nav class="white nav">
+    <nav class="white nav" data-target="mobile-demo" class="sidenav-trigger">
       <div class="nav-wrapper font-bold" ng-controller="AuthController">
         <a href="/" class="black-text text-darken-2 brand-logo left">
           <img src="https://res.cloudinary.com/dqsmurjpg/image/upload/v1530718726/Navbar_Logo.png"
             id="cfh-logo" alt="cfg-logo">
         </a>
-  
-        <ul id="nav-mobile" class="right">
+        <a data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
           <li ng-hide="checkToken()">
             <a class="waves-effect waves-light white black-text btn" id="index-login-btn" href="signin">Login</a>
           </li>
           <li ng-hide="checkToken()"><a class="waves-effect waves-light green darken-4 btn white-text" id="index-signup-btn" href="signup">Signup</a></li>
-          <li ng-show="checkToken()"><a ng-click="logOut()" class="modal-trigger waves-effect waves-light green darken-4 btn white-text" id="index-signup-btn">Sign Out</a></li>
-          <li ng-show="checkToken()" ng-click="showProfile()"><a class="waves-effect waves-light green darken-4 btn white-text" id="index-signup-btn">Show Profile</a></li>
+          <li ng-show="checkToken()" ng-click="showProfile()"><a class="waves-effect waves-light green darken-4 btn white-text" id="profile-button">Show Profile</a></li>
+          <li ng-show="checkToken()"><a ng-click="logOut()" class="waves-effect waves-light green darken-4 btn white-text" id="index-signup-btn">Sign Out</a></li>
         </ul>
       </div>
     </nav>
+    <ul class="sidenav" id="mobile-demo" ng-controller="AuthController">
+      <li ng-hide="checkToken()">
+        <a class="navbar-button" href="signin">Login</a>
+      </li>
+      <li ng-hide="checkToken()"><a class="navbar-button" href="signup">Signup</a></li>
+      <li ng-show="checkToken()" ng-click="showProfile()"><a class="navbar-button sidenav-close">Show Profile</a></li>
+      <li ng-show="checkToken()"><a ng-click="logOut()" class="navbar-button sidenav-close">Sign Out</a></li>
+    </ul>
   </header>
   <div class="banner section">
     <div class="row">
@@ -166,6 +174,7 @@
   </footer>
   <script>
     $(document).ready(function(){
+      $('.sidenav').sidenav();
       $('.modal').modal();
     });
   </script> 
