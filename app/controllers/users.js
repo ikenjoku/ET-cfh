@@ -36,14 +36,19 @@ const authCallback = (req, res) => {
  * @param {req} req carries request payload
  * @param {res} res handles response status code and messages
  * @returns {res} a status code and data
+ * @description this function is called with an Oauth 2 authentication is complete
+ * the authentication returns a user which info is sent to the client through the url.
  */
 const signin = (req, res) => {
   if (!req.user) {
     res.redirect('/#!/signin');
   } else {
     const { user } = req;
+    // Create a token using the user data
     const token = Tokenizer(user);
-    const url = `/#!/auth?${token}----${user.name}---${user._id}`;
+
+    // the token and the user info to the client through the url
+    const url = `/#!/auth?${token}---${user.name}---${user._id}---${user.tour}`;
     res.redirect(url);
   }
 };

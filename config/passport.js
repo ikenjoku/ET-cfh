@@ -1,12 +1,10 @@
 
 import mongoose from 'mongoose';
 import { Strategy as LocalStrategy } from 'passport-local';
-// import { Strategy as TwitterStrategy } from 'passport-twitter';
+import { Strategy as TwitterStrategy } from 'passport-twitter';
 import { Strategy as FacebookStrategy } from 'passport-facebook';
 import { OAuth2Strategy as GoogleStrategy } from 'passport-google-oauth';
 import config from './config';
-
-const TwitterStrategy = require('passport-twitter').Strategy;
 
 const User = mongoose.model('User');
 

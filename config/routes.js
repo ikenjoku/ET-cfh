@@ -21,9 +21,6 @@ export default (router, passport, app) => {
     .get('/profile', ensureUser, users.fetchProfile)
     .get('/signout', users.signout);
 
-  // Setting up the game api
-  api
-    .post('/game/:id/start', auth, game);
 
   // Setting up user tour api
   api
@@ -104,7 +101,7 @@ export default (router, passport, app) => {
 
 
   app.use((err, req, res, next) => {
-    console.log(err);
+    // console.log(err);
     // error from the '/api' namespaced routes
     if (err.status) return res.status(err.status).json({ message: err.message });
     // Treat as 404
