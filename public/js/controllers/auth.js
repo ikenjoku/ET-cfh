@@ -2,95 +2,85 @@
 /* eslint prefer-arrow-callback: 0, func-names: 0 */
 angular.module('mean.system')
   .controller('AuthController', ['$scope', '$location', '$resource', 'Upload', 'cloudinary',
-  function ($scope, $location, $resource, Upload) {
-    $scope.newUser = {};
-    $scope.user = {};
-    $scope.authError = '';
-    let url = window.location.href;
-    url = url.split('auth?')[1]; 
+    function ($scope, $location, $resource, Upload) {
+      $scope.newUser = {};
+      $scope.user = {};
+      $scope.authError = '';
+      let url = window.location.href;
+      url = url.split('auth?')[1];
 
-    const storeAndRefresh = function(token, id, name){
-      localStorage.setItem('#cfhetusertoken', token);
-      localStorage.setItem('#cfhetUserId', id);
-      localStorage.setItem('username', name);
-    }
+      const storeAndRefresh = function (token, id, name) {
+        localStorage.setItem('#cfhetusertoken', token);
+        localStorage.setItem('#cfhetUserId', id);
+        localStorage.setItem('username', name);
+      };
 
-    if(url !== undefined) {
-      url = url.replace(/%20/g,' ');
-      url = url.split('#!')[0];
-      url = url.split('--');
-
-      const [token, name, id] = url;
-      storeAndRefresh(token, id, name);
-      window.location.replace('/');
-    }    
-
-    const Login = $resource('/api/auth/login', {}, {
-      execute: { method: 'POST', hasBody: true }
-    });
-
-    const SignUp = $resource('api/auth/signup', {}, {
-      execute: { method: 'POST', hasBody: true }
-    });
-
-    $scope.logOut = function () {
-      localStorage.removeItem('#cfhetusertoken');
-      localStorage.removeItem('username');
-      localStorage.removeItem('#cfhetUserId');
-    };
-
-    $scope.username = localStorage.getItem('username');
-
-    $scope.checkToken = function () {
-      const token = localStorage.getItem('#cfhetusertoken');
-      if (token) {
-        return true;
-      }
-      return false;
-    };
-
-    $scope.showProfile = function () {
-      document.getElementsByClassName('profile-container')[0].style.display = 'block';
-    };
-
-    $scope.SignUpUser = function () {
-      SignUp.execute({}, $scope.newUser, function (response) {
-        storeAndRefresh(response.token, response._id, response.name);
-        $location.path('/');
-      }, (error) => {
-        $scope.authError = error.data.message;
+      const Login = $resource('/api/auth/login', {}, {
+        execute: { method: 'POST', hasBody: true }
       });
-    };
 
-    $scope.SignInUser = function () {
-      Login.execute({}, $scope.user, function (response) {
-        storeAndRefresh(response.token, response._id, response.name);
-        $location.path('/');
-      }, () => {
-        $scope.authError = 'Please check your username/password and try again';
+      const SignUp = $resource('api/auth/signup', {}, {
+        execute: { method: 'POST', hasBody: true }
       });
-    }
 
-    $scope.uploadImage = function (profilePic) {
-      const cloudUrl = Upload.upload({
-        url: 'https://api.cloudinary.com/v1_1/dffiyhgto/image/upload',
-        data: {
-          upload_preset: 'lupttjwi',
-          secure: true,
-          file: profilePic
+      $scope.logOut = function () {
+        localStorage.removeItem('#cfhetusertoken');
+        localStorage.removeItem('username');
+        localStorage.removeItem('#cfhetUserId');
+      };
+
+      $scope.username = localStorage.getItem('username');
+
+      $scope.checkToken = function () {
+        const token = localStorage.getItem('#cfhetusertoken');
+        if (token) {
+          return true;
         }
-      });
-      return cloudUrl;
-    };
+        return false;
+      };
 
-    $scope.logOut = function () {
-      localStorage.removeItem('#cfhetusertoken');
-      localStorage.removeItem('username');
-      localStorage.removeItem('#cfhetUserId');
-      localStorage.removeItem('#cfhuseristourtaken');
-    };
+      $scope.showProfile = function () {
+        document.getElementsByClassName('profile-container')[0].style.display = 'block';
+      };
 
-    $scope.username = localStorage.getItem('username');
+      $scope.SignUpUser = function () {
+        SignUp.execute({}, $scope.newUser, function (response) {
+          storeAndRefresh(response.token, response._id, response.name);
+          $location.path('/');
+        }, (error) => {
+          $scope.authError = error.data.message;
+        });
+      };
+
+      $scope.SignInUser = function () {
+        Login.execute({}, $scope.user, function (response) {
+          storeAndRefresh(response.token, response._id, response.name);
+          $location.path('/');
+        }, () => {
+          $scope.authError = 'Please check your username/password and try again';
+        });
+      };
+
+      $scope.uploadImage = function (profilePic) {
+        const cloudUrl = Upload.upload({
+          url: 'https://api.cloudinary.com/v1_1/dffiyhgto/image/upload',
+          data: {
+            upload_preset: 'lupttjwi',
+            secure: true,
+            file: profilePic
+          }
+        });
+        return cloudUrl;
+      };
+
+      $scope.logOut = function () {
+        localStorage.removeItem('#cfhetusertoken');
+        localStorage.removeItem('username');
+        localStorage.removeItem('#cfhetUserId');
+        localStorage.removeItem('#cfhuseristourtaken');
+      };
+
+      $scope.username = localStorage.getItem('username');
 
       $scope.checkToken = function () {
         const token = localStorage.getItem('#cfhetusertoken');
@@ -172,4 +162,16 @@ angular.module('mean.system')
           });
         }
       };
+
+      const init = function () {
+        if (url !== undefined) {
+          url = url.replace(/%20/g, ' ').split('#!')[0].split('--');
+
+          const [token, name, id] = url;
+          storeAndRefresh(token, id, name);
+
+          window.location.replace('/');
+        }
+      };
+      init();
     }]);

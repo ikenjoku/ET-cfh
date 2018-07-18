@@ -41,12 +41,10 @@ export default (router, passport, app) => {
   router.get('/users/:userId', users.show);
 
   // Setting the facebook oauth routes
-  router.get('/auth/facebook/', (req, res, next) => {
-    passport.authenticate('facebook', {
-      scope: ['email'],
-      failureRedirect: '/signin',
-    })(req, res, next);
-  }, users.signin);
+  router.get('/auth/facebook/', passport.authenticate('facebook', {
+    scope: ['email'],
+    failureRedirect: '/signin',
+  }), users.signin);
 
   router.get('/auth/facebook/callback', passport.authenticate('facebook', {
     failureRedirect: '/signin'
@@ -72,7 +70,7 @@ export default (router, passport, app) => {
 
   router.get('/auth/google/callback', passport.authenticate('google', {
     failureRedirect: '/signin'
-  }), users.authCallback);
+  }), users.signin);
 
   // Finish with setting up the userId param
   router.param('userId', users.user);

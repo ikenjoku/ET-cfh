@@ -1,7 +1,7 @@
 
 import mongoose from 'mongoose';
 import { Strategy as LocalStrategy } from 'passport-local';
-import { Strategy as TwitterStrategy } from 'passport-twitter'; 
+import { Strategy as TwitterStrategy } from 'passport-twitter';
 import { Strategy as FacebookStrategy } from 'passport-facebook';
 import { OAuth2Strategy as GoogleStrategy } from 'passport-google-oauth';
 import config from './config';
@@ -103,7 +103,8 @@ export default (passport) => {
             email: (profile.emails && profile.emails[0].value) || '',
             username: profile.username,
             avatar: profile.photos ? profile.photos[0].value : '',
-            password: Math.random().toString(36).substring(2),
+            // password: Math.random().toString(36).substring(2),
+            provider: 'facebook',
             facebook: profile
           });
           user.save((err) => {
@@ -119,8 +120,8 @@ export default (passport) => {
 
   // Use google strategy
   passport.use(new GoogleStrategy({
-    clientID: process.env.GOOGLE_CLIENT_ID || config.google.clientID,
-    clientSecret: process.env.GOOGLE_CLIENT_SECRET || config.google.clientSecret,
+    clientID: config.google.clientID,
+    clientSecret: config.google.clientSecret,
     callbackURL: config.google.callbackURL
   },
     ((accessToken, refreshToken, profile, done) => {
@@ -135,6 +136,7 @@ export default (passport) => {
             name: profile.displayName,
             email: profile.emails[0].value,
             username: profile.username,
+            avatar: profile._json.picture,
             provider: 'google',
             google: profile._json
           });
