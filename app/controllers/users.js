@@ -84,7 +84,10 @@ const handleSignUp = (req, res, next) => {
       if (err) return next(err);
       if (!existingUser) {
         const user = new User(req.body);
-        user.avatar = avatarsArray[user.avatar];
+        if (!user.avatar) {
+          // Switch the user's avatar index to an actual avatar url
+          user.avatar = avatarsArray[user.avatar];
+        }
         user.provider = 'local';
         user.save((err, newUser) => {
           if (err) return next(err); // something went wrong saving the new user
@@ -188,8 +191,10 @@ const create = (req, res, next) => {
     }).exec((err, existingUser) => {
       if (!existingUser) {
         const user = new User(req.body);
-        // Switch the user's avatar index to an actual avatar url
-        user.avatar = avatarsArray[user.avatar];
+        if (!user.avatar) {
+          // Switch the user's avatar index to an actual avatar url
+          user.avatar = avatarsArray[user.avatar];
+        }
         user.provider = 'local';
         user.save((err) => {
           if (err) {
@@ -249,7 +254,7 @@ const addDonation = (req, res) => {
         .exec((err, user) => {
         // Confirm that this object hasn't already been entered
           let duplicate = false;
-          for (let i = 0; i < user.donations.length; i + 1) {
+          for (let i = 0; i < user.donations.length; i += 1) {
             if (user.donations[i].crowdrise_donation_id === req.body.crowdrise_donation_id) {
               duplicate = true;
             }

@@ -1,5 +1,5 @@
-/* eslint prefer-arrow-callback: 0, func-names: 0 */
-angular.module('mean', ['ngCookies', 'ngResource', 'ui.bootstrap', 'ui.route', 'mean.system', 'mean.directives'])
+/* eslint prefer-arrow-callback: 0, func-names: 0, no-undef: 0, no-var: 0, object-shorthand: 0 */
+angular.module('mean', ['ngCookies', 'ngResource', 'ui.bootstrap', 'ui.route', 'mean.system', 'mean.directives', 'cloudinary', 'ngFileUpload'])
   .config(['$routeProvider',
     function ($routeProvider) {
       $routeProvider

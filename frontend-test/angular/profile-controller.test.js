@@ -10,6 +10,13 @@ describe('Controller: Profile', function () {
       }
     };
   };
+  mockUpload = {
+    upload() {
+      return {
+        data: { url: 'url' }
+      };
+    }
+  };
 
   beforeEach(module('mean.system'));
 
@@ -21,7 +28,9 @@ describe('Controller: Profile', function () {
     controller('AuthController', {
       $scope,
       $resource: mockApireq,
-      $location
+      $location,
+      Upload: mockUpload,
+      cloudinary: {}
     });
     $scope.SignUpUser();
   }));

@@ -993,3 +993,20 @@ i {
   padding: 8px;
   font-size: 0.9375rem;
 }
+/* Fola imageview */
+.imagepreview {
+  height: 200px;
+  width: 200px;
+  border-radius: 50%;
+  border: 2px solid black;
+  margin-bottom: 10px;
+  background-color: #f1f1f1;
+}
+
+.modal-footer .modal-footer-btn {
+  background-color: #236231;
+  color:white;
+}
+.upload-btn {
+  background-color: #236231;
+}
