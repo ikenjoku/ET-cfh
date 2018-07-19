@@ -1,7 +1,7 @@
 </script>
 <div id="app-container" ng-controller="GameController">
 <!-- Reusable Modal -->
-<div id="reuse-modal" class="modal">
+  <div id="reuse-modal" class="modal">
     <div class="modal-dialog modal-sm">     
       <!-- Modal content -->
       <div class="modal-content" style="background-color: white;">
@@ -15,33 +15,73 @@
       </div>
     </div>
   </div>
-<!-- Resusable Modal -->
-  <header id="menu-container">
-    <nav class="white nav">
+  <!-- Resusable Modal -->
+
+  <!-- Tour Modal content -->
+  <div id="tour-modal" class="modal" ng-controller="TourController">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content" style="background-color: white;">
+        <div class="modal-body" style="text-align: center; margin-top: 10px" style="font-size: 1.8em;">
+          <p>Welcome to the gaming screen for Cards for Humanity. You are about to take a brief tour of the gaming area. Click Okay to continue or cancel if you know how to play already</p>
+        </div>
+        <div class="modal-footer">
+          <button class="btn waves-effect waves-green modal-close" id="tour-chioce-btn" ng-click="takeNewUserTour()">Okay</button>
+          <button class="btn waves-effect waves-green modal-close" id="tour-chioce-btn" ng-click="closeTourModal()">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <header id="menu-container" ng-controller="TourController">
+    <nav class="white nav" data-target="mobile-demo" class="sidenav-trigger">
       <div class="nav-wrapper font-bold" ng-controller="AuthController">
         <a href="/" class="black-text text-darken-2 brand-logo left">
           <img src="https://res.cloudinary.com/dqsmurjpg/image/upload/v1530718726/Navbar_Logo.png"
             id="cfh-logo" alt="cfg-logo">
         </a>
-        <ul id="nav-mobile" class="right">
+        <a data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
           <span ng-show="!checkToken() && (game.state === 'game ended' || game.state === 'game dissolved')">
             <li>
-              <a class="waves-effect waves-light red darken-4 btn white-text abandon-button" id="index-signup-btn" href="signup">SIGNUP</a>
+              <a class="waves-effect waves-light red darken-4 btn white-text navbar-button" id="index-signup-btn" href="signup">SIGNUP</a>
             </li>
           </span>
           <span ng-click="logOut()" ng-show="(game.state === 'game ended' || game.state === 'game dissolved') && checkToken()">
               <li>
-                <a class="waves-effect waves-light red darken-4 btn white-text abandon-button" id="index-signup-btn" href="signup">LOGOUT</a>
+                <a class="waves-effect waves-light red darken-4 btn white-text navbar-button" id="index-signup-btn">LOGOUT</a>
               </li>
           </span>
           <span ng-hide="game.state === 'game ended' || game.state === 'game dissolved'">
             <li>
-              <a class="waves-effect waves-light red darken-4 btn white-text abandon-button" id="index-signup-btn" ng-click="abandonGame()">Abandon Game</a>
+              <a class="waves-effect waves-light btn white-text navbar-button" id="tour-button" ng-click="takeGeneralTour()">Take a Tour</a>
+            </li>
+            <li>
+              <a class="waves-effect waves-light red darken-4 btn white-text navbar-button" id="index-signup-btn" ng-click="abandonGame()">Abandon Game</a>
             </li>
           </span>
         </ul>
       </div>
     </nav>
+    <ul class="sidenav" id="mobile-demo" ng-controller="AuthController">
+      <span ng-show="!checkToken() && (game.state === 'game ended' || game.state === 'game dissolved')">
+        <li>
+          <a class="navbar-button" id="index-signup-btn" href="signup">SIGNUP</a>
+        </li>
+      </span>
+      <span ng-click="logOut()" ng-show="(game.state === 'game ended' || game.state === 'game dissolved') && checkToken()">
+        <li>
+          <a class="navbar-button" id="index-signup-btn">LOGOUT</a>
+        </li>
+      </span>
+      <span ng-hide="game.state === 'game ended' || game.state === 'game dissolved'">
+        <li>
+          <a class="navbar-button sidenav-close" ng-click="takeGeneralTour()">Take a Tour</a>
+        </li>
+        <li>
+          <a class="navbar-button" ng-click="abandonGame()">Abandon Game</a>
+        </li>
+      </span>
+    </ul>
   </header>
   <div id="gameplay-container">
     <div id="upper-gameplay-container" class="row game-row">
@@ -58,7 +98,7 @@
       <div class="col s12 m3 l3" id="social-bar-container" ng-hide="game.state === 'game ended' || game.state === 'game dissolved'">
         <player class="row"></player>
       </div>
-      <div ng-controller="InvitePlayersController" class="col s12 m9 l9 answer-div" ng-hide="game.state === 'game ended' || game.state === 'game dissolved'">
+      <div ng-controller="InvitePlayersController" id="player" class="col s12 m9 l9 answer-div" ng-hide="game.state === 'game ended' || game.state === 'game dissolved'">
         <answers ng-controller="AuthController"></answers>
       </div>
       <div class="col s12 m12 l12 answer-div" ng-show="game.state === 'game ended' || game.state === 'game dissolved'">
@@ -85,7 +125,14 @@
   </div>
   <script>
     $(document).ready(function(){
-      $('.modal').modal();
+      $('.sidenav').sidenav();
+      $('.modal').modal({
+        dismissible: false
+      });
+      const isTourTaken = localStorage.getItem('#cfhuseristourtaken');
+      if (isTourTaken === 'false') {
+        $('#tour-modal').modal('open');
+      }
     });
   </script>
 </div>

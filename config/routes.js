@@ -21,6 +21,10 @@ export default (router, passport, app) => {
     .get('/profile', ensureUser, users.fetchProfile)
     .post('/game/:id/start', ensureUser, game);
 
+  // Setting up user tour api
+  api
+    .post('/tour/:id', users.updateUserTour);
+
   router.get('/signin', users.signin);
   router.get('/signup', users.signup);
   router.get('/chooseavatars', users.checkAvatar);
