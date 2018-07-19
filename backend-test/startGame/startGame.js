@@ -11,8 +11,6 @@ const mockPlayers = {
   players: []
 };
 
-let mockUser;
-
 const userMock = {
   name: 'kelvin',
   password: '12345',
@@ -28,7 +26,6 @@ describe('Player endpoints', () => {
       if (err) throw err;
       mockPlayers.players.push(user._id);
       mockPlayers.gameWinner = user._id;
-      mockUser = user;
     }));
   });
 
@@ -42,19 +39,6 @@ describe('Player endpoints', () => {
         /* eslint prefer-destructuring: 0 */
         token = res.body.token;
         id = res.body._id;
-        done();
-      });
-  });
-
-  it('POST /api/game/:id/start endpoint should return the the game players', (done) => {
-    request(app)
-      .post('/api/game/3/start')
-      .set('authorization', token)
-      .send(mockPlayers)
-      .end((err, res) => {
-        if (err) return done(err);
-        expect(res.statusCode).to.equal(201);
-        expect(res.body.gameWinner).to.equal(mockUser._id.toString());
         done();
       });
   });

@@ -12,17 +12,10 @@ const GameSchema = new Schema({
   gameId: {
     type: Number
   },
-  gameWinner: {
-    type: Schema.Types.ObjectId,
-    trim: true,
-    ref: 'User'
-  },
-  players: [{
-    type: Schema.Types.ObjectId,
-    ref: 'User'
-  }]
-}, {
-  timestamps: true
+  players: [],
+  meta: {
+    type: Object
+  }
 });
 
 GameSchema.statics = {
