@@ -53,6 +53,7 @@
     "express": "^4.16.3",
     "express-session": "^1.15.6",
     "faker": "^4.1.0",
+    "firebase": "^5.2.0",
     "forever": "latest",
     "gulp": "^3.9.1",
     "gulp-cli": "^2.0.1",
@@ -77,6 +78,7 @@
     "socket.io-client": "~0.9.16",
     "supertest": "^3.1.0",
     "underscore": "~1.5.2",
+    "uuid": "^3.3.2",
     "view-helpers": "~0.1.3"
   },
   "devDependencies": {

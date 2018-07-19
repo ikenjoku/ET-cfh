@@ -2,7 +2,7 @@ import { Router } from 'express';
 import users from '../app/controllers/users';
 import * as answers from '../app/controllers/answers';
 import questions from '../app/controllers/questions';
-import avatars from '../app/controllers/avatars';
+import * as avatars from '../app/controllers/avatars';
 import index from '../app/controllers/index';
 import game from '../app/controllers/game';
 import ensureUser from '../app/middleware/auth';

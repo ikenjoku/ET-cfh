@@ -104,22 +104,19 @@
           <answers></answers>
       </div>
     </div>
-    <div id="chat-box">
+    <div id="chat-box" ng-show="renderChatLog">
+      <link rel="stylesheet" type="text/css" href="../css/chat.css"/>
+      <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
       <div id="chat-box-header" ng-click="toggleChatbox()">
-        <p><i class="fas fa-comment-alt"></i> Chat</p>
+        <div id="notification-count"> {{ notificationCount }}</div>
+        <p>Chat</p>
       </div>
-      <div id="chat-box-content-container" style="display: none;">
-        <div id="chat-box-content">
-          <div>
-            <p id="user-name">Muchi</p>
-            <p id="user-message">I love your design</p>
-          </div>
-        </div>
-        <div id="chat-box-input">
-          <input type="text" class="input-field" name="message" id="">
-          <i class="far fa-paper-plane"></i>
-        </div>
+      <div id="chat-box-content-container">
       </div>
+      <div id="chat-box-input">
+          <input type="text" class="input-field" id="chat-input" name="message" ng-model="MessageInput"id="">
+          <i class="far fa-paper-plane" ng-click="SendMessage()"></i>
+        </div>
     </div>
   </div>
   <script>

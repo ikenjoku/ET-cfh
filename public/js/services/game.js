@@ -1,4 +1,4 @@
-/* eslint prefer-arrow-callback: 0, func-names: 0, */
+/* eslint prefer-arrow-callback: 0, func-names: 0 */
 angular.module('mean.system')
   .factory('game', ['socket', '$timeout', '$http', function (socket, $timeout, $http) {
     const game = {
@@ -20,7 +20,9 @@ angular.module('mean.system')
       curQuestion: null,
       notification: null,
       timeLimits: {},
-      joinOverride: false
+      joinOverride: false,
+      openChatLog: false,
+      messages: []
     };
 
     const notificationQueue = [];
@@ -46,6 +48,7 @@ angular.module('mean.system')
     };
 
     let timeSetViaUpdate = false;
+
     const decrementTime = function () {
       if (game.time > 0 && !timeSetViaUpdate) {
         game.time -= 1;
@@ -64,6 +67,7 @@ angular.module('mean.system')
       game.playerMaxLimit = data.playerMaxLimit;
       game.pointLimit = data.pointLimit;
       game.timeLimits = data.timeLimits;
+      game.openChatLog = true;
     });
 
     socket.on('gameFilledUp', function () {
@@ -72,6 +76,18 @@ angular.module('mean.system')
 
     socket.on('userExist', function () {
       game.userExist = true;
+    });
+
+    socket.on('incoming-message', function (message) {
+      const str = `<div id="chat-box-content">
+      <div>
+        <p id="user-name">${message.origin.username}</p>
+        <p id="user-message">${message.content}</p>
+      </div>
+    </div>`;
+      const html = $.parseHTML(str);
+      const target = $('#chat-box-content-container');
+      target.append(html);
     });
 
     socket.on('gameUpdate', function (data) {
@@ -119,6 +135,8 @@ angular.module('mean.system')
       if (data.table.length === 0) {
         game.table = [];
       } else {
+        // disabling this becase _ is made available to the scope from the HTML file
+        /* eslint-disable no-undef */
         const added = _.difference(_.pluck(data.table, 'player'), _.pluck(game.table, 'player'));
         const removed = _.difference(_.pluck(game.table, 'player'), _.pluck(data.table, 'player'));
         for (i = 0; i < added.length; i += 1) {
@@ -237,6 +255,10 @@ angular.module('mean.system')
 
     game.pickWinning = function (card) {
       socket.emit('pickWinning', { card: card.id });
+    };
+
+    game.dispatchMessage = function (message) {
+      socket.emit('new-message', { content: message });
     };
 
     decrementTime();
