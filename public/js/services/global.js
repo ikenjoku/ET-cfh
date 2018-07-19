@@ -67,7 +67,7 @@ angular.module('mean.system')
         /* eslint-disable prefer-const */
         let shuffleIndex = facts.length;
         while (shuffleIndex) {
-          let randNum = Math.floor(Math.random() * (shuffleIndex - 1));
+          let randNum = Math.floor(Math.random() * (shuffleIndex -= 1));
           const temp = facts[randNum];
           facts[randNum] = facts[shuffleIndex];
           facts[shuffleIndex] = temp;
