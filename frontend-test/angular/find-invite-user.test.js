@@ -61,6 +61,6 @@ describe('Invite User', function () {
 
   it('Should pop up modal', function () {
     $scope.closeReusedModal();
-    expect(game.isFilledUp).toEqual(null);
+    expect(game.isFilledUp).toEqual(false);
   });
 });

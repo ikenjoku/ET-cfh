@@ -1,6 +1,6 @@
-/* eslint prefer-arrow-callback: 0, func-names: 0, no-undef: 0 */
+/* eslint prefer-arrow-callback: 0, func-names: 0 */
 angular.module('mean.system')
-  .controller('IndexController', ['$scope', 'Global', '$location', 'socket', 'game', 'AvatarService', '$http', function ($scope, Global, $location, socket, game, AvatarService, $http) {
+  .controller('IndexController', ['$scope', 'Global', '$location', 'game', 'AvatarService', function ($scope, Global, $location, game, AvatarService) {
     $scope.global = Global;
 
     $scope.playAsGuest = function () {

@@ -17,7 +17,8 @@ module.exports = (config) => {
       'public/lib/angular/angular.js',
       'public/lib/angular-mocks/angular-mocks.js',
       'public/js/**/*.js',
-      'frontend-test/angular/*.test.js'
+      'frontend-test/angular/*.test.js',
+      'public/views/*.html'
     ],
 
     // list of files / patterns to exclude
@@ -27,6 +28,7 @@ module.exports = (config) => {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
+      '**/*.html': ['ng-html2js']
     },
 
     // test results reporter to use
@@ -42,14 +44,21 @@ module.exports = (config) => {
     colors: true,
 
     // level of logging
-    // possible values: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN ||
-    // config.LOG_INFO || config.LOG_DEBUG
+    /*
+    possible values: config.LOG_DISABLE || config.LOG_ERROR ||
+     config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
+    */
     logLevel: config.LOG_INFO,
 
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
     browsers: ['Chrome'],
+
+
+    ngHtml2JsPreprocessor: {
+      stripPrefix: 'public'
+    },
 
     // you can define custom flags
     customLaunchers: {
@@ -74,5 +83,5 @@ module.exports = (config) => {
   if (process.env.TRAVIS) {
     configuration.browsers = ['Chrome_travis_ci'];
   }
-  config.set(configuration)
+  config.set(configuration);
 };

@@ -31,6 +31,11 @@ angular.module('mean.system')
       });
     };
 
+    $scope.closeReusedModal = function () {
+      $('#reuse-modal').modal('close');
+      game.isFilledUp = false;
+    };
+
     $scope.sendInvitation = function (user) {
       $scope.selectedUser = user;
       $scope.disableInviteButton = true;

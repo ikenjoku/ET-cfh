@@ -31,7 +31,8 @@ const gameResult = (req, res) => {
   const game = new Game(payload);
   game.save((err) => {
     if (err) {
-      return res.status(500).json({ message: 'Error saving game' });
+      const message = err.message || 'Error saving game';
+      return res.status(500).json({ message });
     }
     return res.status(201).json(game);
   });

@@ -11,3 +11,5 @@ dist
 coverage/
 .nyc_output/
 bower_components
+.eslintrc.json
+.eslintrc.js

@@ -8,7 +8,10 @@ import mongoose from 'mongoose';
 import passport from 'passport';
 import avatarsList from './avatars';
 import { Tokenizer } from '../helpers/tokenizer';
-import sendInvitationEmail from '../helpers/sendInvitationEmail';
+import sendInvite from '../helpers/sendInvitationEmail';
+import Services from '../logic/user';
+
+const { handleFetchProfile } = Services;
 
 const avatarsArray = avatarsList.all();
 const User = mongoose.model('User');
@@ -47,7 +50,8 @@ const signin = (req, res) => {
  * @param {object} req - request object provided by express
  * @param {object} res - response object provided by express
  * @param {function} next - next function for passing the request to next handler
- * @description Controller for handling requests to '/api/auth/login', returns token in response as JSON.
+ * @description Controller for handling requests to '/api/auth/login',
+ * returns token in response as JSON.
  * @param {object} passport - passport with all the startegies registered
  * @description Controller for handling requests to '/api/auth/login',
  * returns token in response as JSON.
@@ -106,6 +110,21 @@ const handleSignUp = (req, res, next) => {
     return next(error);
   }
 };
+
+/**
+ * @param {object} req - request object provided by express
+ * @param {object} res - response object provided by express
+ * @param {function} next - next function for passing the request to next handler
+ * @description controller for handling requests to get the user profile, expects that a token
+ *  has been decoded and payload appended to the request object
+*/
+const fetchProfile = (req, res, next) => handleFetchProfile(req.user._id)
+  .then((data) => {
+    res.status(200).json({ data });
+  })
+  .catch((err) => {
+    next(err);
+  });
 
 
 /**
@@ -230,7 +249,7 @@ const addDonation = (req, res) => {
         .exec((err, user) => {
         // Confirm that this object hasn't already been entered
           let duplicate = false;
-          for (let i = 0; i < user.donations.length; i++) {
+          for (let i = 0; i < user.donations.length; i + 1) {
             if (user.donations[i].crowdrise_donation_id === req.body.crowdrise_donation_id) {
               duplicate = true;
             }
@@ -320,7 +339,7 @@ const findUsers = (req, res) => {
 */
 const invite = (req, res) => {
   const recipient = req.body.user;
-  if (sendInvitationEmail(recipient, req.body.link)) {
+  if (sendInvite(recipient, req.body.link)) {
     return res.status(200).send({ user: recipient });
   }
   return res.status(400).send({ message: 'An error occurred while sending the invitation' });
@@ -339,6 +358,7 @@ export default {
   signup,
   signin,
   handleLogin,
+  fetchProfile,
   handleSignUp,
   avatars,
   findUsers,

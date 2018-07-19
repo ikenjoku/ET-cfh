@@ -1,10 +1,10 @@
-/* eslint prefer-arrow-callback: 0, func-names: 0, no-undef: 0, no-var: 0 */
+/* eslint prefer-arrow-callback: 0, func-names: 0 */
 angular.module('mean.system')
   .factory('Global', [function () {
-    var _this = this;
+    const _this = this;
     _this._data = {
       user: window.user,
-      authenticated: !! window.user
+      authenticated: !!window.user
     };
 
     return _this._data;
@@ -28,7 +28,7 @@ angular.module('mean.system')
           $http.post('/donations', donationObject)
         ])
           .then(function (results) {
-            console.log('userDonated success', results);
+            return results;
           });
       }
     };
@@ -36,7 +36,7 @@ angular.module('mean.system')
   .factory('MakeAWishFactsService', [function () {
     return {
       getMakeAWishFacts() {
-        var facts = ['Health professionals who treat wish kids, including nurses and doctors, overwhelmingly believe that the wish experience can improve a wish kids’ physical health.',
+        const facts = ['Health professionals who treat wish kids, including nurses and doctors, overwhelmingly believe that the wish experience can improve a wish kids’ physical health.',
           'Most health professionals say a wish come true has the potential to be a positive turning point in the child’s battle for health.',
           'Parents and volunteers observe that a wish come true makes kids feel stronger and more energetic.',
           'Wish kids are more willing to comply with difficult, but vital, treatment regimens.',
@@ -60,13 +60,15 @@ angular.module('mean.system')
           'Nearly 75 percent of wish experiences involve travel.',
           'The Walt Disney Company is involved in 40 percent of the wishes Make-A-Wish grants.',
           'As of August 2012, the average cost of a wish was $8,141.'];
-        var shuffleIndex = facts.length;
-        var temp;
-        var randNum;
-
+        /*
+          disabling eslint prefer const, because i need to perform write operations
+          on randNum and shuffleIndex, using shuffleIndex makes them read only
+        */
+        /* eslint-disable prefer-const */
+        let shuffleIndex = facts.length;
         while (shuffleIndex) {
-          randNum = Math.floor(Math.random() * shuffleIndex--);
-          temp = facts[randNum];
+          let randNum = Math.floor(Math.random() * (shuffleIndex - 1));
+          const temp = facts[randNum];
           facts[randNum] = facts[shuffleIndex];
           facts[shuffleIndex] = temp;
         }

@@ -10,7 +10,9 @@ const auth = (req, res, next) => {
   let token = req.headers.authorization || req.headers['x-access-token'];
 
   if (!token) {
-    return res.status(401).json({ message: 'Unauthorized Access' });
+    const err = new Error('You need to be authorized to access this route');
+    err.status = 403;
+    return next(err);
   }
 
   token = token.replace('Bearer ', '');
@@ -20,6 +22,7 @@ const auth = (req, res, next) => {
       return res.status(401).json({ message: 'Please login!' });
     }
     req.decoded = result;
+    req.user = result;
     next();
   });
 };

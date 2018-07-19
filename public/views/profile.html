@@ -1,0 +1,69 @@
+<div class="profile-page">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- This should contain the backdrop -->
+<div class="profile-backdrop" ng-click="hideModal()"></div>
+<link rel="stylesheet" type="text/css" href="../css/profile.css"/>
+<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Quicksand"/>
+<div class="show-profile-main">
+    <!-- show the main user details  -->
+    <div class="show-user-details-main">
+        <!-- show the user image -->
+        <a class="close-button"> x </a>
+        <img class="show-background-image" src="https://images.unsplash.com/photo-1517333971889-7f4416ed5062?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=915681ac8f8a5c1fded424e8ca1b6e6a&auto=format&fit=crop&w=800&q=60"/>
+        <div class="show-user-bio">
+            <!-- close button -->
+            <!-- this shows the name and email of the user-->
+            <div class="show-user-name-and-mail">
+                <img class="user-avatar" ng-src="{{currentUser.avatar}}" />
+              <p class="user-name">{{ currentUser.name }}</p>
+              <p class="user-email">{{ currentUser.email }}</p>
+            </div>
+            <div class="show-game-overview"> 
+                <p class="games-played-preamble"> Game Summary </p>
+                <div class="games-played-tiny-grid"> 
+                    <div class="games-item games-played">
+                        <p class="games-inner-text-a"> Played </p>
+                        <p class="games-inner-text-b">{{ currentUser.games.length }}</p>
+                    </div>
+                    <div class="games-item games-won"> 
+                        <p class="games-inner-text-a"> Won </p>
+                        <p class="games-inner-text-b">{{ currentUser.gamesWon.length }}</p>
+                    </div>
+                </div>
+            </div>
+            <button class="edit-profile-button" ng-click="hideModal()">Close</button>   
+        </div>
+    </div>
+    <!--  show the games played cards -->
+    <div class="show-user-game-history">
+    <div  ngShow="games.length" ng-repeat="game in currentUser.games" class="show-cards-grid">
+        <!-- this should contain the game cards -->
+        <div class="game-card"> 
+                <div class="players-and-winner"> 
+                   <!-- the name -->
+                   <div class="players-and-winner-item">
+                       <p class="players-item"> Players </p>
+                       <p class="players-number"> {{ game.players.length }}</p>
+                   </div>
+                   <div class="players-and-winner-item"> 
+                           <p class="players-item"> Winner </p>
+                           <p class="players-number"> {{ game.gameWinner.name }} </p>
+                       </div>
+                </div>
+                <!-- Game date -->
+                <div class="game-date"> 
+                   <p> {{ moment ? generateDate(game) : '' }} </p>
+                </div>   
+           </div>
+    </div>
+    <div ngShow="!currentUser.games.length" class="no-games-display-text"> 
+            <p> Seems like you haven't played any game yet, play some and watch this space!</p>
+        </div>
+    </div>
+</div>
+<div class="navigator-buttons"> 
+    <a> Dashboard </a>
+    <a href="/play"> Play Game </a>
+</div>
+</div>
