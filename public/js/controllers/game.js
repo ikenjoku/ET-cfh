@@ -160,6 +160,22 @@ angular.module('mean.system')
       }
     };
 
+    $scope.beginRound = function () {
+      game.beginRound();
+    };
+
+    $scope.shuffleCards = function (e) {
+      if ($scope.isCzar()) {
+        const card = $(`#${e.target.id}`);
+        card.addClass('animated flipOutY');
+        setTimeout(() => {
+          $scope.beginRound();
+          card.removeClass('animated flipOutY');
+          $('#czarSelectCard').modal('close');
+        }, 700);
+      }
+    };
+
     // Watches for a new players where game has started already
     $scope.$watch('game.isFilledUp', function () {
       if (game.isFilledUp) {
@@ -188,6 +204,9 @@ angular.module('mean.system')
     $scope.$watch('game.state', function () {
       if (game.state === 'waiting for czar to decide' && $scope.showTable === false) {
         $scope.showTable = true;
+      }
+      if ($scope.isCzar() && game.state === 'czar picks card') {
+        $('#czarSelectCard').modal('open');
       }
     });
 
