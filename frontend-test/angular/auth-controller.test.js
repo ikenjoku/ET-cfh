@@ -9,6 +9,13 @@ describe('AuthController', function () {
       }
     };
   };
+  mockUpload = {
+    upload() {
+      return {
+        data: { url: 'url' }
+      };
+    }
+  };
   beforeEach(inject(function (_$controller_, _$rootScope_, _$location_) {
     // assining providers to global scope
     $scope = _$rootScope_.$new();
@@ -17,7 +24,9 @@ describe('AuthController', function () {
     controller('AuthController', {
       $scope,
       $resource: mockApireq,
-      $location
+      $location,
+      Upload: mockUpload,
+      cloudinary: {}
     });
   }));
 
@@ -27,6 +36,11 @@ describe('AuthController', function () {
     const token = localStorage.getItem('#cfhetusertoken');
     expect(token).toEqual('Thisisatesttoken');
     expect($location.path()).toBe('/');
+  });
+
+  it('Upload function returns a url', function () {
+    const img = $scope.uploadImage('file/url');
+    expect(img.data.url).toEqual('url');
   });
 
   it('Should log in the user with the successful data then set the returning token to local storage', function () {

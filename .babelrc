@@ -8,5 +8,8 @@
         "istanbul"
       ]
     }
-  }
+  },
+  "plugins": [
+    "transform-object-rest-spread"
+  ]
  }

@@ -39,31 +39,12 @@
             </div>
           </div>
           <div class="col s12">
-            <button data-target="modal1" ng-click="openModal()" class="modal-trigger center-align" id="choose-avatar" >Click to choose an avatar</button>
+            <button data-target="modal1" ng-click="openModal()" class="modal-trigger center-align" id="choose-avatar" >Click to upload profile picture</button>
           </div>
           <div class="auth-input">
             <button class="btn col s12 green darken-4 font-lg font-quick-sand auth-btn">SIGN UP</button>
           </div>
         </form>
-      </div>
-    </div>
-    <div id="modal1" class="modal modal-signup">
-      <div class="modal-content">
-        <h4>Choose an avatar</h4>
-        <form action="">
-            <ul ng-controller="IndexController" class="avatar-list">
-                <li ng-repeat="avatar in avatars" class="avatars ng-scope">
-                  <label>
-                    <input ng-model="newUser.avatar" class="with-gap" name="avatar" type='radio' value="{{$index}}">
-                      <img ng-src="{{avatar}}">
-                    </input>
-                  </label>
-                </li>
-              </ul>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button data-target="modal1" ng-click="closeModal()" class="modal-close" >Close</button>
       </div>
     </div>
     <div>
@@ -85,6 +66,31 @@
           <i class="fab fa-google"></i>
         </div>
       </a>
+    </div>
+    <div id="modal1" class="modal">
+      <div class="modal-content black-text">
+        <h4>Upload profile Picture</h4>
+          <div class="row">
+            <img ng-src="{{imagePreview}}" class="imagepreview" >
+          </div>
+          <div class = "row">
+            <label>Profile Image</label>
+            <div class = "file-field input-field" style="padding: 0 !important;">
+            <div class = "btn upload-btn">
+              <span>Upload</span>
+              <input type="file" ng-change="viewImage()" ngf-select ng-model="profilePic" name="profilePic" ngf-pattern="'image/*'" ngf-accept="'image/*'" ngf-max-size="20MB" />
+            </div>
+            
+            <div class = "file-path-wrapper">
+              <input class = "file-path validate" type = "text"
+                placeholder = "Upload Image" />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button data-target="modal1" ng-click="closeModal()" class="modal-close modal-footer-btn" >Close</button>
+      </div>
     </div>
   </section>
 
