@@ -129,10 +129,60 @@ describe('Game Server', () => {
       client2.on('connect', () => {
         client2.emit('joinGame', { userId: 'unauthenticated', room: '', createPrivate: false });
         client1.on('notification', (data) => {
-          data.notification.should.match(/ has joined the game\!/);
+          data.notification.should.match(/ has joined the game!/);
         });
       });
       setTimeout(disconnect, 200);
+    });
+  });
+  describe('Game Server', () => {
+    it('Should update leftPlayers array when a player left a game', (done) => {
+      let client2, client3, client4, client5;
+      const client1 = io.connect(socketURL, options);
+      const disconnect = () => {
+        client1.disconnect();
+        client2.disconnect();
+        client3.disconnect();
+        client4.disconnect();
+        client5.disconnect();
+        done();
+      };
+      const expectStartGame = () => {
+        client1.emit('startGame');
+        client1.on('gameUpdate', (data) => {
+          data.state.should.equal('waiting for players to pick');
+        });
+        client2.on('gameUpdate', (data) => {
+          data.state.should.equal('waiting for players to pick');
+        });
+        client3.on('gameUpdate', (data) => {
+          data.state.should.equal('waiting for players to pick');
+        });
+        client4.on('gameUpdate', (data) => {
+          data.state.should.equal('waiting for players to pick');
+        });
+        setTimeout(disconnect, 200);
+      };
+      client1.on('connect', () => {
+        client1.emit('joinGame', { userId, room: '', createPrivate: false });
+        client2 = io.connect(socketURL, options);
+        client2.on('connect', () => {
+          client2.emit('joinGame', { userId: 'unauthenticated', room: '', createPrivate: false });
+          client3 = io.connect(socketURL, options);
+          client3.on('connect', () => {
+            client3.emit('joinGame', { userId: 'unauthenticated', room: '', createPrivate: false });
+            client4 = io.connect(socketURL, options);
+            client4.on('connect', () => {
+              client4.emit('joinGame', { userId: 'unauthenticated', room: '', createPrivate: false });
+              client5 = io.connect(socketURL, options);
+              client5.on('connect', () => {
+                client5.emit('joinGame', { userId: 'unauthenticated', room: '', createPrivate: false });
+                setTimeout(expectStartGame, 100);
+              });
+            });
+          });
+        });
+      });
     });
   });
 

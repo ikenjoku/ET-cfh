@@ -23,7 +23,7 @@ dotenv.config();
  */
 
 // Bootstrap db connection
-mongoose.connect(config.MONGOHQ_URL);
+mongoose.connect(config.MONGOHQ_URL, { autoIndex: false });
 
 // bootstrap passport config
 passportConfig(passport);

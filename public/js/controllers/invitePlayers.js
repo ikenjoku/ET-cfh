@@ -18,7 +18,7 @@ angular.module('mean.system')
       $('#reuse-modal').modal('close');
       game.isFilledUp = null;
     };
-  
+
     $scope.findUsers = function () {
       return $http.get(`/api/users/findUsers/${$scope.searchKey}`, { headers: { Authorization: `Bearer ${token}` } }).then(function (response) {
         $scope.foundUsers = response.data.users;
