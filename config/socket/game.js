@@ -6,9 +6,6 @@ import { allAnswersForGame } from '../../app/controllers/answers';
 import * as questions from '../../app/controllers/questions';
 
 const GameModel = mongoose.model('Game');
-// const questions = require(`${__dirname}/../../app/controllers/questions.js`);
-// const answers = require(`${__dirname}/../../app/controllers/answers.js`);
-
 const guestNames = [
   'Disco Potato',
   'Silver Blister',

@@ -19,7 +19,8 @@ export default (router, passport, app) => {
     .post('/users/invite', ensureUser, users.invite)
     .post('/game/:id/start', ensureUser, game)
     .get('/profile', ensureUser, users.fetchProfile)
-    .post('/game/:id/start', ensureUser, game);
+    .get('/signout', users.signout);
+
 
   // Setting up user tour api
   api
@@ -28,7 +29,6 @@ export default (router, passport, app) => {
   router.get('/signin', users.signin);
   router.get('/signup', users.signup);
   router.get('/chooseavatars', users.checkAvatar);
-  router.get('/signout', users.signout);
 
   // Setting up the users api
   router.post('/users', users.create);
@@ -43,21 +43,12 @@ export default (router, passport, app) => {
   // Setting the facebook oauth routes
   router.get('/auth/facebook', passport.authenticate('facebook', {
     scope: ['email'],
-    failureRedirect: '/signin'
+    failureRedirect: '/signin',
   }), users.signin);
 
   router.get('/auth/facebook/callback', passport.authenticate('facebook', {
     failureRedirect: '/signin'
-  }), users.authCallback);
-
-  // Setting the github oauth routes
-  router.get('/auth/github', passport.authenticate('github', {
-    failureRedirect: '/signin'
   }), users.signin);
-
-  router.get('/auth/github/callback', passport.authenticate('github', {
-    failureRedirect: '/signin'
-  }), users.authCallback);
 
   // Setting the twitter oauth routes
   router.get('/auth/twitter', passport.authenticate('twitter', {
@@ -66,7 +57,7 @@ export default (router, passport, app) => {
 
   router.get('/auth/twitter/callback', passport.authenticate('twitter', {
     failureRedirect: '/signin'
-  }), users.authCallback);
+  }), users.signin);
 
   // Setting the google oauth routes
   router.get('/auth/google', passport.authenticate('google', {
@@ -79,7 +70,7 @@ export default (router, passport, app) => {
 
   router.get('/auth/google/callback', passport.authenticate('google', {
     failureRedirect: '/signin'
-  }), users.authCallback);
+  }), users.signin);
 
   // Finish with setting up the userId param
   router.param('userId', users.user);
@@ -110,6 +101,7 @@ export default (router, passport, app) => {
 
 
   app.use((err, req, res, next) => {
+    // console.log(err);
     // error from the '/api' namespaced routes
     if (err.status) return res.status(err.status).json({ message: err.message });
     // Treat as 404

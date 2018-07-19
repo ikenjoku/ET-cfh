@@ -7,6 +7,7 @@ import compress from 'compression';
 import helpers from 'view-helpers';
 import bodyParser from 'body-parser';
 import methodOverride from 'method-override';
+import session from 'express-session';
 import config from './config';
 
 /* eslint no-console: 0 */
@@ -37,6 +38,16 @@ export default (app, passport) => {
   // bodyParser should be above methodOverride
   app.use(bodyParser.urlencoded({ extended: false }));
   app.use(bodyParser.json());
+  app.set('trust proxy', 1); // trust first proxy
+  app.use(session({
+    secret: process.env.SECRET_KEY,
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: false }
+  }));
+  // app.use(express.session({ secret: process.env.SECRET_KEY })); // session secret
+  app.use(passport.initialize());
+  app.use(passport.session()); // persistent login sessions
   app.use(methodOverride());
 
   // dynamic helpers

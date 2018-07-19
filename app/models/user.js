@@ -5,7 +5,7 @@ import mongoose from 'mongoose';
 import bcrypt from 'bcryptjs';
 
 const { Schema } = mongoose;
-const authTypes = ['github', 'twitter', 'facebook', 'google'];
+const authTypes = ['twitter', 'facebook', 'google'];
 
 /**
  * User Schema
@@ -22,7 +22,6 @@ const UserSchema = new Schema({
   hashed_password: String,
   facebook: {},
   twitter: {},
-  github: {},
   google: {}
 });
 

@@ -5,23 +5,18 @@ module.exports = {
   port: process.env.PORT,
   MONGOHQ_URL: process.env.MONGODB_URI,
   facebook: {
-    clientID: 'APP_ID',
-    clientSecret: 'APP_SECRET',
-    callbackURL: 'http://cardsforhumanity.com:3000/auth/facebook/callback'
+    clientID: process.env.FB_CLIENT_ID,
+    clientSecret: process.env.FB_CLIENT_SECRET,
+    callbackURL: process.env.FB_CALLBACK_URL
   },
   twitter: {
-    clientID: 'CONSUMER_KEY',
-    clientSecret: 'CONSUMER_SECRET',
-    callbackURL: 'http://cardsforhumanity.com:3000/auth/twitter/callback'
-  },
-  github: {
-    clientID: 'APP_ID',
-    clientSecret: 'APP_SECRET',
-    callbackURL: 'http://cardsforhumanity.com:3000/auth/github/callback'
+    clientID: process.env.TWITTER_CUSTOMER_KEY,
+    clientSecret: process.env.TWITTER_CUSTOMER_SECRET,
+    callbackURL: process.env.TWITTER_CALLBACK_URL
   },
   google: {
-    clientID: 'APP_ID',
-    clientSecret: 'APP_SECRET',
-    callbackURL: 'http://cardsforhumanity.com:3000/auth/google/callback'
+    clientID: process.env.GOOGLE_CLIENT_ID,
+    clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+    callbackURL: process.env.GOOGLE_CALLBACK_URL
   }
 };

@@ -7,6 +7,17 @@ angular.module('mean.system')
       $scope.user = {};
       $scope.authError = '';
 
+      let url = window.location.href.split('auth?')[1];
+
+      // Store token to local storage
+      const storeAndRedirect = function (token, id, name, tour) {
+        localStorage.setItem('#cfhetusertoken', token);
+        localStorage.setItem('#cfhetUserId', id);
+        localStorage.setItem('username', name);
+        localStorage.setItem('#cfhuseristourtaken', tour);
+        $location.path('/');
+      };
+
       const Login = $resource('/api/auth/login', {}, {
         execute: { method: 'POST', hasBody: true }
       });
@@ -15,11 +26,47 @@ angular.module('mean.system')
         execute: { method: 'POST', hasBody: true }
       });
 
+      const LogOut = $resource('api/signout', {}, {
+        execute: { method: 'GET', hasBody: false }
+      });
+
+
       $scope.logOut = function () {
-        localStorage.removeItem('#cfhetusertoken');
-        localStorage.removeItem('username');
-        localStorage.removeItem('#cfhetUserId');
-        localStorage.removeItem('#cfhuseristourtaken');
+        LogOut.execute({}, function () {
+          localStorage.removeItem('#cfhetusertoken');
+          localStorage.removeItem('username');
+          localStorage.removeItem('#cfhetUserId');
+          localStorage.removeItem('#cfhuseristourtaken');
+          $location.path('/');
+        }, (error) => {
+          $scope.authError = error.data.message;
+        });
+      };
+
+      $scope.username = localStorage.getItem('username');
+
+      $scope.checkToken = function () {
+        const token = localStorage.getItem('#cfhetusertoken');
+        if (token) {
+          return true;
+        }
+        return false;
+      };
+
+      $scope.showProfile = function () {
+        document.getElementsByClassName('profile-container')[0].style.display = 'block';
+      };
+
+      $scope.uploadImage = function (profilePic) {
+        const cloudUrl = Upload.upload({
+          url: 'https://api.cloudinary.com/v1_1/dffiyhgto/image/upload',
+          data: {
+            upload_preset: 'lupttjwi',
+            secure: true,
+            file: profilePic
+          }
+        });
+        return cloudUrl;
       };
 
       $scope.username = localStorage.getItem('username');
@@ -38,11 +85,7 @@ angular.module('mean.system')
 
       $scope.SignInUser = function () {
         Login.execute({}, $scope.user, function (response) {
-          localStorage.setItem('#cfhetusertoken', response.token);
-          localStorage.setItem('#cfhetUserId', response._id);
-          localStorage.setItem('username', response.name);
-          localStorage.setItem('#cfhuseristourtaken', response.tour);
-          $location.path('/');
+          storeAndRedirect(response.token, response._id, response.name, response.tour);
         }, (error) => {
           if (error.data.message === 'Unknown user') {
             $scope.authError = 'Oops, We can not find you in our system';
@@ -83,25 +126,28 @@ angular.module('mean.system')
           $scope.uploadImage(profilePic).then(function (res) {
             $scope.newUser.avatar = res.data.url;
             SignUp.execute({}, $scope.newUser, function (response) {
-              localStorage.setItem('#cfhetusertoken', response.token);
-              localStorage.setItem('#cfhetUserId', response._id);
-              localStorage.setItem('username', response.name);
-              localStorage.setItem('#cfhuseristourtaken', response.tour);
-              $location.path('/');
+              storeAndRedirect(response.token, response._id, response.name, response.tour);
             }, (error) => {
               $scope.authError = error.data.message;
             });
           });
         } else {
           SignUp.execute({}, $scope.newUser, function (response) {
-            localStorage.setItem('#cfhetusertoken', response.token);
-            localStorage.setItem('#cfhetUserId', response._id);
-            localStorage.setItem('username', response.name);
-            localStorage.setItem('#cfhuseristourtaken', response.tour);
-            $location.path('/');
+            storeAndRedirect(response.token, response._id, response.name, response.tour);
           }, (error) => {
             $scope.authError = error.data.message;
           });
         }
       };
+
+      const init = function () {
+        if (url !== undefined) {
+          url = url.replace(/%20/g, ' ').split('#!')[0].split('---');
+          const [token, name, id, tour] = url;
+
+          storeAndRedirect(token, id, name, tour);
+          window.location.replace('/');
+        }
+      };
+      init();
     }]);

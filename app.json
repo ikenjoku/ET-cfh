@@ -11,6 +11,33 @@
     },
     "SECRET_KEY": {
       "required": true
+    },
+    "FB_CLIENT_ID": {
+      "required": true
+    },
+    "FB_CLIENT_SECRET": {
+      "required": true
+    },
+    "FB_CALLBACK_URL": {
+      "required": true
+    },
+    "GOOGLE_CLIENT_ID": {
+      "required": true
+    },
+    "GOOGLE_CLIENT_SECRET": {
+      "required": true
+    },
+    "GOOGLE_CALLBACK_URL": {
+      "required": true
+    },
+    "TWITTER_CUSTOMER_KEY": {
+      "required": true
+    },
+    "TWITTER_CUSTOMER_SECRET": {
+      "required": true
+    },
+    "TWITTER_CALLBACK_URL": {
+      "required": true
     }
   },
   "formation": {

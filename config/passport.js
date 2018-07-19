@@ -1,9 +1,8 @@
 
 import mongoose from 'mongoose';
-import { Strategy as LocalStrategy } from 'passport-local'; 
-import { Strategy as TwitterStrategy } from 'passport-twitter'; 
+import { Strategy as LocalStrategy } from 'passport-local';
+import { Strategy as TwitterStrategy } from 'passport-twitter';
 import { Strategy as FacebookStrategy } from 'passport-facebook';
-import { Strategy as GitHubStrategy } from 'passport-github';
 import { OAuth2Strategy as GoogleStrategy } from 'passport-google-oauth';
 import config from './config';
 
@@ -56,13 +55,14 @@ export default (passport) => {
 
   // Use twitter strategy
   passport.use(new TwitterStrategy({
-    consumerKey: process.env.TWITTER_CONSUMER_KEY || config.twitter.clientID,
-    consumerSecret: process.env.TWITTER_CONSUMER_SECRET || config.twitter.clientSecret,
-    callbackURL: config.twitter.callbackURL
+    consumerKey: config.twitter.clientID,
+    consumerSecret: config.twitter.clientSecret,
+    callbackURL: config.twitter.callbackURL,
+    userProfileURL: 'https://api.twitter.com/1.1/account/verify_credentials.json?include_email=true',
   },
     ((token, tokenSecret, profile, done) => {
       User.findOne({
-        'twitter.id_str': profile.id
+        email: profile.emails[0].value
       }, (err, user) => {
         if (err) {
           return done(err);
@@ -71,6 +71,8 @@ export default (passport) => {
           user = new User({
             name: profile.displayName,
             username: profile.username,
+            avatar: profile.photos[0].value,
+            email: profile.emails[0].value,
             provider: 'twitter',
             twitter: profile._json
           });
@@ -86,28 +88,27 @@ export default (passport) => {
 
   // Use facebook strategy
   passport.use(new FacebookStrategy({
-    clientID: process.env.FB_CLIENT_ID || config.facebook.clientID,
-    clientSecret: process.env.FB_CLIENT_SECRET || config.facebook.clientSecret,
-    callbackURL: config.facebook.callbackURL
+    clientID: config.facebook.clientID,
+    clientSecret: config.facebook.clientSecret,
+    callbackURL: config.facebook.callbackURL,
+    profileFields: ['id', 'emails', 'displayName', 'picture.type(large)'],
   },
     ((accessToken, refreshToken, profile, done) => {
       User.findOne({
-        'facebook.id': profile.id
+        email: (profile.emails && profile.emails[0].value)
       }, (err, user) => {
         if (err) {
           return done(err);
         }
         if (!user) {
-          console.log(profile);
           user = new User({
             name: profile.displayName,
             email: (profile.emails && profile.emails[0].value) || '',
-            username: profile.username,
+            avatar: profile.photos ? profile.photos[0].value : '',
             provider: 'facebook',
-            facebook: profile._json
+            facebook: profile
           });
           user.save((err) => {
-            if (err) console.log(err);
             user.facebook = null;
             return done(err, user);
           });
@@ -118,46 +119,15 @@ export default (passport) => {
       });
     })));
 
-  // Use github strategy
-  passport.use(new GitHubStrategy({
-    clientID: process.env.GITHUB_CLIENT_ID || config.github.clientID,
-    clientSecret: process.env.GITHUB_CLIENT_SECRET || config.github.clientSecret,
-    callbackURL: config.github.callbackURL
-  },
-    ((accessToken, refreshToken, profile, done) => {
-      User.findOne({
-        'github.id': profile.id
-      }, (err, user) => {
-        if (err) {
-          return done(err);
-        }
-        if (!user) {
-          user = new User({
-            name: profile.displayName,
-            email: profile.emails[0].value,
-            username: profile.username,
-            provider: 'github',
-            github: profile._json
-          });
-          user.save((err) => {
-            if (err) console.log(err);
-            return done(err, user);
-          });
-        } else {
-          return done(err, user);
-        }
-      });
-    })));
-
   // Use google strategy
   passport.use(new GoogleStrategy({
-    clientID: process.env.GOOGLE_CLIENT_ID || config.google.clientID,
-    clientSecret: process.env.GOOGLE_CLIENT_SECRET || config.google.clientSecret,
+    clientID: config.google.clientID,
+    clientSecret: config.google.clientSecret,
     callbackURL: config.google.callbackURL
   },
     ((accessToken, refreshToken, profile, done) => {
       User.findOne({
-        'google.id': profile.id
+        email: profile.emails[0].value
       }, (err, user) => {
         if (err) {
           return done(err);
@@ -167,6 +137,7 @@ export default (passport) => {
             name: profile.displayName,
             email: profile.emails[0].value,
             username: profile.username,
+            avatar: profile._json.picture,
             provider: 'google',
             google: profile._json
           });

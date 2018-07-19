@@ -5,6 +5,7 @@ describe('AuthController', function () {
   mockApireq = function () {
     return {
       execute(a, b, callback) {
+        if (typeof b === 'function') return b();
         return callback({ token: 'Thisisatesttoken' });
       }
     };
