@@ -247,6 +247,9 @@ angular.module('mean.system')
       if ($scope.isCzar() && game.state === 'czar picks card') {
         $('#czarSelectCard').modal('open');
       }
+      if (game.state === 'game dissolved') {
+        $('#czarSelectCard').modal('close');
+      }
     });
 
     $scope.$watch('game.gameID', function () {

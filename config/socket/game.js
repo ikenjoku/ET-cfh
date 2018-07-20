@@ -200,12 +200,6 @@ Game.prototype.stateChoosing = function (self) {
   }
   self.round += 1;
   self.dealAnswers();
-  // Rotate card czar
-  if (self.czar >= self.players.length - 1) {
-    self.czar = 0;
-  } else {
-    self.czar += 1;
-  }
   self.sendUpdate();
 
   self.choosingTimeout = setTimeout(() => {
@@ -337,8 +331,10 @@ Game.prototype.persistGame = function () {
         round: this.round,
       }
     };
-    const newGame = new GameModel(payload);
-    newGame.save();
+    if (!(payload.meta.state === 'game dissolved' && payload.meta.gameWinner)) {
+      const newGame = new GameModel(payload);
+      newGame.save();
+    }
   }
 };
 

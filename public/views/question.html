@@ -46,39 +46,7 @@
   </div>
 </div>
 
-<!-- Czar's question modal -->
-<div class="modal fade open czar-modal" id="czarSelectCard" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
-  <div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content">
-      <div class="czar-modal-head">
-        <h4>You are the CZAR</h4>
-        <p>Choose a question card to start the round</p>
-      </div>
-      <div class="modal-body">
-        <div class="row contain-cards">
-          <ul class="czars-card" ng-click="shuffleCards($event)" id="czars-cards">
-            <li>
-              <img id="card1" class="card" src="../img/cards4.png" alt="czar card">
-            </li>
-            <li>
-              <img id="card2" class="card" src="../img/cards4.png" alt="czar card">
-            </li>
-            <li>
-              <img id="card3" class="card" src="../img/cards4.png" alt="czar card">
-            </li>
-            <li>
-              <img id="card4" class="card" src="../img/cards4.png" alt="czar card">
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
-  </div>
-  </div>
-  <!-- end Czar's question modal -->
-
-<div class="top-div row" ng-show="game.state ==='game dissolved' && game.gameWinner === -1">
+<div class="top-div row" ng-show="game.state ==='game dissolved' || game.state ==='game ended'">
   <div class="col l12 s12">
     <div class="col l10 m9 s12 question-div">
       <div class="game-end-info row">
@@ -100,8 +68,3 @@
     </div>
   </div>
 </div>
-<script>
-  $(document).ready(function(){
-    $('.modal').modal();
-  });
-</script>
