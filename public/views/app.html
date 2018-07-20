@@ -64,12 +64,12 @@
     <ul class="sidenav" id="mobile-demo" ng-controller="AuthController">
       <span ng-show="!checkToken() && (game.state === 'game ended' || game.state === 'game dissolved')">
         <li>
-          <a class="navbar-button" id="index-signup-btn" href="signup">SIGNUP</a>
+          <a class="navbar-button sidenav-close" id="index-signup-btn" href="signup">SIGNUP</a>
         </li>
       </span>
       <span ng-click="logOut()" ng-show="(game.state === 'game ended' || game.state === 'game dissolved') && checkToken()">
         <li>
-          <a class="navbar-button" id="index-signup-btn">LOGOUT</a>
+          <a class="navbar-button sidenav-close" id="index-signup-btn">LOGOUT</a>
         </li>
       </span>
       <span ng-hide="game.state === 'game ended' || game.state === 'game dissolved'">
@@ -77,7 +77,7 @@
           <a class="navbar-button sidenav-close" ng-click="takeGeneralTour()">Take a Tour</a>
         </li>
         <li>
-          <a class="navbar-button" ng-click="abandonGame()">Abandon Game</a>
+          <a class="navbar-button sidenav-close" ng-click="abandonGame()">Abandon Game</a>
         </li>
       </span>
     </ul>

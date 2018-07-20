@@ -12,6 +12,7 @@
             <a class="waves-effect waves-light white black-text btn" id="index-login-btn" href="signin">Login</a>
           </li>
           <li ng-hide="checkToken()"><a class="waves-effect waves-light green darken-4 btn white-text" id="index-signup-btn" href="signup">Signup</a></li>
+          <li ng-show="checkToken()"><a class="waves-effect waves-light green darken-4 btn white-text" id="profile-button" href="/#!/dashboard">Dashboard</a></li>
           <li ng-show="checkToken()" ng-click="showProfile()"><a class="waves-effect waves-light green darken-4 btn white-text" id="profile-button">Show Profile</a></li>
           <li ng-show="checkToken()"><a ng-click="logOut()" class="waves-effect waves-light green darken-4 btn white-text" id="index-signup-btn">Sign Out</a></li>
         </ul>
@@ -19,10 +20,11 @@
     </nav>
     <ul class="sidenav" id="mobile-demo" ng-controller="AuthController">
       <li ng-hide="checkToken()">
-        <a class="navbar-button" href="signin">Login</a>
+        <a class="navbar-button sidenav-close" href="signin">Login</a>
       </li>
-      <li ng-hide="checkToken()"><a class="navbar-button" href="signup">Signup</a></li>
+      <li ng-hide="checkToken()"><a class="navbar-button sidenav-close" href="signup">Signup</a></li>
       <li ng-show="checkToken()" ng-click="showProfile()"><a class="navbar-button sidenav-close">Show Profile</a></li>
+      <li ng-show="checkToken()"><a class="navbar-button sidenav-close" href="/#!/dashboard">Dashboard</a></li>
       <li ng-show="checkToken()"><a ng-click="logOut()" class="navbar-button sidenav-close">Sign Out</a></li>
     </ul>
   </header>

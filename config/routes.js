@@ -17,14 +17,19 @@ export default (router, passport, app) => {
     .get('/users/findUsers/:searchKey', ensureUser, users.findUsers)
     .get('/users/findUsers/', ensureUser, users.findUsers)
     .post('/users/invite', ensureUser, users.invite)
-    .post('/game/:id/start', ensureUser, game)
     .get('/profile', ensureUser, users.fetchProfile)
     .get('/signout', users.signout);
-
 
   // Setting up user tour api
   api
     .post('/tour/:id', users.updateUserTour);
+
+  // Set up leaderboard endpoint
+  api
+    .get('/leaderboard', ensureUser, game.leaderboard);
+
+  api
+    .get('/games/history', ensureUser, game.gameLog);
 
   router.get('/signin', users.signin);
   router.get('/signup', users.signup);
