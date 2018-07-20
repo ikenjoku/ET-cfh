@@ -1,4 +1,3 @@
-/* global FileReader */
 /* eslint prefer-arrow-callback: 0, func-names: 0 */
 angular.module('mean.system')
   .controller('AuthController', ['$scope', '$location', '$resource', 'Upload', 'cloudinary',
@@ -109,7 +108,7 @@ angular.module('mean.system')
 
       $scope.imagePreview = '';
       $scope.viewImage = function () {
-        const file = event.target.files[0];
+        const file = document.getElementById('profilePic').files[0];
         if (file) {
           const fileReader = new FileReader();
           fileReader.readAsDataURL(file);

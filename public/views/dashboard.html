@@ -1,0 +1,98 @@
+<body>
+  <header ng-controller="AuthController">
+      <nav class="white nav" data-target="mobile-demo" class="sidenav-trigger">
+        <div class="nav-wrapper font-bold" >
+          <a href="/" class="black-text text-darken-2 brand-logo left">
+            <img src="https://res.cloudinary.com/dqsmurjpg/image/upload/v1530718726/Navbar_Logo.png"
+              id="cfh-logo" alt="cfg-logo">
+          </a>
+          <a data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+          <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li ng-show="checkToken()"><a class="waves-effect waves-light green darken-4 btn white-text" id="profile-button" href="/#!/dashboard">Dashboard</a></li>
+            <li ng-show="checkToken()" ng-click="showProfile()"><a class="waves-effect waves-light green darken-4 btn white-text" id="profile-button">Show Profile</a></li>
+            <li ng-show="checkToken()"><a ng-click="logOut()" class="waves-effect waves-light green darken-4 btn white-text" id="index-signup-btn">Sign Out</a></li>
+          </ul>
+        </div>
+      </nav>
+      <ul class="sidenav" id="mobile-demo">
+        <li ng-show="checkToken()" ng-click="showProfile()"><a class="navbar-button sidenav-close">Show Profile</a></li>
+        <li ng-show="checkToken()"><a class="navbar-button sidenav-close" href="/#!/dashboard">Dashboard</a></li>
+        <li ng-show="checkToken()"><a ng-click="logOut()" class="navbar-button sidenav-close">Sign Out</a></li>
+      </ul>
+  </header>
+  <div class="row dashboard center-align" ng-controller="DashboardController">
+    <div class="container" id="dashboard-web-container">
+      <div class="row">
+        <div class="col m4 s12 dashboard-nav">
+          <ul class="tabs">
+            <li class="tab"><a  class="active" href="#leaderboard">Leaderboard</a></li>
+            <li class="tab"><a href="#gamelog">Gamelog</a></li>
+            <!-- <li class="tab"><a href="#donations">Donations</a></li> -->
+          </ul>
+        </div>
+        <div class="col m8 s12">
+          <div id="leaderboard" class="col s12 tab-content">
+            <section>
+              <div class="row tab-header">
+                <div class="col s4">Rank</div>
+                <div class="col s4">Players</div>
+                <div class="col s4">Games Won</div>
+              </div>
+              <div class="row card card-item" ng-repeat="game in games">
+                <div class="col s4">{{game.rank}}</div>
+                <div class="col s4">{{game.username}}</div>
+                <div class="col s4">{{game.gamesWon}}</div>
+              </div>
+            </section>
+          </div>
+          <div id="gamelog" class="col s12 tab-content">
+            <div ng-show="currentUser.games.length">
+              <!-- this should contain the game cards -->
+              <div class="card col s12 m4 l4" ng-repeat="game in currentUser.games" id="game">
+                <div>
+                  <!-- the name -->
+                  <div>
+                      <p class="players-item">Total players</p>
+                      <p class="players-number"> {{ game.players.length }}</p>
+                  </div>
+                  <div> 
+                    <p> Game Winner </p>
+                    <p> {{ game.meta.gameWinner.username }} </p>
+                  </div>
+                </div>
+                <!-- Game date -->
+                <!-- <div class="game-date">
+                  <p> {{ moment ? generateDate(game) :  }} </p>
+                </div>  -->
+              </div>
+            </div>
+          </div>
+          <!-- <div id="donations" class="col s12 tab-content">
+            <section class="center-align">
+              <div class="row tab-header">
+                <div class="col s6">Players</div>
+                <div class="col s6">Donations</div>
+              </div>
+              <div class="row card card-item" ng-repeat="player in players">
+                <div class="col s6">{{player.username}}</div>
+                <div class="col s6">{{player.donations}}</div>
+              </div>
+              <h3>No Donations have been made</h3>
+            </section> 
+          </div>-->
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- the profile page of the user -->
+  <div class="profile-container" style="display:none;"> 
+    <profile-page></profile-page>
+    </div>
+  </div>
+</body>
+
+<script>
+  $(document).ready(function(){
+    $('.tabs').tabs();
+  });
+</script>

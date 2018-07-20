@@ -69,6 +69,16 @@
       <div>
         <h2>DONATE</h2>
         <span>"For it is in giving that we receive." — Francis of Assisi</span>
+        <div id='inner-text-container'>
+          <a href='/#!/app' class="waves-effect waves-light btn" id="start-btn" ng-click="game.joinGame('joinNewGame')">
+            Join a New Game
+          </a>
+          <a href='/' class="waves-effect waves-light btn" id="start-btn">
+            Return to Homepage
+          </a>
+        </div>
+        <div class="row" ng-show="game.state === 'game ended'">
+        </div>
       </div>
       <div class="row">
         <div class="col l4"><img src="./../img/donate.png" alt=""></div>

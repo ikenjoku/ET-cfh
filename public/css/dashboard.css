@@ -1,0 +1,100 @@
+body {
+  background: #F2F2F2;
+}
+
+.dashboard {
+  margin: 2rem auto;
+}
+
+.dashboard-nav {
+  margin-bottom: 1rem;
+}
+
+.tab-header {
+  border: 1px solid #000;
+  border-radius: 5px;
+  padding: .25rem;
+  background: #fff;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.tabs {
+  height: auto;
+  white-space: normal;
+}
+
+.tabs .tab a {
+  color: #236231;
+  font-size: 18px;
+}
+
+
+.tabs .tab a:focus.active,
+.tabs .tab a.active {
+  background-color: #236231;
+  color: #fff;
+}
+
+.tabs .tab a:hover,
+.tabs .tab a:focus, {
+  background-color: #819c8673;
+  color: #fff;
+}
+
+.p1 {
+  padding: 1rem;
+}
+
+.card-item {
+  padding: 1rem;
+  font-size: 18px;
+}
+
+.tabs .indicator {
+  background-color: #236231;
+}
+
+#game {
+  margin-right: 2rem;
+}
+
+
+@media screen and (min-width: 600px) {
+ .tab-header {
+    border: 1px solid #000;
+    border-radius: 5px;
+  }
+
+  #dashboard-web-container {
+    width: 97%;
+  }
+
+  .tabs {
+    height: 101px;
+    white-space: normal;
+  }
+
+  .tab {
+    display: block;
+    width: 100%;
+    border-bottom: 1px solid #f0f0f0;
+  }
+
+  .tab-content {
+    height: 200px;
+    width: 100%;
+    background: #f2f2f2;
+    border:1px solid #f0f0f0;
+  }
+
+  .indicator {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 992px){
+  .tabs {
+    display: block; 
+  }
+}
