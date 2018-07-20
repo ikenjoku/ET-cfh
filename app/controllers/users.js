@@ -6,14 +6,15 @@
 
 import mongoose from 'mongoose';
 import passport from 'passport';
-import avatarsList from './avatars';
+import { all as avatarsList } from './avatars';
 import { Tokenizer } from '../helpers/tokenizer';
 import sendInvite from '../helpers/sendInvitationEmail';
 import Services from '../logic/user';
 
 const { handleFetchProfile } = Services;
 
-const avatarsArray = avatarsList.all();
+
+const avatarsArray = avatarsList();
 const User = mongoose.model('User');
 
 // disabling no underscore because of the default style of mongoose ids

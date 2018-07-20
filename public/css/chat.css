@@ -1,0 +1,114 @@
+#chat-box {
+  width: 420px;
+  height: 50px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  border-radius: 0;
+  background-color: #f8f9f9;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-flow: column nowrap;
+  flex-flow: column nowrap; 
+}
+
+  #chat-box p {
+    font-family: 'Source Sans Pro'; 
+  }
+
+  #chat-box #chat-box-header {
+    background-color: #212121;
+    height: 50px;
+    width: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-flow: row nowrap;
+    flex-flow: row nowrap;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    padding-left: 8px; 
+  }
+
+    #chat-box #chat-box-header p {
+      background-color: inherit;
+      height: auto;
+      padding: 0;
+      width: auto;
+      border: none;
+      border-radius: 0; 
+    }
+
+    #chat-box #chat-box-header #notification-count {
+      height: 18px;
+      width: 18px;
+      border-radius: 40%;
+      margin-right: 4px;
+      background-color: green;
+      color: white;
+      text-align: center;
+      font-weight: bold;
+      font-family: 'Source Sans Pro';
+      font-size: 11px; 
+    }
+
+  #chat-box #chat-box-content-container {
+    height: 77%;
+    width: 420px;
+    background-color: #f8f9f9;
+    padding: 0 10px 0 10px;
+    overflow-y: scroll;
+    padding-top: 10px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-flow: column nowrap;
+    flex-flow: column nowrap; 
+  }
+
+    #chat-box #chat-box-content-container #chat-box-content {
+      min-height: 50px;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      background-color: white;
+      border-radius: 5px;
+      width: 200px;
+      -webkit-box-shadow: 0 0 5px 5px #F2F3F4;
+      box-shadow: 0 0 5px 5px #F2F3F4;
+      margin-bottom: 10px; 
+    }
+
+      #chat-box #chat-box-content-container #chat-box-content div {
+        background-color: white; 
+      }
+
+      #chat-box #chat-box-content-container #chat-box-content #user-name {
+        font-weight: 700px;
+        font-size: 11px; 
+      }
+      #chat-box #chat-box-content-container #chat-box-content #user-message {
+        font-weight: normal;
+        font-size: 14px;
+        color: #A6ACAF; 
+      }
+
+  #chat-box #chat-box-input {
+    height: 10%;
+    width: 100%;
+    position: absolute;
+    bottom: 0px;
+    font-size: 14px; 
+  }
+
+
+@media only screen and (max-width: 480px) {
+  #chat-box {
+    display: none; 
+  } 
+}

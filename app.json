@@ -38,6 +38,18 @@
     },
     "TWITTER_CALLBACK_URL": {
       "required": true
+    }, 
+    "FIREBASE_API_KEY": {
+      "required": true
+    },
+    "FIREBASE_AUTH_DOMAIN": {
+      "required": true
+    },
+    "FIREBASE_DB_URL": {
+      "required": true
+    },
+    "FIREBASE_STORAGE_BUCKET": {
+      "required": true
     }
   },
   "formation": {

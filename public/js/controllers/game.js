@@ -1,12 +1,15 @@
 /* eslint prefer-arrow-callback: 0, func-names: 0 */
 angular.module('mean.system')
-  .controller('GameController', ['$scope', '$http', '$q', 'game', '$timeout', '$location', 'MakeAWishFactsService', '$dialog', '$rootScope', function ($scope, $http, $q, game, $timeout, $location, MakeAWishFactsService) {
+  .controller('GameController', ['$scope', '$http', '$q', 'game', 'socket', '$timeout', '$location', 'MakeAWishFactsService', '$dialog', '$rootScope', function ($scope, $http, $q, game, socket, $timeout, $location, MakeAWishFactsService) {
     $scope.hasPickedCards = false;
     $scope.winningCardPicked = false;
     $scope.showTable = false;
     $scope.modalShown = false;
     $scope.game = game;
+    $scope.MessageInput = '';
     $scope.pickedCards = [];
+    $scope.messages = [];
+    $scope.notificationCount = 0;
     let makeAWishFacts = MakeAWishFactsService.getMakeAWishFacts();
     $scope.makeAWishFact = makeAWishFacts.pop();
 
@@ -115,6 +118,7 @@ angular.module('mean.system')
       return game.winningCard !== -1;
     };
 
+
     $scope.fewPlayersModal = function () {
       const reusableModel = $('#reuse-modal');
       $('.modal-header').empty();
@@ -200,6 +204,41 @@ angular.module('mean.system')
       $scope.pickedCards = [];
     });
 
+    // function called when the send button is pressed;
+    $scope.SendMessage = function () {
+      if (!$scope.MessageInput.length) return;
+      const str = `<div id="chat-box-content" style="align-self: flex-end; background-color: #ABEBC6;">
+      <div style="background-color: #ABEBC6;">
+        <p id="user-name"></p>
+        <p id="user-message" style="color: white;">${$scope.MessageInput}</p>
+      </div>
+    </div>`;
+      const html = $.parseHTML(str);
+      const target = $('#chat-box-content-container');
+      target.append(html);
+      game.dispatchMessage($scope.MessageInput);
+      $scope.MessageInput = '';
+    };
+
+    // determines when to show the chat;
+    $scope.$watch('game.openChatLog', function () {
+      $scope.renderChatLog = game.openChatLog;
+    });
+
+    (function () {
+      const target = document.getElementById('chat-input');
+      if (!target) return; // doing this to this IIFE to avoid failing tests
+      target.addEventListener('keydown', function (e) {
+        if (e.keyCode === 13) return $scope.SendMessage();
+      });
+    }());
+
+    socket.on('incoming-message', function () {
+      if (document.getElementById('chat-box').style.height !== '450px') {
+        $scope.notificationCount += 1;
+      }
+    });
+
     // In case player doesn't pick a card in time, show the table
     $scope.$watch('game.state', function () {
       if (game.state === 'waiting for czar to decide' && $scope.showTable === false) {
@@ -236,13 +275,15 @@ angular.module('mean.system')
     });
 
     $scope.toggleChatbox = function () {
-      const toggleDiv = document.getElementById('chat-box-content-container');
-      if (toggleDiv.style.display === 'none') {
-        toggleDiv.style.display = 'block';
+      const toggleDiv = document.getElementById('chat-box');
+      if (toggleDiv.style.height === '450px') {
+        toggleDiv.style.height = '50px';
       } else {
-        toggleDiv.style.display = 'none';
+        toggleDiv.style.height = '450px';
+        $scope.notificationCount = 0;
       }
     };
+
 
     if ($location.search().game && !(/^\d+$/).test($location.search().game)) {
       game.joinGame('joinGame', $location.search().game);
