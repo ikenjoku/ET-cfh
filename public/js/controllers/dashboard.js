@@ -8,39 +8,16 @@ angular.module('mean.system')
     };
 
     DashboardService.leaderBoard().then(function (data) {
-      $scope.games = data.games;
+      $scope.games = data.games.map(function (game, index) {
+        return {
+          rank: `${index + 1}`,
+          username: game.username,
+          gamesWon: game.gamesWon,
+        };
+      });
     });
 
     DashboardService.gameLog().then(function (data) {
       $scope.currentUser.games = data.games;
     });
-
-    // $scope.currentUser = {
-    //   games: [
-    //     {
-    //       players: [{}, {}, {}, {}],
-    //       gameWinner: {
-    //         name: 'Kelvin',
-    //       },
-    //     },
-    //     {
-    //       players: [{}, {}, {}, {}],
-    //       gameWinner: {
-    //         name: 'Big Ben',
-    //       },
-    //     },
-    //     {
-    //       players: [{}, {}, {}, {}],
-    //       gameWinner: {
-    //         name: 'Folajimi',
-    //       },
-    //     },
-    //     {
-    //       players: [{}, {}, {}, {}],
-    //       gameWinner: {
-    //         name: 'Dikaeinstein',
-    //       },
-    //     },
-    //   ],
-    // };
   }]);
