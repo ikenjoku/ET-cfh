@@ -1,6 +1,6 @@
 /* eslint prefer-arrow-callback: 0, func-names: 0 */
 angular.module('mean.system')
-  .factory('game', ['socket', '$timeout', '$http', function (socket, $timeout, $http) {
+  .factory('game', ['socket', '$timeout', '$http', function (socket, $timeout) {
     const game = {
       id: null, // This player's socket ID, so we know who this player is
       gameID: null,
@@ -220,27 +220,12 @@ angular.module('mean.system')
       socket.emit(mode, { userId, room, createPrivate });
     };
 
-    game.startGame = function () {
-      socket.emit('startGame');
+    game.startGame = function (region) {
+      socket.emit('startGame', region);
     };
 
     game.beginRound = function () {
       socket.emit('czarSelectCard');
-    };
-
-    game.createPlayers = function (gameId, players) {
-      const token = localStorage.getItem('#cfhetusertoken');
-      $http({
-        method: 'POST',
-        url: `/api/game/${gameId}/start`,
-        data: {
-          players
-        },
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: token,
-        }
-      }).then(gamePlayers => gamePlayers);
     };
 
     game.leaveGame = function () {

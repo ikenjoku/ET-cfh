@@ -226,7 +226,7 @@ export default (io) => {
       allGames[socket.gameID].beginRound(allGames[socket.gameID]);
     });
 
-    socket.on('startGame', () => {
+    socket.on('startGame', (region) => {
       if (allGames[socket.gameID]) {
         const thisGame = allGames[socket.gameID];
         if (thisGame.players.length >= thisGame.playerMinLimit) {
@@ -236,7 +236,7 @@ export default (io) => {
               return gamesNeedingPlayers.splice(index, 1);
             }
           });
-          thisGame.prepareGame();
+          thisGame.prepareGame(region);
           thisGame.sendNotification('The game has begun!');
         }
       }

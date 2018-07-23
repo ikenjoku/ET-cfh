@@ -136,7 +136,7 @@ Game.prototype.assignGuestNames = function () {
   });
 };
 
-Game.prototype.prepareGame = function () {
+Game.prototype.prepareGame = function (region) {
   this.state = 'game in progress';
   this.io.sockets.in(this.gameID).emit('prepareGame',
     {
@@ -147,8 +147,8 @@ Game.prototype.prepareGame = function () {
     });
   const self = this;
   async.parallel([
-    this.getQuestions,
-    this.getAnswers
+    this.getQuestions(region),
+    this.getAnswers(region)
   ], (err, results) => {
     [self.questions, self.answers] = results;
     self.startGame();
@@ -352,16 +352,20 @@ Game.prototype.stateDissolveGame = function () {
   this.persistGame();
 };
 
-Game.prototype.getQuestions = function (cb) {
-  questions.allQuestionsForGame((data) => {
-    cb(null, data);
-  });
+Game.prototype.getQuestions = function (region) {
+  return function (cb) {
+    questions.allQuestionsForGame((data) => {
+      cb(null, data);
+    }, region);
+  };
 };
 
-Game.prototype.getAnswers = function (cb) {
-  allAnswersForGame((data) => {
-    cb(null, data);
-  });
+Game.prototype.getAnswers = function (region) {
+  return function (cb) {
+    allAnswersForGame((data) => {
+      cb(null, data);
+    }, region);
+  };
 };
 
 Game.prototype.shuffleCards = function (cards) {

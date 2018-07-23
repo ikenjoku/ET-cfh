@@ -7,7 +7,14 @@ const Answer = mongoose.model('Answer');
 
 
 /**
- * Find answer by id
+ * @description Get answers and pass it to req
+ *
+ * @param {object} req
+ * @param {object} res
+ * @param {Function} next
+ * @param {object} id
+ *
+ * @returns {Array} returns the answer array
  */
 export const answer = (req, res, next, id) => {
   Answer.load(id, (err, answerObject) => {
@@ -19,14 +26,26 @@ export const answer = (req, res, next, id) => {
 };
 
 /**
- * Show an answer
+ * @description Get games leaderboard
+ *
+ * @param {object} req
+ * @param {object} res
+ * @param {Function} next
+ * @param {object} id
+ *
+ * @returns {Array} returns the game array
  */
 export const show = (req, res) => {
   res.jsonp(req.answer);
 };
 
 /**
- * List of Answers
+ * @description Get games leaderboard
+ *
+ * @param {object} req
+ * @param {object} res
+ *
+ * @returns {Array} returns the game array
  */
 export const all = (req, res) => {
   Answer.find({ official: true }).select('-_id').exec((err, answers) => {
@@ -41,15 +60,15 @@ export const all = (req, res) => {
 };
 
 /**
- * List of Answers (for Game class)
+ * @description Get games leaderboard
+ *
+ * @param {object} cb
+ * @param {object} region
+ *
+ * @returns {Array} returns the game array
  */
-export const allAnswersForGame = (cb) => {
-  Answer.find({ official: true }).select('-_id').exec((err, answers) => {
-    if (err) {
-      console.log(err);
-    } else {
-      cb(answers);
-    }
+export const allAnswersForGame = (cb, region) => {
+  Answer.find({ official: true, region }).select('-_id').exec((err, answers) => {
+    cb(answers);
   });
 };
- 
