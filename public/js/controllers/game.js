@@ -5,6 +5,7 @@ angular.module('mean.system')
     $scope.winningCardPicked = false;
     $scope.showTable = false;
     $scope.modalShown = false;
+    $scope.region = '';
     $scope.game = game;
     $scope.MessageInput = '';
     $scope.pickedCards = [];
@@ -160,8 +161,12 @@ angular.module('mean.system')
       if (game.players.length < game.playerMinLimit) {
         $scope.fewPlayersModal();
       } else {
-        game.startGame();
+        $('#region-modal').modal('open');
       }
+    };
+
+    $scope.startGameWithRegion = function () {
+      game.startGame($scope.region);
     };
 
     $scope.beginRound = function () {

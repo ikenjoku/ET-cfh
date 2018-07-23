@@ -1,55 +1,75 @@
 /**
  * Module dependencies.
  */
-var mongoose = require('mongoose'),
-    async = require('async'),
-    Question = mongoose.model('Question'),
-    _ = require('underscore');
+import mongoose from 'mongoose';
 
+const Question = mongoose.model('Question');
 
 /**
- * Find question by id
+ * @description returns grray or error on failed game load
+ *
+ * @param {object} req
+ * @param {object} res
+ * @param {Function} next
+ * @param {object} id
+ *
+ * @returns {Array} returns the game array
  */
-exports.question = function(req, res, next, id) {
-    Question.load(id, function(err, question) {
-        if (err) return next(err);
-        if (!question) return next(new Error('Failed to load question ' + id));
-        req.question = question;
-        next();
-    });
+exports.question = (req, res, next, id) => {
+  Question.load(id, (err, question) => {
+    if (err) return next(err);
+    if (!question) return next(new Error(`Failed to load question ${id}`));
+    req.question = question;
+    next();
+  });
 };
 
 /**
- * Show an question
- */
-exports.show = function(req, res) {
-    res.jsonp(req.question);
+* @description pass questions to req
+*
+* @param {object} req
+* @param {object} res
+* @param {Function} next
+* @param {object} id
+*
+* @returns {Array} returns the game array
+*/
+exports.show = (req, res) => {
+  res.jsonp(req.question);
 };
 
 /**
- * List of Questions
+ * @description Get all games questions
+ *
+ * @param {object} req
+ * @param {object} res
+ * @param {Function} next
+ * @param {object} id
+ *
+ * @returns {Array} returns the game array
  */
-exports.all = function(req, res) {
-    Question.find({official:true, numAnswers: {$lt : 3}}).select('-_id').exec(function(err, questions) {
-        if (err) {
-            res.render('error', {
-                status: 500
-            });
-        } else {
-            res.jsonp(questions);
-        }
-    });
+exports.all = (req, res) => {
+  Question.find({ official: true, numAnswers: { $lt: 3 } }).select('-_id').exec((err, questions) => {
+    if (err) {
+      res.render('error', {
+        status: 500
+      });
+    } else {
+      res.jsonp(questions);
+    }
+  });
 };
 
 /**
- * List of Questions (for Game class)
+ * @description Get games leaderboard
+ *
+ * @param {object} cb
+ * @param {object} region
+ *
+ * @returns {Array} returns the game array according to region
  */
-exports.allQuestionsForGame = function(cb) {
-    Question.find({official:true, numAnswers: {$lt : 3}}).select('-_id').exec(function(err, questions) {
-        if (err) {
-            console.log(err);
-        } else {
-            cb(questions);
-        }
-    });
+exports.allQuestionsForGame = (cb, region) => {
+  Question.find({ official: true, region, numAnswers: { $lt: 3 } }).select('-_id').exec((err, questions) => {
+    cb(questions);
+  });
 };

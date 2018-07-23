@@ -33,6 +33,30 @@
     </div>
   </div>
 
+  <!-- Select region Modal content -->
+  <div id="region-modal" class="modal" ng-controller="GameController">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content" style="background-color: white;">
+        <div class="modal-header">
+            <h4 class="modal-title center-align" style="color: #23522d;">Select a Region</h4>
+        </div>
+        <div class="modal-body" style="text-align: center; margin-top: 10px" style="font-size: 1.8em;">
+            <div class="modal-body" style="text-align: center; margin-top: 10px" style="font-size: 1.8em;">
+              <select ng-model="region" style="display: block !important;">
+                <option value="" selected disabled hidden>Select a Region</option>
+                <option value="Africa">Africa</option>
+                <option value="Europe">Europe</option>
+                <option value="North America">North America</option>
+              </select>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn waves-effect waves-green modal-close" id="tour-chioce-btn" ng-disabled="!region" ng-click="startGameWithRegion()">Okay</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Czar's question modal -->
   <div class="modal fade open czar-modal" id="czarSelectCard" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
     data-backdrop="static">
