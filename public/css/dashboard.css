@@ -55,6 +55,23 @@ body {
   background-color: #236231;
 }
 
+.bold {
+  font-weight: bold;
+}
+
+.mb-0 {
+  margin-bottom: 0rem;
+}
+
+.log-card-item {
+  height: 111px;
+  overflow-y: auto;
+}
+
+.mt-0 {
+  margin-top: 0rem;
+}
+
 #game {
   margin-right: 2rem;
 }

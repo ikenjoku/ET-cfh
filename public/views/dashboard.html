@@ -48,22 +48,24 @@
           <div id="gamelog" class="col s12 tab-content">
             <div ng-show="currentUser.games.length">
               <!-- this should contain the game cards -->
-              <div class="card col s12 m4 l4" ng-repeat="game in currentUser.games" id="game">
-                <div>
+              <div
+                class="card col s12 m3 l3"
+                ng-repeat="game in currentUser.games"
+                id="game"  title="click to view game details">
+                <div class="log-card-item">
                   <!-- the name -->
                   <div>
-                      <p class="players-item">Total players</p>
-                      <p class="players-number"> {{ game.players.length }}</p>
+                    <p>Total players: 
+                      <span class="bold">
+                        {{ game.players.length }}
+                      </span>
+                    </p>
                   </div>
-                  <div> 
-                    <p> Game Winner </p>
-                    <p> {{ game.meta.gameWinner.username }} </p>
+                  <div>
+                    <p class="mb-0">Game Winner</p>
+                    <p class="bold mt-0">{{ game.meta.gameWinner.username }}</p>
                   </div>
                 </div>
-                <!-- Game date -->
-                <!-- <div class="game-date">
-                  <p> {{ moment ? generateDate(game) :  }} </p>
-                </div>  -->
               </div>
             </div>
           </div>
