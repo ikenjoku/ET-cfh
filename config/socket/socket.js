@@ -175,19 +175,19 @@ export default (io) => {
           if (!user) {
           // If the user's ID isn't found (rare)
             player.username = 'Guest';
-            player.avatar = avatars[Math.floor(Math.random() * 4) + 12];
+            player.avatar = avatars()[Math.floor(Math.random() * 4) + 12];
           } else {
             player.userId = user.id;
             player.username = user.name;
             player.premium = user.premium || 0;
-            player.avatar = user.avatar || avatars[Math.floor(Math.random() * 4) + 12];
+            player.avatar = user.avatar || avatars()[Math.floor(Math.random() * 4) + 12];
           }
           getGame(player, socket, data.room, data.createPrivate);
         });
       } else {
       // If the user isn't authenticated (guest)
         player.username = 'Guest';
-        player.avatar = avatars[Math.floor(Math.random() * 4) + 12];
+        player.avatar = avatars()[Math.floor(Math.random() * 4) + 12];
         getGame(player, socket, data.room, data.createPrivate);
       }
     };
