@@ -1,3 +1,4 @@
+
 /* eslint prefer-arrow-callback: 0, func-names: 0, no-undef: 0 */
 describe('Controller: Game(Chat)', function () {
   let $scope;
@@ -36,8 +37,8 @@ describe('Controller: Game(Chat)', function () {
   }));
 
   it('should change the scope MessageInput on submit', function () {
-    $scope.MessageInput = 'This is a test thing';
     spyOn(game, 'dispatchMessage');
+    $scope.MessageInput = 'Hello world';
     $scope.SendMessage();
     expect($scope.MessageInput).toEqual('');
     expect(game.dispatchMessage).toHaveBeenCalled();

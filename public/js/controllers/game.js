@@ -133,7 +133,7 @@ angular.module('mean.system')
     $scope.morePlayersModal = function () {
       const reusableModel = $('#reuse-modal');
       $('.modal-header').empty();
-      reuseableModal.find('.modal-header').append('<h4 class="modal-title center-align" style="color: #23522d;">MAX NUMBER OF PLAYERS</h4>');
+      reusableModel.find('.modal-header').append('<h4 class="modal-title center-align" style="color: #23522d;">MAX NUMBER OF PLAYERS</h4>');
       $('.modal-body').empty();
       reusableModel.find('.modal-body').append('<p>The game cannot take more than 12 players.</p> <p>Game has started already. You have been added to a new game</p>');
       const okayBtn = '<button type="button" class="btn waves-effect waves-green modal-close"  id="play-chioce-btn">OKAY</button>';
@@ -206,32 +206,29 @@ angular.module('mean.system')
 
     // function called when the send button is pressed;
     $scope.SendMessage = function () {
-      if (!$scope.MessageInput.length) return;
+      // emoji target is the message the user inputed + any emojis used
+      const emojiTarget = document.getElementsByClassName('emojionearea-editor').length ? document.getElementsByClassName('emojionearea-editor')[0].innerHTML : $scope.MessageInput;
+      if (!emojiTarget.length) return;
       const str = `<div id="chat-box-content" style="align-self: flex-end; background-color: #ABEBC6;">
       <div style="background-color: #ABEBC6;">
         <p id="user-name"></p>
-        <p id="user-message" style="color: white;">${$scope.MessageInput}</p>
+        <p id="user-message" style="color: white;">${emojiTarget}</p>
       </div>
     </div>`;
       const html = $.parseHTML(str);
       const target = $('#chat-box-content-container');
       target.append(html);
-      game.dispatchMessage($scope.MessageInput);
+      if (document.getElementsByClassName('emojionearea-editor').length) {
+        document.getElementsByClassName('emojionearea-editor')[0].innerHTML = '';
+      }
       $scope.MessageInput = '';
+      game.dispatchMessage(emojiTarget);
     };
 
     // determines when to show the chat;
     $scope.$watch('game.openChatLog', function () {
       $scope.renderChatLog = game.openChatLog;
     });
-
-    (function () {
-      const target = document.getElementById('chat-input');
-      if (!target) return; // doing this to this IIFE to avoid failing tests
-      target.addEventListener('keydown', function (e) {
-        if (e.keyCode === 13) return $scope.SendMessage();
-      });
-    }());
 
     socket.on('incoming-message', function () {
       if (document.getElementById('chat-box').style.height !== '450px') {
@@ -287,6 +284,26 @@ angular.module('mean.system')
       }
     };
 
+
+    if ($('#chat-input').emojioneArea) {
+      $(document).ready(function () {
+        $('#chat-input').emojioneArea({
+          standalone: false,
+          inline: true,
+          placeholder: 'Press enter to send a message',
+          filtersPosition: 'bottom',
+          events: {
+            keydown(_, e) {
+              if (e.keyCode === 13) return $scope.SendMessage();
+            }
+          },
+          filters: {
+            symbols: false,
+            flags: false
+          }
+        });
+      });
+    }
 
     if ($location.search().game && !(/^\d+$/).test($location.search().game)) {
       game.joinGame('joinGame', $location.search().game);
