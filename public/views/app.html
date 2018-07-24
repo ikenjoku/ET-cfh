@@ -131,10 +131,10 @@
       <div class="col s12 m3 l3" id="social-bar-container" ng-hide="game.state === 'game ended' || game.state === 'game dissolved'">
         <player class="row"></player>
       </div>
-      <div ng-controller="InvitePlayersController" id="player" class="col s12 m9 l9 answer-div" ng-hide="game.state === 'game ended' || game.state === 'game dissolved'">
+      <div ng-controller="InvitePlayersController" id="player" class="col s12 m9 l9 answer-div" ng-if="game.state !== 'game ended' && game.state !== 'game dissolved'">
         <answers ng-controller="AuthController"></answers>
       </div>
-      <div class="col s12 m12 l12 answer-div" ng-show="game.state === 'game ended' || game.state === 'game dissolved'">
+      <div class="col s12 m12 l12 answer-div" ng-if="game.state === 'game ended' || game.state === 'game dissolved'">
         <answers></answers>
       </div>
     </div>
