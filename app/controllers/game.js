@@ -24,6 +24,7 @@ const leaderboard = (req, res, next) => Game.aggregate(gamesWonQuery())
       error.status = 404;
       return next(error);
     }
+
     return res.status(200).json({
       status: 'success',
       games,

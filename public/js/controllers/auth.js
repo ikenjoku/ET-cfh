@@ -83,6 +83,7 @@ angular.module('mean.system')
       };
 
       $scope.SignInUser = function () {
+        $('modal-loading-indicator').modal('open');
         Login.execute({}, $scope.user, function (response) {
           storeAndRedirect(response.token, response._id, response.name, response.tour);
         }, (error) => {
@@ -119,6 +120,7 @@ angular.module('mean.system')
       };
 
       $scope.SignUpUser = function () {
+        $('modal-loading-indicator').modal('open');
         const { profilePic } = $scope;
         // if image is uploaded, save profile picture as avatar
         if (profilePic) {

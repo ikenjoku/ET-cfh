@@ -24,7 +24,7 @@
          <div class="sign-error" ng-show="authError !== ''">
             <p>{{ authError }}</p>
           </div>
-        <form class="col s12" ng-submit="SignInUser()" >
+        <form class="col s12">
           <div class="auth-input">
             <div class="input-field col s12">
               <input id="email" type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" name="email" ng-model="user.email" placeholder="Email" required />
@@ -36,7 +36,9 @@
             </div>
           </div>
           <div class="auth-input">
-            <button class="btn col s12 green darken-4 font-lg font-quick-sand auth-btn">LOG IN</button>
+            <button
+              data-target="modal-loading-indicator" ng-click="SignInUser()"
+              class="btn col s12 green darken-4 font-lg font-quick-sand auth-btn modal-trigger center-align">LOG IN</button>
           </div>
         </form>
       </div>
@@ -61,6 +63,21 @@
         </div>
       </a>
     </div>
+    <div is-loading id="modal-loading-indicator" class="modal loading-circle">
+      <div class="modal-content loader-circle">
+        <div class="preloader-wrapper active">
+          <div class="spinner-layer spinner-green-only">
+            <div class="circle-clipper left">
+              <div class="circle"></div>
+            </div><div class="gap-patch">
+              <div class="circle"></div>
+            </div><div class="circle-clipper right">
+              <div class="circle"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </section>
 
   <!-- Footer start -->
@@ -71,3 +88,9 @@
   </footer>
   <!-- Footer end -->
 </div>
+
+<script>
+  $(document).ready(function(){
+    $('.modal').modal();
+  });
+</script>

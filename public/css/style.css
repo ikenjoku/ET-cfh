@@ -1093,3 +1093,8 @@ nav .sidenav-trigger {
 .upload-btn {
   background-color: #236231;
 }
+
+.loading-circle {
+  width: 10%;
+  margin: auto;
+}
