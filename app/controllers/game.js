@@ -2,6 +2,7 @@
  * Module dependencies.
  */
 import mongoose from 'mongoose';
+import gamesWonQuery from '../logic/gamesWonQuery';
 
 mongoose.Promise = global.Promise;
 
@@ -16,16 +17,7 @@ const Game = mongoose.model('Game');
  *
  * @returns {Array} returns the game array
  */
-const leaderboard = (req, res, next) => Game.aggregate([
-  {
-    $match: {
-      'meta.gameWinner.userId': { $not: { $eq: 'unauthenticated' } },
-      'meta.gameWinner': { $exists: true },
-    }
-  },
-  { $group: { _id: '$meta.gameWinner.username', gamesWon: { $sum: 1 } } },
-  { $project: { _id: 0, username: '$_id', gamesWon: 1 } }
-])
+const leaderboard = (req, res, next) => Game.aggregate(gamesWonQuery())
   .then((games) => {
     if (games.length === 0) {
       const error = new Error('No game found');
