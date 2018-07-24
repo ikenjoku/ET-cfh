@@ -25,32 +25,69 @@
       <div class="row">
         <div class="col m4 s12 dashboard-nav">
           <ul class="tabs">
-            <li class="tab"><a  class="active" href="#leaderboard">Leaderboard</a></li>
-            <li class="tab"><a href="#gamelog">Gamelog</a></li>
+            <li class="tab"><a  class="active" href="#leaderboard" ng-click="!games.data.length && fetchLeaderboard()">Leaderboard</a></li>
+            <li class="tab"><a href="#gamelog" ng-click="!currentUser.games.data.length && fetchGamelog()">Gamelog</a></li>
             <!-- <li class="tab"><a href="#donations">Donations</a></li> -->
           </ul>
         </div>
         <div class="col m8 s12">
           <div id="leaderboard" class="col s12 tab-content">
-            <section>
+            <!-- Loading indicator directive -->
+            <div is-loading>
+              <!-- Spinning preloader -->
+              <div class="preloader-wrapper active">
+                <div class="spinner-layer spinner-green-only">
+                  <div class="circle-clipper left">
+                    <div class="circle"></div>
+                  </div><div class="gap-patch">
+                    <div class="circle"></div>
+                  </div><div class="circle-clipper right">
+                    <div class="circle"></div>
+                  </div>
+                </div>
+              </div>
+              <!--  Ender Loader -->
+              <br /><br />
+              Loading ...
+            </div>
+            <section ng-show="!loadingIndicatorShow && games.data.length">
               <div class="row tab-header">
                 <div class="col s4">Rank</div>
                 <div class="col s4">Players</div>
                 <div class="col s4">Games Won</div>
               </div>
-              <div class="row card card-item" ng-repeat="game in games">
+              <div class="row card card-item" ng-repeat="game in games.data">
                 <div class="col s4">{{game.rank}}</div>
                 <div class="col s4">{{game.username}}</div>
                 <div class="col s4">{{game.gamesWon}}</div>
               </div>
             </section>
+            <div ng-show="games.status">{{games.data}}</div>
           </div>
           <div id="gamelog" class="col s12 tab-content">
-            <div ng-show="currentUser.games.length">
+            <!-- Loading indicator directive -->
+            <div is-loading>
+              <!-- Spinning preloader -->
+              <div class="preloader-wrapper active">
+                <div class="spinner-layer spinner-green-only">
+                  <div class="circle-clipper left">
+                    <div class="circle"></div>
+                  </div><div class="gap-patch">
+                    <div class="circle"></div>
+                  </div><div class="circle-clipper right">
+                    <div class="circle"></div>
+                  </div>
+                </div>
+              </div>
+                <!--  Ender Loader -->
+                <br /><br />
+                Loading ...
+            </div>
+            <div ng-show="!loadingIndicatorShow && currentUser.games.data.length">
               <!-- this should contain the game cards -->
               <div
                 class="card col s12 m3 l3"
-                ng-repeat="game in currentUser.games"
+                ng-repeat="game in currentUser.games.data"
                 id="game"  title="click to view game details">
                 <div class="log-card-item">
                   <!-- the name -->
@@ -68,6 +105,7 @@
                 </div>
               </div>
             </div>
+            <div ng-show="currentUser.games.status">{{games.data}}</div>
           </div>
           <!-- <div id="donations" class="col s12 tab-content">
             <section class="center-align">
@@ -95,6 +133,6 @@
 
 <script>
   $(document).ready(function(){
-    $('.tabs').tabs();
+
   });
 </script>

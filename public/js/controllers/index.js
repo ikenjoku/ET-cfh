@@ -23,6 +23,10 @@ angular.module('mean.system')
       $('modal1').modal('open');
     };
 
+    $scope.openModalLoading = function () {
+      $('modal-loading-indicator').modal('open');
+    };
+
     $scope.closeModal = function () {
       $('modal1').modal('close');
     };
