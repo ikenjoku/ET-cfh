@@ -70,6 +70,14 @@ export default (io) => {
       }
       const game = new Game(uniqueRoom, io);
       allPlayers[socket.id] = true;
+
+      const isUserExist = game.players.find(
+        user => user.userId === player.userId
+      );
+      if (isUserExist && player.userId !== 'unauthenticated') {
+        return io.sockets.socket(socket.id).emit('userExist');
+      }
+
       game.players.push(player);
       allGames[uniqueRoom] = game;
       socket.join(game.gameID);
@@ -87,6 +95,12 @@ export default (io) => {
         gameIDStr = gameID.toString();
         game = new Game(gameIDStr, io);
         allPlayers[socket.id] = true;
+        const isUserExist = game.players.find(
+          user => user.userId === player.userId
+        );
+        if (isUserExist && player.userId !== 'unauthenticated') {
+          return io.sockets.socket(socket.id).emit('userExist');
+        }
         game.players.push(player);
         allGames[gameID] = game;
         gamesNeedingPlayers.push(game);
@@ -139,6 +153,12 @@ export default (io) => {
         || game.players[0].socket.id !== socket.id)) {
         // Put player into the requested game
           allPlayers[socket.id] = true;
+          const isUserExist = game.players.find(
+            user => user.userId === player.userId
+          );
+          if (isUserExist && player.userId !== 'unauthenticated') {
+            return io.sockets.socket(socket.id).emit('userExist');
+          }
           game.players.push(player);
           socket.join(game.gameID);
           socket.gameID = game.gameID;

@@ -48,7 +48,9 @@ export const show = (req, res) => {
  * @returns {Array} returns the game array
  */
 export const all = (req, res) => {
-  Answer.find({ official: true }).select('-_id').exec((err, answers) => {
+  Answer.find({
+    official: true
+  }).select('-_id').exec((err, answers) => {
     if (err) {
       res.render('error', {
         status: 500
@@ -68,7 +70,8 @@ export const all = (req, res) => {
  * @returns {Array} returns the game array
  */
 export const allAnswersForGame = (cb, region) => {
-  Answer.find({ official: true, region }).select('-_id').exec((err, answers) => {
-    cb(answers);
-  });
+  Answer.find({ official: true, region })
+    .select('-_id').exec((err, answers) => {
+      cb(answers);
+    });
 };

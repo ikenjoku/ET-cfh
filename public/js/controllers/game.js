@@ -7,6 +7,7 @@ angular.module('mean.system')
     $scope.modalShown = false;
     $scope.region = '';
     $scope.game = game;
+    $scope.custom = $location.search().game;
     $scope.MessageInput = '';
     $scope.pickedCards = [];
     $scope.messages = [];
@@ -229,7 +230,6 @@ angular.module('mean.system')
       $scope.MessageInput = '';
       game.dispatchMessage(emojiTarget);
     };
-
     // determines when to show the chat;
     $scope.$watch('game.openChatLog', function () {
       $scope.renderChatLog = game.openChatLog;

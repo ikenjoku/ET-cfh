@@ -11,6 +11,7 @@
           <li ng-hide="checkToken()">
             <a class="waves-effect waves-light white black-text btn" id="index-login-btn" href="signin">Login</a>
           </li>
+          <li ng-show="checkToken()" id="username-web"><span>Hi, {{username}}</span></li>
           <li ng-hide="checkToken()"><a class="waves-effect waves-light green darken-4 btn white-text" id="index-signup-btn" href="signup">Signup</a></li>
           <li ng-show="checkToken()"><a class="waves-effect waves-light green darken-4 btn white-text" id="profile-button" href="/#!/dashboard">Dashboard</a></li>
           <li ng-show="checkToken()" ng-click="showProfile()"><a class="waves-effect waves-light green darken-4 btn white-text" id="profile-button">Show Profile</a></li>
@@ -22,6 +23,7 @@
       <li ng-hide="checkToken()">
         <a class="navbar-button sidenav-close" href="signin">Login</a>
       </li>
+      <li ng-show="checkToken()" id="username-mobile"><span>Hi, {{username}}</span></li>
       <li ng-hide="checkToken()"><a class="navbar-button sidenav-close" href="signup">Signup</a></li>
       <li ng-show="checkToken()" ng-click="showProfile()"><a class="navbar-button sidenav-close">Show Profile</a></li>
       <li ng-show="checkToken()"><a class="navbar-button sidenav-close" href="/#!/dashboard">Dashboard</a></li>
@@ -38,7 +40,7 @@
     </div>
     <div class="row">
         <div class="cfh-text col s12 l8 info flow-text">
-            Cards for Humanity is a fast-paced online version of the popular card game, Cards Against Humanity, that gives you the opportunity to donate to children in need all while remaining as despicable and awkward as you naturally are.
+          Cards for Humanity is a fast-paced online version of the popular card game, Cards Against Humanity, that gives you the opportunity to donate to children in need all while remaining as despicable and awkward as you naturally are.
         </div>
     </div>
     <div class="row">
@@ -51,14 +53,15 @@
       </div>
     </div>
   </div>
+
   <!-- modal one section -->
   <div id="modal1" class="modal text-white">
     <div class="modal-content">
+      <a class="modal-close waves-effect waves-light green darken-4 btn white-text" style="float: right;"><i class="fas fa-times"></i></a>
       <h4>Play Game As A Guest</h4>
       <p>You are about to play game as a guest! </p>
     </div>
     <div class="modal-footer">
-      <a id="play-chioce-btn" href="#" class="modal-close waves-effect waves-light green darken-4 btn white-text">Cancel</a>&nbsp;&nbsp;&nbsp;&nbsp;
       <a id="play-chioce-btn" href="/play" class="modal-close waves-effect waves-light green darken-4 btn white-text">Start Game</a>
     </div>
   </div>
@@ -66,12 +69,13 @@
   <!-- modal two section -->
   <div id="modal2" class="modal text-white" ng-controller="AuthController">
     <div class="modal-content">
+      <a class="modal-close waves-effect waves-light green darken-4 btn white-text" style="float: right;"><i class="fas fa-times"></i></a>
       <h4>Card For Humanity</h4>
       <p>Hi {{username}}, click on the start game button to continue</p>
     </div>
     <div class="modal-footer">
-      <a href="#" class="modal-close waves-effect waves-light green darken-4 btn white-text" id="play-chioce-btn">Cancel</a>&nbsp;&nbsp;&nbsp;&nbsp;
-      <a href="/play" class="modal-close waves-effect waves-light green darken-4 btn white-text" id="play-chioce-btn">Start Game </a>
+      <a href="/play" class="modal-close waves-effect waves-light green darken-4 btn white-text" id="play-chioce-btn">Play with strangers</a>
+      <a href="/play?custom" class="modal-close waves-effect waves-light green darken-4 btn white-text" id="play-chioce-btn">Play a custom game</a>
     </div>
   </div>
 
@@ -165,7 +169,6 @@
   <div class="profile-container" style="display:none;"> 
     <profile-page></profile-page>
     </div>
-
   </div>
 
   <!-- Footer start -->

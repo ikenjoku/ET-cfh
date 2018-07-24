@@ -1098,3 +1098,11 @@ nav .sidenav-trigger {
   width: 10%;
   margin: auto;
 }
+  #username-mobile, #username-web {
+    color: #000;
+  }
+
+#username-mobile {
+  padding: 0 32px;
+  font-weight: bolder;
+}

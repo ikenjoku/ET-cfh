@@ -49,7 +49,9 @@ exports.show = (req, res) => {
  * @returns {Array} returns the game array
  */
 exports.all = (req, res) => {
-  Question.find({ official: true, numAnswers: { $lt: 3 } }).select('-_id').exec((err, questions) => {
+  Question.find({
+    official: true, numAnswers: { $lt: 3 }
+  }).select('-_id').exec((err, questions) => {
     if (err) {
       res.render('error', {
         status: 500
@@ -69,7 +71,9 @@ exports.all = (req, res) => {
  * @returns {Array} returns the game array according to region
  */
 exports.allQuestionsForGame = (cb, region) => {
-  Question.find({ official: true, region, numAnswers: { $lt: 3 } }).select('-_id').exec((err, questions) => {
+  Question.find({
+    official: true, region, numAnswers: { $lt: 3 }
+  }).select('-_id').exec((err, questions) => {
     cb(questions);
   });
 };
