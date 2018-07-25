@@ -1,6 +1,6 @@
 <div id="info-container" ng-show="game.state === 'awaiting players' && checkToken()">
   <div id="inner-info">
-    <h5>Invite friends to play with you</h5>
+    <h5>Invite other players to play with you</h5>
     <form id="search-users" ng-submit="findUsers()" name="myForm">
       <div class="form-group col-md-10">
         <input ng-keyup="findUsers()" ng-model="searchKey" type='text' autocomplete="off" name='searchKey' placeholder="Search for friends">
@@ -9,23 +9,46 @@
       <br>
     </form>
   </div>
-  <div id='found-users' style="clear: both;">
+  <div class='found-users' style="clear: both;">
     <div ng-show="showNotFound" style="color: rgb(226, 94, 94)"><br>Your search did not match any current user.</div>
     <table>
       <tr ng-repeat="user in foundUsers">
         <td>{{user.name}}</td>
         <td>{{user.email}}</td>
         <td>
-          <img ng-show="selectedUser === user" src='../img/loaders/spinner.gif' style="margin-right: 5px" width="20px" alt='spin'>
-          <button style="width: 100px;" ng-show="invitedUsers.indexOf(user.email) === -1" ng-disabled="disableInviteButton" ng-click="sendInvitation(user)" class="btn btn-primary invite-button">
+          <img ng-show="selectedUser === user" src='../img/loaders/spinner.gif' alt='spin'>
+          <button style="width: 100px;" ng-show="invitedUsers.indexOf(user) === -1" ng-disabled="disableInviteButton" ng-click="sendInvitation(user)" class="btn btn-primary invite-button">
             invite
           </button>
-          <button style="width: 100px;" ng-show="invitedUsers.indexOf(user.email) !== -1" ng-disabled="true" class="btn btn-default">
+          <button style="width: 100px;" ng-show="invitedUsers.indexOf(user) !== -1" ng-disabled="true" class="btn btn-default">
             <b>invited</b>
           </button>
         </td>
       </tr>
     </table>
+  </div>
+</div>
+<div id="info-container" ng-show="game.state === 'awaiting players' && checkToken()">
+  <div id="inner-info">
+    <h5>Players Invited</h5>
+    <div class='found-users'>
+      <div ng-show="!hasInvitedUsers()"><br>You have not invited any friends</div>
+      <table>
+        <tr ng-repeat="user in invitedUsers">
+          <td>{{user.name}}</td>
+          <td>{{user.email}}</td>
+          <td>
+            <img ng-show="selectedUser === user" src='../img/loaders/spinner.gif' alt='spin'>
+            <button style="width: 160px;" ng-show="(friendRequests.indexOf(user) === -1 && user.friends === 'not friends')" ng-disabled="disableInviteButton" ng-click="sendFriendRequest(user)" class="btn btn-primary invite-button">
+              Add Friend
+            </button>
+            <button style="width: 160px;" ng-show="(friendRequests.indexOf(user) !== -1 || user.friends === 'pending')" ng-disabled="true" class="btn btn-default">
+              <b>Request Sent</b>
+            </button>
+          </td>
+        </tr>
+      </table>
+    </div>
   </div>
 </div>
 <div id="donates">

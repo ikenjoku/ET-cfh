@@ -1,7 +1,7 @@
 /* eslint prefer-arrow-callback: 0, func-names: 0 */
 angular.module('mean.system')
-  .controller('AuthController', ['$scope', '$location', '$resource', 'Upload', 'cloudinary',
-    function ($scope, $location, $resource, Upload) {
+  .controller('AuthController', ['$scope', '$location', '$resource', 'Upload', 'friend', 'cloudinary',
+    function ($scope, $location, $resource, Upload, friend) {
       $scope.newUser = {};
       $scope.user = {};
       $scope.authError = '';
@@ -148,6 +148,8 @@ angular.module('mean.system')
 
           storeAndRedirect(token, id, name, tour);
           window.location.replace('/');
+        } else {
+          friend.addToRoom(localStorage.getItem('#cfhetUserId'));
         }
       };
       init();

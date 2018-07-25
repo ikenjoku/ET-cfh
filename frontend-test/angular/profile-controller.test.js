@@ -30,7 +30,11 @@ describe('Controller: Profile', function () {
       $resource: mockApireq,
       $location,
       Upload: mockUpload,
+      friend: {
+        addToRoom() {}
+      },
       cloudinary: {}
+
     });
     $scope.SignUpUser();
   }));

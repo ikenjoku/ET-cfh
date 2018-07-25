@@ -65,56 +65,178 @@
   </div>
   <!-- end Czar's question modal -->
   <header id="menu-container" ng-controller="TourController">
-    <nav class="white nav" data-target="mobile-demo" class="sidenav-trigger">
-      <div class="nav-wrapper font-bold" ng-controller="AuthController">
-        <a href="/" class="black-text text-darken-2 brand-logo left">
-          <img src="https://res.cloudinary.com/dqsmurjpg/image/upload/v1530718726/Navbar_Logo.png" id="cfh-logo" alt="cfg-logo">
-        </a>
-        <a data-target="mobile-demo" class="sidenav-trigger">
-          <i class="material-icons">menu</i>
-        </a>
-        <ul id="nav-mobile" class="right hide-on-med-and-down">
-          <span ng-show="!checkToken() && (game.state === 'game ended' || game.state === 'game dissolved')">
-            <li>
-              <a class="waves-effect waves-light red darken-4 btn white-text navbar-button" id="index-signup-btn" href="signup">SIGNUP</a>
-            </li>
-          </span>
-          <span ng-click="logOut()" ng-show="(game.state === 'game ended' || game.state === 'game dissolved') && checkToken()">
-            <li>
-              <a class="waves-effect waves-light red darken-4 btn white-text navbar-button" id="index-signup-btn">LOGOUT</a>
-            </li>
-          </span>
-          <span ng-hide="game.state === 'game ended' || game.state === 'game dissolved'">
-            <li>
-              <a class="waves-effect waves-light btn white-text navbar-button" id="tour-button" ng-click="takeGeneralTour()">Take a Tour</a>
-            </li>
-            <li>
-              <a class="waves-effect waves-light red darken-4 btn white-text navbar-button" id="index-signup-btn" ng-click="abandonGame()">Abandon Game</a>
-            </li>
-          </span>
-        </ul>
+    <div ng-controller="FriendsController">
+      <div id="modal4" class="modal text-white">
+        <div class="modal-content">
+          <h4>Game Invitation</h4>
+          <div class="modal-body">
+            <p>You have been invited to join an ongoing game. Click the play button below to join the game.</p>
+          </div>
+          <div class="modal-footer">
+            <a href="#" class="modal-close waves-effect waves-light green darken-4 btn white-text" id="play-chioce-btn">Close</a>
+            <a id="play-chioce-btn" href="{{ gameAddress }}" class="modal-close waves-effect waves-light green darken-4 btn white-text">Start Game</a>
+          </div>
+        </div>
       </div>
-    </nav>
-    <ul class="sidenav" id="mobile-demo" ng-controller="AuthController">
-      <span ng-show="!checkToken() && (game.state === 'game ended' || game.state === 'game dissolved')">
-        <li>
-          <a class="navbar-button sidenav-close" id="index-signup-btn" href="signup">SIGNUP</a>
-        </li>
-      </span>
-      <span ng-click="logOut()" ng-show="(game.state === 'game ended' || game.state === 'game dissolved') && checkToken()">
-        <li>
-          <a class="navbar-button sidenav-close" id="index-signup-btn">LOGOUT</a>
-        </li>
-      </span>
-      <span ng-hide="game.state === 'game ended' || game.state === 'game dissolved'">
-        <li>
-          <a class="navbar-button sidenav-close" ng-click="takeGeneralTour()">Take a Tour</a>
-        </li>
-        <li>
-          <a class="navbar-button sidenav-close" ng-click="abandonGame()">Abandon Game</a>
-        </li>
-      </span>
-    </ul>
+      <div id="modal3" class="modal text-white">
+        <div class="modal-content">
+          <div class="row">
+            <div class="col s12">
+              <ul class="tabs" style="margin-bottom: 45px;">
+                <li class="tab col s6">
+                  <a class="active" href="#friends">Friends</a>
+                </li>
+                <li class="tab col s6">
+                  <a href="#friend_requests">Friend Requests</a>
+                </li>
+              </ul>
+            </div>
+            <div id="friends" class="col s12">
+              <div ng-show="isLoading" style="text-align: center; margin-top: 10px">
+                <div class="preloader-wrapper active">
+                  <div class="spinner-layer spinner-green-only">
+                    <div class="circle-clipper right">
+                      <div class="circle"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div ng-show="(friends.length === 0 && !isLoading)">
+                <h5>Oops. You have no friends</h5>
+              </div>
+
+              <div class='row' ng-show="friends.length > 0">
+                <div class='col s12' ng-repeat="user in friends">
+                  <div class='col s6'>
+                    <div class='col s3'>
+                      <img src='{{user.avatar}}' alt='avatar' style="height: 50px; border-radius: 50%">
+                    </div>
+                    <div class='col s9' style="line-height: 15px; padding-top: 10px;">
+                      <span style="color: #236231">{{ user.name }}</span>
+                      <br>
+                      <span>{{ user.email }}</span>
+                    </div>
+                  </div>
+                  <div class='col s6' style="text-align: right; padding-top: 6px;" ng-controller="InvitePlayersController">
+                    <img ng-show="selectedUser === user" src='../img/loaders/spinner.gif' alt='spin' style="margin-bottom: -7px; margin-right: 5px; height: 21px;">
+                    <button ng-disabled="selectedUser === user" ng-click="unfriend(user)" class="btn btn-primary white-text" style="width: 80px; background-color: #236231">Unfriend</button>
+                    <button ng-show="invitedUsers.indexOf(user) === -1" ng-disabled="selectedUser === user" ng-click="sendInvitation(user)" class="btn btn-primary white-text"
+                      style="width: 80px; background-color: #236231">Invite</button>
+                    <button ng-show="invitedUsers.indexOf(user) !== -1" ng-disabled="true" class="btn btn-primary white-text" style="width: 80px; background-color: #236231">Invited</button>
+                  </div>
+                  <div class="col s12">
+                    <hr>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+            <div id="friend_requests" class="col s12">
+              <div ng-show="isLoading" style="text-align: center; margin-top: 10px">
+                <div class="preloader-wrapper active">
+                  <div class="spinner-layer spinner-green-only">
+                    <div class="circle-clipper right">
+                      <div class="circle"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div ng-show="(friendRequests.length === 0 && !isLoading)">
+                <h5>You have no pending friend requests</h5>
+              </div>
+
+              <div class='row' ng-show="friendRequests.length > 0">
+                <div class='col s12' ng-repeat="user in friendRequests">
+                  <div class='col s6'>
+                    <div class='col s3'>
+                      <img src='{{user.avatar}}' alt='avatar' style="height: 50px; border-radius: 50%">
+                    </div>
+                    <div class='col s9' style="line-height: 15px; padding-top: 10px;">
+                      <span style="color: #236231">{{ user.name }}</span>
+                      <br>
+                      <span>{{ user.email }}</span>
+                    </div>
+                  </div>
+                  <div class='col s6' style="text-align: right; padding-top: 6px;">
+                    <img ng-show="selectedUser === user" src='../img/loaders/spinner.gif' alt='spin' style="margin-bottom: -7px; margin-right: 5px; height: 21px;">
+                    <button ng-disabled="selectedUser === user" ng-click="acceptFriend(user)" class="btn btn-primary white-text" style="width: 80px; background-color: #236231">Accept</button>
+                    <button style="width: 80px;" ng-disabled="selectedUser === user" ng-click="declineRequest(user)" class="btn btn-primary btn-default">Decline</button>
+                  </div>
+                  <div class="col s12">
+                    <hr>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <a href="#" class="modal-close waves-effect waves-light green darken-4 btn white-text" id="play-chioce-btn">Close</a>
+        </div>
+      </div>
+      <nav class="white nav" data-target="mobile-demo" class="sidenav-trigger">
+        <div class="nav-wrapper font-bold" ng-controller="AuthController">
+          <a href="/" class="black-text text-darken-2 brand-logo left">
+            <img src="https://res.cloudinary.com/dqsmurjpg/image/upload/v1530718726/Navbar_Logo.png" id="cfh-logo" alt="cfg-logo">
+          </a>
+          <a data-target="mobile-demo" class="sidenav-trigger">
+            <i class="material-icons">menu</i>
+          </a>
+          <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <span ng-show="!checkToken() && (game.state === 'game ended' || game.state === 'game dissolved')">
+              <li>
+                <a class="waves-effect waves-light red darken-4 btn white-text navbar-button" id="index-signup-btn" href="signup">SIGNUP</a>
+              </li>
+            </span>
+            <span ng-click="logOut()" ng-show="(game.state === 'game ended' || game.state === 'game dissolved') && checkToken()">
+              <li>
+                <a class="waves-effect waves-light red darken-4 btn white-text navbar-button" id="index-signup-btn">LOGOUT</a>
+              </li>
+            </span>
+            <span ng-hide="game.state === 'game ended' || game.state === 'game dissolved'">
+              <li>
+                <a class="waves-effect waves-light btn white-text navbar-button" id="tour-button" ng-click="takeGeneralTour()">Take a Tour</a>
+              </li>
+              <li ng-show="checkToken()">
+                <a data-target="modal3" class="waves-effect waves-light green darken-4 btn white-text" id="profile-button" ng-click="showFriendsModal()">Friends
+                  <span ng-show="friendRequestsLength > 0" class="badge green darken-4 white-text">{{ friendRequestsLength }}</span>
+                </a>
+              </li>
+              <li>
+                <a class="waves-effect waves-light red darken-4 btn white-text navbar-button" id="index-signup-btn" ng-click="abandonGame()">Abandon Game</a>
+              </li>
+            </span>
+          </ul>
+        </div>
+      </nav>
+      <ul class="sidenav" id="mobile-demo" ng-controller="AuthController">
+        <span ng-show="!checkToken() && (game.state === 'game ended' || game.state === 'game dissolved')">
+          <li>
+            <a class="navbar-button sidenav-close" id="index-signup-btn" href="signup">SIGNUP</a>
+          </li>
+        </span>
+        <span ng-click="logOut()" ng-show="(game.state === 'game ended' || game.state === 'game dissolved') && checkToken()">
+          <li>
+            <a class="navbar-button sidenav-close" id="index-signup-btn">LOGOUT</a>
+          </li>
+        </span>
+        <span ng-hide="game.state === 'game ended' || game.state === 'game dissolved'">
+          <li>
+            <a class="navbar-button sidenav-close" ng-click="takeGeneralTour()">Take a Tour</a>
+          </li>
+          <li ng-show="checkToken()">
+            <a data-target="modal3" class="waves-effect waves-light green darken-4 btn white-text" id="profile-button" ng-click="showFriendsModal()">Friends
+              <span ng-show="friendRequestsLength > 0" class="badge green darken-4 white-text">{{ friendRequestsLength }}</span>
+            </a>
+          </li>
+          <li>
+            <a class="navbar-button sidenav-close" ng-click="abandonGame()">Abandon Game</a>
+          </li>
+        </span>
+      </ul>
+    </div>
   </header>
   <div id="gameplay-container">
     <div id="upper-gameplay-container" class="row game-row">
@@ -159,6 +281,7 @@
       $('.modal').modal({
         dismissible: false
       });
+      $('.tabs').tabs();
       const isTourTaken = localStorage.getItem('#cfhuseristourtaken');
       if (isTourTaken === 'false') {
         $('#tour-modal').modal('open');

@@ -8,19 +8,30 @@ describe('Invite User', function () {
     controller = _$controller_;
     $httpBackend = _$httpBackend_;
     game = {};
+    const socket = {
+      on() {}
+    };
+    const friend = {
+      dispatchAddFriend() {},
+      dispatchInvitation() {},
+      addToRoom() {},
+    };
     controller('InvitePlayersController', {
       $scope,
       $http,
-      game
+      game,
+      friend,
+      socket
     });
   }));
 
   it('Should return users on search', function () {
     $scope.searchKey = 'ben';
+    $scope.userId = '12345';
     let response = null;
     const users = { users: [{ name: 'Benjamin' }, { name: 'Benny' }] };
 
-    $httpBackend.whenGET('/api/users/findUsers/ben').respond(function () {
+    $httpBackend.whenGET('/api/users/findUsers/ben/12345').respond(function () {
       return users;
     }());
 

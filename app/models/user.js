@@ -19,6 +19,8 @@ const UserSchema = new Schema({
   tour: { type: Boolean, default: false },
   premium: Number, // null or 0 for non-donors, 1 for everyone else (for now)
   donations: [],
+  friends: [{ type: Schema.Types.ObjectId, ref: 'User' }],
+  friend_requests: [{ type: Schema.Types.ObjectId, ref: 'User' }],
   hashed_password: String,
   facebook: {},
   twitter: {},

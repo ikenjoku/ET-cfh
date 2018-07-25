@@ -14,11 +14,16 @@ export default (router, passport, app) => {
   api
     .post('/auth/login', users.handleLogin)
     .post('/auth/signup', users.handleSignUp)
-    .get('/users/findUsers/:searchKey', ensureUser, users.findUsers)
+    .get('/users/findUsers/:searchKey/:_id', ensureUser, users.findUsers)
     .get('/users/findUsers/', ensureUser, users.findUsers)
     .post('/users/invite', ensureUser, users.invite)
     .get('/profile', ensureUser, users.fetchProfile)
-    .get('/signout', users.signout);
+    .get('/signout', users.signout)
+    .get('/user/friends/:userId', ensureUser, users.getFriends)
+    .put('/user/accept/:userId', ensureUser, users.acceptRequest)
+    .put('/user/decline/:userId', ensureUser, users.declineRequest)
+    .put('/user/unfriend/:userId', ensureUser, users.unfriendUser)
+    .get('/user/getRequestCount/:userId', ensureUser, users.getRequestCount);
 
   // Setting up user tour api
   api
@@ -106,7 +111,7 @@ export default (router, passport, app) => {
 
 
   app.use((err, req, res, next) => {
-    // console.log(err);
+    console.log(err);
     // error from the '/api' namespaced routes
     if (err.status) return res.status(err.status).json({ message: err.message });
     // Treat as 404

@@ -17,6 +17,13 @@ describe('AuthController', function () {
       };
     }
   };
+
+  const friend = {
+    dispatchAddFriend() {},
+    dispatchInvitation() {},
+    addToRoom() {},
+  };
+
   beforeEach(inject(function (_$controller_, _$rootScope_, _$location_) {
     // assining providers to global scope
     $scope = _$rootScope_.$new();
@@ -27,6 +34,7 @@ describe('AuthController', function () {
       $resource: mockApireq,
       $location,
       Upload: mockUpload,
+      friend,
       cloudinary: {}
     });
   }));

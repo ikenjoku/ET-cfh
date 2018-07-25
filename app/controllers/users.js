@@ -13,9 +13,46 @@ import Services from '../logic/user';
 
 const { handleFetchProfile } = Services;
 
-
 const avatarsArray = avatarsList();
 const User = mongoose.model('User');
+
+/**
+ * @param {user} user the user whose friend list and friend request list will be searched
+ * @param {*} id the id of the finder
+ * @description this method verifies the friendship status between a
+ * finder and the user that is found. Friendship status can be friends, not friends, or pending
+ */
+const checkIfFriends = (user, id) => {
+  let friends = 'not friends';
+  friends = user.friend_requests.indexOf(mongoose.Types.ObjectId(id)) > -1 ? 'pending' : friends;
+  friends = user.friends.indexOf(mongoose.Types.ObjectId(id)) > -1 ? 'friends' : friends;
+  return friends;
+};
+
+/**
+ * @param {users} users the list of all returned users
+ * @description this function takes a list of users from the database,
+ * removes the sensitive fields and returns the list of users
+ */
+const cleanUpUsers = (users = [], _id) => users.map(user => ({
+  _id: user._id,
+  name: user.name,
+  email: user.email,
+  avatar: user.avatar || 'https://assets.hotukdeals.com/assets/img/profile-placeholder_f56af.png',
+  friends: checkIfFriends(user, _id),
+}));
+
+/**
+ * @param {users} users the list of all returned users
+ * @description this function takes a list of users from the database,
+ * removes the sensitive fields and returns the list of users
+ */
+const cleanUpFriends = users => users.map(user => ({
+  _id: user._id,
+  name: user.name,
+  email: user.email,
+  avatar: user.avatar || 'https://assets.hotukdeals.com/assets/img/profile-placeholder_f56af.png',
+}));
 
 // disabling no underscore because of the default style of mongoose ids
 /* eslint no-underscore-dangle: 0, valid-jsdoc: 0 */
@@ -354,8 +391,9 @@ const updateUserTour = (req, res, next) => {
  * that match the key. It search the name and email only.
 */
 const findUsers = (req, res) => {
-  const { searchKey } = req.params;
+  const { searchKey, _id } = req.params;
   User.find({
+    _id: { $ne: _id },
     $and:
     [
       {
@@ -366,7 +404,7 @@ const findUsers = (req, res) => {
         ]
       }
     ]
-  }, (err, users) => res.status(200).send({ users }));
+  }, (err, users) => res.status(200).send({ users: users ? cleanUpUsers(users, _id) : [] }));
 };
 
 
@@ -384,6 +422,108 @@ const invite = (req, res) => {
   return res.status(400).send({ message: 'An error occurred while sending the invitation' });
 };
 
+/**
+ * @param {object} req - request object provided by express
+ * @param {object} res - response object provided by express
+ * @description retrieves all friends and friend request a user has
+*/
+const getFriends = (req, res, next) => {
+  const { userId } = req.params;
+  User.findById(userId).populate('friends').populate('friend_requests').exec((error, currentUser) => {
+    if (error) {
+      return next(error);
+    }
+    return res.status(200).send({
+      friends: cleanUpFriends(currentUser.friends),
+      friendRequests: cleanUpFriends(currentUser.friend_requests)
+    });
+  });
+};
+
+/**
+ * @param {object} req - request object provided by express
+ * @param {object} res - response object provided by express
+ * @description accepts a friend request by adding both parties to each other's record
+*/
+const acceptRequest = (req, res, next) => {
+  const { userId } = req.params;
+  const { id } = req.body;
+  User.update({ _id: userId },
+    { $push: { friends: id }, $pull: { friend_requests: id } },
+    (err) => {
+      if (err) {
+        return next(err);
+      }
+      User.update({ _id: id },
+        { $push: { friends: userId }, $pull: { friend_requests: userId } },
+        (err) => {
+          if (err) {
+            return next(err);
+          }
+          res.status(200).send({ message: 'Friend request accepted' });
+        });
+    });
+};
+
+/**
+ * @param {object} req - request object provided by express
+ * @param {object} res - response object provided by express
+ * @description unfriend user by deleting both parties form each other's record
+*/
+const unfriendUser = (req, res, next) => {
+  const { userId } = req.params;
+  const { id } = req.body;
+  User.update({ _id: userId },
+    { $pull: { friends: id } },
+    (err) => {
+      if (err) {
+        return next(err);
+      }
+      User.update({ _id: id },
+        { $pull: { friends: userId } },
+        (err) => {
+          if (err) {
+            return next(err);
+          }
+          res.status(200).send({ message: 'Friend removed' });
+        });
+    });
+};
+
+/**
+ * @param {object} req - request object provided by express
+ * @param {object} res - response object provided by express
+ * @description decline friend request by deleting request from receivers record
+*/
+const declineRequest = (req, res, next) => {
+  const { userId } = req.params;
+  const { id } = req.body;
+  User.update({ _id: userId },
+    { $pull: { friend_requests: id } },
+    (err) => {
+      if (err) {
+        return next(err);
+      }
+      res.status(200).send({ message: 'Friend request declined' });
+    });
+};
+
+/**
+ * @param {object} req - request object provided by express
+ * @param {object} res - response object provided by express
+ * @description get the number of friend requests a friend has
+*/
+const getRequestCount = (req, res, next) => {
+  const { userId } = req.params;
+  User.findById(userId).exec((error, currentUser) => {
+    if (error) {
+      return next(error);
+    }
+    return res.status(200).send({
+      length: currentUser.friend_requests.length,
+    });
+  });
+};
 
 export default {
   authCallback,
@@ -402,5 +542,10 @@ export default {
   handleSignUp,
   avatars,
   findUsers,
-  invite
+  invite,
+  getFriends,
+  acceptRequest,
+  unfriendUser,
+  declineRequest,
+  getRequestCount
 };

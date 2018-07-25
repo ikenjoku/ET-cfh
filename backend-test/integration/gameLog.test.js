@@ -203,8 +203,10 @@ const mockGames = [
 const token = Tokenizer(user);
 
 describe('Game History', () => {
-  before(() => {
-    Promise.resolve(Game.create(mockGames));
+  before((done) => {
+    Game.create(mockGames).then(() => {
+      done();
+    });
   });
 
   after(() => {

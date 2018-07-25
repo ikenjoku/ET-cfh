@@ -28,6 +28,26 @@ export default (io) => {
       }
     });
 
+    socket.on('create-room', (room) => {
+      socket.join(room);
+    });
+
+    socket.on('new-friend', (data) => {
+      User.update({ _id: data.user._id },
+        { $push: { friend_requests: data.id } },
+        (err) => {
+          if (err) {
+            return err;
+          }
+          io.sockets.in(`room-${data.user._id}`).emit('friendSaved');
+          io.sockets.in(`room-${data.id}`).emit('saveAsSent');
+        });
+    });
+
+    socket.on('invite-player', (data) => {
+      io.sockets.in(`room-${data.user._id}`).emit('popup-invitation-modal', data.link);
+    });
+
     socket.on('new-message', (data) => {
       if (!allGames[socket.gameID] || !allPlayers[socket.id]) return;
       const targetGame = allGames[socket.gameID];
@@ -159,7 +179,6 @@ export default (io) => {
         fireGame(player, socket);
       }
     };
-
 
     const joinGame = (socket, data) => {
       const player = new Player(socket);

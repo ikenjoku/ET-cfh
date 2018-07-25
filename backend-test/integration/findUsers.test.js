@@ -35,9 +35,15 @@ const mock = [
   }
 ];
 
+let _id;
+
 describe('User endpoints', () => {
-  before(() => {
-    Promise.resolve(User.create(mock));
+  before((done) => {
+    Promise.resolve(User.create(mock)).then((users) => {
+      const { id } = users[0];
+      _id = id;
+      done();
+    });
   });
 
   after(() => {
@@ -46,19 +52,19 @@ describe('User endpoints', () => {
 
   it('GET /api/users/findUsers/:searchKey should return statusCode 200 with 2 users', (done) => {
     request(app)
-      .get('/api/users/findUsers/ben')
+      .get(`/api/users/findUsers/ben/${_id}`)
       .set('Authorization', `Bearer ${token}`)
       .end((err, res) => {
         if (err) return done(err);
         expect(res.statusCode).to.equal(200);
-        expect(res.body.users.length).to.equal(2);
+        expect(res.body.users.length).to.equal(1);
         done();
       });
   });
 
   it('GET /api/users/findUsers/:searchKey should return statusCode 200 with no user', (done) => {
     request(app)
-      .get('/api/users/findUsers/nothing')
+      .get(`/api/users/findUsers/nothing/${_id}`)
       .set('Authorization', `Bearer ${token}`)
       .end((err, res) => {
         if (err) return done(err);

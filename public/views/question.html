@@ -1,27 +1,30 @@
 <div class="top-div row" ng-show="game.state === 'awaiting players'">
   <div class="col l12 s12">
-      <div class="col l10 m9 s12 question-div">
-          <div id="finding-players">Finding Players</div>
-          <div id="player-count">{{game.players.length}} of 12 players have joined</div>
-          <div class="preloader-wrapper active">
-            <div class="spinner-layer spinner-green-only">
-              <div class="circle-clipper left">
-                <div class="circle"></div>
-              </div><div class="gap-patch">
-                <div class="circle"></div>
-              </div><div class="circle-clipper right">
-                <div class="circle"></div>
-              </div>
-            </div>
+    <div class="col l10 m9 s12 question-div">
+      <div id="finding-players">Finding Players</div>
+      <div id="player-count">{{game.players.length}} of 12 players have joined</div>
+      <div class="preloader-wrapper active">
+        <div class="spinner-layer spinner-green-only">
+          <div class="circle-clipper left">
+            <div class="circle"></div>
           </div>
-          <div class="game-btns">
-            <a ng-click="startGame()" class="waves-effect waves-light btn" id="start-btn">Start Game</a>
+          <div class="gap-patch">
+            <div class="circle"></div>
+          </div>
+          <div class="circle-clipper right">
+            <div class="circle"></div>
           </div>
         </div>
+      </div>
+      <div class="game-btns">
+        <a ng-click="startGame()" class="waves-effect waves-light btn" id="start-btn">Start Game</a>
+      </div>
+    </div>
 
-        <div class="col l2 m3" id="card-img">
-          <img class="card-img" src="https://res.cloudinary.com/dffiyhgto/image/upload/v1531231021/Screen_Shot_2018-07-09_at_5.14.23_PM.png" alt="card-img">
-        </div>
+    <div class="col l2 m3" id="card-img">
+      <img class="card-img" src="https://res.cloudinary.com/dffiyhgto/image/upload/v1531231021/Screen_Shot_2018-07-09_at_5.14.23_PM.png"
+        alt="card-img">
+    </div>
   </div>
 </div>
 
@@ -30,32 +33,73 @@
     <div class="col l6 m7 s12 question-div">
       <span ng-bind-html-unsafe="game.curQuestion.text" ng-hide="game.state === 'game ended' || game.state ==='game dissolved' || game.state === 'awaiting players'"></span>
       <div ng-show="isCzar() === false && game.state === 'czar picks card'" style="text-align:center">CZAR is selecting a question card. Please wait...</div>
-      <div id="notifications" ng-if="game.notification" ng-animate="{enter:'animated fadeInLeft', leave:'animated fadeOut'}">{{game.notification}}</div></div>
+      <div id="notifications" ng-if="game.notification" ng-animate="{enter:'animated fadeInLeft', leave:'animated fadeOut'}">{{game.notification}}</div>
+    </div>
     <div class="col l2 s2" id="card-img">
-      <img class="card-img2" src="https://res.cloudinary.com/dffiyhgto/image/upload/v1531231021/Screen_Shot_2018-07-09_at_5.14.23_PM.png" alt="card-img">
+      <img class="card-img2" src="https://res.cloudinary.com/dffiyhgto/image/upload/v1531231021/Screen_Shot_2018-07-09_at_5.14.23_PM.png"
+        alt="card-img">
     </div>
     <div class="col l4 m5" id="help">
       <div class="col help-instructions" id="help">
         <h2>Forgotten how to play?</h2>
-        <p class="help-step"><span>E</span>ach player except the czar starts with 10 answer cards</p>
-        <p class="help-step"><span>A</span> player i s randomly chosen as czar</p>
-        <p class="help-step"><span>O</span>ther players answer the question card by selecting answer cards</p>
-        <p class="help-step"><span>T</span>he Card Czar then picks a favorite answer, and whoever that answer wins</p>
+        <p class="help-step">
+          <span>E</span>ach player except the czar starts with 10 answer cards</p>
+        <p class="help-step">
+          <span>A</span> player i s randomly chosen as czar</p>
+        <p class="help-step">
+          <span>O</span>ther players answer the question card by selecting answer cards</p>
+        <p class="help-step">
+          <span>T</span>he Card Czar then picks a favorite answer, and whoever that answer wins</p>
       </div>
     </div>
   </div>
 </div>
 
-<div class="top-div row" ng-show="game.state ==='game dissolved' || game.state ==='game ended'">
+<!-- Czar's question modal -->
+<div class="modal fade open czar-modal" id="czarSelectCard" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
+  data-backdrop="static">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="czar-modal-head">
+        <h4>You are the CZAR</h4>
+        <p>Choose a question card to start the round</p>
+      </div>
+      <div class="modal-body">
+        <div class="row contain-cards">
+          <ul class="czars-card" ng-click="shuffleCards($event)" id="czars-cards">
+            <li>
+              <img id="card1" class="card" src="../img/cards4.png" alt="czar card">
+            </li>
+            <li>
+              <img id="card2" class="card" src="../img/cards4.png" alt="czar card">
+            </li>
+            <li>
+              <img id="card3" class="card" src="../img/cards4.png" alt="czar card">
+            </li>
+            <li>
+              <img id="card4" class="card" src="../img/cards4.png" alt="czar card">
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<!-- end Czar's question modal -->
+
+<div class="top-div row" ng-show="game.state ==='game dissolved' && game.gameWinner === -1">
   <div class="col l12 s12">
     <div class="col l10 m9 s12 question-div">
       <div class="game-end-info row">
         <div id="people-left-game-top" ng-show="game.state ==='game dissolved' && game.gameWinner === -1">
           <div class="game-end-headline">What the!? The game ended because too many people left! </div>
-            Our sincere apologies.
+          Our sincere apologies.
         </div>
         <div ng-show="game.state === 'game ended' && game.gameWinner === game.playerIndex">
-          <div class="game-end-headline">Congratulations! You won the game, {{game.players[game.playerIndex].username | upperFirstLetter}}!</div>We hope you feel special. If you'd like to share that special feeling with the world, consider donating to charity. Or just horde it all for youself.
+          <div class="game-end-headline">Congratulations! You won the game, {{game.players[game.playerIndex].username | upperFirstLetter}}!</div>We hope
+          you feel special. If you'd like to share that special feeling with the world, consider donating to charity. Or
+          just horde it all for youself.
         </div>
         <div ng-show="game.state === 'game ended' && game.gameWinner !== game.playerIndex">
           <div class="game-end-headline">Aw, shucks! {{game.players[game.gameWinner].username | upperFirstLetter }} won the game!</div>
@@ -64,7 +108,13 @@
       </div>
     </div>
     <div class="col m3 l2" id="card-img">
-      <img class="card-img" src="https://res.cloudinary.com/dffiyhgto/image/upload/v1531231021/Screen_Shot_2018-07-09_at_5.14.23_PM.png" alt="card-img">
+      <img class="card-img" src="https://res.cloudinary.com/dffiyhgto/image/upload/v1531231021/Screen_Shot_2018-07-09_at_5.14.23_PM.png"
+        alt="card-img">
     </div>
   </div>
 </div>
+<script>
+  $(document).ready(function () {
+    $('.modal').modal();
+  });
+</script>
