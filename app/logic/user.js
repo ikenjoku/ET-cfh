@@ -21,7 +21,9 @@ const Game = mongoose.model('Game');
  */
 function returnGamesWon(games, user) {
   try {
-    return games.filter(game => game.gameWinner._id.toString() === user._id.toString());
+    /* eslint max-len: 0 */
+    // disabled max-len to keep to syntax sugar
+    return games.filter(game => game.meta.gameWinner && game.meta.gameWinner.userId.toString() === user._id.toString());
   } catch (e) {
     return [];
   }
@@ -41,10 +43,8 @@ const handleFetchProfile = _id => new Promise((resolve, reject) => {
     if (err) reject(err);
     if (user) {
       return Game.find({
-        players: user._id
+        'players.userId': user._id.toString()
       })
-        .populate('players')
-        .populate('gameWinner')
         .exec((err, games) => {
           if (err) return reject(err);
           // using toString() because these methods behave anomalously

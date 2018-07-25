@@ -37,9 +37,9 @@
     </div>
     <!--  show the games played cards -->
     <div class="show-user-game-history">
-    <div  ngShow="games.length" ng-repeat="game in currentUser.games" class="show-cards-grid">
+    <div  ngShow="games.length" class="show-cards-grid">
         <!-- this should contain the game cards -->
-        <div class="game-card"> 
+        <div class="game-card" ng-repeat="game in currentUser.games"> 
                 <div class="players-and-winner"> 
                    <!-- the name -->
                    <div class="players-and-winner-item">
@@ -57,7 +57,7 @@
                 </div>   
            </div>
     </div>
-    <div ngShow="!currentUser.games.length" class="no-games-display-text"> 
+    <div ng-show="!games.length" class="no-games-display-text"> 
             <p> Seems like you haven't played any game yet, play some and watch this space!</p>
         </div>
     </div>

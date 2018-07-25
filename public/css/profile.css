@@ -218,7 +218,6 @@
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
     -ms-flex-flow: column nowrap;
-    flex-flow: column nowrap;
     padding-top: 15px;
     background-color: #EAECEE; 
   }
@@ -251,15 +250,16 @@
       -webkit-box-direction: normal;
       -ms-flex-flow: row wrap;
       flex-flow: row wrap;
+      align-content: baseline;
       overflow-y: scroll;
-      height: 100%;
+      height: auto;
       width: 100%;
-      padding-left: 5%;
       -webkit-box-pack: justify;
       -ms-flex-pack: justify;
-      justify-content: space-between;
-      -webkit-box-align: space-evenly;
-      -ms-flex-align: space-evenly;
+      justify-content: flex-start;
+      padding-left: 15px;
+      -webkit-box-align: space-around;
+      -ms-flex-align: space-around;
       align-items: space-evenly; 
     }
 
@@ -269,7 +269,7 @@
 
       .profile-page .show-user-game-history .show-cards-grid .game-card {
         height: 95px;
-        margin-bottom: -50%;
+        margin: 0 20px 10% 20px;
         -ms-flex-preferred-size: 35%;
         flex-basis: 35%;
         background-color: white;
@@ -419,6 +419,7 @@
         .show-profile-main .show-user-game-history .show-cards-grid .game-card {
           width: 70% !important;
           height: 50% !important; 
+          margin-bottom: 10px !important;
         }
 
           .show-profile-main .show-user-game-history .show-cards-grid .game-card .players-and-winner {
